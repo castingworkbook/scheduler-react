@@ -1,0 +1,23 @@
+{
+  "name": "BoilerPlate",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "dependencies": {
+    "color": "^0.10.1",
+    "moment": "^2.12.0",
+    "react-native": "0.20",
+    "react-native-android-statusbar": "0.1.2",
+    "react-native-button": "^1.4.2",
+    "react-native-drawer": "^1.16.6",
+    "react-native-gifted-spinner": "0.0.3",
+    "react-native-modalbox": "^1.3.1",
+    "react-native-navbar": "^1.1.4",
+    "react-native-router-flux": "^2.1.8",
+    "react-native-selectme": "^1.0.0",
+    "react-native-spinkit": "0.0.7",
+    "react-native-vector-icons": "1.0.0-rc"
+  }
+}
