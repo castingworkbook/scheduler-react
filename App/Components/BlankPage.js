@@ -12,13 +12,13 @@ export default class BlankPage extends Component {
 			<View style={blankPage.color}>
 				<Image source={require('../img/glow2.png')} style={blankPage.container}>
 					<Navbar
-		     		    title="Blank Page"
-		     		    subtitle=""
-		     		    style={blankPage.toolbar}
-		     		    subtitleStyle={blankPage.subtitle}   />		
-		     		    <ScrollView style={{backgroundColor: 'transparent', padding: 15}}>	     		      
-						
-		     		    </ScrollView>
+     		    title="Blank Page"
+     		    subtitle=""
+     		    style={blankPage.toolbar}
+     		    subtitleStyle={blankPage.subtitle} />
+     		    <ScrollView style={{backgroundColor: 'transparent', padding: 15}}>
+
+     		    </ScrollView>
 				</Image>
 			</View>
 		);

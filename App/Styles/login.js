@@ -39,7 +39,7 @@ module.exports = StyleSheet.create({
 		backgroundColor: primary
 	},
 	textInput: {
-		height: 40, 
+		height: 40,
 		backgroundColor: 'transparent',
 		color: 'rgba(255, 255, 255, 0.9)',
 		paddingLeft: 40,
