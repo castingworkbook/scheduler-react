@@ -46,7 +46,6 @@ module.exports = StyleSheet.create({
 	},
 	bg : {
 		flex: 1,
-		marginTop: deviceHeight/2,
 		backgroundColor: secondary,
 		paddingTop: 20,
 		paddingLeft: 10,
@@ -56,27 +55,35 @@ module.exports = StyleSheet.create({
 	},
 	abg : {
 		flex: 1,
-		marginTop: deviceHeight/2-20,
 		backgroundColor: secondary,
 		paddingTop: 30,
 		paddingLeft: 10,
 		paddingRight: 10,
 		paddingBottom: 30
 	},
-	loginLogo: {
-		width: 100,
-	},
 	background: {
-        flex: 1,
-        resizeMode: 'stretch'
-    },
+    flex: 1,
+    resizeMode: 'stretch'
+  },
+  logoContainer: {
+    flex: 1,
+    height: deviceHeight/2+50,
+    padding: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    backgroundColor: 'transparent'
+  },
 	logo: {
-		marginBottom: 50,
-		marginTop: -20,
-		height: 150,
-		width: 150,
-		alignSelf: 'center'
+		height: 100,
+		width: 100,
+    marginBottom: 20,
 	},
+  nameText: {
+    fontSize: 60,
+    fontWeight: 'bold',
+    color: 'white'
+  },
 	navbar: {
 		borderBottomColor: 'transparent',
 	},

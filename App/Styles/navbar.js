@@ -15,7 +15,7 @@ module.exports = StyleSheet.create({
 	title : {
 		color: '#fff',
 		fontSize: 20,
-		fontWeight: "500"
+		fontWeight: "500",
+    marginTop: 10,
 	}
 });
-

@@ -37,37 +37,39 @@ export default class Login extends Component {
     return(
       <ScrollView style={login.color} scrollEnabled={this.state.scroll}>
         <Image source={require('../img/glow2.png')} style={login.container}>
-          <Image source={require('../img/logo.png')} style={login.shadow}>
-            <View style={ Platform.OS === 'android' ? login.abg : login.bg}>
-              <IconInput
-                placeholder="EMAIL"
-                icon="person"
-                secureTextEntry={false}
-                dark={false}
-                value={this.state.email}
-                onChangeText={(val) => this.setState({email: val})} />
-              <IconInput
-                placeholder="PASSWORD"
-                icon="ios-unlocked-outline"
-                secureTextEntry={true}
-                dark={false}
-                value={this.state.password}
-                onChangeText={(val) => this.setState({password: val}) } />
-              <TouchableOpacity onPress={this.signuep} style={{alignSelf: 'flex-end', marginRight: 15}}>
-                <Text style={login.registerLink}>
-                  Forgot Password
-                </Text>
-              </TouchableOpacity>
-              <ButtonRounded
-                onPress={()=>Actions.home({data:this.state.value })}
-                text="Login" />
-              <TouchableOpacity onPress={Actions.signup} style={{marginTop: 20}}>
-                <Text style={login.registerLink}>
-                  Sign Up Here
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </Image>
+          <View style={login.logoContainer}>
+            <Image source={require('../img/cwb_logo.png')} style={login.logo} />
+            <Text style={login.nameText}>Scheduler</Text>
+          </View>
+          <View style={ Platform.OS === 'android' ? login.abg : login.bg}>
+            <IconInput
+              placeholder="EMAIL"
+              icon="person"
+              secureTextEntry={false}
+              dark={false}
+              value={this.state.email}
+              onChangeText={(val) => this.setState({email: val})} />
+            <IconInput
+              placeholder="PASSWORD"
+              icon="ios-unlocked-outline"
+              secureTextEntry={true}
+              dark={false}
+              value={this.state.password}
+              onChangeText={(val) => this.setState({password: val}) } />
+            <TouchableOpacity onPress={this.signuep} style={{alignSelf: 'flex-end', marginRight: 15}}>
+              <Text style={login.registerLink}>
+                Forgot Password
+              </Text>
+            </TouchableOpacity>
+            <ButtonRounded
+              onPress={()=>Actions.home({data:this.state.value })}
+              text="Login" />
+            <TouchableOpacity onPress={Actions.signup} style={{marginTop: 20}}>
+              <Text style={login.registerLink}>
+                Sign Up Here
+              </Text>
+            </TouchableOpacity>
+          </View>
         </Image>
       </ScrollView>
     );
