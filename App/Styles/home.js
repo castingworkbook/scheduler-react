@@ -41,17 +41,18 @@ module.exports = StyleSheet.create({
 
   highlightedFont: {
     fontSize: 20,
+    fontWeight: 'bold',
     color: '#fff'
   },
 
   normalFont: {
-    fontSize: 15,
+    fontSize: 16,
     color: '#fff'
   },
 
 	listContainer: {
-		marginLeft: 22,
-		marginRight: 22,
+		marginLeft: 12,
+		marginRight: 12,
 		flexDirection: 'row'
 	},
 
@@ -63,24 +64,25 @@ module.exports = StyleSheet.create({
   projectItem: {
     flex: 1,
     flexDirection: 'row',
-    height: 100,
-    marginTop: 10,
+    height: 120,
     padding: 10,
     backgroundColor: 'transparent',
   },
 
   projectItemLeft: {
-    flex: 0.5,
+    flex: 0.6,
     flexDirection: 'column',
+    overflow: 'hidden',
+    marginRight: 10,
   },
 
   projectItemRoles: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
 
   projectItemRight: {
-    flex: 0.5,
+    flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: 33,
@@ -100,13 +102,10 @@ module.exports = StyleSheet.create({
   },
 
   inactiveActions: {
+    width: 25,
+    height: 25,
+    marginRight: 15,
     opacity: 0
-  },
-
-  projectItemControls: {
-    width: 80,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
 
   projectItemIcon: {

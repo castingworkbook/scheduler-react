@@ -67,7 +67,7 @@ module.exports = StyleSheet.create({
   },
   logoContainer: {
     flex: 1,
-    height: deviceHeight/2+50,
+    height: deviceHeight/2+30,
     padding: 30,
     justifyContent: 'center',
     alignItems: 'center',
@@ -80,7 +80,7 @@ module.exports = StyleSheet.create({
     marginBottom: 20,
 	},
   nameText: {
-    fontSize: 60,
+    fontSize: 50,
     fontWeight: 'bold',
     color: 'white'
   },

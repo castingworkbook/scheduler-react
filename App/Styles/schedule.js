@@ -41,17 +41,18 @@ module.exports = StyleSheet.create({
 
   highlightedFont: {
     fontSize: 20,
+    fontWeight: 'bold',
     color: '#fff'
   },
 
   normalFont: {
-    fontSize: 15,
+    fontSize: 16,
     color: '#fff'
   },
 
   listContainer: {
-		marginLeft: 22,
-		marginRight: 22,
+		marginLeft: 12,
+		marginRight: 12,
 		flexDirection: 'row'
 	},
 
@@ -83,7 +84,6 @@ module.exports = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: 100,
-    marginTop: 10,
     padding: 10,
     backgroundColor: 'transparent',
   },
@@ -93,16 +93,13 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     height: 100,
     padding: 10,
-    borderColor: 'gray',
-    borderTopWidth: 0,
-    borderBottomWidth: 1,
-    justifyContent: 'space-between',
-    backgroundColor: '#00FFFF',
+    backgroundColor: '#800000',
   },
 
   auditionItemLeft: {
     flex: 0.5,
     flexDirection: 'column',
+    overflow: 'hidden',
   },
 
   auditionItemRight: {
@@ -127,12 +124,6 @@ module.exports = StyleSheet.create({
     borderRadius: 12,
     justifyContent: 'center',
     bottom: 5,
-  },
-
-  auditionItemControls: {
-    width: 100,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
 
   auditionItemIcon: {

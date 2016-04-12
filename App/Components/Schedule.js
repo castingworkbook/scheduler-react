@@ -8,41 +8,49 @@ import schedule from '../Styles/schedule';
 import ButtonRounded from './Widgets/ButtonRounded';
 import {brandPrimary as primary} from '../Styles/variable';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ActionSheet from '@remobile/react-native-action-sheet'
 
 export default class Schedule extends Component {
 	constructor(props) {
 		super(props);
+
+		const dummyAuditions = [
+			{
+				id: 1,
+				actor: "Brad Pitt",
+				role: "Batman",
+				date: "02/20/16",
+				time: "3:30p",
+				status: "C",
+				selected: false
+			},
+			{
+				id: 2,
+				actor: "Christian Bale",
+				role: "Batman",
+				date: "02/20/16",
+				time: "3:50p",
+				status: "R",
+				selected: false
+			},
+			{
+				id: 3,
+				actor: "Ben Affleck",
+				role: "Batman",
+				date: "02/20/16",
+				time: "4:10p",
+				status: "?",
+				selected: false
+			}
+		]
+
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
-			dataSource: ds.cloneWithRows([
-				{
-			    id: 1,
-			    actor: "Brad Pitt",
-			    role: "Batman",
-			    date: "02/20/16",
-			    time: "3:30p",
-			    status: "C",
-			    selected: false
-			  },
-			  {
-			    id: 2,
-			    actor: "Christian Bale",
-			    role: "Batman",
-			    date: "02/20/16",
-			    time: "3:50p",
-			    status: "R",
-			    selected: false
-			  },
-			  {
-			    id: 3,
-			    actor: "Ben Affleck",
-			    role: "Batman",
-			    date: "02/20/16",
-			    time: "4:10p",
-			    status: "?",
-			    selected: false
-			  }
-			])
+			dataSource: ds.cloneWithRows(dummyAuditions),
+			auditions: dummyAuditions,
+      status: "",
+      clicked: 'none',
+      show: false
 		}
 	}
 
@@ -60,14 +68,20 @@ export default class Schedule extends Component {
 								<ListView
 									dataSource={this.state.dataSource}
 									renderHeader= {this._renderHeader}
-									renderRow={this._renderRow}
+									renderRow={this._renderRow.bind(this)}
 									renderSeparator={this._renderSeperator} />
 							</View>
 						</View>
    		    </ScrollView>
 					<View style={schedule.footer}>
-						<ButtonRounded text="Actions" />
+						<ButtonRounded text="Actions" onPress={this.onOpen.bind(this)} />
 					</View>
+					<ActionSheet
+	          visible  = { this.state.show }
+	          onCancel = { this.onCancel.bind(this) }>
+	          <ActionSheet.Button>Forward to actor</ActionSheet.Button>
+	          <ActionSheet.Button>Forward to casting</ActionSheet.Button>
+	        </ActionSheet>
 				</Image>
 			</View>
 		);
@@ -86,8 +100,8 @@ export default class Schedule extends Component {
 
 	_renderRow(audition) {
 		return(
-			<View style={ audition.selected ? schedule.auditionItemSelected : schedule.auditionItem }>
-        <View style={ schedule.auditionItemLeft }>
+			<View style={audition.selected ? schedule.auditionItemSelected : schedule.auditionItem}>
+        <View style={schedule.auditionItemLeft}>
           <TouchableOpacity onPress={() => this.onItemSelected(audition.id)}>
             <View style={schedule.auditionItemSelect}>
               <Text style={schedule.highlightedFont}>{audition.actor}</Text>
@@ -100,18 +114,16 @@ export default class Schedule extends Component {
 					<View style={schedule.status}>
             <Text>{audition.status}</Text>
           </View>
-					<View style={schedule.auditionItemControls}>
-						<TouchableOpacity>
-							<Icon name="ios-telephone" style={schedule.auditionItemIcon} />
-						</TouchableOpacity>
-						<TouchableOpacity>
-							<Icon name="document-text" style={schedule.auditionItemIcon} />
-						</TouchableOpacity>
-						<TouchableOpacity>
-							<Icon name="ios-arrow-forward" style={schedule.auditionItemIcon} />
-						</TouchableOpacity>
-					</View>
-        </View>
+					<TouchableOpacity>
+						<Icon name="ios-telephone" style={schedule.auditionItemIcon} />
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<Icon name="document-text" style={schedule.auditionItemIcon} />
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<Icon name="ios-arrow-forward" style={schedule.auditionItemIcon} />
+					</TouchableOpacity>
+				</View>
       </View>
 		)
 	}
@@ -121,4 +133,29 @@ export default class Schedule extends Component {
       <View key={`${sectionID}-${rowID}`} style={schedule.separator} />
     )
 	}
+
+	onItemSelected(id) {
+    const auditions = _.map(_.cloneDeep(this.state.auditions), (audition) => {
+      if (audition.id == id && audition.selected == false) {
+        audition.selected = true;
+      } else if (audition.id == id && audition.selected == true) {
+        audition.selected = false;
+      }
+
+      return audition;
+    });
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(auditions),
+      auditions: auditions
+    });
+	}
+
+	onCancel() {
+    this.setState({show: false});
+  }
+
+  onOpen() {
+    this.setState({show: true});
+  }
 }

@@ -6,7 +6,9 @@
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
+    "@remobile/react-native-action-sheet": "^1.0.1",
     "color": "^0.10.1",
+    "lodash": "^4.10.0",
     "moment": "^2.12.0",
     "react-native": "0.20",
     "react-native-android-statusbar": "0.1.2",

@@ -10,6 +10,7 @@ import {secondary} from '../Styles/variable';
 import Login from './Login';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
+import _ from 'lodash'
 
 export default class Home extends Component {
 	constructor(props) {
@@ -32,7 +33,7 @@ export default class Home extends Component {
 			  {
 			    name: "Brian the Great",
 			    director: "Bill Gates",
-			    roles: ["Brian", "Susan", "Trevar"],
+			    roles: ["Brian", "Susan", "Trevar", "something"],
 			    actions: 2
 			  }
 			])
@@ -63,27 +64,30 @@ export default class Home extends Component {
 	}
 
 	_renderRow(project) {
+		let roles = _.map(project.roles, (role, index) => {
+			if (index < 2)
+				return <Text key={index} style={home.normalFont}>{role}</Text>
+		});
+
 		return(
 			<View style={home.projectItem}>
 				<View style={home.projectItemLeft}>
 					<Text style={home.highlightedFont}>{project.name}</Text>
 					<Text style={home.normalFont}>{project.director}</Text>
 					<View style={home.projectItemRoles}>
-						<Text style={home.normalFont}>{project.roles}</Text>
+						{roles}
 					</View>
 				</View>
 				<View style={home.projectItemRight}>
 					<View style={project.actions > 0 ? home.activeActions : home.inactiveActions}>
 						<Text>{project.actions}</Text>
 					</View>
-					<View style={home.projectItemControls}>
-						<TouchableOpacity>
-							<Icon name="ios-telephone" style={home.projectItemIcon} />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={Actions.schedule}>
-							<Icon name="ios-arrow-forward" style={home.projectItemIcon} />
-						</TouchableOpacity>
-					</View>
+					<TouchableOpacity>
+						<Icon name="ios-telephone" style={home.projectItemIcon} />
+					</TouchableOpacity>
+					<TouchableOpacity onPress={Actions.schedule}>
+						<Icon name="ios-arrow-forward" style={home.projectItemIcon} />
+					</TouchableOpacity>
 				</View>
 			</View>
 		);
