@@ -14,12 +14,11 @@ StatusBarIOS.setStyle('light-content');
 import RootRouter from './App/Components/RootRouter';
 
 class BoilerPlate extends Component {
-    render() {
-        return (
-            <RootRouter />
-        );
-    }
+  render() {
+    return (
+      <RootRouter />
+    );
+  }
 }
 
 AppRegistry.registerComponent('BoilerPlate', () => BoilerPlate);
-

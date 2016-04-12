@@ -7,7 +7,7 @@ import Drawer from 'react-native-drawer'
 import ControlPanel from './Widgets/ControlPanel';
 import Login from './Login';
 import Home from './Home';
-import BlankPage from './BlankPage';
+import Schedule from './Schedule';
 import layout from '../Styles/layout';
 import AppEventEmitter from '../Services/AppEventEmitter';
 
@@ -44,7 +44,7 @@ export default class RootRouter extends Component {
           <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight} />
           <Route name="login" wrapRouter={false} component={Login} initial={true} />
           <Route name="home" wrapRouter={false} component={Home} title="Home" />
-          <Route name="blankPage" wrapRouter={false} component={BlankPage} title="BlankPage" />
+          <Route name="schedule" wrapRouter={false} component={Schedule} title="schedule" />
         </Router>
       </Drawer>
     );

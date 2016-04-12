@@ -57,18 +57,11 @@ export default class Login extends Component {
               value={this.state.password}
               onChangeText={(val) => this.setState({password: val}) } />
             <TouchableOpacity onPress={this.signuep} style={{alignSelf: 'flex-end', marginRight: 15}}>
-              <Text style={login.registerLink}>
-                Forgot Password
-              </Text>
+              <Text style={login.registerLink}>Forgot Password</Text>
             </TouchableOpacity>
             <ButtonRounded
               onPress={()=>Actions.home({data:this.state.value })}
               text="Login" />
-            <TouchableOpacity onPress={Actions.signup} style={{marginTop: 20}}>
-              <Text style={login.registerLink}>
-                Sign Up Here
-              </Text>
-            </TouchableOpacity>
           </View>
         </Image>
       </ScrollView>

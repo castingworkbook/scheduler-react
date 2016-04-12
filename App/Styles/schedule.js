@@ -10,23 +10,23 @@ var {
 } = React;
 
 module.exports = StyleSheet.create({
-	container: {
-		flex: 1,
-		width: null,
-		height: null
-	},
+  container: {
+    flex: 1,
+    width: null,
+    height: null
+  },
 
-	color: {
-		position: 'absolute',
-		top: 0,
-		bottom: 0,
-		left: 0,
-		right: 0,
-		backgroundColor: primary
-	},
+  color: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: primary
+  },
 
   toolbar: {
-		height: 80,
+    height: 80,
 		backgroundColor: secondary,
 		justifyContent: 'space-between',
 		alignItems: 'center',
@@ -37,7 +37,7 @@ module.exports = StyleSheet.create({
 		shadowOffset: {width: 0, height: 2},
 		shadowOpacity: 0.1,
 		shadowRadius: 1.5
-	},
+  },
 
   highlightedFont: {
     fontSize: 20,
@@ -49,18 +49,37 @@ module.exports = StyleSheet.create({
     color: '#fff'
   },
 
-	listContainer: {
+  listContainer: {
 		marginLeft: 22,
 		marginRight: 22,
 		flexDirection: 'row'
 	},
+
+  headerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderColor: '#fff',
+  },
+
+  header: {
+    fontSize: 25,
+    color: '#fff',
+  },
 
   separator: {
     height: 1,
     backgroundColor: 'white',
   },
 
-  projectItem: {
+  footer: {
+    padding: 10
+  },
+
+  auditionItem: {
     flex: 1,
     flexDirection: 'row',
     height: 100,
@@ -69,25 +88,36 @@ module.exports = StyleSheet.create({
     backgroundColor: 'transparent',
   },
 
-  projectItemLeft: {
+  auditionItemSelected: {
+    flex: 1,
+    flexDirection: 'row',
+    height: 100,
+    padding: 10,
+    borderColor: 'gray',
+    borderTopWidth: 0,
+    borderBottomWidth: 1,
+    justifyContent: 'space-between',
+    backgroundColor: '#00FFFF',
+  },
+
+  auditionItemLeft: {
     flex: 0.5,
     flexDirection: 'column',
   },
 
-  projectItemRoles: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-
-  projectItemRight: {
+  auditionItemRight: {
     flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignSelf: 'center',
     height: 33,
-    alignSelf: 'center'
   },
 
-  activeActions: {
+  auditionItemSelect: {
+    flex: 1,
+  },
+
+  status: {
     alignSelf: 'flex-end',
     alignItems: 'center',
     marginRight: 15,
@@ -99,17 +129,13 @@ module.exports = StyleSheet.create({
     bottom: 5,
   },
 
-  inactiveActions: {
-    opacity: 0
-  },
-
-  projectItemControls: {
-    width: 80,
+  auditionItemControls: {
+    width: 100,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
 
-  projectItemIcon: {
+  auditionItemIcon: {
     fontSize: 30,
     color: '#fff',
   },

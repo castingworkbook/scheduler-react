@@ -1,8 +1,8 @@
 var Color = require("color")
 
 var primary = Color("rgba(0,0,0,0.8)");
-var secondary = Color("#384850");
-var sidebar = Color("#252932");
+var secondary = Color("#252932");
+var sidebar = Color("#384850");
 var dark = Color("rgba(0,0,0,0.8)");
 var light = Color("rgba(255,255,255,0.8)");
 

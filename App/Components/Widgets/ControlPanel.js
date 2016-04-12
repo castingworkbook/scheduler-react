@@ -8,36 +8,35 @@ import controlPanel from '../../Styles/controlPanel';
 import {Actions} from 'react-native-router-flux';
 
 export default class ControlPanel extends Component {
-    
-    render() {
-        return (
-            <View style={controlPanel.sidebar}>
-                <ScrollView>
-                    <Image source={require('../../img/icon.png')} style={{alignSelf:'center', margin: 30, width: 180, height: 100, opacity: 0.9}}/>
-                    
-                    <View style={{position: 'relative'}}>
-                        <Icon name="ios-home-outline" size={30} color="rgba(255,255,255,0.9)" style={{position:'absolute', left: 9,  bottom: 6}}/>
-                        <TouchableOpacity 
-                            style={controlPanel.link}
-                            underlayColor="#2D2D30"
-                            onPress={Actions.home}>
-                            <Text style={controlPanel.linkText}>Home</Text>
-                        </TouchableOpacity>                
-                    </View>
-                    <View style={{position: 'relative'}}>
-                        <Icon name="ios-copy-outline" size={30} color="rgba(255,255,255,0.9)" style={{position:'absolute', left: 9, bottom: 6}}/>
-                        <TouchableOpacity 
-                            style={controlPanel.link}
-                            underlayColor="#2D2D30"
-                            onPress={Actions.blankPage}>
-                            <View>
-                                <Text style={controlPanel.linkText}>Blank Page</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>  
-                </ScrollView>
-            </View>
-        );
-    }
-    
+  render() {
+    return (
+      <View style={controlPanel.sidebar}>
+        <ScrollView>
+          <Image source={require('../../img/cwb_logo.png')} style={controlPanel.logo} />
+          <View style={{position: 'relative'}}>
+            <TouchableOpacity
+              style={controlPanel.link}
+              underlayColor="#2D2D30"
+              onPress={Actions.home}>
+              <Icon name="clipboard" style={controlPanel.linkIcon} />
+              <View style={{position: 'relative'}}>
+                <Text style={controlPanel.linkText}>Projects</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={{position: 'relative'}}>
+            <TouchableOpacity
+              style={controlPanel.link}
+              underlayColor="#2D2D30"
+              onPress={Actions.login}>
+              <Icon name="log-out" style={controlPanel.linkIcon} />
+              <View style={{position: 'relative'}}>
+                <Text style={controlPanel.linkText}>Logout</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
 }

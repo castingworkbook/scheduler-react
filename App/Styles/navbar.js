@@ -12,6 +12,11 @@ module.exports = StyleSheet.create({
 	navbar: {
 		height: 70
 	},
+
+  backContainer: {
+    width: 30
+  },
+
 	title : {
 		color: '#fff',
 		fontSize: 20,

@@ -1,9 +1,8 @@
 /* @flow */
 'use strict';
 
-import React, {Component, Text, View, Image, ScrollView, ListView, BackAndroid, TouchableHighlight} from 'react-native';
+import React, {Component, Text, View, Image, ScrollView, ListView, BackAndroid, TouchableOpacity} from 'react-native';
 import styles from '../Styles/style';
-import main from '../Styles/main';
 import Navbar from './Widgets/Navbar';
 import home from '../Styles/home';
 import {primary} from '../Styles/variable';
@@ -28,7 +27,7 @@ export default class Home extends Component {
 			    name: "Forrest Gump",
 			    director: "Natalie Low",
 			    roles: ["Forrest", "Jenny", "Mom"],
-			    actions: 1
+			    actions: 0
 			  },
 			  {
 			    name: "Brian the Great",
@@ -45,15 +44,16 @@ export default class Home extends Component {
     	<View style={home.color}>
      		<Navbar
    		    title="Projects"
-   		    style={home.toolbar} />
+   		    style={home.toolbar}
+					back={false} />
      		<Image source={require('../img/glow2.png')} style={home.container}>
 					<ScrollView style={{backgroundColor: 'transparent'}}>
 						<View style={styles.verticalCenter}>
 							<View style={home.listContainer}>
 								<ListView
-				          dataSource = { this.state.dataSource }
-				          renderRow  = { this._renderRow.bind(this) }
-									renderSeparator = { this._renderSeperator } />
+				          dataSource={this.state.dataSource}
+				          renderRow={this._renderRow}
+									renderSeparator={this._renderSeperator} />
 				 			</View>
 			 			</View>
 					</ScrollView>
@@ -62,34 +62,36 @@ export default class Home extends Component {
 		);
 	}
 
-	_renderRow (project) {
+	_renderRow(project) {
 		return(
-			<View style = { main.projectListItem }>
-				<View style = { main.projectListItemLeft }>
-					<Text style = { main.highlightedFont }>
-						{ project.name }
-					</Text>
-					<Text style = { main.normalFont }>
-						{ project.director }
-					</Text>
-					<View style = { main.projectListItemRoles }>
-						<Text style = { main.normalFont }>
-							{ project.roles }
-						</Text>
+			<View style={home.projectItem}>
+				<View style={home.projectItemLeft}>
+					<Text style={home.highlightedFont}>{project.name}</Text>
+					<Text style={home.normalFont}>{project.director}</Text>
+					<View style={home.projectItemRoles}>
+						<Text style={home.normalFont}>{project.roles}</Text>
 					</View>
 				</View>
-				<View style = { main.projectListItemRight }>
-					<View style = { project.actions > 0 ? main.activeActions : main.inactiveActions }>
-						<Text style = { project.actionsText }>{ project.actions }</Text>
+				<View style={home.projectItemRight}>
+					<View style={project.actions > 0 ? home.activeActions : home.inactiveActions}>
+						<Text>{project.actions}</Text>
+					</View>
+					<View style={home.projectItemControls}>
+						<TouchableOpacity>
+							<Icon name="ios-telephone" style={home.projectItemIcon} />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={Actions.schedule}>
+							<Icon name="ios-arrow-forward" style={home.projectItemIcon} />
+						</TouchableOpacity>
 					</View>
 				</View>
 			</View>
 		);
 	}
 
-	_renderSeperator (sectionID, rowID) {
+	_renderSeperator(sectionID, rowID) {
 		return (
-      <View key = { `${sectionID}-${rowID}` } style = { main.separator } />
+      <View key={`${sectionID}-${rowID}`} style={home.separator} />
     )
 	}
 }
