@@ -8,6 +8,7 @@ import schedule from '../Styles/schedule';
 import ButtonRounded from './Widgets/ButtonRounded';
 import {brandPrimary as primary} from '../Styles/variable';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet'
 
 export default class Schedule extends Component {
@@ -79,8 +80,12 @@ export default class Schedule extends Component {
 					<ActionSheet
 	          visible  = { this.state.show }
 	          onCancel = { this.onCancel.bind(this) }>
-	          <ActionSheet.Button>Forward to actor</ActionSheet.Button>
-	          <ActionSheet.Button>Forward to casting</ActionSheet.Button>
+	          <ActionSheet.Button>Forward to Actor</ActionSheet.Button>
+	          <ActionSheet.Button>Forward to Casting</ActionSheet.Button>
+						<ActionSheet.Button>Set as Confirm</ActionSheet.Button>
+						<ActionSheet.Button>Set as Regret</ActionSheet.Button>
+						<ActionSheet.Button>Set as Pending</ActionSheet.Button>
+						<ActionSheet.Button>Set as Closed</ActionSheet.Button>
 	        </ActionSheet>
 				</Image>
 			</View>
@@ -120,7 +125,7 @@ export default class Schedule extends Component {
 					<TouchableOpacity>
 						<Icon name="document-text" style={schedule.auditionItemIcon} />
 					</TouchableOpacity>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={Actions.history}>
 						<Icon name="ios-arrow-forward" style={schedule.auditionItemIcon} />
 					</TouchableOpacity>
 				</View>

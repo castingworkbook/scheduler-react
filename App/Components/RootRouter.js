@@ -8,6 +8,7 @@ import ControlPanel from './Widgets/ControlPanel';
 import Login from './Login';
 import Home from './Home';
 import Schedule from './Schedule';
+import History from './History';
 import layout from '../Styles/layout';
 import AppEventEmitter from '../Services/AppEventEmitter';
 
@@ -45,6 +46,7 @@ export default class RootRouter extends Component {
           <Route name="login" wrapRouter={false} component={Login} initial={true} />
           <Route name="home" wrapRouter={false} component={Home} title="Home" />
           <Route name="schedule" wrapRouter={false} component={Schedule} title="schedule" />
+					<Route name="history" wrapRouter={false} component={History} title="history" />
         </Router>
       </Drawer>
     );

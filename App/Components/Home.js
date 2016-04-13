@@ -10,33 +10,36 @@ import {secondary} from '../Styles/variable';
 import Login from './Login';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
-import _ from 'lodash'
+import _ from 'lodash';
 
 export default class Home extends Component {
 	constructor(props) {
     super(props);
+
+		const dummyProjects = [
+			{
+				name: "Batman Returns",
+				director: "Brad Richardson",
+				roles: ["Batman", "Robin", "Joker"],
+				actions: 3
+			},
+			{
+				name: "Forrest Gump",
+				director: "Natalie Low",
+				roles: ["Forrest Gump", "Jenny Curran", "Mom"],
+				actions: 0
+			},
+			{
+				name: "Brian the Great",
+				director: "Bill Gates",
+				roles: ["Brian Park", "Susan Fox", "Trevar"],
+				actions: 2
+			}
+		];
+
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
-			dataSource: ds.cloneWithRows([
-				{
-			    name: "Batman Returns",
-			    director: "Brad Richardson",
-			    roles: ["Batman", "Robin", "Joker"],
-			    actions: 3
-			  },
-			  {
-			    name: "Forrest Gump",
-			    director: "Natalie Low",
-			    roles: ["Forrest", "Jenny", "Mom"],
-			    actions: 0
-			  },
-			  {
-			    name: "Brian the Great",
-			    director: "Bill Gates",
-			    roles: ["Brian", "Susan", "Trevar", "something"],
-			    actions: 2
-			  }
-			])
+			dataSource: ds.cloneWithRows(dummyProjects)
 		}
   }
 
