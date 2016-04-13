@@ -80,12 +80,12 @@ export default class Schedule extends Component {
 					<ActionSheet
 	          visible  = { this.state.show }
 	          onCancel = { this.onCancel.bind(this) }>
-	          <ActionSheet.Button onPress={this.onForward.bind(this)}>Forward Audition to Actor</ActionSheet.Button>
-	          <ActionSheet.Button onPress={this.onConfirm.bind(this)}>Forward Confirm to Casting</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onRegret.bind(this)}>Forward Regret to Casting</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onAlt.bind(this)}>Request Alternative Time to Casting</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onPending.bind(this)}>Forward Pending to Casting</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onSetClosed.bind(this)}>Set as Closed</ActionSheet.Button>
+	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Forward Audition to Actor</ActionSheet.Button>
+	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Forward Confirm to Casting</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onAction.bind(this)}>Forward Regret to Casting</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onAction.bind(this)}>Request Alternative Time to Casting</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onAction.bind(this)}>Forward Pending to Casting</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onAction.bind(this)}>Set as Closed</ActionSheet.Button>
 	        </ActionSheet>
 				</Image>
 			</View>
@@ -161,8 +161,12 @@ export default class Schedule extends Component {
     this.setState({show: true});
   }
 
-	onForward() {
+	onAction() {
 		this.setState({show: false});
+		this.triggerAlert();
+	}
+
+	triggerAlert() {
 		Alert.alert(
 			'Note',
 			'Add a Note?',
@@ -171,29 +175,5 @@ export default class Schedule extends Component {
         {text: 'Yes', onPress: () => console.log('OK Pressed!')},
       ]
 		)
-	}
-
-	onConfirm() {
-
-	}
-
-	onRegret() {
-
-	}
-
-	onAlt() {
-
-	}
-
-	onPending() {
-
-	}
-
-	onSetClosed() {
-
-	}
-
-	triggerAlert() {
-
 	}
 }
