@@ -97,13 +97,13 @@ module.exports = StyleSheet.create({
   },
 
   auditionItemLeft: {
-    flex: 0.5,
+    flex: 0.6,
     flexDirection: 'column',
     overflow: 'hidden',
   },
 
   auditionItemRight: {
-    flex: 0.5,
+    flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',

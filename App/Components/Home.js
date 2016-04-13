@@ -77,9 +77,7 @@ export default class Home extends Component {
 				<View style={home.projectItemLeft}>
 					<Text style={home.highlightedFont}>{project.name}</Text>
 					<Text style={home.normalFont}>{project.director}</Text>
-					<View style={home.projectItemRoles}>
-						{roles}
-					</View>
+					<View style={home.projectItemRoles}>{roles}</View>
 				</View>
 				<View style={home.projectItemRight}>
 					<View style={project.actions > 0 ? home.activeActions : home.inactiveActions}>

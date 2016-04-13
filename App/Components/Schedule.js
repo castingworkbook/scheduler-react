@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, {Component, ScrollView, Text, View, Image, ListView, TouchableOpacity} from 'react-native';
+import React, {Component, ScrollView, Text, View, Image, ListView, TouchableOpacity, Alert} from 'react-native';
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import schedule from '../Styles/schedule';
@@ -80,12 +80,12 @@ export default class Schedule extends Component {
 					<ActionSheet
 	          visible  = { this.state.show }
 	          onCancel = { this.onCancel.bind(this) }>
-	          <ActionSheet.Button>Forward to Actor</ActionSheet.Button>
-	          <ActionSheet.Button>Forward to Casting</ActionSheet.Button>
-						<ActionSheet.Button>Set as Confirm</ActionSheet.Button>
-						<ActionSheet.Button>Set as Regret</ActionSheet.Button>
-						<ActionSheet.Button>Set as Pending</ActionSheet.Button>
-						<ActionSheet.Button>Set as Closed</ActionSheet.Button>
+	          <ActionSheet.Button onPress={this.onForward.bind(this)}>Forward Audition to Actor</ActionSheet.Button>
+	          <ActionSheet.Button onPress={this.onConfirm.bind(this)}>Forward Confirm to Casting</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onRegret.bind(this)}>Forward Regret to Casting</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onAlt.bind(this)}>Request Alternative Time to Casting</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onPending.bind(this)}>Forward Pending to Casting</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onSetClosed.bind(this)}>Set as Closed</ActionSheet.Button>
 	        </ActionSheet>
 				</Image>
 			</View>
@@ -121,9 +121,6 @@ export default class Schedule extends Component {
           </View>
 					<TouchableOpacity>
 						<Icon name="ios-telephone" style={schedule.auditionItemIcon} />
-					</TouchableOpacity>
-					<TouchableOpacity>
-						<Icon name="document-text" style={schedule.auditionItemIcon} />
 					</TouchableOpacity>
 					<TouchableOpacity onPress={Actions.history}>
 						<Icon name="ios-arrow-forward" style={schedule.auditionItemIcon} />
@@ -163,4 +160,40 @@ export default class Schedule extends Component {
   onOpen() {
     this.setState({show: true});
   }
+
+	onForward() {
+		this.setState({show: false});
+		Alert.alert(
+			'Note',
+			'Add a Note?',
+			[
+        {text: 'No', onPress: () => console.log('Cancel Pressed!')},
+        {text: 'Yes', onPress: () => console.log('OK Pressed!')},
+      ]
+		)
+	}
+
+	onConfirm() {
+
+	}
+
+	onRegret() {
+
+	}
+
+	onAlt() {
+
+	}
+
+	onPending() {
+
+	}
+
+	onSetClosed() {
+
+	}
+
+	triggerAlert() {
+
+	}
 }
