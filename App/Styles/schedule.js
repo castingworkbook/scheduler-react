@@ -93,17 +93,17 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     height: 100,
     padding: 10,
-    backgroundColor: '#800000',
+    backgroundColor: '#008EC2',
   },
 
   auditionItemLeft: {
-    flex: 0.6,
+    flex: 0.5,
     flexDirection: 'column',
     overflow: 'hidden',
   },
 
   auditionItemRight: {
-    flex: 0.4,
+    flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',

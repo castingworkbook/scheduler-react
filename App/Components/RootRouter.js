@@ -9,6 +9,7 @@ import Login from './Login';
 import Home from './Home';
 import Schedule from './Schedule';
 import History from './History';
+import Message from './Message';
 import layout from '../Styles/layout';
 import AppEventEmitter from '../Services/AppEventEmitter';
 
@@ -47,6 +48,7 @@ export default class RootRouter extends Component {
           <Route name="home" wrapRouter={false} component={Home} title="Home" />
           <Route name="schedule" wrapRouter={false} component={Schedule} title="schedule" />
 					<Route name="history" wrapRouter={false} component={History} title="history" />
+					<Route name="message" wrapRouter={false} component={Message} title="message" />
         </Router>
       </Drawer>
     );

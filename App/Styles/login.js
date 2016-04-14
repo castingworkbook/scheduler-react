@@ -10,7 +10,6 @@ var {
   Dimensions
 } = React;
 var deviceHeight = Dimensions.get('window').height;
-console.log(deviceHeight);
 module.exports = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -55,7 +54,7 @@ module.exports = StyleSheet.create({
 	},
 	abg : {
 		flex: 1,
-		backgroundColor: secondary,
+		backgroundColor: primary,
 		paddingTop: 30,
 		paddingLeft: 10,
 		paddingRight: 10,

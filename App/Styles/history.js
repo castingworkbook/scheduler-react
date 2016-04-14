@@ -92,7 +92,7 @@ module.exports = StyleSheet.create({
   formContainer: {
     flexDirection: 'row',
     padding: 10,
-    backgroundColor: 'transparent',
+    backgroundColor: secondary,
     borderTopWidth: 1,
     borderColor: '#fff',
   },

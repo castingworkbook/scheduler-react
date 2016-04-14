@@ -80,12 +80,13 @@ export default class Schedule extends Component {
 					<ActionSheet
 	          visible  = { this.state.show }
 	          onCancel = { this.onCancel.bind(this) }>
-	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Forward Audition to Actor</ActionSheet.Button>
-	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Forward Confirm to Casting</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onAction.bind(this)}>Forward Regret to Casting</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onAction.bind(this)}>Request Alternative Time to Casting</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onAction.bind(this)}>Forward Pending to Casting</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onAction.bind(this)}>Set as Closed</ActionSheet.Button>
+	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Forward audition</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onActionMessage.bind(this)}>Forward audition with Message</ActionSheet.Button>
+	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Confirm</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onActionMessage.bind(this)}>Confirm with Message</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onAction.bind(this)}>Regret</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onActionMessage.bind(this)}>Regret with Message</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onActionMessage.bind(this)}>Request Alternative Time</ActionSheet.Button>
 	        </ActionSheet>
 				</Image>
 			</View>
@@ -95,10 +96,7 @@ export default class Schedule extends Component {
 	_renderHeader() {
 		return (
       <View style={schedule.headerContainer}>
-        <Text style={schedule.header}>Michael Bay</Text>
-				<TouchableOpacity>
-					<Icon name="ios-telephone" style={schedule.auditionItemIcon} />
-				</TouchableOpacity>
+        <Text style={schedule.header}>Batman Returns</Text>
       </View>
     )
 	}
@@ -121,6 +119,9 @@ export default class Schedule extends Component {
           </View>
 					<TouchableOpacity>
 						<Icon name="ios-telephone" style={schedule.auditionItemIcon} />
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<Icon name="document-text" style={schedule.auditionItemIcon} />
 					</TouchableOpacity>
 					<TouchableOpacity onPress={Actions.history}>
 						<Icon name="ios-arrow-forward" style={schedule.auditionItemIcon} />
@@ -163,17 +164,9 @@ export default class Schedule extends Component {
 
 	onAction() {
 		this.setState({show: false});
-		this.triggerAlert();
 	}
 
-	triggerAlert() {
-		Alert.alert(
-			'Note',
-			'Add a Note?',
-			[
-        {text: 'No', onPress: () => console.log('Cancel Pressed!')},
-        {text: 'Yes', onPress: () => console.log('OK Pressed!')},
-      ]
-		)
+	onActionMessage() {
+		Actions.message();
 	}
 }

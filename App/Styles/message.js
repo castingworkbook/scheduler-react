@@ -39,18 +39,37 @@ module.exports = StyleSheet.create({
 		shadowRadius: 1.5
 	},
 
-  headerContainer: {
+  content: {
     flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'transparent',
-    justifyContent: 'space-between',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderColor: '#fff',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
 
   header: {
-    fontSize: 25,
-    color: '#fff',
+    padding: 10
+  },
+
+  headerText: {
+    fontSize: 20,
+    color: 'white'
+  },
+
+  textAreaInput: {
+    height: 120,
+    borderColor: 'rgba(255, 255, 255, 0.4)',
+    borderWidth: 2,
+    margin: 15,
+    marginTop: 5,
+    backgroundColor: '#fff',
+    color: 'rgba(0, 0, 0, 0.9)',
+    padding: 10,
+    alignItems: 'flex-start',
+    fontSize: 17
+  },
+
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
   },
 });

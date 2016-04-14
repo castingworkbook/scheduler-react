@@ -127,7 +127,7 @@ export default class History extends Component {
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(dummyActions2),
+      dataSource: ds.cloneWithRows(dummyActions1),
       action: ""
     }
   }
@@ -153,7 +153,7 @@ export default class History extends Component {
           <View style={history.formContainer}>
             <View style={history.inputContainer}>
               <IconInput
-                placeholder="Add an action..."
+                placeholder="Add a Note..."
                 icon="compose"
                 secureTextEntry={false}
                 dark={false}

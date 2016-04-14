@@ -1,0 +1,41 @@
+/* @flow */
+'use strict';
+
+import React, {Component, ScrollView, View, Text, TextInput, Image} from 'react-native';
+import Navbar from './Widgets/Navbar';
+import styles from '../Styles/style';
+import message from '../Styles/message';
+import ButtonRounded from './Widgets/ButtonRounded';
+import {Actions} from 'react-native-router-flux';
+
+export default class Message extends Component {
+  render() {
+    return(
+      <View style={message.color}>
+        <Navbar
+          title="Compose Message"
+          style={message.toolbar}
+          back={true} />
+        <Image source={require('../img/glow2.png')} style={message.container}>
+          <ScrollView style={{backgroundColor: 'transparent'}}>
+            <View style={message.content}>
+              <View style={message.header}>
+                <Text style={message.headerText}>To: Michael Bay</Text>
+              </View>
+              <TextInput
+                style={message.textAreaInput}
+                multiline={true}
+                numberOfLines={20}
+                placeholder={'Write a message....'}
+                placeholderTextColor={'rgba(0,0,0,0.6)'} />
+            </View>
+          </ScrollView>
+          <View style={message.footer}>
+            <ButtonRounded text="Send" onPress={Actions.schedule} />
+            <ButtonRounded text="Discard" onPress={Actions.schedule}/>
+          </View>
+        </Image>
+      </View>
+    )
+  }
+}
