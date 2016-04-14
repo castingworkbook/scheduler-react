@@ -69,7 +69,7 @@ export default class History extends Component {
 
     const dummyActions2 = [
       {
-        text: "Forward to Actor",
+        text: "Forward",
         date: "02/11/16",
         time: "10:37am",
       },
@@ -79,24 +79,24 @@ export default class History extends Component {
         time: "1:37pm",
       },
       {
-        text: "Called Actor",
+        text: "Call Actor",
         date: "02/11/16",
         time: "2:01pm",
       },
       {
-        text: "Added: Actor said 02/21/16 @ 1:30 to 4:30 works",
+        text: "Note: Actor said 02/21/16 @ 1:30 to 4:30 works",
         date: "02/11/16",
         time: "2:15pm"
       },
       {
-        text: "Called Casting",
+        text: "Request Alternative Time with Message",
         date: "02/11/16",
         time: "2:37pm",
       },
       {
-        text: "Added: Casting will resubmit for 2:30",
+        text: "Message: Can we set the time between to 02/21/16 between 1:30 to 4:30?",
         date: "02/11/16",
-        time: "3:10pm",
+        time: "2:37pm",
       },
       {
         text: "Casting resubmits time",
@@ -104,7 +104,7 @@ export default class History extends Component {
         time: "10:37am",
       },
       {
-        text: "Forward to Actor",
+        text: "Forward",
         date: "02/12/16",
         time: "10:51pm",
       },
@@ -114,20 +114,15 @@ export default class History extends Component {
         time: "11:37pm",
       },
       {
-        text: "Forward Confirm to Casting",
+        text: "Confirm",
         date: "02/12/16",
         time: "1:37pm",
-      },
-      {
-        text: "Set as Closed",
-        date: "02/12/16",
-        time: "1:40pm",
       }
     ]
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(dummyActions1),
+      dataSource: ds.cloneWithRows(dummyActions2),
       action: ""
     }
   }

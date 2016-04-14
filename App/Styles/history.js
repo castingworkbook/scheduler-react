@@ -75,7 +75,8 @@ module.exports = StyleSheet.create({
   },
 
   actionItemLeft: {
-    flex: 0.8
+    flex: 0.8,
+    paddingRight: 10
   },
 
   actionItemRight: {

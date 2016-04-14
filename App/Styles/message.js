@@ -75,6 +75,6 @@ module.exports = StyleSheet.create({
   },
 
   button: {
-    width: 200
+    flex: 1
   }
 });
