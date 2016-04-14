@@ -83,7 +83,7 @@ module.exports = StyleSheet.create({
   auditionItem: {
     flex: 1,
     flexDirection: 'row',
-    height: 100,
+    height: 115,
     padding: 10,
     backgroundColor: 'transparent',
   },
@@ -91,7 +91,7 @@ module.exports = StyleSheet.create({
   auditionItemSelected: {
     flex: 1,
     flexDirection: 'row',
-    height: 100,
+    height: 115,
     padding: 10,
     backgroundColor: '#008EC2',
   },
@@ -100,6 +100,10 @@ module.exports = StyleSheet.create({
     flex: 0.5,
     flexDirection: 'column',
     overflow: 'hidden',
+  },
+
+  date: {
+    marginTop: 10
   },
 
   auditionItemRight: {

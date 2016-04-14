@@ -21,7 +21,7 @@ export default class Schedule extends Component {
 				actor: "Brad Pitt",
 				role: "Batman",
 				date: "02/20/16",
-				time: "3:30p",
+				time: "3:30pm",
 				status: "C",
 				selected: false
 			},
@@ -30,7 +30,7 @@ export default class Schedule extends Component {
 				actor: "Christian Bale",
 				role: "Batman",
 				date: "02/20/16",
-				time: "3:50p",
+				time: "3:50pm",
 				status: "R",
 				selected: false
 			},
@@ -39,7 +39,7 @@ export default class Schedule extends Component {
 				actor: "Ben Affleck",
 				role: "Batman",
 				date: "02/20/16",
-				time: "4:10p",
+				time: "4:10pm",
 				status: "?",
 				selected: false
 			}
@@ -53,6 +53,11 @@ export default class Schedule extends Component {
       clicked: 'none',
       show: false
 		}
+	}
+
+	componentDidMount() {
+		if (this.props.message)
+			Alert.alert(this.props.message);
 	}
 
 	render() {
@@ -80,13 +85,10 @@ export default class Schedule extends Component {
 					<ActionSheet
 	          visible  = { this.state.show }
 	          onCancel = { this.onCancel.bind(this) }>
-	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Forward audition</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onActionMessage.bind(this)}>Forward audition with Message</ActionSheet.Button>
+	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Forward</ActionSheet.Button>
 	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Confirm</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onActionMessage.bind(this)}>Confirm with Message</ActionSheet.Button>
 						<ActionSheet.Button onPress={this.onAction.bind(this)}>Regret</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onActionMessage.bind(this)}>Regret with Message</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onActionMessage.bind(this)}>Request Alternative Time</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onAction.bind(this)}>Request Alternative Time</ActionSheet.Button>
 	        </ActionSheet>
 				</Image>
 			</View>
@@ -109,7 +111,10 @@ export default class Schedule extends Component {
             <View style={schedule.auditionItemSelect}>
               <Text style={schedule.highlightedFont}>{audition.actor}</Text>
               <Text style={schedule.normalFont}>{audition.role}</Text>
-              <Text style={schedule.normalFont }>{audition.date} - {audition.time}</Text>
+							<View style={schedule.date}>
+								<Text style={schedule.normalFont}>{audition.date}</Text>
+								<Text style={schedule.normalFont}>{audition.time}</Text>
+							</View>
             </View>
           </TouchableOpacity>
         </View>
@@ -164,9 +169,13 @@ export default class Schedule extends Component {
 
 	onAction() {
 		this.setState({show: false});
-	}
 
-	onActionMessage() {
-		Actions.message();
+		Alert.alert(
+			'Send a Message',
+      'Would you like to attach a message to this action?',
+      [
+        {text: 'Yes', onPress: () => Actions.message()},
+				{text: 'No', onPress: () => Alert.alert('Action Sent')},
+      ])
 	}
 }

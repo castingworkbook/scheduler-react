@@ -7,8 +7,9 @@ var secondary = require('./variable').brandSecondary;
 
 var {
   StyleSheet,
+  Dimensions
 } = React;
-
+var deviceHeight = Dimensions.get('window').height;
 module.exports = StyleSheet.create({
   container: {
 		flex: 1,
@@ -39,7 +40,7 @@ module.exports = StyleSheet.create({
 		shadowRadius: 1.5
 	},
 
-  content: {
+  inputContainer: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center'
@@ -51,11 +52,11 @@ module.exports = StyleSheet.create({
 
   headerText: {
     fontSize: 20,
-    color: 'white'
+    color: '#fff'
   },
 
   textAreaInput: {
-    height: 120,
+    height: deviceHeight/2,
     borderColor: 'rgba(255, 255, 255, 0.4)',
     borderWidth: 2,
     margin: 15,
@@ -72,4 +73,8 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
   },
+
+  button: {
+    width: 200
+  }
 });

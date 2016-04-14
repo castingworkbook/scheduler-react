@@ -19,17 +19,17 @@ export default class Login extends Component {
     };
   }
 
-  componentWillMount () {
+  componentWillMount() {
     DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
     DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
   }
 
-  keyboardWillShow (e) {
+  keyboardWillShow(e) {
     let newSize = Dimensions.get('window').height - e.endCoordinates.height;
     this.setState({scroll: true});
   }
 
-  keyboardWillHide (e) {
+  keyboardWillHide(e) {
     this.setState({scroll: false});
   }
 
@@ -55,12 +55,12 @@ export default class Login extends Component {
               secureTextEntry={true}
               dark={false}
               value={this.state.password}
-              onChangeText={(val) => this.setState({password: val}) } />
+              onChangeText={(val) => this.setState({password: val})} />
             <TouchableOpacity onPress={this.signuep} style={{alignSelf: 'flex-end', marginRight: 15}}>
               <Text style={login.registerLink}>Forgot Password</Text>
             </TouchableOpacity>
             <ButtonRounded
-              onPress={()=>Actions.home({data:this.state.value })}
+              onPress={()=>Actions.home({data:this.state.value})}
               text="Login" />
           </View>
         </Image>

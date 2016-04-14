@@ -18,7 +18,7 @@ export default class Message extends Component {
           back={true} />
         <Image source={require('../img/glow2.png')} style={message.container}>
           <ScrollView style={{backgroundColor: 'transparent'}}>
-            <View style={message.content}>
+            <View style={message.inputContainer}>
               <View style={message.header}>
                 <Text style={message.headerText}>To: Michael Bay</Text>
               </View>
@@ -31,8 +31,12 @@ export default class Message extends Component {
             </View>
           </ScrollView>
           <View style={message.footer}>
-            <ButtonRounded text="Send" onPress={Actions.schedule} />
-            <ButtonRounded text="Discard" onPress={Actions.schedule}/>
+            <View style={message.button}>
+              <ButtonRounded text="Send" onPress={() => Actions.schedule({message: "Action with Message Sent"})} />
+            </View>
+            <View style={message.button}>
+              <ButtonRounded text="Discard" onPress={() => Actions.schedule({message: "Action Sent"})} />
+            </View>
           </View>
         </Image>
       </View>

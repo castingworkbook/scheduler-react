@@ -30,9 +30,9 @@ export default class Home extends Component {
 				actions: 0
 			},
 			{
-				name: "Brian the Great",
-				director: "Bill Gates",
-				roles: ["Brian Park", "Susan Fox", "Trevar"],
+				name: "The NoteBook",
+				director: "Jeff Rose",
+				roles: ["Ryan Gosling", "Gena Rowlands"],
 				actions: 2
 			}
 		];

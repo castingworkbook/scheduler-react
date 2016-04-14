@@ -64,7 +64,7 @@ module.exports = StyleSheet.create({
   projectItem: {
     flex: 1,
     flexDirection: 'row',
-    height: 120,
+    height: 115,
     padding: 10,
     backgroundColor: 'transparent',
   },
@@ -79,6 +79,7 @@ module.exports = StyleSheet.create({
   projectItemRoles: {
     flex: 1,
     flexDirection: 'column',
+    marginTop: 10,
   },
 
   projectItemRight: {
