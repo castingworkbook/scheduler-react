@@ -32,7 +32,7 @@ export default class Home extends Component {
 			{
 				name: "The NoteBook",
 				director: "Jeff Rose",
-				roles: ["Ryan Gosling", "Gena Rowlands"],
+				roles: ["Handsome Guy", "Pretty Girl"],
 				actions: 2
 			}
 		];
