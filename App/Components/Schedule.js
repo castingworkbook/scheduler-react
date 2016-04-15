@@ -119,17 +119,12 @@ export default class Schedule extends Component {
           </TouchableOpacity>
         </View>
         <View style={schedule.auditionItemRight}>
-					<View style={schedule.status}>
-            <Text>{audition.status}</Text>
-          </View>
+					<View style={schedule.statusContainer}>
+						<View style={schedule.status}><Text>{audition.status}</Text></View>
+					</View>
 					<TouchableOpacity>
 						<View style={schedule.auditionItemIconContainer}>
 							<Icon name="ios-telephone" style={schedule.auditionItemIcon} />
-						</View>
-					</TouchableOpacity>
-					<TouchableOpacity>
-						<View style={schedule.auditionItemIconContainer}>
-							<Icon name="document-text" style={schedule.auditionItemIcon} />
 						</View>
 					</TouchableOpacity>
 					<TouchableOpacity onPress={Actions.history}>

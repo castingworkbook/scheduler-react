@@ -80,8 +80,10 @@ export default class Home extends Component {
 					<View style={home.projectItemRoles}>{roles}</View>
 				</View>
 				<View style={home.projectItemRight}>
-					<View style={project.actions > 0 ? home.activeActions : home.inactiveActions}>
-						<Text>{project.actions}</Text>
+					<View style={home.actionsContainer}>
+						<View style={project.actions > 0 ? home.activeActions : home.inactiveActions}>
+							<Text>{project.actions}</Text>
+						</View>
 					</View>
 					<TouchableOpacity>
 						<View style={home.projectItemIconContainer}>

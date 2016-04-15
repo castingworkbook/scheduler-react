@@ -51,8 +51,6 @@ module.exports = StyleSheet.create({
   },
 
   listContainer: {
-		marginLeft: 12,
-		marginRight: 12,
 		flexDirection: 'row'
 	},
 
@@ -74,6 +72,8 @@ module.exports = StyleSheet.create({
   separator: {
     height: 1,
     backgroundColor: 'white',
+    marginLeft: 10,
+    marginRight: 10,
   },
 
   footer: {
@@ -83,23 +83,26 @@ module.exports = StyleSheet.create({
   auditionItem: {
     flex: 1,
     flexDirection: 'row',
-    height: 115,
+    paddingLeft: 10,
     paddingTop: 10,
+    paddingBottom: 10,
     backgroundColor: 'transparent',
   },
 
   auditionItemSelected: {
     flex: 1,
     flexDirection: 'row',
-    height: 115,
+    paddingLeft: 10,
     paddingTop: 10,
+    paddingBottom: 10,
     backgroundColor: '#008EC2',
   },
 
   auditionItemLeft: {
-    flex: 0.5,
+    flex: 0.55,
     flexDirection: 'column',
     overflow: 'hidden',
+    marginRight: 10,
   },
 
   date: {
@@ -107,33 +110,39 @@ module.exports = StyleSheet.create({
   },
 
   auditionItemRight: {
-    flex: 0.5,
+    flex: 0.45,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
-    height: 33,
   },
 
   auditionItemSelect: {
     flex: 1,
   },
 
-  status: {
-    alignSelf: 'flex-end',
+  statusContainer: {
+    height: 50,
+    width: 30,
     alignItems: 'center',
-    marginRight: 15,
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+
+  status: {
+    alignItems: 'center',
     width: 25,
     height: 25,
     backgroundColor: '#fff',
     borderRadius: 12,
     justifyContent: 'center',
-    bottom: 5,
+    marginRight: 20,
   },
 
   auditionItemIconContainer: {
-    height: 30,
-    width: 40,
-    alignItems: 'center'
+    height: 50,
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   auditionItemIcon: {

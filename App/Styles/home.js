@@ -51,26 +51,27 @@ module.exports = StyleSheet.create({
   },
 
 	listContainer: {
-		marginLeft: 12,
-		marginRight: 12,
 		flexDirection: 'row'
 	},
 
   separator: {
     height: 1,
     backgroundColor: 'white',
+    marginLeft: 10,
+    marginRight: 10,
   },
 
   projectItem: {
     flex: 1,
     flexDirection: 'row',
-    height: 115,
+    paddingLeft: 10,
     paddingTop: 10,
+    paddingBottom: 10,
     backgroundColor: 'transparent',
   },
 
   projectItemLeft: {
-    flex: 0.6,
+    flex: 0.55,
     flexDirection: 'column',
     overflow: 'hidden',
     marginRight: 10,
@@ -83,40 +84,46 @@ module.exports = StyleSheet.create({
   },
 
   projectItemRight: {
-    flex: 0.4,
+    flex: 0.45,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 33,
-    alignSelf: 'center'
+    alignSelf: 'center',
+  },
+
+  actionsContainer: {
+    height: 50,
+    width: 30,
+    marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   activeActions: {
-    alignSelf: 'flex-end',
     alignItems: 'center',
-    marginRight: 15,
     width: 25,
     height: 25,
     backgroundColor: '#fff',
     borderRadius: 12,
     justifyContent: 'center',
-    bottom: 5,
+    marginRight: 20,
   },
 
   inactiveActions: {
     width: 25,
     height: 25,
-    marginRight: 15,
+    marginRight: 20,
     opacity: 0,
   },
 
   projectItemIconContainer: {
-    height: 30,
-    width: 40,
-    alignItems: 'center'
+    height: 50,
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   projectItemIcon: {
     fontSize: 30,
-    color: '#fff',
+    color: '#fff'
   },
 });
