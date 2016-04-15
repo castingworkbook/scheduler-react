@@ -65,7 +65,8 @@ module.exports = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: 115,
-    padding: 10,
+    paddingLeft: 10,
+    paddingTop: 10,
     backgroundColor: 'transparent',
   },
 
@@ -106,7 +107,13 @@ module.exports = StyleSheet.create({
     width: 25,
     height: 25,
     marginRight: 15,
-    opacity: 0
+    opacity: 0,
+  },
+
+  projectItemIconContainer: {
+    height: 30,
+    width: 30,
+    alignItems: 'flex-end'
   },
 
   projectItemIcon: {

@@ -84,7 +84,8 @@ module.exports = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: 115,
-    padding: 10,
+    paddingLeft: 10,
+    paddingTop: 10,
     backgroundColor: 'transparent',
   },
 
@@ -92,7 +93,8 @@ module.exports = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: 115,
-    padding: 10,
+    paddingLeft: 10,
+    paddingTop: 10,
     backgroundColor: '#008EC2',
   },
 
@@ -128,6 +130,12 @@ module.exports = StyleSheet.create({
     borderRadius: 12,
     justifyContent: 'center',
     bottom: 5,
+  },
+
+  auditionItemIconContainer: {
+    height: 30,
+    width: 30,
+    alignItems: 'flex-end'
   },
 
   auditionItemIcon: {

@@ -15,20 +15,27 @@ export default class Navbar extends Component {
 
   render() {
     let backButton;
-    if (this.props.back)
+    if (this.props.back) {
       backButton = <TouchableOpacity onPress={Actions.pop}>
-                     <Icon name="ios-arrow-left" size={40} color="rgba(255,255,255,0.9)"/>
+                     <View style={navbarStyle.backContainer}>
+                       <Icon name="ios-arrow-left" size={40} color="rgba(255,255,255,0.9)" />
+                     </View>
                    </TouchableOpacity>
+    } else {
+      backButton = <View style={navbarStyle.backContainer}></View>
+    }
 
     return(
       <View style={[this.props.style, navbarStyle.navbar]}>
-        <View style={navbarStyle.backContainer}>{ backButton }</View>
+        { backButton }
         <View>
-          <Text style={navbarStyle.title}> {this.props.title} </Text>
-          <Text style={this.props.subtitleStyle}> {this.props.subtitle} </Text>
+          <Text style={navbarStyle.title}>{this.props.title}</Text>
+          <Text style={this.props.subtitleStyle}>{this.props.subtitle}</Text>
         </View>
         <TouchableOpacity onPress={this.open}>
-          <Icon name="navicon" size={40} color="rgba(255,255,255,0.9)" style={{top:0}} />
+          <View style={navbarStyle.menuContainer}>
+            <Icon name="navicon" size={40} color="rgba(255,255,255,0.9)" style={{top:0}} />
+          </View>
         </TouchableOpacity>
       </View>
     );

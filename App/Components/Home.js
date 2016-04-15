@@ -84,10 +84,14 @@ export default class Home extends Component {
 						<Text>{project.actions}</Text>
 					</View>
 					<TouchableOpacity>
-						<Icon name="ios-telephone" style={home.projectItemIcon} />
+						<View style={home.projectItemIconContainer}>
+							<Icon name="ios-telephone" style={home.projectItemIcon} />
+						</View>
 					</TouchableOpacity>
 					<TouchableOpacity onPress={Actions.schedule}>
-						<Icon name="ios-arrow-forward" style={home.projectItemIcon} />
+						<View style={home.projectItemIconContainer}>
+							<Icon name="ios-arrow-forward" style={home.projectItemIcon} />
+						</View>
 					</TouchableOpacity>
 				</View>
 			</View>

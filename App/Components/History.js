@@ -140,7 +140,7 @@ export default class History extends Component {
   						<View style={history.listContainer}>
                 <ListView
                   dataSource={this.state.dataSource}
-                  renderHeader= {this._renderHeader}
+                  renderHeader={this._renderHeader}
                   renderRow={this._renderRow} />
               </View>
             </View>
@@ -148,7 +148,7 @@ export default class History extends Component {
           <View style={history.formContainer}>
             <View style={history.inputContainer}>
               <IconInput
-                placeholder="Add a Note..."
+                placeholder="Enter a Note..."
                 icon="compose"
                 secureTextEntry={false}
                 dark={false}
@@ -156,7 +156,9 @@ export default class History extends Component {
                 onChangeText={(val) => this.setState({action: val})} />
             </View>
             <TouchableOpacity>
-              <Text style={history.addFont}>Add</Text>
+              <View style={history.addButton}>
+                <Text style={history.addButtonText}>Add</Text>
+              </View>
             </TouchableOpacity>
           </View>
         </Image>
