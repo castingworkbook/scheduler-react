@@ -31,7 +31,7 @@ module.exports = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		flexDirection: 'row',
-		padding: 15,
+		paddingBottom: 15,
 		paddingTop: 30,
 		shadowColor: '#000',
 		shadowOffset: {width: 0, height: 2},
@@ -65,7 +65,6 @@ module.exports = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: 115,
-    paddingLeft: 10,
     paddingTop: 10,
     backgroundColor: 'transparent',
   },
@@ -112,8 +111,8 @@ module.exports = StyleSheet.create({
 
   projectItemIconContainer: {
     height: 30,
-    width: 30,
-    alignItems: 'flex-end'
+    width: 40,
+    alignItems: 'center'
   },
 
   projectItemIcon: {

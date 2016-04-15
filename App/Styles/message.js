@@ -32,7 +32,7 @@ module.exports = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		flexDirection: 'row',
-		padding: 15,
+		paddingBottom: 15,
 		paddingTop: 30,
 		shadowColor: '#000',
 		shadowOffset: {width: 0, height: 2},

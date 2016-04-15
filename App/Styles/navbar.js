@@ -14,15 +14,15 @@ module.exports = StyleSheet.create({
 	},
 
   backContainer: {
-    width: 40,
+    width: 50,
     height: 40,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
 
   menuContainer: {
-    width: 40,
+    width: 50,
     height: 40,
-    alignItems: 'flex-end',
+    alignItems: 'center',
   },
 
 	title : {
