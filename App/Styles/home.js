@@ -93,9 +93,10 @@ module.exports = StyleSheet.create({
   actionsContainer: {
     height: 50,
     width: 30,
-    marginRight: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 5,
   },
 
   activeActions: {
@@ -104,8 +105,7 @@ module.exports = StyleSheet.create({
     height: 25,
     backgroundColor: '#fff',
     borderRadius: 12,
-    justifyContent: 'center',
-    marginRight: 20,
+    justifyContent: 'center'
   },
 
   inactiveActions: {

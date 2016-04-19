@@ -68,6 +68,18 @@ module.exports = StyleSheet.create({
     fontSize: 17
   },
 
+  switchContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 10,
+  },
+
+  switchFont: {
+    marginRight: 10,
+    fontSize: 16,
+    color: '#fff'
+  },
+
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',

@@ -9,7 +9,7 @@ import ButtonRounded from './Widgets/ButtonRounded';
 import {brandPrimary as primary} from '../Styles/variable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
-import ActionSheet from '@remobile/react-native-action-sheet'
+import ActionSheet from '@remobile/react-native-action-sheet';
 
 export default class Schedule extends Component {
 	constructor(props) {
@@ -40,7 +40,7 @@ export default class Schedule extends Component {
 				role: "Batman",
 				date: "02/20/16",
 				time: "4:10pm",
-				status: "?",
+				status: "",
 				selected: false
 			}
 		]
@@ -119,14 +119,14 @@ export default class Schedule extends Component {
           </TouchableOpacity>
         </View>
         <View style={schedule.auditionItemRight}>
-					<View style={schedule.statusContainer}>
-						<View style={schedule.status}><Text>{audition.status}</Text></View>
-					</View>
 					<TouchableOpacity>
 						<View style={schedule.auditionItemIconContainer}>
 							<Icon name="ios-telephone" style={schedule.auditionItemIcon} />
 						</View>
 					</TouchableOpacity>
+					<View style={audition.status ? schedule.activeStatus : schedule.inactiveStatus}>
+						<View style={schedule.status}><Text>{audition.status}</Text></View>
+					</View>
 					<TouchableOpacity onPress={Actions.history}>
 						<View style={schedule.auditionItemIconContainer}>
 							<Icon name="ios-arrow-forward" style={schedule.auditionItemIcon} />
@@ -172,8 +172,8 @@ export default class Schedule extends Component {
 		this.setState({show: false});
 
 		Alert.alert(
-			'Send a Message',
-      'Would you like to attach a message to this action?',
+			'Send Message or Materials',
+      'Would you like to attach messages or materials to this action?',
       [
         {text: 'Yes', onPress: () => Actions.message()},
 				{text: 'No', onPress: () => Alert.alert('Action Sent')},

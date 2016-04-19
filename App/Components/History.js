@@ -13,12 +13,12 @@ export default class History extends Component {
 
     const dummyActions = [
       {
-        text: "Forward to Actor",
+        text: "Forward to Brad Pitt",
         date: "02/11/16",
         time: "10:37am",
       },
       {
-        text: "Actor responds Confirm",
+        text: "Brad Pitt responds Confirm",
         date: "02/11/16",
         time: "1:37pm",
       },
@@ -74,17 +74,17 @@ export default class History extends Component {
         time: "10:37am",
       },
       {
-        text: "Actor responds Regret",
+        text: "Brad Pitt responds Regret",
         date: "02/11/16",
         time: "1:37pm",
       },
       {
-        text: "Call Actor",
+        text: "Call Brad Pitt",
         date: "02/11/16",
         time: "2:01pm",
       },
       {
-        text: "Note: Actor said 02/21/16 @ 1:30 to 4:30 works",
+        text: "Note: Brad said 02/21/16 @ 1:30 to 4:30 works",
         date: "02/11/16",
         time: "2:15pm"
       },
@@ -109,7 +109,7 @@ export default class History extends Component {
         time: "10:51pm",
       },
       {
-        text: "Actor responds Confirm",
+        text: "Brad Pitt responds Confirm",
         date: "02/12/16",
         time: "11:37pm",
       },

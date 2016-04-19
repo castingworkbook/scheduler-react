@@ -120,12 +120,20 @@ module.exports = StyleSheet.create({
     flex: 1,
   },
 
-  statusContainer: {
+  activeStatus: {
     height: 50,
     width: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
+    marginLeft: 10,
+    marginRight: 5,
+  },
+
+  inactiveStatus: {
+    width: 25,
+    height: 25,
+    marginRight: 20,
+    opacity: 0,
   },
 
   status: {
@@ -134,8 +142,7 @@ module.exports = StyleSheet.create({
     height: 25,
     backgroundColor: '#fff',
     borderRadius: 12,
-    justifyContent: 'center',
-    marginRight: 20,
+    justifyContent: 'center'
   },
 
   auditionItemIconContainer: {
