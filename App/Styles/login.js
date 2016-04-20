@@ -54,11 +54,12 @@ module.exports = StyleSheet.create({
 	},
 	abg : {
 		flex: 1,
-		backgroundColor: primary,
+		backgroundColor: secondary,
 		paddingTop: 30,
 		paddingLeft: 10,
 		paddingRight: 10,
-		paddingBottom: 30
+		paddingBottom: 30,
+    height: deviceHeight/1.8
 	},
 	background: {
     flex: 1,
