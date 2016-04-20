@@ -9489,7 +9489,7 @@ return 'Range []';}
 
 return 'Range [ '+
 this._start+'...'+this._end+(
-this._step!==1?' by '+this._step:'')+
+this._step>1?' by '+this._step:'')+
 ' ]';};
 
 
@@ -9803,17 +9803,6 @@ emptyMap().withMutations(function(map){
 var iter=KeyedIterable(value);
 assertNotInfinite(iter.size);
 iter.forEach(function(v,k){return map.set(k,v);});});}
-
-
-
-Map.of=function(){var keyValues=SLICE$0.call(arguments,0);
-return emptyMap().withMutations(function(map){
-for(var i=0;i<keyValues.length;i+=2){
-if(i+1>=keyValues.length){
-throw new Error('Missing value for key: '+keyValues[i]);}
-
-map.set(keyValues[i],keyValues[i+1]);}});};
-
 
 
 
@@ -11729,11 +11718,7 @@ if(begin!==undefined){
 begin=begin|0;}
 
 if(end!==undefined){
-if(end===Infinity){
-end=originalSize;}else 
-{
-end=end|0;}}
-
+end=end|0;}
 
 
 if(wholeSlice(begin,end,originalSize)){
@@ -12269,12 +12254,6 @@ return RecordType._empty||(RecordType._empty=makeRecord(this,emptyMap()));};
 Record.prototype.set=function(k,v){
 if(!this.has(k)){
 throw new Error('Cannot set unknown key "'+k+'" on '+recordName(this));}
-
-if(this._map&&!this._map.has(k)){
-var defaultVal=this._defaultValues[k];
-if(v===defaultVal){
-return this;}}
-
 
 var newMap=this._map&&this._map.set(k,v);
 if(this.__ownerID||newMap===this._map){
@@ -12959,8 +12938,8 @@ var entry=this.findEntry(predicate,context);
 return entry?entry[1]:notSetValue;},
 
 
-findEntry:function(predicate,context,notSetValue){
-var found=notSetValue;
+findEntry:function(predicate,context){
+var found;
 this.__iterate(function(v,k,c){
 if(predicate.call(context,v,k,c)){
 found=[k,v];
@@ -12970,8 +12949,8 @@ return false;}});
 return found;},
 
 
-findLastEntry:function(predicate,context,notSetValue){
-return this.toSeq().reverse().findEntry(predicate,context,notSetValue);},
+findLastEntry:function(predicate,context){
+return this.toSeq().reverse().findEntry(predicate,context);},
 
 
 forEach:function(sideEffect,context){
@@ -13244,6 +13223,35 @@ IterablePrototype.toSource=function(){return this.toString();};
 IterablePrototype.chain=IterablePrototype.flatMap;
 IterablePrototype.contains=IterablePrototype.includes;
 
+
+(function(){
+try{
+Object.defineProperty(IterablePrototype,'length',{
+get:function(){
+if(!Iterable.noLengthWarning){
+var stack;
+try{
+throw new Error();}
+catch(error){
+stack=error.stack;}
+
+if(stack.indexOf('_wrapObject')===-1){
+console&&console.warn&&console.warn(
+'iterable.length has been deprecated, '+
+'use iterable.size or iterable.count(). '+
+'This warning will become a silent error in a future version. '+
+stack);
+
+return this.size;}}}});}
+
+
+
+
+catch(e){}})();
+
+
+
+
 mixin(KeyedIterable,{
 
 
@@ -13324,6 +13332,9 @@ return key===undefined?-1:key;},
 lastIndexOf:function(searchValue){
 var key=this.toKeyedSeq().reverse().keyOf(searchValue);
 return key===undefined?-1:key;},
+
+
+
 
 
 reverse:function(){
@@ -13447,7 +13458,6 @@ return this.valueSeq();}});
 
 
 SetIterable.prototype.has=IterablePrototype.includes;
-SetIterable.prototype.contains=SetIterable.prototype.includes;
 
 
 
@@ -17868,7 +17878,7 @@ __d('color-name/index.js',function(global, require, module, exports) {  module.e
 });
 __d('lodash/lodash.js',function(global, require, module, exports) {  /**
  * @license
- * lodash 4.11.1 (Custom Build) <https://lodash.com/>
+ * lodash 4.10.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash -d -o ./foo/lodash.js`
  * Copyright jQuery Foundation and other contributors <https://jquery.org/>
  * Released under MIT license <https://lodash.com/license>
@@ -17881,7 +17891,7 @@ __d('lodash/lodash.js',function(global, require, module, exports) {  /**
 var undefined;
 
 
-var VERSION='4.11.1';
+var VERSION='4.10.0';
 
 
 var LARGE_ARRAY_SIZE=200;
@@ -18056,8 +18066,7 @@ rsVarRange='\\ufe0e\\ufe0f',
 rsBreakRange=rsMathOpRange+rsNonCharRange+rsQuoteRange+rsSpaceRange;
 
 
-var rsApos="['\u2019]",
-rsAstral='['+rsAstralRange+']',
+var rsAstral='['+rsAstralRange+']',
 rsBreak='['+rsBreakRange+']',
 rsCombo='['+rsComboMarksRange+rsComboSymbolsRange+']',
 rsDigits='\\d+',
@@ -18075,17 +18084,12 @@ rsZWJ='\\u200d';
 
 var rsLowerMisc='(?:'+rsLower+'|'+rsMisc+')',
 rsUpperMisc='(?:'+rsUpper+'|'+rsMisc+')',
-rsOptLowerContr='(?:'+rsApos+'(?:d|ll|m|re|s|t|ve))?',
-rsOptUpperContr='(?:'+rsApos+'(?:D|LL|M|RE|S|T|VE))?',
 reOptMod=rsModifier+'?',
 rsOptVar='['+rsVarRange+']?',
 rsOptJoin='(?:'+rsZWJ+'(?:'+[rsNonAstral,rsRegional,rsSurrPair].join('|')+')'+rsOptVar+reOptMod+')*',
 rsSeq=rsOptVar+reOptMod+rsOptJoin,
 rsEmoji='(?:'+[rsDingbat,rsRegional,rsSurrPair].join('|')+')'+rsSeq,
 rsSymbol='(?:'+[rsNonAstral+rsCombo+'?',rsCombo,rsRegional,rsSurrPair,rsAstral].join('|')+')';
-
-
-var reApos=RegExp(rsApos,'g');
 
 
 
@@ -18098,10 +18102,10 @@ var reComplexSymbol=RegExp(rsFitz+'(?='+rsFitz+')|'+rsSymbol+rsSeq,'g');
 
 
 var reComplexWord=RegExp([
-rsUpper+'?'+rsLower+'+'+rsOptLowerContr+'(?='+[rsBreak,rsUpper,'$'].join('|')+')',
-rsUpperMisc+'+'+rsOptUpperContr+'(?='+[rsBreak,rsUpper+rsLowerMisc,'$'].join('|')+')',
-rsUpper+'?'+rsLowerMisc+'+'+rsOptLowerContr,
-rsUpper+'+'+rsOptUpperContr,
+rsUpper+'?'+rsLower+'+(?='+[rsBreak,rsUpper,'$'].join('|')+')',
+rsUpperMisc+'+(?='+[rsBreak,rsUpper+rsLowerMisc,'$'].join('|')+')',
+rsUpper+'?'+rsLowerMisc+'+',
+rsUpper+'+',
 rsDigits,
 rsEmoji].
 join('|'),'g');
@@ -19256,8 +19260,7 @@ TypeError=context.TypeError;
 
 
 var arrayProto=context.Array.prototype,
-objectProto=context.Object.prototype,
-stringProto=context.String.prototype;
+objectProto=context.Object.prototype;
 
 
 var funcToString=context.Function.prototype.toString;
@@ -19312,9 +19315,7 @@ nativeMax=Math.max,
 nativeMin=Math.min,
 nativeParseInt=context.parseInt,
 nativeRandom=Math.random,
-nativeReplace=stringProto.replace,
-nativeReverse=arrayProto.reverse,
-nativeSplit=stringProto.split;
+nativeReverse=arrayProto.reverse;
 
 
 var DataView=getNative(context,'DataView'),
@@ -21176,27 +21177,10 @@ assignMergeValue(object,key,newValue);}
 
 
 
-function baseNth(array,n){
-var length=array.length;
-if(!length){
-return;}
-
-n+=n<0?length:0;
-return isIndex(n,length)?array[n]:undefined;}
-
-
-
-
-
-
-
-
-
-
 
 function baseOrderBy(collection,iteratees,orders){
 var index=-1;
-iteratees=arrayMap(iteratees.length?iteratees:[identity],baseUnary(getIteratee()));
+iteratees=arrayMap(iteratees.length?iteratees:[identity],getIteratee());
 
 var result=baseMap(collection,function(value,key,collection){
 var criteria=arrayMap(iteratees,function(iteratee){
@@ -22071,8 +22055,22 @@ return array;}
 
 
 
+function copyObject(source,props,object){
+return copyObjectWith(source,props,object);}
 
-function copyObject(source,props,object,customizer){
+
+
+
+
+
+
+
+
+
+
+
+
+function copyObjectWith(source,props,object,customizer){
 object||(object={});
 
 var index=-1,
@@ -22263,7 +22261,7 @@ return chr[methodName]()+trailing;};}
 
 function createCompounder(callback){
 return function(string){
-return arrayReduce(words(deburr(string).replace(reApos,'')),callback,'');};}
+return arrayReduce(words(deburr(string)),callback,'');};}
 
 
 
@@ -22499,10 +22497,7 @@ return baseInverter(object,setter,toIteratee(iteratee),{});};}
 
 function createOver(arrayFunc){
 return rest(function(iteratees){
-iteratees=iteratees.length==1&&isArray(iteratees[0])?
-arrayMap(iteratees[0],baseUnary(getIteratee())):
-arrayMap(baseFlatten(iteratees,1,isFlattenableIteratee),baseUnary(getIteratee()));
-
+iteratees=arrayMap(baseFlatten(iteratees,1,isFlattenableIteratee),getIteratee());
 return rest(function(args){
 var thisArg=this;
 return arrayFunc(iteratees,function(iteratee){
@@ -22616,6 +22611,7 @@ return baseRange(start,end,step,fromRight);};}
 
 function createRecurryWrapper(func,bitmask,wrapFunc,placeholder,thisArg,partials,holders,argPos,ary,arity){
 var isCurry=bitmask&CURRY_FLAG,
+newArgPos=argPos?copyArray(argPos):undefined,
 newHolders=isCurry?holders:undefined,
 newHoldersRight=isCurry?undefined:holders,
 newPartials=isCurry?partials:undefined,
@@ -22629,7 +22625,7 @@ bitmask&=~(BIND_FLAG|BIND_KEY_FLAG);}
 
 var newData=[
 func,bitmask,thisArg,newPartials,newHolders,newPartialsRight,
-newHoldersRight,argPos,ary,arity];
+newHoldersRight,newArgPos,ary,arity];
 
 
 var result=wrapFunc.apply(undefined,newData);
@@ -23542,20 +23538,20 @@ newBitmask|=bitmask&BIND_FLAG?0:CURRY_BOUND_FLAG;}
 var value=source[3];
 if(value){
 var partials=data[3];
-data[3]=partials?composeArgs(partials,value,source[4]):value;
-data[4]=partials?replaceHolders(data[3],PLACEHOLDER):source[4];}
+data[3]=partials?composeArgs(partials,value,source[4]):copyArray(value);
+data[4]=partials?replaceHolders(data[3],PLACEHOLDER):copyArray(source[4]);}
 
 
 value=source[5];
 if(value){
 partials=data[5];
-data[5]=partials?composeArgsRight(partials,value,source[6]):value;
-data[6]=partials?replaceHolders(data[5],PLACEHOLDER):source[6];}
+data[5]=partials?composeArgsRight(partials,value,source[6]):copyArray(value);
+data[6]=partials?replaceHolders(data[5],PLACEHOLDER):copyArray(source[6]);}
 
 
 value=source[7];
 if(value){
-data[7]=value;}
+data[7]=copyArray(value);}
 
 
 if(srcBitmask&ARY_FLAG){
@@ -24310,7 +24306,7 @@ return result;}
 
 
 function head(array){
-return array&&array.length?array[0]:undefined;}
+return array?array[0]:undefined;}
 
 
 
@@ -24544,31 +24540,6 @@ return index;}}
 
 
 return -1;}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function nth(array,n){
-return array&&array.length?baseNth(array,toInteger(n)):undefined;}
 
 
 
@@ -26874,11 +26845,7 @@ iteratees=[];}else
 if(length>2&&isIterateeCall(iteratees[0],iteratees[1],iteratees[2])){
 iteratees=[iteratees[0]];}
 
-iteratees=iteratees.length==1&&isArray(iteratees[0])?
-iteratees[0]:
-baseFlatten(iteratees,1,isFlattenableIteratee);
-
-return baseOrderBy(collection,iteratees,[]);});
+return baseOrderBy(collection,baseFlatten(iteratees,1),[]);});
 
 
 
@@ -27241,13 +27208,12 @@ return result;}
 function debounce(func,wait,options){
 var lastArgs,
 lastThis,
-maxWait,
 result,
 timerId,
 lastCallTime=0,
 lastInvokeTime=0,
 leading=false,
-maxing=false,
+maxWait=false,
 trailing=true;
 
 if(typeof func!='function'){
@@ -27256,8 +27222,7 @@ throw new TypeError(FUNC_ERROR_TEXT);}
 wait=toNumber(wait)||0;
 if(isObject(options)){
 leading=!!options.leading;
-maxing='maxWait' in options;
-maxWait=maxing?nativeMax(toNumber(options.maxWait)||0,wait):maxWait;
+maxWait='maxWait' in options&&nativeMax(toNumber(options.maxWait)||0,wait);
 trailing='trailing' in options?!!options.trailing:trailing;}
 
 
@@ -27285,7 +27250,7 @@ var timeSinceLastCall=time-lastCallTime,
 timeSinceLastInvoke=time-lastInvokeTime,
 result=wait-timeSinceLastCall;
 
-return maxing?nativeMin(result,maxWait-timeSinceLastInvoke):result;}
+return maxWait===false?result:nativeMin(result,maxWait-timeSinceLastInvoke);}
 
 
 function shouldInvoke(time){
@@ -27296,7 +27261,7 @@ timeSinceLastInvoke=time-lastInvokeTime;
 
 
 return !lastCallTime||timeSinceLastCall>=wait||
-timeSinceLastCall<0||maxing&&timeSinceLastInvoke>=maxWait;}
+timeSinceLastCall<0||maxWait!==false&&timeSinceLastInvoke>=maxWait;}
 
 
 function timerExpired(){
@@ -27345,12 +27310,10 @@ if(isInvoking){
 if(timerId===undefined){
 return leadingEdge(lastCallTime);}
 
-if(maxing){
 
 clearTimeout(timerId);
 timerId=setTimeout(timerExpired,wait);
-return invokeFunc(lastCallTime);}}
-
+return invokeFunc(lastCallTime);}
 
 if(timerId===undefined){
 timerId=setTimeout(timerExpired,wait);}
@@ -27580,10 +27543,7 @@ return before(2,func);}
 
 
 var overArgs=rest(function(func,transforms){
-transforms=transforms.length==1&&isArray(transforms[0])?
-arrayMap(transforms[0],baseUnary(getIteratee())):
-arrayMap(baseFlatten(transforms,1,isFlattenableIteratee),baseUnary(getIteratee()));
-
+transforms=arrayMap(baseFlatten(transforms,1,isFlattenableIteratee),getIteratee());
 var funcsLength=transforms.length;
 return rest(function(args){
 var index=-1,
@@ -29589,7 +29549,7 @@ assignValue(object,key,source[key]);}});
 
 
 var assignInWith=createAssigner(function(object,source,srcIndex,customizer){
-copyObject(source,keysIn(source),object,customizer);});
+copyObjectWith(source,keysIn(source),object,customizer);});
 
 
 
@@ -29620,7 +29580,7 @@ copyObject(source,keysIn(source),object,customizer);});
 
 
 var assignWith=createAssigner(function(object,source,srcIndex,customizer){
-copyObject(source,keys(source),object,customizer);});
+copyObjectWith(source,keys(source),object,customizer);});
 
 
 
@@ -31447,7 +31407,7 @@ function replace(){
 var args=arguments,
 string=toString(args[0]);
 
-return args.length<3?string:nativeReplace.call(string,args[1],args[2]);}
+return args.length<3?string:string.replace(args[1],args[2]);}
 
 
 
@@ -31512,7 +31472,7 @@ if(separator==''&&reHasComplexSymbol.test(string)){
 return castSlice(stringToArray(string),0,limit);}}
 
 
-return nativeSplit.call(string,separator,limit);}
+return string.split(separator,limit);}
 
 
 
@@ -32571,7 +32531,7 @@ source=object;
 object=this;
 methodNames=baseFunctions(source,keys(source));}
 
-var chain=!(isObject(options)&&'chain' in options)||!!options.chain,
+var chain=isObject(options)&&'chain' in options?options.chain:true,
 isFunc=isFunction(object);
 
 arrayEach(methodNames,function(methodName){
@@ -32651,14 +32611,10 @@ function noop(){}
 
 
 
-
-
-
-
 function nthArg(n){
 n=toInteger(n);
-return rest(function(args){
-return baseNth(args,n);});}
+return function(){
+return arguments[n];};}
 
 
 
@@ -33567,7 +33523,6 @@ lodash.meanBy=meanBy;
 lodash.min=min;
 lodash.minBy=minBy;
 lodash.multiply=multiply;
-lodash.nth=nth;
 lodash.noConflict=noConflict;
 lodash.noop=noop;
 lodash.now=now;
@@ -33894,9 +33849,11 @@ root._=_;}}).
 
 call(this);
 });
-__d('BoilerPlate/App/img/cwb_logo.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/lucid/Dev/scheduler-react/App/img","httpServerLocation":"/assets/App/img","width":60,"height":50,"scales":[1],"files":["/Users/lucid/Dev/scheduler-react/App/img/cwb_logo.png"],"hash":"dd1f3a4e7291cbf5acd279ed661412df","name":"cwb_logo","type":"png"});
+__d('BoilerPlate/App/img/cwb_logo.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/brianpark/dev/CWBScheduler/App/img","httpServerLocation":"/assets/App/img","width":60,"height":50,"scales":[1],"files":["/Users/brianpark/dev/CWBScheduler/App/img/cwb_logo.png"],"hash":"a758743bea663a6cd496b16de056458f","name":"cwb_logo","type":"png"});
 });
-__d('BoilerPlate/App/img/glow2.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/lucid/Dev/scheduler-react/App/img","httpServerLocation":"/assets/App/img","width":213.33333333333334,"height":378.6666666666667,"scales":[1,2,3],"files":["/Users/lucid/Dev/scheduler-react/App/img/glow2.png","/Users/lucid/Dev/scheduler-react/App/img/glow2@2x.png","/Users/lucid/Dev/scheduler-react/App/img/glow2@3x.png"],"hash":"c2afa67a5916fc0477285b22b9a68cfb","name":"glow2","type":"png"});
+__d('BoilerPlate/App/img/glow2.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/brianpark/dev/CWBScheduler/App/img","httpServerLocation":"/assets/App/img","width":640,"height":1136,"scales":[1,2,3],"files":["/Users/brianpark/dev/CWBScheduler/App/img/glow2.png","/Users/brianpark/dev/CWBScheduler/App/img/glow2@2x.png","/Users/brianpark/dev/CWBScheduler/App/img/glow2@3x.png"],"hash":"eae7c26e1fc9ca1a7acbd7e3f564fd7c","name":"glow2","type":"png"});
+});
+__d('BoilerPlate/App/img/menu.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/brianpark/dev/CWBScheduler/App/img","httpServerLocation":"/assets/App/img","width":512,"height":512,"scales":[1,2,3],"files":["/Users/brianpark/dev/CWBScheduler/App/img/menu.png","/Users/brianpark/dev/CWBScheduler/App/img/menu@2x.png","/Users/brianpark/dev/CWBScheduler/App/img/menu@3x.png"],"hash":"eae7c26e1fc9ca1a7acbd7e3f564fd7c","name":"menu","type":"png"});
 });
 __d('BoilerPlate/index.android.js',function(global, require, module, exports) {  'use strict';
 
@@ -45433,7 +45390,7 @@ return result===undefined?defaultValue:result;}
 
 module.exports=get;
 });
-__d('lodash/_baseGet.js',function(global, require, module, exports) {  var castPath=require('lodash/_castPath.js'),
+__d('lodash/_baseGet.js',function(global, require, module, exports) {  var baseCastPath=require('lodash/_baseCastPath.js'),
 isKey=require('lodash/_isKey.js');
 
 
@@ -45445,7 +45402,7 @@ isKey=require('lodash/_isKey.js');
 
 
 function baseGet(object,path){
-path=isKey(path,object)?[path]:castPath(path);
+path=isKey(path,object)?[path]:baseCastPath(path);
 
 var index=0,
 length=path.length;
@@ -45458,7 +45415,7 @@ return index&&index==length?object:undefined;}
 
 module.exports=baseGet;
 });
-__d('lodash/_castPath.js',function(global, require, module, exports) {  var isArray=require('lodash/isArray.js'),
+__d('lodash/_baseCastPath.js',function(global, require, module, exports) {  var isArray=require('lodash/isArray.js'),
 stringToPath=require('lodash/_stringToPath.js');
 
 
@@ -45468,11 +45425,11 @@ stringToPath=require('lodash/_stringToPath.js');
 
 
 
-function castPath(value){
+function baseCastPath(value){
 return isArray(value)?value:stringToPath(value);}
 
 
-module.exports=castPath;
+module.exports=baseCastPath;
 });
 __d('lodash/_stringToPath.js',function(global, require, module, exports) {  var memoize=require('lodash/memoize.js'),
 toString=require('lodash/toString.js');
@@ -45724,7 +45681,7 @@ return object!=null&&hasPath(object,path,baseHasIn);}
 
 module.exports=hasIn;
 });
-__d('lodash/_hasPath.js',function(global, require, module, exports) {  var castPath=require('lodash/_castPath.js'),
+__d('lodash/_hasPath.js',function(global, require, module, exports) {  var baseCastPath=require('lodash/_baseCastPath.js'),
 isArguments=require('lodash/isArguments.js'),
 isArray=require('lodash/isArray.js'),
 isIndex=require('lodash/_isIndex.js'),
@@ -45742,7 +45699,7 @@ isString=require('lodash/isString.js');
 
 
 function hasPath(object,path,hasFunc){
-path=isKey(path,object)?[path]:castPath(path);
+path=isKey(path,object)?[path]:baseCastPath(path);
 
 var result,
 index=-1,
@@ -46109,7 +46066,24 @@ object[key]=value;}}
 
 module.exports=assignValue;
 });
-__d('lodash/_copyObject.js',function(global, require, module, exports) {  var assignValue=require('lodash/_assignValue.js');
+__d('lodash/_copyObject.js',function(global, require, module, exports) {  var copyObjectWith=require('lodash/_copyObjectWith.js');
+
+
+
+
+
+
+
+
+
+
+function copyObject(source,props,object){
+return copyObjectWith(source,props,object);}
+
+
+module.exports=copyObject;
+});
+__d('lodash/_copyObjectWith.js',function(global, require, module, exports) {  var assignValue=require('lodash/_assignValue.js');
 
 
 
@@ -46121,7 +46095,8 @@ __d('lodash/_copyObject.js',function(global, require, module, exports) {  var as
 
 
 
-function copyObject(source,props,object,customizer){
+
+function copyObjectWith(source,props,object,customizer){
 object||(object={});
 
 var index=-1,
@@ -46139,7 +46114,7 @@ assignValue(object,key,newValue);}
 return object;}
 
 
-module.exports=copyObject;
+module.exports=copyObjectWith;
 });
 __d('lodash/_createAssigner.js',function(global, require, module, exports) {  var isIterateeCall=require('lodash/_isIterateeCall.js'),
 rest=require('lodash/rest.js');
@@ -87316,11 +87291,12 @@ height:deviceHeight/1.8},
 
 abg:{
 flex:1,
-backgroundColor:primary,
+backgroundColor:secondary,
 paddingTop:30,
 paddingLeft:10,
 paddingRight:10,
-paddingBottom:30},
+paddingBottom:30,
+height:deviceHeight/1.8},
 
 background:{
 flex:1,
@@ -87663,9 +87639,10 @@ alignSelf:'center'},
 actionsContainer:{
 height:50,
 width:30,
-marginRight:10,
 alignItems:'center',
-justifyContent:'center'},
+justifyContent:'center',
+marginLeft:10,
+marginRight:5},
 
 
 activeActions:{
@@ -87674,8 +87651,7 @@ width:25,
 height:25,
 backgroundColor:'#fff',
 borderRadius:12,
-justifyContent:'center',
-marginRight:20},
+justifyContent:'center'},
 
 
 inactiveActions:{
@@ -87818,12 +87794,20 @@ auditionItemSelect:{
 flex:1},
 
 
-statusContainer:{
+activeStatus:{
 height:50,
 width:30,
 alignItems:'center',
 justifyContent:'center',
-marginRight:10},
+marginLeft:10,
+marginRight:5},
+
+
+inactiveStatus:{
+width:25,
+height:25,
+marginRight:20,
+opacity:0},
 
 
 status:{
@@ -87832,8 +87816,7 @@ width:25,
 height:25,
 backgroundColor:'#fff',
 borderRadius:12,
-justifyContent:'center',
-marginRight:20},
+justifyContent:'center'},
 
 
 auditionItemIconContainer:{
@@ -88212,6 +88195,18 @@ alignItems:'flex-start',
 fontSize:17},
 
 
+switchContainer:{
+flex:1,
+flexDirection:'row',
+padding:10},
+
+
+switchFont:{
+marginRight:10,
+fontSize:16,
+color:'#fff'},
+
+
 footer:{
 flexDirection:'row',
 justifyContent:'center',
@@ -88420,14 +88415,14 @@ _reactNative2.default.createElement(_reactNative.Text,{style:_home2.default.norm
 _reactNative2.default.createElement(_reactNative.View,{style:_home2.default.projectItemRoles},roles)),
 
 _reactNative2.default.createElement(_reactNative.View,{style:_home2.default.projectItemRight},
-_reactNative2.default.createElement(_reactNative.View,{style:_home2.default.actionsContainer},
-_reactNative2.default.createElement(_reactNative.View,{style:project.actions>0?_home2.default.activeActions:_home2.default.inactiveActions},
-_reactNative2.default.createElement(_reactNative.Text,null,project.actions))),
-
-
 _reactNative2.default.createElement(_reactNative.TouchableOpacity,null,
 _reactNative2.default.createElement(_reactNative.View,{style:_home2.default.projectItemIconContainer},
 _reactNative2.default.createElement(_Ionicons2.default,{name:'ios-telephone',style:_home2.default.projectItemIcon}))),
+
+
+_reactNative2.default.createElement(_reactNative.View,{style:_home2.default.actionsContainer},
+_reactNative2.default.createElement(_reactNative.View,{style:project.actions>0?_home2.default.activeActions:_home2.default.inactiveActions},
+_reactNative2.default.createElement(_reactNative.Text,null,project.actions))),
 
 
 _reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:_reactNativeRouterFlux.Actions.schedule},
@@ -88443,6 +88438,31 @@ _reactNative2.default.createElement(_Ionicons2.default,{name:'ios-arrow-forward'
 sectionID,rowID){
 return (
 _reactNative2.default.createElement(_reactNative.View,{key:sectionID+'-'+rowID,style:_home2.default.separator}));}}]);return Home;}(_reactNative.Component);exports.default=Home;
+});
+__d('BoilerPlate/App/Components/Widgets/Navbar.android.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+
+
+var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
+var _ToolbarAndroid=require('ToolbarAndroid');var _ToolbarAndroid2=babelHelpers.interopRequireDefault(_ToolbarAndroid);
+var _variable=require('BoilerPlate/App/Styles/variable.js');
+var _AppEventEmitter=require('BoilerPlate/App/Services/AppEventEmitter.js');var _AppEventEmitter2=babelHelpers.interopRequireDefault(_AppEventEmitter);var 
+
+Navbar=function(_Component){babelHelpers.inherits(Navbar,_Component);function Navbar(){babelHelpers.classCallCheck(this,Navbar);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Navbar).apply(this,arguments));}babelHelpers.createClass(Navbar,[{key:'open',value:function open()
+{
+_AppEventEmitter2.default.emit('hamburger.click');}},{key:'render',value:function render()
+
+
+
+{
+return (
+_reactNative2.default.createElement(_ToolbarAndroid2.default,{
+actions:[{title:' ',icon:require('BoilerPlate/App/img/menu.png'),show:'always'}],
+title:this.props.title,
+titleColor:'#fff',
+subtitle:this.props.subtitle,
+subtitleColor:'#fff',
+style:this.props.style,
+onActionSelected:this.open}));}}]);return Navbar;}(_reactNative.Component);exports.default=Navbar;
 });
 __d('BoilerPlate/App/Components/Schedule.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
@@ -88486,7 +88506,7 @@ actor:"Ben Affleck",
 role:"Batman",
 date:"02/20/16",
 time:"4:10pm",
-status:"?",
+status:"",
 selected:false}];
 
 
@@ -88565,13 +88585,13 @@ _reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.
 
 
 _reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.auditionItemRight},
-_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.statusContainer},
-_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.status},_reactNative2.default.createElement(_reactNative.Text,null,audition.status))),
-
 _reactNative2.default.createElement(_reactNative.TouchableOpacity,null,
 _reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.auditionItemIconContainer},
 _reactNative2.default.createElement(_Ionicons2.default,{name:'ios-telephone',style:_schedule2.default.auditionItemIcon}))),
 
+
+_reactNative2.default.createElement(_reactNative.View,{style:audition.status?_schedule2.default.activeStatus:_schedule2.default.inactiveStatus},
+_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.status},_reactNative2.default.createElement(_reactNative.Text,null,audition.status))),
 
 _reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:_reactNativeRouterFlux.Actions.history},
 _reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.auditionItemIconContainer},
@@ -88618,8 +88638,8 @@ this.setState({show:true});}},{key:'onAction',value:function onAction()
 this.setState({show:false});
 
 _reactNative.Alert.alert(
-'Send a Message',
-'Would you like to attach a message to this action?',
+'Send Message or Materials',
+'Would you like to attach messages or materials to this action?',
 [
 {text:'Yes',onPress:function(){return _reactNativeRouterFlux.Actions.message();}},
 {text:'No',onPress:function(){return _reactNative.Alert.alert('Action Sent');}}]);}}]);return Schedule;}(_reactNative.Component);exports.default=Schedule;
@@ -88639,12 +88659,12 @@ props));
 
 var dummyActions=[
 {
-text:"Forward to Actor",
+text:"Forward to Brad Pitt",
 date:"02/11/16",
 time:"10:37am"},
 
 {
-text:"Actor responds Confirm",
+text:"Brad Pitt responds Confirm",
 date:"02/11/16",
 time:"1:37pm"},
 
@@ -88700,17 +88720,17 @@ date:"02/11/16",
 time:"10:37am"},
 
 {
-text:"Actor responds Regret",
+text:"Brad Pitt responds Regret",
 date:"02/11/16",
 time:"1:37pm"},
 
 {
-text:"Call Actor",
+text:"Call Brad Pitt",
 date:"02/11/16",
 time:"2:01pm"},
 
 {
-text:"Note: Actor said 02/21/16 @ 1:30 to 4:30 works",
+text:"Note: Brad said 02/21/16 @ 1:30 to 4:30 works",
 date:"02/11/16",
 time:"2:15pm"},
 
@@ -88735,7 +88755,7 @@ date:"02/12/16",
 time:"10:51pm"},
 
 {
-text:"Actor responds Confirm",
+text:"Brad Pitt responds Confirm",
 date:"02/12/16",
 time:"11:37pm"},
 
@@ -88821,8 +88841,17 @@ var _message=require('BoilerPlate/App/Styles/message.js');var _message2=babelHel
 var _ButtonRounded=require('BoilerPlate/App/Components/Widgets/ButtonRounded.js');var _ButtonRounded2=babelHelpers.interopRequireDefault(_ButtonRounded);
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');var 
 
-Message=function(_Component){babelHelpers.inherits(Message,_Component);function Message(){babelHelpers.classCallCheck(this,Message);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Message).apply(this,arguments));}babelHelpers.createClass(Message,[{key:'render',value:function render()
-{
+Message=function(_Component){babelHelpers.inherits(Message,_Component);
+function Message(props){babelHelpers.classCallCheck(this,Message);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Message).call(this,
+props));
+
+_this.state={
+materials:false};return _this;}babelHelpers.createClass(Message,[{key:'render',value:function render()
+
+
+
+
+{var _this2=this;
 return (
 _reactNative2.default.createElement(_reactNative.View,{style:_message2.default.color},
 _reactNative2.default.createElement(_Navbar2.default,{
@@ -88839,8 +88868,14 @@ _reactNative2.default.createElement(_reactNative.TextInput,{
 style:_message2.default.textAreaInput,
 multiline:true,
 numberOfLines:20,
-placeholder:'Write a message....',
-placeholderTextColor:'rgba(0,0,0,0.6)'}))),
+placeholder:'Write a message...',
+placeholderTextColor:'rgba(0,0,0,0.6)'})),
+
+_reactNative2.default.createElement(_reactNative.View,{style:_message2.default.switchContainer},
+_reactNative2.default.createElement(_reactNative.Text,{style:_message2.default.switchFont},'Attach Materials?'),
+_reactNative2.default.createElement(_reactNative.Switch,{
+onValueChange:function(value){return _this2.setState({materials:value});},
+value:this.state.materials}))),
 
 
 _reactNative2.default.createElement(_reactNative.View,{style:_message2.default.footer},
@@ -88849,33 +88884,6 @@ _reactNative2.default.createElement(_ButtonRounded2.default,{text:'Send',onPress
 
 _reactNative2.default.createElement(_reactNative.View,{style:_message2.default.button},
 _reactNative2.default.createElement(_ButtonRounded2.default,{text:'Discard',onPress:function(){return _reactNativeRouterFlux.Actions.schedule({message:"Action Sent"});}}))))));}}]);return Message;}(_reactNative.Component);exports.default=Message;
-});
-__d('BoilerPlate/App/img/menu.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/lucid/Dev/scheduler-react/App/img","httpServerLocation":"/assets/App/img","width":170.66666666666666,"height":170.66666666666666,"scales":[1,2,3],"files":["/Users/lucid/Dev/scheduler-react/App/img/menu.png","/Users/lucid/Dev/scheduler-react/App/img/menu@2x.png","/Users/lucid/Dev/scheduler-react/App/img/menu@3x.png"],"hash":"c2afa67a5916fc0477285b22b9a68cfb","name":"menu","type":"png"});
-});
-__d('BoilerPlate/App/Components/Widgets/Navbar.android.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
-
-
-var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _ToolbarAndroid=require('ToolbarAndroid');var _ToolbarAndroid2=babelHelpers.interopRequireDefault(_ToolbarAndroid);
-var _variable=require('BoilerPlate/App/Styles/variable.js');
-var _AppEventEmitter=require('BoilerPlate/App/Services/AppEventEmitter.js');var _AppEventEmitter2=babelHelpers.interopRequireDefault(_AppEventEmitter);var 
-
-Navbar=function(_Component){babelHelpers.inherits(Navbar,_Component);function Navbar(){babelHelpers.classCallCheck(this,Navbar);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Navbar).apply(this,arguments));}babelHelpers.createClass(Navbar,[{key:'open',value:function open()
-{
-
-_AppEventEmitter2.default.emit('hamburger.click');}},{key:'render',value:function render()
-
-
-{
-return (
-_reactNative2.default.createElement(_ToolbarAndroid2.default,{
-actions:[{title:' ',icon:require('BoilerPlate/App/img/menu.png'),show:'always'}],
-title:this.props.title,
-titleColor:'#fff',
-subtitle:this.props.subtitle,
-subtitleColor:'#fff',
-style:this.props.style,
-onActionSelected:this.open}));}}]);return Navbar;}(_reactNative.Component);exports.default=Navbar;
 });
 ;require("InitializeJavaScriptAppEngine");
 ;require("BoilerPlate/index.android.js");
