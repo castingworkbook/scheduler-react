@@ -86,34 +86,34 @@ export default class Home extends Component {
 
 	_renderRow(project) {
 		let roles = _.map(project.roles, (role, index) => {
-			if (index < 2)
+			if (index < 3)
 				return <Text key={index} style={home.normalFont}>{role}</Text>
 		});
 
 		return(
-			<View style={project.selected ? home.projectItemSelected : home.projectItem}>
-				<View style={home.projectItemLeft}>
-					<TouchableOpacity onPress={() => this.onItemSelected(project.id)}>
+			<TouchableOpacity onPress={() => this.onItemSelected(project.id)}>
+				<View style={project.selected ? home.projectItemSelected : home.projectItem}>
+					<View style={home.projectItemLeft}>
 						<View style={home.projectItemSelect}>
 							<Text style={home.highlightedFont}>{project.name}</Text>
 							<Text style={home.normalFont}>{project.director}</Text>
 							<View style={home.projectItemRoles}>{roles}</View>
 						</View>
-					</TouchableOpacity>
-				</View>
-				<View style={home.projectItemRight}>
-					<View style={home.actionsContainer}>
-						<View style={project.actions > 0 ? home.activeActions : home.inactiveActions}>
-							<Text>{project.actions}</Text>
-						</View>
 					</View>
-					<TouchableOpacity onPress={Actions.schedule}>
-						<View style={home.projectItemIconContainer}>
-							<Icon name="ios-arrow-forward" style={home.projectItemIcon} />
+					<View style={home.projectItemRight}>
+						<View style={home.actionsContainer}>
+							<View style={project.actions > 0 ? home.activeActions : home.inactiveActions}>
+								<Text>{project.actions}</Text>
+							</View>
 						</View>
-					</TouchableOpacity>
+						<TouchableOpacity onPress={Actions.schedule}>
+							<View style={home.projectItemIconContainer}>
+								<Icon name="ios-arrow-forward" style={home.projectItemIcon} />
+							</View>
+						</TouchableOpacity>
+					</View>
 				</View>
-			</View>
+			</TouchableOpacity>
 		);
 	}
 

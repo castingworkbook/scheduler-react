@@ -19,29 +19,61 @@ export default class Schedule extends Component {
 				id: 1,
 				actor: "Brad Pitt",
 				role: "Batman",
-				date: "02/20/16",
+				date: "M 02/20/16",
 				time: "3:30pm",
-				status: "C",
+				forwardStatus: 1,
+				materialStatus: 0,
+				actorStatus: 0,
+				agentStatus: 0,
+				forwardAlert: false,
+				materialAlert: true,
+				actorAlert: false,
+				agentAlert: false,
+				historyAlert: false,
 				selected: false
 			},
 			{
 				id: 2,
 				actor: "Christian Bale",
 				role: "Batman",
-				date: "02/20/16",
+				date: "M 02/20/16",
 				time: "3:50pm",
-				status: "R",
+				forwardStatus: 1,
+				materialStatus: 1,
+				actorStatus: 2,
+				agentStatus: 0,
+				forwardAlert: false,
+				materialAlert: false,
+				actorAlert: true,
+				agentAlert: false,
+				historyAlert: false,
 				selected: false
 			},
 			{
 				id: 3,
 				actor: "Ben Affleck",
 				role: "Batman",
-				date: "02/20/16",
+				date: "M 02/20/16",
 				time: "4:10pm",
-				status: "",
+				forwardStatus: 1,
+				materialStatus: 1,
+				actorStatus: 1,
+				agentStatus: 1,
+				forwardAlert: false,
+				materialAlert: false,
+				actorAlert: false,
+				agentAlert: false,
+				historyAlert: false,
 				selected: false
 			}
+		]
+
+		this.statusStyles = [
+			schedule.auditionItemIcon,
+			schedule.greenIconStatus,
+			schedule.yellowIconStatus,
+			schedule.redIconStatus,
+			schedule.auditionItemIcon
 		]
 
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -83,13 +115,13 @@ export default class Schedule extends Component {
 					<ActionSheet
 	          visible={ this.state.show }
 	          onCancel={ this.onCancel.bind(this) }>
-						<ActionSheet.Button>Call Actor</ActionSheet.Button>
-						<ActionSheet.Button>Call Casting</ActionSheet.Button>
 	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Forward</ActionSheet.Button>
 	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Confirm</ActionSheet.Button>
 						<ActionSheet.Button onPress={this.onAction.bind(this)}>Regret</ActionSheet.Button>
 						<ActionSheet.Button onPress={this.onAction.bind(this)}>Request Alternative Time</ActionSheet.Button>
-						<ActionSheet.Button>Add / View Notes</ActionSheet.Button>
+						<ActionSheet.Button>Call Actor</ActionSheet.Button>
+						<ActionSheet.Button>Call Casting</ActionSheet.Button>
+						<ActionSheet.Button>View / Add Notes</ActionSheet.Button>
 	        </ActionSheet>
 				</Image>
 			</View>
@@ -120,34 +152,47 @@ export default class Schedule extends Component {
 							<Text style={schedule.normalFont}>{audition.date}</Text>
 						</View>
 					</View>
-					<View style={schedule.auditionItemBottom}>
-						<View style={schedule.statusPanel}>
-							<TouchableOpacity>
+					<View style={schedule.statusPanel}>
+						<TouchableOpacity onPress={() => this.onForwardStatus(audition.forwardStatus)}>
+							<View style={schedule.auditionItemStatusContainer}>
 								<View style={schedule.auditionItemIconContainer}>
-									<Icon name="videocamera" style={schedule.auditionItemIcon} />
+									<Icon name="videocamera" style={this.statusStyles[audition.forwardStatus]} />
 								</View>
-							</TouchableOpacity>
-							<TouchableOpacity>
+								<Icon name="android-alert" style={audition.forwardAlert ? schedule.notificationIcon : {opacity: 0}} />
+							</View>
+						</TouchableOpacity>
+						<TouchableOpacity onPress={() => this.onMaterialStatus(audition.materialStatus)}>
+							<View style={schedule.auditionItemStatusContainer}>
 								<View style={schedule.auditionItemIconContainer}>
-									<Icon name="document-text" style={schedule.auditionItemIcon} />
+									<Icon name="document-text" style={this.statusStyles[audition.materialStatus]} />
 								</View>
-							</TouchableOpacity>
-							<TouchableOpacity>
+								<Icon name="android-alert" style={audition.materialAlert ? schedule.notificationIcon : {opacity: 0}} />
+							</View>
+						</TouchableOpacity>
+						<TouchableOpacity onPress={() => this.onActorStatus(audition.actorStatus)}>
+							<View style={schedule.auditionItemStatusContainer}>
 								<View style={schedule.auditionItemIconContainer}>
-									<Icon name="person" style={schedule.auditionItemIcon} />
+									<Icon name="person" style={this.statusStyles[audition.actorStatus]} />
 								</View>
-							</TouchableOpacity>
-							<TouchableOpacity>
+								<Icon name="android-alert" style={audition.actorAlert ? schedule.notificationIcon : {opacity: 0}} />
+							</View>
+						</TouchableOpacity>
+						<TouchableOpacity onPress={() => this.onAgentStatus(audition.agentStatus)}>
+							<View style={schedule.auditionItemStatusContainer}>
 								<View style={schedule.auditionItemIconContainer}>
-									<Icon name="film-marker" style={schedule.auditionItemIcon} />
+									<Icon name="film-marker" style={this.statusStyles[audition.agentStatus]} />
 								</View>
-							</TouchableOpacity>
-							<TouchableOpacity onPress={Actions.history}>
+								<Icon name="android-alert" style={audition.agentAlert ? schedule.notificationIcon : {opacity: 0}} />
+							</View>
+						</TouchableOpacity>
+						<TouchableOpacity onPress={Actions.history}>
+							<View style={schedule.auditionItemStatusContainer}>
 								<View style={schedule.auditionItemIconContainer}>
 									<Icon name="clock" style={schedule.auditionItemIcon} />
 								</View>
-							</TouchableOpacity>
-						</View>
+								<Icon name="android-alert" style={audition.historyAlert ? schedule.notificationIcon : {opacity: 0}} />
+							</View>
+						</TouchableOpacity>
 					</View>
 	      </View>
 			</TouchableOpacity>
@@ -184,6 +229,39 @@ export default class Schedule extends Component {
   onOpen() {
     this.setState({show: true});
   }
+
+	onForwardStatus(state) {
+		if(state == 1)
+			Alert.alert('Forward Status', 'You have forwarded the audition to Actor. (Green)');
+		else
+			Alert.alert('Forward Status', 'You have not forwarded the audition to the Actor. (White)');
+	}
+
+	onMaterialStatus(state) {
+
+	}
+
+	onActorStatus(state) {
+		if(state == 1)
+			Alert.alert('Actor Status', 'Actor has confirmed. (Green)');
+		else if(state == 2)
+			Alert.alert('Actor Status', 'Actor has requested alternative time. (Yellow)');
+		else if(state == 3)
+			Alert.alert('Actor Status', 'Actor has regreted. (Red)');
+		else
+			Alert.alert('Actor Status', 'Actor has not responded yet. (White)');
+	}
+
+	onAgentStatus(state) {
+		if(state == 1)
+			Alert.alert('Audition Status', 'You have confirmed. (Green)');
+		else if(state == 2)
+			Alert.alert('Audition Status', 'You have requested an alternative time. (Yellow)');
+		else if(state == 3)
+			Alert.alert('Audition Status', 'You have regreted. (Red)');
+		else
+			Alert.alert('Audition Status', 'You have not sent a response. (White)');
+	}
 
 	onAction() {
 		this.setState({show: false});

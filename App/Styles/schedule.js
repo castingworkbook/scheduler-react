@@ -77,32 +77,27 @@ module.exports = StyleSheet.create({
   },
 
   footer: {
-    padding: 10
+    paddingBottom: 10
   },
 
   auditionItem: {
     flex: 1,
     flexDirection: 'column',
-    height: 130,
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
+    height: 135,
     backgroundColor: 'transparent',
   },
 
   auditionItemSelected: {
     flex: 1,
     flexDirection: 'column',
-    height: 130,
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
+    height: 135,
     backgroundColor: '#008EC2',
   },
 
   auditionItemTop: {
     flex: 1,
     flexDirection: 'row',
+    padding: 10,
   },
 
   auditionItemLeft: {
@@ -125,10 +120,6 @@ module.exports = StyleSheet.create({
     alignItems: 'flex-end',
   },
 
-  auditionItemBottom: {
-
-  },
-
   statusPanel: {
     flex: 1,
     flexDirection: 'row',
@@ -142,8 +133,31 @@ module.exports = StyleSheet.create({
     justifyContent: 'center'
   },
 
+  notificationIcon: {
+    fontSize: 20,
+    color: '#fff',
+    position: 'absolute',
+    top: 0,
+    right: 5,
+  },
+
   auditionItemIcon: {
     fontSize: 30,
     color: '#fff',
   },
+
+  greenIconStatus: {
+    fontSize: 30,
+    color: '#00A54E',
+  },
+
+  yellowIconStatus: {
+    fontSize: 30,
+    color: '#FAF519',
+  },
+
+  redIconStatus: {
+    fontSize: 30,
+    color: '#DF0024',
+  }
 });

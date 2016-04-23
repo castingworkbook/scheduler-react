@@ -13,7 +13,7 @@ module.exports = StyleSheet.create({
 	container: {
 		flex: 1,
 		width: null,
-		height: null
+		height: null,
 	},
 
 	color: {
@@ -22,7 +22,7 @@ module.exports = StyleSheet.create({
 		bottom: 0,
 		left: 0,
 		right: 0,
-		backgroundColor: primary
+		backgroundColor: primary,
 	},
 
   toolbar: {
@@ -36,13 +36,13 @@ module.exports = StyleSheet.create({
 		shadowColor: '#000',
 		shadowOffset: {width: 0, height: 2},
 		shadowOpacity: 0.1,
-		shadowRadius: 1.5
+		shadowRadius: 1.5,
 	},
 
   highlightedFont: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
   },
 
   normalFont: {
@@ -62,13 +62,13 @@ module.exports = StyleSheet.create({
   },
 
   footer: {
-    padding: 10
+    paddingBottom: 10
   },
 
   projectItem: {
     flex: 1,
     flexDirection: 'row',
-    height: 130,
+    height: 135,
     paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
@@ -78,7 +78,7 @@ module.exports = StyleSheet.create({
   projectItemSelected: {
     flex: 1,
     flexDirection: 'row',
-    height: 130,
+    height: 135,
     paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
@@ -110,7 +110,7 @@ module.exports = StyleSheet.create({
   },
 
   actionsContainer: {
-    height: 50,
+    height: 60,
     width: 30,
     alignItems: 'center',
     justifyContent: 'center',
@@ -124,7 +124,7 @@ module.exports = StyleSheet.create({
     height: 25,
     backgroundColor: '#fff',
     borderRadius: 12,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   inactiveActions: {
@@ -135,14 +135,14 @@ module.exports = StyleSheet.create({
   },
 
   projectItemIconContainer: {
-    height: 50,
-    width: 50,
+    height: 60,
+    width: 60,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   projectItemIcon: {
     fontSize: 30,
-    color: '#fff'
+    color: '#fff',
   },
 });
