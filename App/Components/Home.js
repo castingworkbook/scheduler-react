@@ -5,11 +5,11 @@ import React, {Component, Text, View, Image, ScrollView, ListView, BackAndroid, 
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import home from '../Styles/home';
-import {primary} from '../Styles/variable';
-import {secondary} from '../Styles/variable';
+import ButtonRounded from './Widgets/ButtonRounded';
 import Login from './Login';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
+import ActionSheet from '@remobile/react-native-action-sheet';
 import _ from 'lodash';
 
 export default class Home extends Component {
@@ -18,28 +18,37 @@ export default class Home extends Component {
 
 		const dummyProjects = [
 			{
+				id: 1,
 				name: "Batman Returns",
 				director: "Brad Richardson",
 				roles: ["Batman", "Robin", "Joker"],
-				actions: 3
+				actions: 3,
+				selected: false,
 			},
 			{
+				id: 2,
 				name: "Forrest Gump",
 				director: "Natalie Low",
 				roles: ["Forrest Gump", "Jenny Curran", "Mom"],
-				actions: 0
+				actions: 0,
+				selected: false,
 			},
 			{
+				id: 3,
 				name: "The NoteBook",
 				director: "Jeff Rose",
 				roles: ["Handsome Guy", "Pretty Girl"],
-				actions: 2
+				actions: 2,
+				selected: false,
 			}
 		];
 
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
-			dataSource: ds.cloneWithRows(dummyProjects)
+			dataSource: ds.cloneWithRows(dummyProjects),
+			projects: dummyProjects,
+			clicked: 'none',
+			show: false
 		}
   }
 
@@ -56,11 +65,20 @@ export default class Home extends Component {
 							<View style={home.listContainer}>
 								<ListView
 				          dataSource={this.state.dataSource}
-				          renderRow={this._renderRow}
+				          renderRow={this._renderRow.bind(this)}
 									renderSeparator={this._renderSeperator} />
 				 			</View>
 			 			</View>
 					</ScrollView>
+					<View style={home.footer}>
+						<ButtonRounded text="Actions" onPress={this.onOpen.bind(this)} />
+					</View>
+					<ActionSheet
+	          visible={ this.state.show }
+	          onCancel={ this.onCancel.bind(this) }>
+	          <ActionSheet.Button>Call Casting</ActionSheet.Button>
+	          <ActionSheet.Button>View/Add Notes</ActionSheet.Button>
+	        </ActionSheet>
         </Image>
     	</View>
 		);
@@ -73,18 +91,17 @@ export default class Home extends Component {
 		});
 
 		return(
-			<View style={home.projectItem}>
+			<View style={project.selected ? home.projectItemSelected : home.projectItem}>
 				<View style={home.projectItemLeft}>
-					<Text style={home.highlightedFont}>{project.name}</Text>
-					<Text style={home.normalFont}>{project.director}</Text>
-					<View style={home.projectItemRoles}>{roles}</View>
-				</View>
-				<View style={home.projectItemRight}>
-					<TouchableOpacity>
-						<View style={home.projectItemIconContainer}>
-							<Icon name="ios-telephone" style={home.projectItemIcon} />
+					<TouchableOpacity onPress={() => this.onItemSelected(project.id)}>
+						<View style={home.projectItemSelect}>
+							<Text style={home.highlightedFont}>{project.name}</Text>
+							<Text style={home.normalFont}>{project.director}</Text>
+							<View style={home.projectItemRoles}>{roles}</View>
 						</View>
 					</TouchableOpacity>
+				</View>
+				<View style={home.projectItemRight}>
 					<View style={home.actionsContainer}>
 						<View style={project.actions > 0 ? home.activeActions : home.inactiveActions}>
 							<Text>{project.actions}</Text>
@@ -105,4 +122,29 @@ export default class Home extends Component {
       <View key={`${sectionID}-${rowID}`} style={home.separator} />
     )
 	}
+
+	onItemSelected(id) {
+    const projects = _.map(_.cloneDeep(this.state.projects), (project) => {
+      if (project.id == id && project.selected == false) {
+        project.selected = true;
+      } else if (project.id == id && project.selected == true) {
+        project.selected = false;
+      }
+
+      return project;
+    });
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(projects),
+      projects: projects
+    });
+	}
+
+	onCancel() {
+    this.setState({show: false});
+  }
+
+  onOpen() {
+    this.setState({show: true});
+  }
 }

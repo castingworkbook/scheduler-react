@@ -11,6 +11,7 @@ var {
 } = React;
 
 var deviceHeight = Dimensions.get('window').height;
+
 module.exports = StyleSheet.create({
   container: {
 		flex: 1,
@@ -18,7 +19,7 @@ module.exports = StyleSheet.create({
 		height: null
 	},
 
-	color: {
+  color: {
 		position: 'absolute',
 		top: 0,
 		bottom: 0,
@@ -41,53 +42,6 @@ module.exports = StyleSheet.create({
 		shadowRadius: 1.5
 	},
 
-  inputContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
+  
 
-  header: {
-    padding: 10
-  },
-
-  headerText: {
-    fontSize: 20,
-    color: '#fff'
-  },
-
-  textAreaInput: {
-    height: deviceHeight/2,
-    borderColor: 'rgba(255, 255, 255, 0.4)',
-    borderWidth: 2,
-    margin: 15,
-    marginTop: 5,
-    backgroundColor: '#fff',
-    color: 'rgba(0, 0, 0, 0.9)',
-    padding: 10,
-    alignItems: 'flex-start',
-    fontSize: 17
-  },
-
-  switchContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    padding: 10,
-  },
-
-  switchFont: {
-    marginRight: 10,
-    fontSize: 16,
-    color: '#fff'
-  },
-
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 10,
-  },
-
-  button: {
-    flex: 1
-  }
 });

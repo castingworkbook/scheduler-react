@@ -145,22 +145,6 @@ export default class History extends Component {
               </View>
             </View>
           </ScrollView>
-          <View style={history.formContainer}>
-            <View style={history.inputContainer}>
-              <IconInput
-                placeholder="Enter a Note..."
-                icon="compose"
-                secureTextEntry={false}
-                dark={false}
-                value={this.state.action}
-                onChangeText={(val) => this.setState({action: val})} />
-            </View>
-            <TouchableOpacity>
-              <View style={history.addButton}>
-                <Text style={history.addButtonText}>Add</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
         </Image>
       </View>
     );

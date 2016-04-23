@@ -61,20 +61,39 @@ module.exports = StyleSheet.create({
     marginRight: 10,
   },
 
+  footer: {
+    padding: 10
+  },
+
   projectItem: {
     flex: 1,
     flexDirection: 'row',
+    height: 130,
     paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
     backgroundColor: 'transparent',
   },
 
+  projectItemSelected: {
+    flex: 1,
+    flexDirection: 'row',
+    height: 130,
+    paddingLeft: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: '#008EC2',
+  },
+
   projectItemLeft: {
-    flex: 0.55,
+    flex: 0.7,
     flexDirection: 'column',
     overflow: 'hidden',
     marginRight: 10,
+  },
+
+  projectItemSelect: {
+    flex: 1,
   },
 
   projectItemRoles: {
@@ -84,7 +103,7 @@ module.exports = StyleSheet.create({
   },
 
   projectItemRight: {
-    flex: 0.45,
+    flex: 0.3,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',

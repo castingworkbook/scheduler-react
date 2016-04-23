@@ -6,7 +6,6 @@ import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import schedule from '../Styles/schedule';
 import ButtonRounded from './Widgets/ButtonRounded';
-import {brandPrimary as primary} from '../Styles/variable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet';
@@ -49,7 +48,6 @@ export default class Schedule extends Component {
 		this.state = {
 			dataSource: ds.cloneWithRows(dummyAuditions),
 			auditions: dummyAuditions,
-      status: "",
       clicked: 'none',
       show: false
 		}
@@ -83,12 +81,15 @@ export default class Schedule extends Component {
 						<ButtonRounded text="Actions" onPress={this.onOpen.bind(this)} />
 					</View>
 					<ActionSheet
-	          visible  = { this.state.show }
-	          onCancel = { this.onCancel.bind(this) }>
+	          visible={ this.state.show }
+	          onCancel={ this.onCancel.bind(this) }>
+						<ActionSheet.Button>Call Actor</ActionSheet.Button>
+						<ActionSheet.Button>Call Casting</ActionSheet.Button>
 	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Forward</ActionSheet.Button>
 	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Confirm</ActionSheet.Button>
 						<ActionSheet.Button onPress={this.onAction.bind(this)}>Regret</ActionSheet.Button>
 						<ActionSheet.Button onPress={this.onAction.bind(this)}>Request Alternative Time</ActionSheet.Button>
+						<ActionSheet.Button>Add / View Notes</ActionSheet.Button>
 	        </ActionSheet>
 				</Image>
 			</View>
@@ -105,35 +106,51 @@ export default class Schedule extends Component {
 
 	_renderRow(audition) {
 		return(
-			<View style={audition.selected ? schedule.auditionItemSelected : schedule.auditionItem}>
-        <View style={schedule.auditionItemLeft}>
-          <TouchableOpacity onPress={() => this.onItemSelected(audition.id)}>
-            <View style={schedule.auditionItemSelect}>
-              <Text style={schedule.highlightedFont}>{audition.actor}</Text>
-              <Text style={schedule.normalFont}>{audition.role}</Text>
-							<View style={schedule.date}>
-								<Text style={schedule.normalFont}>{audition.date}</Text>
-								<Text style={schedule.normalFont}>{audition.time}</Text>
-							</View>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={schedule.auditionItemRight}>
-					<TouchableOpacity>
-						<View style={schedule.auditionItemIconContainer}>
-							<Icon name="ios-telephone" style={schedule.auditionItemIcon} />
+			<TouchableOpacity onPress={() => this.onItemSelected(audition.id)}>
+				<View style={audition.selected ? schedule.auditionItemSelected : schedule.auditionItem}>
+					<View style={schedule.auditionItemTop}>
+		        <View style={schedule.auditionItemLeft}>
+		            <View style={schedule.auditionItemSelect}>
+		              <Text style={schedule.highlightedFont}>{audition.actor}</Text>
+		              <Text style={schedule.normalFont}>{audition.role}</Text>
+		            </View>
+		        </View>
+		        <View style={schedule.auditionItemRight}>
+							<Text style={schedule.highlightedFont}>{audition.time}</Text>
+							<Text style={schedule.normalFont}>{audition.date}</Text>
 						</View>
-					</TouchableOpacity>
-					<View style={audition.status ? schedule.activeStatus : schedule.inactiveStatus}>
-						<View style={schedule.status}><Text>{audition.status}</Text></View>
 					</View>
-					<TouchableOpacity onPress={Actions.history}>
-						<View style={schedule.auditionItemIconContainer}>
-							<Icon name="ios-arrow-forward" style={schedule.auditionItemIcon} />
+					<View style={schedule.auditionItemBottom}>
+						<View style={schedule.statusPanel}>
+							<TouchableOpacity>
+								<View style={schedule.auditionItemIconContainer}>
+									<Icon name="videocamera" style={schedule.auditionItemIcon} />
+								</View>
+							</TouchableOpacity>
+							<TouchableOpacity>
+								<View style={schedule.auditionItemIconContainer}>
+									<Icon name="document-text" style={schedule.auditionItemIcon} />
+								</View>
+							</TouchableOpacity>
+							<TouchableOpacity>
+								<View style={schedule.auditionItemIconContainer}>
+									<Icon name="person" style={schedule.auditionItemIcon} />
+								</View>
+							</TouchableOpacity>
+							<TouchableOpacity>
+								<View style={schedule.auditionItemIconContainer}>
+									<Icon name="film-marker" style={schedule.auditionItemIcon} />
+								</View>
+							</TouchableOpacity>
+							<TouchableOpacity onPress={Actions.history}>
+								<View style={schedule.auditionItemIconContainer}>
+									<Icon name="clock" style={schedule.auditionItemIcon} />
+								</View>
+							</TouchableOpacity>
 						</View>
-					</TouchableOpacity>
-				</View>
-      </View>
+					</View>
+	      </View>
+			</TouchableOpacity>
 		)
 	}
 
