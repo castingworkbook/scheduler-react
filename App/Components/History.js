@@ -122,8 +122,7 @@ export default class History extends Component {
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(dummyActions2),
-      action: ""
+      dataSource: ds.cloneWithRows(dummyActions2)
     }
   }
 

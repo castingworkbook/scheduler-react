@@ -170,7 +170,7 @@ export default class Schedule extends Component {
 							</View>
 						</TouchableOpacity>
 						<TouchableOpacity onPress={() => this.onActorStatus(audition.actorStatus)}>
-							<View style={schedule.auditionItemStatusContainer}>
+							<View>
 								<View style={schedule.auditionItemIconContainer}>
 									<Icon name="person" style={this.statusStyles[audition.actorStatus]} />
 								</View>
@@ -238,7 +238,7 @@ export default class Schedule extends Component {
 	}
 
 	onMaterialStatus(state) {
-
+		Actions.materials();
 	}
 
 	onActorStatus(state) {

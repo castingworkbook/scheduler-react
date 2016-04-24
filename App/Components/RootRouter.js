@@ -10,6 +10,8 @@ import Home from './Home';
 import Schedule from './Schedule';
 import History from './History';
 import Message from './Message';
+import Materials from './Materials';
+import Notes from './Notes';
 import layout from '../Styles/layout';
 import AppEventEmitter from '../Services/AppEventEmitter';
 
@@ -49,6 +51,8 @@ export default class RootRouter extends Component {
           <Route name="schedule" wrapRouter={false} component={Schedule} title="schedule" />
 					<Route name="history" wrapRouter={false} component={History} title="history" />
 					<Route name="message" wrapRouter={false} component={Message} title="message" />
+					<Route name="materials" wrapRouter={false} component={Materials} title="materials" />
+					<Route name="notes" wrapRouter={false} component={Notes} title="notes" />
         </Router>
       </Drawer>
     );
