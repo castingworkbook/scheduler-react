@@ -74,10 +74,10 @@ export default class Home extends Component {
 						<ButtonRounded text="Actions" onPress={this.onOpen.bind(this)} />
 					</View>
 					<ActionSheet
-	          visible={ this.state.show }
-	          onCancel={ this.onCancel.bind(this) }>
+	          visible={this.state.show}
+	          onCancel={this.onCancel.bind(this)}>
 	          <ActionSheet.Button>Call Casting</ActionSheet.Button>
-	          <ActionSheet.Button>View/Add Notes</ActionSheet.Button>
+	          <ActionSheet.Button onPress={this.onNotesAction.bind(this)}>View/Add Notes</ActionSheet.Button>
 	        </ActionSheet>
         </Image>
     	</View>
@@ -147,4 +147,8 @@ export default class Home extends Component {
   onOpen() {
     this.setState({show: true});
   }
+
+	onNotesAction() {
+		Actions.notes();
+	}
 }

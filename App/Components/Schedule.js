@@ -121,7 +121,7 @@ export default class Schedule extends Component {
 						<ActionSheet.Button onPress={this.onAction.bind(this)}>Request Alternative Time</ActionSheet.Button>
 						<ActionSheet.Button>Call Actor</ActionSheet.Button>
 						<ActionSheet.Button>Call Casting</ActionSheet.Button>
-						<ActionSheet.Button>View / Add Notes</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onNotesAction.bind(this)}>View / Add Notes</ActionSheet.Button>
 	        </ActionSheet>
 				</Image>
 			</View>
@@ -273,5 +273,9 @@ export default class Schedule extends Component {
         {text: 'Yes', onPress: () => Actions.message()},
 				{text: 'No', onPress: () => Alert.alert('Action Sent')},
       ])
+	}
+
+	onNotesAction() {
+		Actions.notes();
 	}
 }
