@@ -37,12 +37,6 @@ export default class Message extends Component {
                 placeholder={'Write a message...'}
                 placeholderTextColor={'rgba(0,0,0,0.6)'} />
             </View>
-            <View style={message.switchContainer}>
-              <Text style={message.switchFont}>Attach Materials?</Text>
-              <Switch
-                onValueChange={(value) => this.setState({materials: value})}
-                value={this.state.materials} />
-            </View>
           </ScrollView>
           <View style={message.footer}>
             <View style={message.button}>

@@ -77,38 +77,32 @@ module.exports = StyleSheet.create({
   },
 
   footer: {
-    paddingBottom: 10
+    padding: 10
   },
 
   auditionItem: {
     flex: 1,
-    flexDirection: 'column',
-    height: 135,
+    flexDirection: 'row',
+    paddingLeft: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
     backgroundColor: 'transparent',
   },
 
   auditionItemSelected: {
     flex: 1,
-    flexDirection: 'column',
-    height: 135,
+    flexDirection: 'row',
+    paddingLeft: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
     backgroundColor: '#008EC2',
   },
 
-  auditionItemTop: {
-    flex: 1,
-    flexDirection: 'row',
-    padding: 10,
-  },
-
   auditionItemLeft: {
-    flex: 1,
+    flex: 0.7,
     flexDirection: 'column',
     overflow: 'hidden',
     marginRight: 10,
-  },
-
-  auditionItemSelect: {
-    flex: 1,
   },
 
   date: {
@@ -116,48 +110,35 @@ module.exports = StyleSheet.create({
   },
 
   auditionItemRight: {
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-  },
-
-  statusPanel: {
-    flex: 1,
+    flex: 0.3,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignSelf: 'center',
+  },
+
+  statusContainer: {
+    flex: 1,
+    height: 50,
+    justifyContent: 'center',
   },
 
   auditionItemIconContainer: {
     height: 50,
-    width: 60,
+    width: 50,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   notificationIcon: {
-    fontSize: 20,
-    color: '#fff',
-    position: 'absolute',
-    top: 0,
-    right: 5,
+     fontSize: 20,
+     color: '#fff',
+     position: 'absolute',
+     top: 0,
+     right: 0,
   },
 
   auditionItemIcon: {
     fontSize: 30,
     color: '#fff',
   },
-
-  greenIconStatus: {
-    fontSize: 30,
-    color: '#00A54E',
-  },
-
-  yellowIconStatus: {
-    fontSize: 30,
-    color: '#FAF519',
-  },
-
-  redIconStatus: {
-    fontSize: 30,
-    color: '#DF0024',
-  }
 });
