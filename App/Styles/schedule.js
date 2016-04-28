@@ -99,7 +99,7 @@ module.exports = StyleSheet.create({
   },
 
   auditionItemLeft: {
-    flex: 0.7,
+    flex: 0.6,
     flexDirection: 'column',
     overflow: 'hidden',
     marginRight: 10,
@@ -110,7 +110,7 @@ module.exports = StyleSheet.create({
   },
 
   auditionItemRight: {
-    flex: 0.3,
+    flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
@@ -119,7 +119,7 @@ module.exports = StyleSheet.create({
   statusContainer: {
     flex: 1,
     height: 50,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   auditionItemIconContainer: {

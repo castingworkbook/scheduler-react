@@ -84,7 +84,7 @@ module.exports = StyleSheet.create({
   },
 
   projectItemLeft: {
-    flex: 0.7,
+    flex: 0.6,
     flexDirection: 'column',
     overflow: 'hidden',
     marginRight: 10,
@@ -101,7 +101,7 @@ module.exports = StyleSheet.create({
   },
 
   projectItemRight: {
-    flex: 0.3,
+    flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
