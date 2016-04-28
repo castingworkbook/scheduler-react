@@ -5,7 +5,8 @@ import React, {Component, ScrollView, View, Image, ListView, Text, TouchableOpac
 import styles from '../Styles/style';
 import history from '../Styles/history';
 import Navbar from './Widgets/Navbar';
-import IconInput from './Widgets/IconInput';
+import {Actions} from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class History extends Component {
   constructor(props) {
@@ -13,100 +14,9 @@ export default class History extends Component {
 
     const dummyActions = [
       {
-        text: "Forward to Brad Pitt",
-        date: "02/11/16",
-        time: "10:37am",
-      },
-      {
-        text: "Brad Pitt responds Confirm",
-        date: "02/11/16",
-        time: "1:37pm",
-      },
-      {
-        text: "Forward to Casting",
-        date: "02/11/16",
-        time: "2:01pm",
-      },
-      {
-        text: "Set as Closed",
-        date: "02/11/16",
-        time: "3:01pm",
-      },
-    ]
-
-    const dummyActions1 = [
-      {
-        text: "Forward to Actor",
-        date: "02/11/16",
-        time: "10:37am",
-      },
-      {
-        text: "Called Actor",
-        date: "02/11/16",
-        time: "1:37pm",
-      },
-      {
-        text: "Added: Actor accepted another role",
-        date: "02/11/16",
-        time: "1:55pm",
-      },
-      {
-        text: "Set as Regret",
-        date: "02/11/16",
-        time: "2:01pm",
-      },
-      {
-        text: "Forward to Casting",
-        date: "02/11/16",
-        time: "2:15pm"
-      },
-      {
-        text: "Set as Closed",
-        date: "02/11/16",
-        time: "2:37pm",
-      },
-    ]
-
-    const dummyActions2 = [
-      {
-        text: "Forward",
-        date: "02/11/16",
-        time: "10:37am",
-      },
-      {
-        text: "Brad Pitt responds Regret",
-        date: "02/11/16",
-        time: "1:37pm",
-      },
-      {
-        text: "Call Brad Pitt",
-        date: "02/11/16",
-        time: "2:01pm",
-      },
-      {
-        text: "Note: Brad said 02/21/16 @ 1:30 to 4:30 works",
-        date: "02/11/16",
-        time: "2:15pm"
-      },
-      {
-        text: "Request Alternative Time with Message",
-        date: "02/11/16",
-        time: "2:37pm",
-      },
-      {
-        text: "Message: Can we set the time between to 02/21/16 between 1:30 to 4:30?",
-        date: "02/11/16",
-        time: "2:37pm",
-      },
-      {
-        text: "Casting resubmits time",
+        text: "Confirm",
         date: "02/12/16",
-        time: "10:37am",
-      },
-      {
-        text: "Forward",
-        date: "02/12/16",
-        time: "10:51pm",
+        time: "1:37pm",
       },
       {
         text: "Brad Pitt responds Confirm",
@@ -114,15 +24,50 @@ export default class History extends Component {
         time: "11:37pm",
       },
       {
-        text: "Confirm",
+        text: "Forward",
         date: "02/12/16",
+        time: "10:51pm",
+      },
+      {
+        text: "Casting resubmits time",
+        date: "02/12/16",
+        time: "10:37am",
+      },
+      {
+        text: "Message: Can we set the time between to 02/21/16 between 1:30 to 4:30?",
+        date: "02/11/16",
+        time: "2:37pm",
+      },
+      {
+        text: "Request Alternative Time with Message",
+        date: "02/11/16",
+        time: "2:37pm",
+      },
+      {
+        text: "Note: Brad said 02/21/16 @ 1:30 to 4:30 works",
+        date: "02/11/16",
+        time: "2:15pm"
+      },
+      {
+        text: "Call Brad Pitt",
+        date: "02/11/16",
+        time: "2:01pm",
+      },
+      {
+        text: "Brad Pitt responds Regret",
+        date: "02/11/16",
         time: "1:37pm",
-      }
+      },
+      {
+        text: "Forward to Brad Pitt",
+        date: "02/11/16",
+        time: "10:37am",
+      },
     ]
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(dummyActions2)
+      dataSource: ds.cloneWithRows(dummyActions)
     }
   }
 
@@ -139,8 +84,8 @@ export default class History extends Component {
   						<View style={history.listContainer}>
                 <ListView
                   dataSource={this.state.dataSource}
-                  renderHeader={this._renderHeader}
-                  renderRow={this._renderRow} />
+                  renderHeader={this._renderHeader.bind(this)}
+                  renderRow={this._renderRow.bind(this)} />
               </View>
             </View>
           </ScrollView>
@@ -152,8 +97,18 @@ export default class History extends Component {
   _renderHeader() {
     return(
       <View style={history.headerContainer}>
-        <Text style={history.header}>Brad Pitt</Text>
-        <Text style={history.headerDate}>02/20/16 - 3:30pm</Text>
+        <View style={history.nameContainer}>
+          <Text style={history.header}>Brad Pitt</Text>
+          <Text style={history.headerDate}>02/20/16 - 3:30pm</Text>
+        </View>
+        <View style={history.materialsContainer}>
+          <Text style={history.materialsFont}>Materials</Text>
+          <TouchableOpacity onPress={() => this.onMaterials()}>
+						<View style={history.materialsIconContainer}>
+							<Icon name="document-text" style={history.materialsIcon} />
+						</View>
+					</TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -170,5 +125,9 @@ export default class History extends Component {
         </View>
       </View>
     )
+  }
+
+  onMaterials() {
+    Actions.materials();
   }
 }

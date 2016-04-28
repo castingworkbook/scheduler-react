@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, {Component, Text, View, Image, ScrollView, ListView, BackAndroid, TouchableOpacity} from 'react-native';
+import React, {Component, Text, View, Image, ScrollView, Alert, ListView, BackAndroid, TouchableOpacity} from 'react-native';
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import home from '../Styles/home';
@@ -21,7 +21,8 @@ export default class Home extends Component {
 				id: 1,
 				name: "Batman Returns",
 				director: "Brad Richardson",
-				roles: ["Batman", "Robin", "Joker"],
+				phone: "7777777",
+				roles: ["Batman", "Robin"],
 				actions: 3,
 				selected: false,
 			},
@@ -29,7 +30,8 @@ export default class Home extends Component {
 				id: 2,
 				name: "Forrest Gump",
 				director: "Natalie Low",
-				roles: ["Forrest Gump", "Jenny Curran", "Mom"],
+				phone: "7777777",
+				roles: ["Forrest Gump", "Jenny Curran"],
 				actions: 0,
 				selected: false,
 			},
@@ -47,7 +49,7 @@ export default class Home extends Component {
 		this.state = {
 			dataSource: ds.cloneWithRows(dummyProjects),
 			projects: dummyProjects,
-			clicked: 'none',
+			selected: [],
 			show: false
 		}
   }
@@ -76,8 +78,8 @@ export default class Home extends Component {
 					<ActionSheet
 	          visible={this.state.show}
 	          onCancel={this.onCancel.bind(this)}>
-	          <ActionSheet.Button>Call Casting</ActionSheet.Button>
-	          <ActionSheet.Button onPress={this.onNotesAction.bind(this)}>View/Add Notes</ActionSheet.Button>
+	          {this.generateCallButtons()}
+	          <ActionSheet.Button onPress={this.onNotesAction.bind(this)}>View/Add {this.state.selected.length} Notes</ActionSheet.Button>
 	        </ActionSheet>
         </Image>
     	</View>
@@ -123,7 +125,22 @@ export default class Home extends Component {
     )
 	}
 
+	generateCallButtons() {
+		let buttons;
+		if(this.state.selected.length == 1)
+			buttons = [
+				<ActionSheet.Button key="call-casting">Call Casting</ActionSheet.Button>
+			]
+		return buttons;
+	}
+
 	onItemSelected(id) {
+		let selected;
+		if (_.includes(this.state.selected, id))
+			selected = _.without(this.state.selected, id);
+		else
+			selected = _.concat(this.state.selected, id);
+
     const projects = _.map(_.cloneDeep(this.state.projects), (project) => {
       if (project.id == id && project.selected == false) {
         project.selected = true;
@@ -136,7 +153,8 @@ export default class Home extends Component {
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(projects),
-      projects: projects
+      projects: projects,
+			selected
     });
 	}
 
@@ -145,7 +163,10 @@ export default class Home extends Component {
   }
 
   onOpen() {
-    this.setState({show: true});
+		if(this.state.selected.length < 1)
+			Alert.alert("Please select projects");
+		else
+    	this.setState({show: true});
   }
 
 	onNotesAction() {

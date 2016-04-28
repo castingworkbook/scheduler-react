@@ -104,13 +104,14 @@ module.exports = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     height: 70,
     padding: 20,
     backgroundColor: secondary,
   },
 
   switchFont: {
-    fontSize: 20,
+    fontSize: 13,
     color: '#fff',
     marginRight: 10,
   },

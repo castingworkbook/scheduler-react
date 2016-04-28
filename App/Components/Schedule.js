@@ -19,30 +19,33 @@ export default class Schedule extends Component {
 			{
 				id: 1,
 				actor: "Brad Pitt",
+				phone: "7777777",
 				role: "Batman",
-				date: "M Apr 25",
+				date: "Monday Apr 25",
 				time: "3:30pm",
 				status: "",
-				casting: "confirm",
+				casting: "",
 				selected: false
 			},
 			{
 				id: 2,
 				actor: "Christian Bale",
+				phone: "7777777",
 				role: "Batman",
-				date: "M Apr 25",
+				date: "Monday Apr 25",
 				time: "3:50pm",
-				status: "CONF",
+				status: "",
 				casting: "",
 				selected: false
 			},
 			{
 				id: 3,
 				actor: "Ben Affleck",
+				phone: "7777777",
 				role: "Batman",
-				date: "M Apr 25",
+				date: "Monday Apr 25",
 				time: "4:10pm",
-				status: "REQ+",
+				status: "",
 				casting: "",
 				selected: false
 			}
@@ -86,17 +89,16 @@ export default class Schedule extends Component {
 						<ButtonRounded text="Actions" onPress={this.onOpen.bind(this)} />
 					</View>
 					<ActionSheet
-	          visible={ this.state.show }
-	          onCancel={ this.onCancel.bind(this) }>
-	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Forward to Actor</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onAction.bind(this)}>Forward to Actor with Materials</ActionSheet.Button>
-	          <ActionSheet.Button onPress={this.onAction.bind(this)}>Set to Confirm</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onAction.bind(this)}>Set to Regret</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onAction.bind(this)}>Set to Request Alternative Time</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onAction.bind(this)}>Forward to Casting</ActionSheet.Button>
-						<ActionSheet.Button>Call Actor</ActionSheet.Button>
-						<ActionSheet.Button>Call Casting</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onNotes.bind(this)}>View / Add Notes</ActionSheet.Button>
+	          visible={this.state.show}
+	          onCancel={this.onCancel.bind(this)}>
+	          <ActionSheet.Button onPress={() => this.onAction("REQ")}>Forward {this.state.selected.length} Request(s)</ActionSheet.Button>
+						<ActionSheet.Button onPress={() => this.onAction("REQ+")}>Forward {this.state.selected.length} Request(s) plus Materials</ActionSheet.Button>
+	          <ActionSheet.Button onPress={() => this.onAction("CONF")}>Set {this.state.selected.length} to Confirm</ActionSheet.Button>
+						<ActionSheet.Button onPress={() => this.onAction("REGT")}>Set {this.state.selected.length} to Regret</ActionSheet.Button>
+						<ActionSheet.Button onPress={() => this.onAction("TIME")}>Set {this.state.selected.length} to Request Alternative Time</ActionSheet.Button>
+						<ActionSheet.Button onPress={() => this.onAction("CAST")}>Forward {this.state.selected.length} Response(s) to Casting</ActionSheet.Button>
+						{this.generateCallButtons()}
+						<ActionSheet.Button onPress={this.onNotes.bind(this)}>View/Add {this.state.selected.length} Notes</ActionSheet.Button>
 	        </ActionSheet>
 				</Image>
 			</View>
@@ -112,20 +114,9 @@ export default class Schedule extends Component {
 	}
 
 	_renderRow(audition) {
-		let statusElement;
-		if(audition.casting == 'confirm') {
-			statusElement = <Icon name='checkmark' style={schedule.auditionItemIcon} />
-		} else if (audition.casting == 'regret'){
-			statusElement = <Icon name='close' style={schedule.auditionItemIcon} />
-		} else if (audition.casting == 'time'){
-			statusElement = <Icon name='clock' style={schedule.auditionItemIcon} />
-		} else {
-			statusElement = <Text style={schedule.highlightedFont}>{audition.status}</Text>
-		}
-
 		return(
 			<TouchableOpacity onPress={() => this.onItemSelected(audition.id)}>
-				<View style={_.includes(this.state.selected, audition.id) ? schedule.auditionItemSelected : schedule.auditionItem}>
+				<View style={audition.selected ? schedule.auditionItemSelected : schedule.auditionItem}>
 	        <View style={schedule.auditionItemLeft}>
             <Text style={schedule.highlightedFont}>{audition.actor}</Text>
             <Text style={schedule.normalFont}>{audition.role}</Text>
@@ -136,7 +127,7 @@ export default class Schedule extends Component {
 	        </View>
 	        <View style={schedule.auditionItemRight}>
 						<View style={schedule.statusContainer}>
-							{statusElement}
+							{this.generateStatus(audition)}
 						</View>
 						<TouchableOpacity onPress={Actions.history}>
 							<View style={schedule.auditionItemIconContainer}>
@@ -155,12 +146,52 @@ export default class Schedule extends Component {
     )
 	}
 
+	generateCallButtons() {
+		let buttons;
+		if(this.state.selected.length == 1)
+			buttons = [
+				<ActionSheet.Button key="call-actor" onPress={() => this.onAction("CALL")}>Call Actor</ActionSheet.Button>,
+				<ActionSheet.Button key="call-casting">Call Casting</ActionSheet.Button>
+			]
+		return buttons;
+	}
+
+	generateStatus(audition) {
+		let statusElement;
+		if(audition.casting == 'confirm')
+			statusElement = <Icon name='checkmark' style={schedule.auditionItemIcon} />
+		else if(audition.casting == 'regret')
+			statusElement = <Icon name='close' style={schedule.auditionItemIcon} />
+		else if(audition.casting == 'time')
+			statusElement = <Icon name='clock' style={schedule.auditionItemIcon} />
+		else
+			statusElement = <Text style={schedule.highlightedFont}>{audition.status}</Text>
+
+		return statusElement;
+	}
+
 	onItemSelected(id) {
-		if(_.includes(this.state.selected, id)) {
-			this.setState({selected: _.remove(this.state.selected, id)});
-		} else {
-			this.setState({selected: _.concat(this.state.selected, id)});
-		}
+		let selected;
+		if (_.includes(this.state.selected, id))
+			selected = _.without(this.state.selected, id);
+		else
+			selected = _.concat(this.state.selected, id);
+
+    const auditions = _.map(_.cloneDeep(this.state.auditions), (audition) => {
+      if (audition.id == id && audition.selected == false) {
+        audition.selected = true;
+      } else if (audition.id == id && audition.selected == true) {
+        audition.selected = false;
+      }
+
+      return audition;
+    });
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(auditions),
+      auditions: auditions,
+			selected
+    });
 	}
 
 	onCancel() {
@@ -168,10 +199,13 @@ export default class Schedule extends Component {
   }
 
   onOpen() {
-    this.setState({show: true});
+		if(this.state.selected.length < 1)
+			Alert.alert("Please select auditions");
+		else
+    	this.setState({show: true});
   }
 
-	onAction() {
+	sendMessageAlert() {
 		this.setState({show: false});
 
 		Alert.alert(
@@ -184,36 +218,32 @@ export default class Schedule extends Component {
 		)
 	}
 
-	onForward() {
-		this.setState({show: false});
-	}
+	onAction(type) {
+		const auditions = _.map(_.cloneDeep(this.state.auditions), (audition) => {
+			if (_.includes(this.state.selected, audition.id) && type == 'CAST') {
+				if(audition.status == 'CONF')
+					audition.casting = 'confirm';
+				else if(audition.status == 'REGT')
+					audition.casting = 'regret';
+				else if(audition.status == 'TIME')
+					audition.casting = 'time'
+			} else if(_.includes(this.state.selected, audition.id) && type != 'CAST') {
+				audition.status = type;
+			}
+			audition.selected = false;
 
-	onForwardPlus() {
-		this.setState({show: false});
-	}
+			return audition;
+    });
 
-	onConfirm() {
-		this.setState({show: false});
-	}
+		if(type == "REQ" || type == "REQ+" || type == "CAST")
+			this.sendMessageAlert();
 
-	onRegret() {
-		this.setState({show: false});
-	}
-
-	onTime() {
-		this.setState({show: false});
-	}
-
-	onCasting() {
-		this.setState({show: false});
-	}
-
-	onCallActor() {
-		this.setState({show: false});
-	}
-
-	onCallCasting() {
-		this.setState({show: false});
+		this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(auditions),
+      auditions: auditions,
+			selected: [],
+			show: false,
+    });
 	}
 
 	onNotes() {

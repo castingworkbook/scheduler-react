@@ -63,7 +63,6 @@ module.exports = StyleSheet.create({
 
   noteItemLeft: {
     flex: 0.8,
-    flexDirection: 'row',
     paddingRight: 10,
   },
 

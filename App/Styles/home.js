@@ -68,7 +68,6 @@ module.exports = StyleSheet.create({
   projectItem: {
     flex: 1,
     flexDirection: 'row',
-    height: 135,
     paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
@@ -78,7 +77,6 @@ module.exports = StyleSheet.create({
   projectItemSelected: {
     flex: 1,
     flexDirection: 'row',
-    height: 135,
     paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
