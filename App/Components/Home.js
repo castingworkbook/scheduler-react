@@ -78,8 +78,8 @@ export default class Home extends Component {
 					<ActionSheet
 	          visible={this.state.show}
 	          onCancel={this.onCancel.bind(this)}>
-	          {this.generateCallButtons()}
-	          <ActionSheet.Button onPress={this.onNotesAction.bind(this)}>View/Add {this.state.selected.length} Notes</ActionSheet.Button>
+	          {this.generateActionButtons()}
+	          <ActionSheet.Button onPress={this.onNotesAction.bind(this)}>View / Add Notes</ActionSheet.Button>
 	        </ActionSheet>
         </Image>
     	</View>
@@ -125,11 +125,11 @@ export default class Home extends Component {
     )
 	}
 
-	generateCallButtons() {
+	generateActionButtons() {
 		let buttons;
 		if(this.state.selected.length == 1)
 			buttons = [
-				<ActionSheet.Button key="call-casting">Call Casting</ActionSheet.Button>
+				<ActionSheet.Button key="call-casting">Call Casting Director</ActionSheet.Button>
 			]
 		return buttons;
 	}

@@ -56,7 +56,6 @@ module.exports = StyleSheet.create({
   nameContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
 
   header: {
@@ -65,9 +64,15 @@ module.exports = StyleSheet.create({
   },
 
   headerDate: {
-    fontSize: 16,
-    color: '#fff',
-    marginTop: 7,
+    flexDirection: 'column',
+    alignItems: 'flex-end'
+  },
+
+  subheaderContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
 
   materialsContainer: {
@@ -85,12 +90,12 @@ module.exports = StyleSheet.create({
   },
 
   actionItemLeft: {
-    flex: 0.8,
+    flex: 0.7,
     paddingRight: 10
   },
 
   actionItemRight: {
-    flex: 0.2,
+    flex: 0.3,
     flexDirection: 'column',
     alignItems: 'flex-end'
   },
@@ -98,11 +103,6 @@ module.exports = StyleSheet.create({
   font: {
     fontSize: 16,
     color: '#fff'
-  },
-
-  materialsFont: {
-    fontSize: 20,
-    color: '#fff',
   },
 
   materialsIconContainer: {

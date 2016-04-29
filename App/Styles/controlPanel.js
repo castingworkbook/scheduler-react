@@ -30,8 +30,8 @@ module.exports = StyleSheet.create({
   logo: {
     alignSelf:'center',
     margin: 30,
-    width: 180,
     height: 100,
+    width: 126,
     opacity: 0.9,
   },
 

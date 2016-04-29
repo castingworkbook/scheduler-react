@@ -91,14 +91,15 @@ export default class Schedule extends Component {
 					<ActionSheet
 	          visible={this.state.show}
 	          onCancel={this.onCancel.bind(this)}>
-	          <ActionSheet.Button onPress={() => this.onAction("REQ")}>Forward {this.state.selected.length} Request(s)</ActionSheet.Button>
-						<ActionSheet.Button onPress={() => this.onAction("REQ+")}>Forward {this.state.selected.length} Request(s) plus Materials</ActionSheet.Button>
-	          <ActionSheet.Button onPress={() => this.onAction("CONF")}>Set {this.state.selected.length} to Confirm</ActionSheet.Button>
-						<ActionSheet.Button onPress={() => this.onAction("REGT")}>Set {this.state.selected.length} to Regret</ActionSheet.Button>
-						<ActionSheet.Button onPress={() => this.onAction("TIME")}>Set {this.state.selected.length} to Request Alternative Time</ActionSheet.Button>
-						<ActionSheet.Button onPress={() => this.onAction("CAST")}>Forward {this.state.selected.length} Response(s) to Casting</ActionSheet.Button>
-						{this.generateCallButtons()}
-						<ActionSheet.Button onPress={this.onNotes.bind(this)}>View/Add {this.state.selected.length} Notes</ActionSheet.Button>
+	          <ActionSheet.Button onPress={() => this.onAction("SENT")}>Send to {this.state.selected.length} Actor(s)</ActionSheet.Button>
+						<ActionSheet.Button onPress={() => this.onAction("SENT+")}>Send to {this.state.selected.length} Actor(s) + Materials</ActionSheet.Button>
+	          <ActionSheet.Button onPress={() => this.onAction("CONF")}>Confirm {this.state.selected.length}</ActionSheet.Button>
+						<ActionSheet.Button onPress={() => this.onAction("REGR")}>Regret {this.state.selected.length}</ActionSheet.Button>
+						<ActionSheet.Button onPress={() => this.onAction("TIME")}>Request {this.state.selected.length} New Time(s)</ActionSheet.Button>
+						<ActionSheet.Button onPress={() => this.onAction("CAST")}>Forward {this.state.selected.length} to Casting</ActionSheet.Button>
+						{this.generateActionButtons()}
+						<ActionSheet.Button>Call Casting Director</ActionSheet.Button>
+						<ActionSheet.Button onPress={this.onNotes.bind(this)}>View / Add Notes</ActionSheet.Button>
 	        </ActionSheet>
 				</Image>
 			</View>
@@ -109,6 +110,16 @@ export default class Schedule extends Component {
 		return (
       <View style={schedule.headerContainer}>
         <Text style={schedule.header}>Batman Returns</Text>
+				<View style={schedule.notificationsContainer}>
+					<View style={schedule.notification}>
+						<Icon name="android-alert" style={schedule.notificationIcon} />
+						<Text style={schedule.notificationFont}>2 need to be sent to Actor(s)</Text>
+					</View>
+					<View style={schedule.notification}>
+						<Icon name="android-alert" style={schedule.notificationIcon} />
+						<Text style={schedule.notificationFont}>4 need to be forwarded to Casting</Text>
+					</View>
+				</View>
       </View>
     )
 	}
@@ -146,12 +157,11 @@ export default class Schedule extends Component {
     )
 	}
 
-	generateCallButtons() {
+	generateActionButtons() {
 		let buttons;
 		if(this.state.selected.length == 1)
 			buttons = [
-				<ActionSheet.Button key="call-actor" onPress={() => this.onAction("CALL")}>Call Actor</ActionSheet.Button>,
-				<ActionSheet.Button key="call-casting">Call Casting</ActionSheet.Button>
+				<ActionSheet.Button key="call-actor" onPress={() => this.onAction("CALL")}>Call Selected Actor</ActionSheet.Button>,
 			]
 		return buttons;
 	}

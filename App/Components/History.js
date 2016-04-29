@@ -15,52 +15,52 @@ export default class History extends Component {
     const dummyActions = [
       {
         text: "Confirm",
-        date: "02/12/16",
+        date: "MO Apr 25",
         time: "1:37pm",
       },
       {
         text: "Brad Pitt responds Confirm",
-        date: "02/12/16",
+        date: "MO Apr 25",
         time: "11:37pm",
       },
       {
         text: "Forward",
-        date: "02/12/16",
+        date: "MO Apr 25",
         time: "10:51pm",
       },
       {
         text: "Casting resubmits time",
-        date: "02/12/16",
+        date: "MO Apr 25",
         time: "10:37am",
       },
       {
         text: "Message: Can we set the time between to 02/21/16 between 1:30 to 4:30?",
-        date: "02/11/16",
+        date: "MO Apr 25",
         time: "2:37pm",
       },
       {
         text: "Request Alternative Time with Message",
-        date: "02/11/16",
+        date: "MO Apr 25",
         time: "2:37pm",
       },
       {
         text: "Note: Brad said 02/21/16 @ 1:30 to 4:30 works",
-        date: "02/11/16",
+        date: "MO Apr 25",
         time: "2:15pm"
       },
       {
         text: "Call Brad Pitt",
-        date: "02/11/16",
+        date: "MO Apr 25",
         time: "2:01pm",
       },
       {
         text: "Brad Pitt responds Regret",
-        date: "02/11/16",
+        date: "MO Apr 25",
         time: "1:37pm",
       },
       {
         text: "Forward to Brad Pitt",
-        date: "02/11/16",
+        date: "MO Apr 25",
         time: "10:37am",
       },
     ]
@@ -99,15 +99,22 @@ export default class History extends Component {
       <View style={history.headerContainer}>
         <View style={history.nameContainer}>
           <Text style={history.header}>Brad Pitt</Text>
-          <Text style={history.headerDate}>02/20/16 - 3:30pm</Text>
         </View>
-        <View style={history.materialsContainer}>
-          <Text style={history.materialsFont}>Materials</Text>
-          <TouchableOpacity onPress={() => this.onMaterials()}>
-						<View style={history.materialsIconContainer}>
-							<Icon name="document-text" style={history.materialsIcon} />
-						</View>
-					</TouchableOpacity>
+        <View>
+          <View style={history.subheaderContainer}>
+            <View style={history.materialsContainer}>
+              <Text style={history.font}>Materials</Text>
+              <TouchableOpacity onPress={() => this.onMaterials()}>
+    						<View style={history.materialsIconContainer}>
+    							<Icon name="document-text" style={history.materialsIcon} />
+    						</View>
+    					</TouchableOpacity>
+            </View>
+            <View style={history.headerDate}>
+              <Text style={history.font}>Monday Apr 25</Text>
+              <Text style={history.font}>3:30pm</Text>
+            </View>
+          </View>
         </View>
       </View>
     )

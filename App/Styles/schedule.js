@@ -47,7 +47,7 @@ module.exports = StyleSheet.create({
 
   normalFont: {
     fontSize: 16,
-    color: '#fff'
+    color: '#fff',
   },
 
   listContainer: {
@@ -56,9 +56,8 @@ module.exports = StyleSheet.create({
 
   headerContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     backgroundColor: 'transparent',
-    justifyContent: 'space-between',
     padding: 10,
     borderBottomWidth: 1,
     borderColor: '#fff',
@@ -66,6 +65,30 @@ module.exports = StyleSheet.create({
 
   header: {
     fontSize: 25,
+    color: '#fff',
+  },
+
+  notificationsContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    marginTop: 5,
+    marginLeft: 5,
+  },
+
+  notification: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  notificationIcon: {
+    fontSize: 12,
+    color: '#fff',
+    marginRight: 5,
+  },
+
+  notificationFont: {
+    fontSize: 12,
     color: '#fff',
   },
 
@@ -127,14 +150,6 @@ module.exports = StyleSheet.create({
     width: 50,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-
-  notificationIcon: {
-     fontSize: 20,
-     color: '#fff',
-     position: 'absolute',
-     top: 0,
-     right: 0,
   },
 
   auditionItemIcon: {

@@ -76,7 +76,7 @@ module.exports = StyleSheet.create({
   },
 	logo: {
 		height: 100,
-		width: 100,
+		width: 126,
     marginBottom: 20,
 	},
   nameText: {
