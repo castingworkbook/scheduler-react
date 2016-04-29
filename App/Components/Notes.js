@@ -88,17 +88,7 @@ export default class Notes extends Component {
     return(
       <View style={notes.noteItem}>
         <View style={notes.noteItemLeft}>
-          <TouchableOpacity>
-            <View>
-              <View style={notes.noteItemIconContainer}>
-                <Icon name="document-text" style={notes.noteItemIcon} />
-              </View>
-              <Icon name="android-alert" style={note.alert ? notes.notificationIcon : {opacity: 0}} />
-            </View>
-          </TouchableOpacity>
-          <View style={notes.nameContainer}>
-            <Text style={notes.font}>{note.text}</Text>
-          </View>
+          <Text style={notes.font}>{note.text}</Text>
         </View>
         <View style={notes.noteItemRight}>
           <Text style={notes.font}>{note.date}</Text>
