@@ -233,7 +233,7 @@ export default class Schedule extends Component {
 			if (_.includes(this.state.selected, audition.id) && type == 'CAST') {
 				if(audition.status == 'CONF')
 					audition.casting = 'confirm';
-				else if(audition.status == 'REGT')
+				else if(audition.status == 'REGR')
 					audition.casting = 'regret';
 				else if(audition.status == 'TIME')
 					audition.casting = 'time'

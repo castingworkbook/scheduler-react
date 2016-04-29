@@ -62,7 +62,7 @@ module.exports = StyleSheet.create({
   },
 
   footer: {
-    paddingBottom: 10
+    paddingBottom: 10,
   },
 
   projectItem: {

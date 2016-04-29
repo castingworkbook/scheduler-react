@@ -100,7 +100,7 @@ module.exports = StyleSheet.create({
   },
 
   footer: {
-    padding: 10
+    paddingBottom: 10,
   },
 
   auditionItem: {
