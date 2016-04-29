@@ -7,13 +7,14 @@ import login from '../Styles/login';
 import ButtonRounded from './Widgets/ButtonRounded';
 import {Actions} from 'react-native-router-flux';
 import IconInput from './Widgets/IconInput';
+import NetworkClient from '../Network/NetworkClient';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: 'agentjeff',
+      password: 'dontgivethisout',
       visibleHeight: Dimensions.get('window').height,
       scroll: false
     };
@@ -41,7 +42,7 @@ export default class Login extends Component {
             <Image source={require('../img/cwb_logo.png')} style={login.logo} />
             <Text style={login.nameText}>Scheduler</Text>
           </View>
-          <View style={ Platform.OS === 'android' ? login.abg : login.bg}>
+          <View style={Platform.OS === 'android' ? login.abg : login.bg}>
             <IconInput
               placeholder="EMAIL"
               icon="person"
@@ -60,11 +61,17 @@ export default class Login extends Component {
               <Text style={login.registerLink}>Forgot Password</Text>
             </TouchableOpacity>
             <ButtonRounded
-              onPress={()=>Actions.home({data:this.state.value})}
+              onPress={() => this.onLoginPressed()}
               text="Login" />
           </View>
         </Image>
       </ScrollView>
     );
+  }
+
+  async onLoginPressed() {
+    try {
+      let response = await NetworkClient.getAuthCookie(this.state.username, this.state.password)
+    }
   }
 }
