@@ -7,7 +7,6 @@ import login from '../Styles/login';
 import ButtonRounded from './Widgets/ButtonRounded';
 import {Actions} from 'react-native-router-flux';
 import IconInput from './Widgets/IconInput';
-import NetworkClient from '../Network/NetworkClient';
 
 export default class Login extends Component {
   constructor(props) {
