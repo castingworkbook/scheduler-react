@@ -7,7 +7,11 @@ var secondary = require('./variable').brandSecondary;
 
 var {
   StyleSheet,
+  Dimensions
 } = React;
+
+var deviceHeight = Dimensions.get('window').height;
+var deviceWidth = Dimensions.get('window').width;
 
 module.exports = StyleSheet.create({
 	container: {
@@ -48,6 +52,13 @@ module.exports = StyleSheet.create({
   normalFont: {
     fontSize: 16,
     color: '#fff'
+  },
+
+  spinnerContainer: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+    bottom: deviceHeight/2,
+    left: deviceWidth/2-25,
   },
 
 	listContainer: {

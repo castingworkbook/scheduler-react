@@ -13,8 +13,8 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'agentjeff',
-      password: 'dontgivethisout',
+      email: '',
+      password: '',
       visibleHeight: Dimensions.get('window').height,
       scroll: false
     };
@@ -61,7 +61,7 @@ export default class Login extends Component {
               <Text style={login.registerLink}>Forgot Password</Text>
             </TouchableOpacity>
             <ButtonRounded
-              onPress={() => this.onLoginPressed()}
+              onPress={() => Actions.home({data:this.state.value})}
               text="Login" />
           </View>
         </Image>
@@ -69,9 +69,5 @@ export default class Login extends Component {
     );
   }
 
-  async onLoginPressed() {
-    try {
-      let response = await NetworkClient.getAuthCookie(this.state.username, this.state.password)
-    }
-  }
+
 }

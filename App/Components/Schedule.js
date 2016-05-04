@@ -10,45 +10,47 @@ import {brandPrimary as primary} from '../Styles/variable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet';
+import Spinner from 'react-native-spinkit';
+import _ from 'lodash';
 
 export default class Schedule extends Component {
 	constructor(props) {
 		super(props);
 
 		const dummyAuditions = [
-			{
-				id: 1,
-				actor: "Brad Pitt",
-				phone: "7777777",
-				role: "Batman",
-				date: "Monday Apr 25",
-				time: "3:30pm",
-				status: "",
-				casting: "",
-				selected: false
-			},
-			{
-				id: 2,
-				actor: "Christian Bale",
-				phone: "7777777",
-				role: "Batman",
-				date: "Monday Apr 25",
-				time: "3:50pm",
-				status: "",
-				casting: "",
-				selected: false
-			},
-			{
-				id: 3,
-				actor: "Ben Affleck",
-				phone: "7777777",
-				role: "Batman",
-				date: "Monday Apr 25",
-				time: "4:10pm",
-				status: "",
-				casting: "",
-				selected: false
-			}
+			// {
+			// 	id: 1,
+			// 	actor: "Brad Pitt",
+			// 	phone: "7777777",
+			// 	role: "Batman",
+			// 	date: "Monday Apr 25",
+			// 	time: "3:30pm",
+			// 	status: "",
+			// 	casting: "",
+			// 	selected: false
+			// },
+			// {
+			// 	id: 2,
+			// 	actor: "Christian Bale",
+			// 	phone: "7777777",
+			// 	role: "Batman",
+			// 	date: "Monday Apr 25",
+			// 	time: "3:50pm",
+			// 	status: "",
+			// 	casting: "",
+			// 	selected: false
+			// },
+			// {
+			// 	id: 3,
+			// 	actor: "Ben Affleck",
+			// 	phone: "7777777",
+			// 	role: "Batman",
+			// 	date: "Monday Apr 25",
+			// 	time: "4:10pm",
+			// 	status: "",
+			// 	casting: "",
+			// 	selected: false
+			// }
 		]
 
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -57,13 +59,16 @@ export default class Schedule extends Component {
 			auditions: dummyAuditions,
       selected: [],
       clicked: 'none',
-      show: false
+      show: false,
+			isLoading: false
 		}
 	}
 
 	componentDidMount() {
 		if (this.props.message)
 			Alert.alert(this.props.message);
+
+		this.getSchedules();
 	}
 
 	render() {
@@ -101,6 +106,13 @@ export default class Schedule extends Component {
 						<ActionSheet.Button>Call Casting Director</ActionSheet.Button>
 						<ActionSheet.Button onPress={this.onNotes.bind(this)}>View / Add Notes</ActionSheet.Button>
 	        </ActionSheet>
+					<View style={schedule.spinnerContainer}>
+						<Spinner
+							isVisible={this.state.isLoading}
+							color={'#ffffff'}
+							size={50}
+							type={'Wave'} />
+					</View>
 				</Image>
 			</View>
 		);
@@ -245,7 +257,7 @@ export default class Schedule extends Component {
 			return audition;
     });
 
-		if(type == "REQ" || type == "REQ+" || type == "CAST")
+		if(type == "SENT" || type == "SENT+" || type == "CAST")
 			this.sendMessageAlert();
 
 		this.setState({
@@ -258,5 +270,38 @@ export default class Schedule extends Component {
 
 	onNotes() {
 		Actions.notes();
+	}
+
+	async getSchedules() {
+		let responseJson;
+		try {
+			this.setState({isLoading: true});
+			let response = await fetch('http://www.thecwbint.com/scheduling2016/api/agents/71/breakdown/43570/1');
+			responseJson = await response.json();
+		} catch(error) {
+			console.error(error);
+		}
+		this.setState({isLoading: false});
+
+		let auditions = _.map(responseJson.auditionSchedules, (schedule, index) => {
+			let object = {
+				id: index+1,
+				actor: schedule.actorName,
+				phone: schedule.actorPhoneNumber,
+				role: schedule.role,
+				date: schedule.auditionDate8601,
+				time: schedule.auditionTime8601,
+				status: "",
+				casting: "",
+				selected: false
+			}
+
+			return object;
+		});
+
+		this.setState({
+			dataSource: this.state.dataSource.cloneWithRows(auditions),
+      auditions: auditions,
+		});
 	}
 }

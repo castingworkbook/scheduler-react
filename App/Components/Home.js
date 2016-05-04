@@ -10,6 +10,7 @@ import Login from './Login';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet';
+import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
 
 export default class Home extends Component {
@@ -17,32 +18,32 @@ export default class Home extends Component {
     super(props);
 
 		const dummyProjects = [
-			{
-				id: 1,
-				name: "Batman Returns",
-				director: "Brad Richardson",
-				phone: "7777777",
-				roles: ["Batman", "Robin"],
-				actions: 3,
-				selected: false,
-			},
-			{
-				id: 2,
-				name: "Forrest Gump",
-				director: "Natalie Low",
-				phone: "7777777",
-				roles: ["Forrest Gump", "Jenny Curran"],
-				actions: 0,
-				selected: false,
-			},
-			{
-				id: 3,
-				name: "The NoteBook",
-				director: "Jeff Rose",
-				roles: ["Handsome Guy", "Pretty Girl"],
-				actions: 2,
-				selected: false,
-			}
+			// {
+			// 	id: 1,
+			// 	name: "Batman Returns",
+			// 	director: "Brad Richardson",
+			// 	phone: "7777777",
+			// 	roles: ["Batman", "Robin"],
+			// 	actions: 3,
+			// 	selected: false,
+			// },
+			// {
+			// 	id: 2,
+			// 	name: "Forrest Gump",
+			// 	director: "Natalie Low",
+			// 	phone: "7777777",
+			// 	roles: ["Forrest Gump", "Jenny Curran"],
+			// 	actions: 0,
+			// 	selected: false,
+			// },
+			// {
+			// 	id: 3,
+			// 	name: "The NoteBook",
+			// 	director: "Jeff Rose",
+			// 	roles: ["Handsome Guy", "Pretty Girl"],
+			// 	actions: 2,
+			// 	selected: false,
+			// }
 		];
 
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -50,9 +51,14 @@ export default class Home extends Component {
 			dataSource: ds.cloneWithRows(dummyProjects),
 			projects: dummyProjects,
 			selected: [],
-			show: false
+			show: false,
+			isLoading: false,
 		}
   }
+
+	componentDidMount() {
+		this.getProjects();
+	}
 
 	render() {
 		return(
@@ -81,6 +87,13 @@ export default class Home extends Component {
 	          {this.generateActionButtons()}
 	          <ActionSheet.Button onPress={this.onNotesAction.bind(this)}>View / Add Notes</ActionSheet.Button>
 	        </ActionSheet>
+					<View style={home.spinnerContainer}>
+						<Spinner
+							isVisible={this.state.isLoading}
+							color={'#ffffff'}
+							size={50}
+							type={'Wave'} />
+					</View>
         </Image>
     	</View>
 		);
@@ -127,7 +140,7 @@ export default class Home extends Component {
 
 	generateActionButtons() {
 		let buttons;
-		if(this.state.selected.length == 1)
+		if (this.state.selected.length == 1)
 			buttons = [
 				<ActionSheet.Button key="call-casting">Call Casting Director</ActionSheet.Button>
 			]
@@ -163,7 +176,7 @@ export default class Home extends Component {
   }
 
   onOpen() {
-		if(this.state.selected.length < 1)
+		if (this.state.selected.length < 1)
 			Alert.alert("Please select projects");
 		else
     	this.setState({show: true});
@@ -171,5 +184,36 @@ export default class Home extends Component {
 
 	onNotesAction() {
 		Actions.notes();
+	}
+
+	async getProjects() {
+		let responseJson;
+		try {
+			this.setState({isLoading: true});
+			let response = await fetch('http://www.thecwbint.com/scheduling2016/api/agents/71/activebreakdowns');
+			responseJson = await response.json();
+		} catch(error) {
+			console.error(error);
+		}
+		this.setState({isLoading: false});
+
+		let projects = _.map(responseJson, (project, index) => {
+			let object = {
+				id: index+1,
+				name: project.title,
+				director: project.directorName,
+				phone: project.directorPhone,
+				roles: ["Batman", "Robin"],
+				actions: project.auditionsRegretedNotForwardedCount+project.auditionsConfirmedNotForwardedCount+project.auditionsRequestedNotForwardedCount,
+				selected: false,
+			}
+
+			return object;
+		});
+
+		this.setState({
+			dataSource: this.state.dataSource.cloneWithRows(projects),
+      projects: projects
+		});
 	}
 }
