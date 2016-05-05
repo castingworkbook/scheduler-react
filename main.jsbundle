@@ -33860,11 +33860,11 @@ root._=_;}}).
 
 call(this);
 });
-__d('BoilerPlate/App/img/cwb_logo.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/lucid/Dev/scheduler-react/App/img","httpServerLocation":"/assets/App/img","width":60,"height":50,"scales":[1],"files":["/Users/lucid/Dev/scheduler-react/App/img/cwb_logo.png"],"hash":"dd1f3a4e7291cbf5acd279ed661412df","name":"cwb_logo","type":"png"});
+__d('Scheduler/App/img/cwb_logo.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/lucid/Dev/scheduler-react/App/img","httpServerLocation":"/assets/App/img","width":60,"height":50,"scales":[1],"files":["/Users/lucid/Dev/scheduler-react/App/img/cwb_logo.png"],"hash":"dd1f3a4e7291cbf5acd279ed661412df","name":"cwb_logo","type":"png"});
 });
-__d('BoilerPlate/App/img/glow2.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/lucid/Dev/scheduler-react/App/img","httpServerLocation":"/assets/App/img","width":213.33333333333334,"height":378.6666666666667,"scales":[1,2,3],"files":["/Users/lucid/Dev/scheduler-react/App/img/glow2.png","/Users/lucid/Dev/scheduler-react/App/img/glow2@2x.png","/Users/lucid/Dev/scheduler-react/App/img/glow2@3x.png"],"hash":"c2afa67a5916fc0477285b22b9a68cfb","name":"glow2","type":"png"});
+__d('Scheduler/App/img/glow2.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/lucid/Dev/scheduler-react/App/img","httpServerLocation":"/assets/App/img","width":213.33333333333334,"height":378.6666666666667,"scales":[1,2,3],"files":["/Users/lucid/Dev/scheduler-react/App/img/glow2.png","/Users/lucid/Dev/scheduler-react/App/img/glow2@2x.png","/Users/lucid/Dev/scheduler-react/App/img/glow2@3x.png"],"hash":"c2afa67a5916fc0477285b22b9a68cfb","name":"glow2","type":"png"});
 });
-__d('BoilerPlate/index.ios.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/index.ios.js',function(global, require, module, exports) {  'use strict';
 
 
 
@@ -33877,17 +33877,17 @@ var _reactNative=require('react-native/Libraries/react-native/react-native.js');
 
 
 
-var _RootRouter=require('BoilerPlate/App/Components/RootRouter.js');var _RootRouter2=babelHelpers.interopRequireDefault(_RootRouter);_reactNative.StatusBarIOS.setStyle('light-content');var 
+var _RootRouter=require('Scheduler/App/Components/RootRouter.js');var _RootRouter2=babelHelpers.interopRequireDefault(_RootRouter);_reactNative.StatusBarIOS.setStyle('light-content');var 
 
-BoilerPlate=function(_Component){babelHelpers.inherits(BoilerPlate,_Component);function BoilerPlate(){babelHelpers.classCallCheck(this,BoilerPlate);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(BoilerPlate).apply(this,arguments));}babelHelpers.createClass(BoilerPlate,[{key:'render',value:function render()
+Scheduler=function(_Component){babelHelpers.inherits(Scheduler,_Component);function Scheduler(){babelHelpers.classCallCheck(this,Scheduler);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Scheduler).apply(this,arguments));}babelHelpers.createClass(Scheduler,[{key:'render',value:function render()
 {
 return (
-_reactNative2.default.createElement(_RootRouter2.default,null));}}]);return BoilerPlate;}(_reactNative.Component);
+_reactNative2.default.createElement(_RootRouter2.default,null));}}]);return Scheduler;}(_reactNative.Component);
 
 
 
 
-_reactNative.AppRegistry.registerComponent('BoilerPlate',function(){return BoilerPlate;});
+_reactNative.AppRegistry.registerComponent('Scheduler',function(){return Scheduler;});
 });
 __d('react-native/Libraries/react-native/react-native.js',function(global, require, module, exports) {  'use strict';
 
@@ -81095,20 +81095,20 @@ return ReactMount.getNodeFromInstance(componentOrElement);}
 
 module.exports=findDOMNode;
 });
-__d('BoilerPlate/App/Components/RootRouter.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/RootRouter.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
 var _EventEmitter=require('EventEmitter');var _EventEmitter2=babelHelpers.interopRequireDefault(_EventEmitter);
 var _reactNativeDrawer=require('react-native-drawer/index.js');var _reactNativeDrawer2=babelHelpers.interopRequireDefault(_reactNativeDrawer);
-var _ControlPanel=require('BoilerPlate/App/Components/Widgets/ControlPanel.js');var _ControlPanel2=babelHelpers.interopRequireDefault(_ControlPanel);
-var _Login=require('BoilerPlate/App/Components/Login.js');var _Login2=babelHelpers.interopRequireDefault(_Login);
-var _Home=require('BoilerPlate/App/Components/Home.js');var _Home2=babelHelpers.interopRequireDefault(_Home);
-var _Schedule=require('BoilerPlate/App/Components/Schedule.js');var _Schedule2=babelHelpers.interopRequireDefault(_Schedule);
-var _History=require('BoilerPlate/App/Components/History.js');var _History2=babelHelpers.interopRequireDefault(_History);
-var _Message=require('BoilerPlate/App/Components/Message.js');var _Message2=babelHelpers.interopRequireDefault(_Message);
-var _layout=require('BoilerPlate/App/Styles/layout.js');var _layout2=babelHelpers.interopRequireDefault(_layout);
-var _AppEventEmitter=require('BoilerPlate/App/Services/AppEventEmitter.js');var _AppEventEmitter2=babelHelpers.interopRequireDefault(_AppEventEmitter);var 
+var _ControlPanel=require('Scheduler/App/Components/Widgets/ControlPanel.js');var _ControlPanel2=babelHelpers.interopRequireDefault(_ControlPanel);
+var _Login=require('Scheduler/App/Components/Login.js');var _Login2=babelHelpers.interopRequireDefault(_Login);
+var _Home=require('Scheduler/App/Components/Home.js');var _Home2=babelHelpers.interopRequireDefault(_Home);
+var _Schedule=require('Scheduler/App/Components/Schedule.js');var _Schedule2=babelHelpers.interopRequireDefault(_Schedule);
+var _History=require('Scheduler/App/Components/History.js');var _History2=babelHelpers.interopRequireDefault(_History);
+var _Message=require('Scheduler/App/Components/Message.js');var _Message2=babelHelpers.interopRequireDefault(_Message);
+var _layout=require('Scheduler/App/Styles/layout.js');var _layout2=babelHelpers.interopRequireDefault(_layout);
+var _AppEventEmitter=require('Scheduler/App/Services/AppEventEmitter.js');var _AppEventEmitter2=babelHelpers.interopRequireDefault(_AppEventEmitter);var 
 
 RootRouter=function(_Component){babelHelpers.inherits(RootRouter,_Component);function RootRouter(){babelHelpers.classCallCheck(this,RootRouter);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(RootRouter).apply(this,arguments));}babelHelpers.createClass(RootRouter,[{key:'componentDidMount',value:function componentDidMount()
 {
@@ -83819,11 +83819,11 @@ requestAnimationFrame(this._rafLoop);};
 Tween.prototype.terminate=function(){
 this._break=true;};
 });
-__d('BoilerPlate/App/Components/Widgets/Button.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/Widgets/Button.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _style=require('BoilerPlate/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);var 
+var _style=require('Scheduler/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);var 
 
 Button=function(_Component){babelHelpers.inherits(Button,_Component);function Button(){babelHelpers.classCallCheck(this,Button);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Button).apply(this,arguments));}babelHelpers.createClass(Button,[{key:'render',value:function render()
 {
@@ -83834,7 +83834,7 @@ underlayColor:'#B5B5B5',
 onPress:this.props.onPress},
 _reactNative2.default.createElement(_reactNative.Text,{style:_style2.default.buttonText},this.props.text)));}}]);return Button;}(_reactNative.Component);exports.default=Button;
 });
-__d('BoilerPlate/App/Styles/style.js',function(global, require, module, exports) {  var React=require('react-native/Libraries/react-native/react-native.js');var 
+__d('Scheduler/App/Styles/style.js',function(global, require, module, exports) {  var React=require('react-native/Libraries/react-native/react-native.js');var 
 
 
 AppRegistry=
@@ -86229,13 +86229,13 @@ return isObjectLike(value)&&isLength(value.length)&&!!typedArrayTags[objToString
 
 module.exports=isTypedArray;
 });
-__d('BoilerPlate/App/Styles/controlPanel.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/App/Styles/controlPanel.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');
-var primary=require('BoilerPlate/App/Styles/variable.js').brandPrimary;
-var secondary=require('BoilerPlate/App/Styles/variable.js').brandSecondary;
-var sidebar=require('BoilerPlate/App/Styles/variable.js').brandSidebar;var 
+var primary=require('Scheduler/App/Styles/variable.js').brandPrimary;
+var secondary=require('Scheduler/App/Styles/variable.js').brandSecondary;
+var sidebar=require('Scheduler/App/Styles/variable.js').brandSidebar;var 
 
 
 StyleSheet=
@@ -86286,7 +86286,7 @@ position:'relative',
 paddingTop:14,
 height:50}});
 });
-__d('BoilerPlate/App/Styles/variable.js',function(global, require, module, exports) {  var Color=require("color/index.js");
+__d('Scheduler/App/Styles/variable.js',function(global, require, module, exports) {  var Color=require("color/index.js");
 
 var primary=Color("rgba(0,0,0,0.8)");
 var secondary=Color("#252932");
@@ -87051,12 +87051,12 @@ var reverseNames={};
 for(var name in colorNames){
 reverseNames[colorNames[name]]=name;}
 });
-__d('BoilerPlate/App/Styles/login.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/App/Styles/login.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');
-var primary=require('BoilerPlate/App/Styles/variable.js').brandPrimary;
-var secondary=require('BoilerPlate/App/Styles/variable.js').brandSecondary;var 
+var primary=require('Scheduler/App/Styles/variable.js').brandPrimary;
+var secondary=require('Scheduler/App/Styles/variable.js').brandSecondary;var 
 
 
 StyleSheet=
@@ -87144,12 +87144,12 @@ color:'rgba(255, 255, 255, 0.9)',
 alignSelf:'center',
 fontSize:15}});
 });
-__d('BoilerPlate/App/Components/Widgets/ButtonRounded.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/Widgets/ButtonRounded.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _bootstrap=require('BoilerPlate/App/Styles/bootstrap.js');var _bootstrap2=babelHelpers.interopRequireDefault(_bootstrap);
-var _variable=require('BoilerPlate/App/Styles/variable.js');var 
+var _bootstrap=require('Scheduler/App/Styles/bootstrap.js');var _bootstrap2=babelHelpers.interopRequireDefault(_bootstrap);
+var _variable=require('Scheduler/App/Styles/variable.js');var 
 
 Button=function(_Component){babelHelpers.inherits(Button,_Component);function Button(){babelHelpers.classCallCheck(this,Button);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Button).apply(this,arguments));}babelHelpers.createClass(Button,[{key:'render',value:function render()
 {
@@ -87159,12 +87159,12 @@ style:this.props.backgroundColor?_bootstrap2.default.buttonColor:_bootstrap2.def
 onPress:this.props.onPress},
 _reactNative2.default.createElement(_reactNative.Text,{style:this.props.backgroundColor?_bootstrap2.default.buttonColorText:_bootstrap2.default.buttonText},this.props.text)));}}]);return Button;}(_reactNative.Component);exports.default=Button;
 });
-__d('BoilerPlate/App/Styles/bootstrap.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/App/Styles/bootstrap.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');
-var primary=require('BoilerPlate/App/Styles/variable.js').brandPrimary;
-var secondary=require('BoilerPlate/App/Styles/variable.js').brandSecondary;var 
+var primary=require('Scheduler/App/Styles/variable.js').brandPrimary;
+var secondary=require('Scheduler/App/Styles/variable.js').brandSecondary;var 
 
 
 StyleSheet=
@@ -87273,16 +87273,16 @@ borderLeftWidth:0,
 margin:15,
 marginTop:5}});
 });
-__d('BoilerPlate/App/Components/Widgets/IconInput.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/Widgets/IconInput.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _button=require('BoilerPlate/App/Styles/button.js');var _button2=babelHelpers.interopRequireDefault(_button);
-var _variable=require('BoilerPlate/App/Styles/variable.js');
+var _button=require('Scheduler/App/Styles/button.js');var _button2=babelHelpers.interopRequireDefault(_button);
+var _variable=require('Scheduler/App/Styles/variable.js');
 
 
 var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
-var _bootstrap=require('BoilerPlate/App/Styles/bootstrap.js');var _bootstrap2=babelHelpers.interopRequireDefault(_bootstrap);var 
+var _bootstrap=require('Scheduler/App/Styles/bootstrap.js');var _bootstrap2=babelHelpers.interopRequireDefault(_bootstrap);var 
 
 IconInput=function(_Component){babelHelpers.inherits(IconInput,_Component);function IconInput(){babelHelpers.classCallCheck(this,IconInput);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(IconInput).apply(this,arguments));}babelHelpers.createClass(IconInput,[{key:'render',value:function render()
 
@@ -87297,12 +87297,12 @@ this.props)),
 
 _reactNative2.default.createElement(_Ionicons2.default,{name:this.props.icon,size:27,color:this.props.dark?_variable.dark:_variable.light,style:{position:'absolute',top:6,left:6}})));}}]);return IconInput;}(_reactNative.Component);exports.default=IconInput;
 });
-__d('BoilerPlate/App/Styles/button.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/App/Styles/button.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');
-var primary=require('BoilerPlate/App/Styles/variable.js').brandPrimary;
-var secondary=require('BoilerPlate/App/Styles/variable.js').brandSecondary;var 
+var primary=require('Scheduler/App/Styles/variable.js').brandPrimary;
+var secondary=require('Scheduler/App/Styles/variable.js').brandSecondary;var 
 
 
 StyleSheet=
@@ -87353,15 +87353,15 @@ color:'#fff',
 alignSelf:'center',
 fontSize:17}});
 });
-__d('BoilerPlate/App/Components/Widgets/Navbar.ios.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/Widgets/Navbar.ios.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
 var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
-var _navbar=require('BoilerPlate/App/Styles/navbar.js');var _navbar2=babelHelpers.interopRequireDefault(_navbar);
-var _variable=require('BoilerPlate/App/Styles/variable.js');
+var _navbar=require('Scheduler/App/Styles/navbar.js');var _navbar2=babelHelpers.interopRequireDefault(_navbar);
+var _variable=require('Scheduler/App/Styles/variable.js');
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
-var _AppEventEmitter=require('BoilerPlate/App/Services/AppEventEmitter.js');var _AppEventEmitter2=babelHelpers.interopRequireDefault(_AppEventEmitter);var 
+var _AppEventEmitter=require('Scheduler/App/Services/AppEventEmitter.js');var _AppEventEmitter2=babelHelpers.interopRequireDefault(_AppEventEmitter);var 
 
 Navbar=function(_Component){babelHelpers.inherits(Navbar,_Component);function Navbar(){babelHelpers.classCallCheck(this,Navbar);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Navbar).apply(this,arguments));}babelHelpers.createClass(Navbar,[{key:'open',value:function open()
 {
@@ -87385,11 +87385,11 @@ _reactNative2.default.createElement(_reactNative.Text,{style:this.props.subtitle
 _reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:this.open},
 _reactNative2.default.createElement(_Ionicons2.default,{name:'navicon',size:40,color:'rgba(255,255,255,0.9)',style:{top:0}}))));}}]);return Navbar;}(_reactNative.Component);exports.default=Navbar;
 });
-__d('BoilerPlate/App/Styles/navbar.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/App/Styles/navbar.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');
-var primary=require('BoilerPlate/App/Styles/variable.js').brandPrimary;var 
+var primary=require('Scheduler/App/Styles/variable.js').brandPrimary;var 
 
 
 StyleSheet=
@@ -87410,18 +87410,18 @@ fontSize:20,
 fontWeight:"500",
 marginTop:10}});
 });
-__d('BoilerPlate/App/Services/AppEventEmitter.js',function(global, require, module, exports) {  Object.defineProperty(exports,"__esModule",{value:true});var _EventEmitter=require('EventEmitter');var _EventEmitter2=babelHelpers.interopRequireDefault(_EventEmitter);
+__d('Scheduler/App/Services/AppEventEmitter.js',function(global, require, module, exports) {  Object.defineProperty(exports,"__esModule",{value:true});var _EventEmitter=require('EventEmitter');var _EventEmitter2=babelHelpers.interopRequireDefault(_EventEmitter);
 
 var AppEventEmitter=new _EventEmitter2.default();exports.default=
 
 AppEventEmitter;
 });
-__d('BoilerPlate/App/Styles/home.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/App/Styles/home.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');
-var primary=require('BoilerPlate/App/Styles/variable.js').brandPrimary;
-var secondary=require('BoilerPlate/App/Styles/variable.js').brandSecondary;var 
+var primary=require('Scheduler/App/Styles/variable.js').brandPrimary;
+var secondary=require('Scheduler/App/Styles/variable.js').brandSecondary;var 
 
 
 StyleSheet=
@@ -87531,12 +87531,12 @@ projectItemIcon:{
 fontSize:30,
 color:'#fff'}});
 });
-__d('BoilerPlate/App/Styles/schedule.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/App/Styles/schedule.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');
-var primary=require('BoilerPlate/App/Styles/variable.js').brandPrimary;
-var secondary=require('BoilerPlate/App/Styles/variable.js').brandSecondary;var 
+var primary=require('Scheduler/App/Styles/variable.js').brandPrimary;
+var secondary=require('Scheduler/App/Styles/variable.js').brandSecondary;var 
 
 
 StyleSheet=
@@ -87847,12 +87847,12 @@ return (
 React.createElement(Animated.View,{style:{bottom:this.state.bottom}},
 this.props.children));}});
 });
-__d('BoilerPlate/App/Styles/history.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/App/Styles/history.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');
-var primary=require('BoilerPlate/App/Styles/variable.js').brandPrimary;
-var secondary=require('BoilerPlate/App/Styles/variable.js').brandSecondary;var 
+var primary=require('Scheduler/App/Styles/variable.js').brandPrimary;
+var secondary=require('Scheduler/App/Styles/variable.js').brandSecondary;var 
 
 
 StyleSheet=
@@ -87958,12 +87958,12 @@ fontSize:20,
 fontWeight:'bold',
 color:'#fff'}});
 });
-__d('BoilerPlate/App/Styles/message.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/App/Styles/message.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');
-var primary=require('BoilerPlate/App/Styles/variable.js').brandPrimary;
-var secondary=require('BoilerPlate/App/Styles/variable.js').brandSecondary;var 
+var primary=require('Scheduler/App/Styles/variable.js').brandPrimary;
+var secondary=require('Scheduler/App/Styles/variable.js').brandSecondary;var 
 
 
 StyleSheet=
@@ -88037,7 +88037,7 @@ padding:10},
 button:{
 flex:1}});
 });
-__d('BoilerPlate/App/Styles/layout.js',function(global, require, module, exports) {  'use strict';
+__d('Scheduler/App/Styles/layout.js',function(global, require, module, exports) {  'use strict';
 
 
 var React=require('react-native/Libraries/react-native/react-native.js');var 
@@ -88054,13 +88054,13 @@ left:0,
 right:0,
 bottom:0}});
 });
-__d('BoilerPlate/App/Components/Widgets/ControlPanel.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/Widgets/ControlPanel.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _Button=require('BoilerPlate/App/Components/Widgets/Button.js');var _Button2=babelHelpers.interopRequireDefault(_Button);
+var _Button=require('Scheduler/App/Components/Widgets/Button.js');var _Button2=babelHelpers.interopRequireDefault(_Button);
 var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
-var _controlPanel=require('BoilerPlate/App/Styles/controlPanel.js');var _controlPanel2=babelHelpers.interopRequireDefault(_controlPanel);
+var _controlPanel=require('Scheduler/App/Styles/controlPanel.js');var _controlPanel2=babelHelpers.interopRequireDefault(_controlPanel);
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');var 
 
 ControlPanel=function(_Component){babelHelpers.inherits(ControlPanel,_Component);function ControlPanel(){babelHelpers.classCallCheck(this,ControlPanel);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(ControlPanel).apply(this,arguments));}babelHelpers.createClass(ControlPanel,[{key:'render',value:function render()
@@ -88068,7 +88068,7 @@ ControlPanel=function(_Component){babelHelpers.inherits(ControlPanel,_Component)
 return (
 _reactNative2.default.createElement(_reactNative.View,{style:_controlPanel2.default.sidebar},
 _reactNative2.default.createElement(_reactNative.ScrollView,null,
-_reactNative2.default.createElement(_reactNative.Image,{source:require('BoilerPlate/App/img/cwb_logo.png'),style:_controlPanel2.default.logo}),
+_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/cwb_logo.png'),style:_controlPanel2.default.logo}),
 _reactNative2.default.createElement(_reactNative.View,{style:{position:'relative'}},
 _reactNative2.default.createElement(_reactNative.TouchableOpacity,{
 style:_controlPanel2.default.link,
@@ -88089,15 +88089,15 @@ _reactNative2.default.createElement(_Ionicons2.default,{name:'log-out',style:_co
 _reactNative2.default.createElement(_reactNative.View,{style:{position:'relative'}},
 _reactNative2.default.createElement(_reactNative.Text,{style:_controlPanel2.default.linkText},'Logout')))))));}}]);return ControlPanel;}(_reactNative.Component);exports.default=ControlPanel;
 });
-__d('BoilerPlate/App/Components/Login.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/Login.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _style=require('BoilerPlate/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
-var _login=require('BoilerPlate/App/Styles/login.js');var _login2=babelHelpers.interopRequireDefault(_login);
-var _ButtonRounded=require('BoilerPlate/App/Components/Widgets/ButtonRounded.js');var _ButtonRounded2=babelHelpers.interopRequireDefault(_ButtonRounded);
+var _style=require('Scheduler/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
+var _login=require('Scheduler/App/Styles/login.js');var _login2=babelHelpers.interopRequireDefault(_login);
+var _ButtonRounded=require('Scheduler/App/Components/Widgets/ButtonRounded.js');var _ButtonRounded2=babelHelpers.interopRequireDefault(_ButtonRounded);
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
-var _IconInput=require('BoilerPlate/App/Components/Widgets/IconInput.js');var _IconInput2=babelHelpers.interopRequireDefault(_IconInput);var 
+var _IconInput=require('Scheduler/App/Components/Widgets/IconInput.js');var _IconInput2=babelHelpers.interopRequireDefault(_IconInput);var 
 
 Login=function(_Component){babelHelpers.inherits(Login,_Component);
 function Login(props){babelHelpers.classCallCheck(this,Login);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Login).call(this,
@@ -88127,9 +88127,9 @@ this.setState({scroll:false});}},{key:'render',value:function render()
 {var _this2=this;
 return (
 _reactNative2.default.createElement(_reactNative.ScrollView,{style:_login2.default.color,scrollEnabled:this.state.scroll},
-_reactNative2.default.createElement(_reactNative.Image,{source:require('BoilerPlate/App/img/glow2.png'),style:_login2.default.container},
+_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_login2.default.container},
 _reactNative2.default.createElement(_reactNative.View,{style:_login2.default.logoContainer},
-_reactNative2.default.createElement(_reactNative.Image,{source:require('BoilerPlate/App/img/cwb_logo.png'),style:_login2.default.logo}),
+_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/cwb_logo.png'),style:_login2.default.logo}),
 _reactNative2.default.createElement(_reactNative.Text,{style:_login2.default.nameText},'Scheduler')),
 
 _reactNative2.default.createElement(_reactNative.View,{style:_reactNative.Platform.OS==='android'?_login2.default.abg:_login2.default.bg},
@@ -88154,16 +88154,16 @@ _reactNative2.default.createElement(_ButtonRounded2.default,{
 onPress:function(){return _reactNativeRouterFlux.Actions.home({data:_this2.state.value});},
 text:'Login'})))));}}]);return Login;}(_reactNative.Component);exports.default=Login;
 });
-__d('BoilerPlate/App/Components/Home.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/Home.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _style=require('BoilerPlate/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
-var _Navbar=require('BoilerPlate/App/Components/Widgets/Navbar.ios.js');var _Navbar2=babelHelpers.interopRequireDefault(_Navbar);
-var _home=require('BoilerPlate/App/Styles/home.js');var _home2=babelHelpers.interopRequireDefault(_home);
-var _variable=require('BoilerPlate/App/Styles/variable.js');
+var _style=require('Scheduler/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
+var _Navbar=require('Scheduler/App/Components/Widgets/Navbar.ios.js');var _Navbar2=babelHelpers.interopRequireDefault(_Navbar);
+var _home=require('Scheduler/App/Styles/home.js');var _home2=babelHelpers.interopRequireDefault(_home);
+var _variable=require('Scheduler/App/Styles/variable.js');
 
-var _Login=require('BoilerPlate/App/Components/Login.js');var _Login2=babelHelpers.interopRequireDefault(_Login);
+var _Login=require('Scheduler/App/Components/Login.js');var _Login2=babelHelpers.interopRequireDefault(_Login);
 var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
 var _lodash=require('lodash/lodash.js');var _lodash2=babelHelpers.interopRequireDefault(_lodash);var 
@@ -88206,7 +88206,7 @@ _reactNative2.default.createElement(_Navbar2.default,{
 title:'Projects',
 style:_home2.default.toolbar,
 back:false}),
-_reactNative2.default.createElement(_reactNative.Image,{source:require('BoilerPlate/App/img/glow2.png'),style:_home2.default.container},
+_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_home2.default.container},
 _reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'}},
 _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter},
 _reactNative2.default.createElement(_reactNative.View,{style:_home2.default.listContainer},
@@ -88254,15 +88254,15 @@ sectionID,rowID){
 return (
 _reactNative2.default.createElement(_reactNative.View,{key:sectionID+'-'+rowID,style:_home2.default.separator}));}}]);return Home;}(_reactNative.Component);exports.default=Home;
 });
-__d('BoilerPlate/App/Components/Schedule.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/Schedule.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _style=require('BoilerPlate/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
-var _Navbar=require('BoilerPlate/App/Components/Widgets/Navbar.ios.js');var _Navbar2=babelHelpers.interopRequireDefault(_Navbar);
-var _schedule=require('BoilerPlate/App/Styles/schedule.js');var _schedule2=babelHelpers.interopRequireDefault(_schedule);
-var _ButtonRounded=require('BoilerPlate/App/Components/Widgets/ButtonRounded.js');var _ButtonRounded2=babelHelpers.interopRequireDefault(_ButtonRounded);
-var _variable=require('BoilerPlate/App/Styles/variable.js');
+var _style=require('Scheduler/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
+var _Navbar=require('Scheduler/App/Components/Widgets/Navbar.ios.js');var _Navbar2=babelHelpers.interopRequireDefault(_Navbar);
+var _schedule=require('Scheduler/App/Styles/schedule.js');var _schedule2=babelHelpers.interopRequireDefault(_schedule);
+var _ButtonRounded=require('Scheduler/App/Components/Widgets/ButtonRounded.js');var _ButtonRounded2=babelHelpers.interopRequireDefault(_ButtonRounded);
+var _variable=require('Scheduler/App/Styles/variable.js');
 var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
 var _reactNativeActionSheet=require('@remobile/react-native-action-sheet/index.js');var _reactNativeActionSheet2=babelHelpers.interopRequireDefault(_reactNativeActionSheet);var 
@@ -88323,7 +88323,7 @@ _reactNative2.default.createElement(_Navbar2.default,{
 title:'Schedule',
 style:_schedule2.default.toolbar,
 back:true}),
-_reactNative2.default.createElement(_reactNative.Image,{source:require('BoilerPlate/App/img/glow2.png'),style:_schedule2.default.container},
+_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_schedule2.default.container},
 _reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'}},
 _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter},
 _reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.listContainer},
@@ -88433,14 +88433,14 @@ _reactNative.Alert.alert(
 {text:'Yes',onPress:function(){return _reactNativeRouterFlux.Actions.message();}},
 {text:'No',onPress:function(){return _reactNative.Alert.alert('Action Sent');}}]);}}]);return Schedule;}(_reactNative.Component);exports.default=Schedule;
 });
-__d('BoilerPlate/App/Components/History.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/History.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _style=require('BoilerPlate/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
-var _history=require('BoilerPlate/App/Styles/history.js');var _history2=babelHelpers.interopRequireDefault(_history);
-var _Navbar=require('BoilerPlate/App/Components/Widgets/Navbar.ios.js');var _Navbar2=babelHelpers.interopRequireDefault(_Navbar);
-var _IconInput=require('BoilerPlate/App/Components/Widgets/IconInput.js');var _IconInput2=babelHelpers.interopRequireDefault(_IconInput);var 
+var _style=require('Scheduler/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
+var _history=require('Scheduler/App/Styles/history.js');var _history2=babelHelpers.interopRequireDefault(_history);
+var _Navbar=require('Scheduler/App/Components/Widgets/Navbar.ios.js');var _Navbar2=babelHelpers.interopRequireDefault(_Navbar);
+var _IconInput=require('Scheduler/App/Components/Widgets/IconInput.js');var _IconInput2=babelHelpers.interopRequireDefault(_IconInput);var 
 
 History=function(_Component){babelHelpers.inherits(History,_Component);
 function History(props){babelHelpers.classCallCheck(this,History);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(History).call(this,
@@ -88569,7 +88569,7 @@ _reactNative2.default.createElement(_Navbar2.default,{
 title:'History',
 style:_history2.default.toolbar,
 back:true}),
-_reactNative2.default.createElement(_reactNative.Image,{source:require('BoilerPlate/App/img/glow2.png'),style:_history2.default.container},
+_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_history2.default.container},
 _reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'}},
 _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter},
 _reactNative2.default.createElement(_reactNative.View,{style:_history2.default.listContainer},
@@ -88618,14 +88618,14 @@ _reactNative2.default.createElement(_reactNative.View,{style:_history2.default.a
 _reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font},action.date),
 _reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font},action.time))));}}]);return History;}(_reactNative.Component);exports.default=History;
 });
-__d('BoilerPlate/App/Components/Message.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
+__d('Scheduler/App/Components/Message.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});
 
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _Navbar=require('BoilerPlate/App/Components/Widgets/Navbar.ios.js');var _Navbar2=babelHelpers.interopRequireDefault(_Navbar);
-var _style=require('BoilerPlate/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
-var _message=require('BoilerPlate/App/Styles/message.js');var _message2=babelHelpers.interopRequireDefault(_message);
-var _ButtonRounded=require('BoilerPlate/App/Components/Widgets/ButtonRounded.js');var _ButtonRounded2=babelHelpers.interopRequireDefault(_ButtonRounded);
+var _Navbar=require('Scheduler/App/Components/Widgets/Navbar.ios.js');var _Navbar2=babelHelpers.interopRequireDefault(_Navbar);
+var _style=require('Scheduler/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
+var _message=require('Scheduler/App/Styles/message.js');var _message2=babelHelpers.interopRequireDefault(_message);
+var _ButtonRounded=require('Scheduler/App/Components/Widgets/ButtonRounded.js');var _ButtonRounded2=babelHelpers.interopRequireDefault(_ButtonRounded);
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');var 
 
 Message=function(_Component){babelHelpers.inherits(Message,_Component);function Message(){babelHelpers.classCallCheck(this,Message);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Message).apply(this,arguments));}babelHelpers.createClass(Message,[{key:'render',value:function render()
@@ -88636,7 +88636,7 @@ _reactNative2.default.createElement(_Navbar2.default,{
 title:'Compose Message',
 style:_message2.default.toolbar,
 back:true}),
-_reactNative2.default.createElement(_reactNative.Image,{source:require('BoilerPlate/App/img/glow2.png'),style:_message2.default.container},
+_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_message2.default.container},
 _reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'}},
 _reactNative2.default.createElement(_reactNative.View,{style:_message2.default.inputContainer},
 _reactNative2.default.createElement(_reactNative.View,{style:_message2.default.header},
@@ -88658,5 +88658,5 @@ _reactNative2.default.createElement(_reactNative.View,{style:_message2.default.b
 _reactNative2.default.createElement(_ButtonRounded2.default,{text:'Discard',onPress:function(){return _reactNativeRouterFlux.Actions.schedule({message:"Action Sent"});}}))))));}}]);return Message;}(_reactNative.Component);exports.default=Message;
 });
 ;require("InitializeJavaScriptAppEngine");
-;require("BoilerPlate/index.ios.js");
+;require("Scheduler/index.ios.js");
 //# sourceMappingURL=/index.ios.map
