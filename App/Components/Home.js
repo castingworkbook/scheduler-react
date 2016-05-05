@@ -18,32 +18,32 @@ export default class Home extends Component {
     super(props);
 
 		const dummyProjects = [
-			// {
-			// 	id: 1,
-			// 	name: "Batman Returns",
-			// 	director: "Brad Richardson",
-			// 	phone: "7777777",
-			// 	roles: ["Batman", "Robin"],
-			// 	actions: 3,
-			// 	selected: false,
-			// },
-			// {
-			// 	id: 2,
-			// 	name: "Forrest Gump",
-			// 	director: "Natalie Low",
-			// 	phone: "7777777",
-			// 	roles: ["Forrest Gump", "Jenny Curran"],
-			// 	actions: 0,
-			// 	selected: false,
-			// },
-			// {
-			// 	id: 3,
-			// 	name: "The NoteBook",
-			// 	director: "Jeff Rose",
-			// 	roles: ["Handsome Guy", "Pretty Girl"],
-			// 	actions: 2,
-			// 	selected: false,
-			// }
+			{
+				id: 1,
+				name: "Batman Returns",
+				director: "Brad Richardson",
+				phone: "7777777",
+				roles: ["Batman", "Robin"],
+				actions: 3,
+				selected: false,
+			},
+			{
+				id: 2,
+				name: "Forrest Gump",
+				director: "Natalie Low",
+				phone: "7777777",
+				roles: ["Forrest Gump", "Jenny Curran"],
+				actions: 0,
+				selected: false,
+			},
+			{
+				id: 3,
+				name: "The NoteBook",
+				director: "Jeff Rose",
+				roles: ["Handsome Guy", "Pretty Girl"],
+				actions: 2,
+				selected: false,
+			}
 		];
 
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
