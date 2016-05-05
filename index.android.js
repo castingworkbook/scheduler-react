@@ -13,13 +13,13 @@ import {Actions} from 'react-native-router-flux';
 
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
-    Actions.pop(); 
+    Actions.pop();
     return true;
 });
 
 import RootRouter from './App/Components/RootRouter';
 
-class BoilerPlate extends Component {
+class Scheduler extends Component {
     render() {
         return (
             <RootRouter />
@@ -28,4 +28,4 @@ class BoilerPlate extends Component {
 }
 
 
-AppRegistry.registerComponent('BoilerPlate', () => BoilerPlate);
+AppRegistry.registerComponent('Scheduler', () => Scheduler);

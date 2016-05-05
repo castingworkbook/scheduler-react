@@ -18,39 +18,39 @@ export default class Schedule extends Component {
 		super(props);
 
 		const dummyAuditions = [
-			{
-				id: 1,
-				actor: "Brad Pitt",
-				phone: "7777777",
-				role: "Batman",
-				date: "Monday Apr 25",
-				time: "3:30pm",
-				status: "",
-				casting: "",
-				selected: false
-			},
-			{
-				id: 2,
-				actor: "Christian Bale",
-				phone: "7777777",
-				role: "Batman",
-				date: "Monday Apr 25",
-				time: "3:50pm",
-				status: "",
-				casting: "",
-				selected: false
-			},
-			{
-				id: 3,
-				actor: "Ben Affleck",
-				phone: "7777777",
-				role: "Batman",
-				date: "Monday Apr 25",
-				time: "4:10pm",
-				status: "",
-				casting: "",
-				selected: false
-			}
+			// {
+			// 	id: 1,
+			// 	actor: "Brad Pitt",
+			// 	phone: "7777777",
+			// 	role: "Batman",
+			// 	date: "Monday Apr 25",
+			// 	time: "3:30pm",
+			// 	status: "",
+			// 	casting: "",
+			// 	selected: false
+			// },
+			// {
+			// 	id: 2,
+			// 	actor: "Christian Bale",
+			// 	phone: "7777777",
+			// 	role: "Batman",
+			// 	date: "Monday Apr 25",
+			// 	time: "3:50pm",
+			// 	status: "",
+			// 	casting: "",
+			// 	selected: false
+			// },
+			// {
+			// 	id: 3,
+			// 	actor: "Ben Affleck",
+			// 	phone: "7777777",
+			// 	role: "Batman",
+			// 	date: "Monday Apr 25",
+			// 	time: "4:10pm",
+			// 	status: "",
+			// 	casting: "",
+			// 	selected: false
+			// }
 		]
 
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});

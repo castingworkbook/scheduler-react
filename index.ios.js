@@ -13,7 +13,7 @@ import React, {
 StatusBarIOS.setStyle('light-content');
 import RootRouter from './App/Components/RootRouter';
 
-class BoilerPlate extends Component {
+class Scheduler extends Component {
   render() {
     return (
       <RootRouter />
@@ -21,4 +21,4 @@ class BoilerPlate extends Component {
   }
 }
 
-AppRegistry.registerComponent('BoilerPlate', () => BoilerPlate);
+AppRegistry.registerComponent('Scheduler', () => Scheduler);
