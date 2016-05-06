@@ -60,7 +60,7 @@ export default class Login extends Component {
               <Text style={login.registerLink}>Forgot Password</Text>
             </TouchableOpacity>
             <ButtonRounded
-              onPress={() => Actions.home({data:this.state.value})}
+              onPress={() => Actions.projects()}
               text="Login" />
           </View>
         </Image>

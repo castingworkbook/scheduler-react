@@ -4,7 +4,7 @@
 import React, {Component, Text, View, Image, ScrollView, Alert, ListView, BackAndroid, TouchableOpacity} from 'react-native';
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
-import home from '../Styles/home';
+import projects from '../Styles/projects';
 import ButtonRounded from './Widgets/ButtonRounded';
 import Login from './Login';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,7 +13,7 @@ import ActionSheet from '@remobile/react-native-action-sheet';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
 
-export default class Home extends Component {
+export default class Projects extends Component {
 	constructor(props) {
     super(props);
 
@@ -62,15 +62,15 @@ export default class Home extends Component {
 
 	render() {
 		return(
-    	<View style={home.color}>
+    	<View style={projects.color}>
      		<Navbar
    		    title="Projects"
-   		    style={home.toolbar}
+   		    style={projects.toolbar}
 					back={false} />
-     		<Image source={require('../img/glow2.png')} style={home.container}>
+     		<Image source={require('../img/glow2.png')} style={projects.container}>
 					<ScrollView style={{backgroundColor: 'transparent'}}>
 						<View style={styles.verticalCenter}>
-							<View style={home.listContainer}>
+							<View style={projects.listContainer}>
 								<ListView
 				          dataSource={this.state.dataSource}
 				          renderRow={this._renderRow.bind(this)}
@@ -78,7 +78,7 @@ export default class Home extends Component {
 				 			</View>
 			 			</View>
 					</ScrollView>
-					<View style={home.footer}>
+					<View style={projects.footer}>
 						<ButtonRounded text="Actions" onPress={this.onOpen.bind(this)} />
 					</View>
 					<ActionSheet
@@ -87,7 +87,7 @@ export default class Home extends Component {
 	          {this.generateActionButtons()}
 	          <ActionSheet.Button onPress={this.onNotesAction.bind(this)}>View / Add Notes</ActionSheet.Button>
 	        </ActionSheet>
-					<View style={home.spinnerContainer}>
+					<View style={projects.spinnerContainer}>
 						<Spinner
 							isVisible={this.state.isLoading}
 							color={'#ffffff'}
@@ -102,28 +102,28 @@ export default class Home extends Component {
 	_renderRow(project) {
 		let roles = _.map(project.roles, (role, index) => {
 			if (index < 3)
-				return <Text key={index} style={home.normalFont}>{role}</Text>
+				return <Text key={index} style={projects.normalFont}>{role}</Text>
 		});
 
 		return(
 			<TouchableOpacity onPress={() => this.onItemSelected(project.id)}>
-				<View style={project.selected ? home.projectItemSelected : home.projectItem}>
-					<View style={home.projectItemLeft}>
-						<View style={home.projectItemSelect}>
-							<Text style={home.highlightedFont}>{project.name}</Text>
-							<Text style={home.normalFont}>{project.director}</Text>
-							<View style={home.projectItemRoles}>{roles}</View>
+				<View style={project.selected ? projects.projectItemSelected : projects.projectItem}>
+					<View style={projects.projectItemLeft}>
+						<View style={projects.projectItemSelect}>
+							<Text style={projects.highlightedFont}>{project.name}</Text>
+							<Text style={projects.normalFont}>{project.director}</Text>
+							<View style={projects.projectItemRoles}>{roles}</View>
 						</View>
 					</View>
-					<View style={home.projectItemRight}>
-						<View style={home.actionsContainer}>
-							<View style={project.actions > 0 ? home.activeActions : home.inactiveActions}>
+					<View style={projects.projectItemRight}>
+						<View style={projects.actionsContainer}>
+							<View style={project.actions > 0 ? projects.activeActions : projects.inactiveActions}>
 								<Text>{project.actions}</Text>
 							</View>
 						</View>
 						<TouchableOpacity onPress={Actions.schedule}>
-							<View style={home.projectItemIconContainer}>
-								<Icon name="ios-arrow-forward" style={home.projectItemIcon} />
+							<View style={projects.projectItemIconContainer}>
+								<Icon name="ios-arrow-forward" style={projects.projectItemIcon} />
 							</View>
 						</TouchableOpacity>
 					</View>
@@ -134,7 +134,7 @@ export default class Home extends Component {
 
 	_renderSeperator(sectionID, rowID) {
 		return (
-      <View key={`${sectionID}-${rowID}`} style={home.separator} />
+      <View key={`${sectionID}-${rowID}`} style={projects.separator} />
     )
 	}
 
