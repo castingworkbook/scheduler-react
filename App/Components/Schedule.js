@@ -73,12 +73,12 @@ export default class Schedule extends Component {
 
 	render() {
 		return(
-			<View style={schedule.color}>
+			<View style={styles.color}>
 				<Navbar
 					title="Schedule"
-					style={schedule.toolbar}
+					style={styles.toolbar}
 					back={true} />
-				<Image source={require('../img/glow2.png')} style={schedule.container}>
+				<Image source={require('../img/glow2.png')} style={styles.container}>
    		    <ScrollView style={{backgroundColor: 'transparent'}}>
 						<View style={styles.verticalCenter}>
 							<View style={schedule.listContainer}>

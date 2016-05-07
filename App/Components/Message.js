@@ -19,12 +19,12 @@ export default class Message extends Component {
 
   render() {
     return(
-      <View style={message.color}>
+      <View style={styles.color}>
         <Navbar
           title="Compose Message"
-          style={message.toolbar}
+          style={styles.toolbar}
           back={true} />
-        <Image source={require('../img/glow2.png')} style={message.container}>
+        <Image source={require('../img/glow2.png')} style={styles.container}>
           <ScrollView style={{backgroundColor: 'transparent'}}>
             <View style={message.inputContainer}>
               <View style={message.header}>

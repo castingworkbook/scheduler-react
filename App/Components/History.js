@@ -73,12 +73,12 @@ export default class History extends Component {
 
   render() {
     return(
-      <View style={history.color}>
+      <View style={styles.color}>
         <Navbar
           title="History"
-          style={history.toolbar}
+          style={styles.toolbar}
           back={true} />
-        <Image source={require('../img/glow2.png')} style={history.container}>
+        <Image source={require('../img/glow2.png')} style={styles.container}>
           <ScrollView style={{backgroundColor: 'transparent'}}>
             <View style={styles.verticalCenter}>
   						<View style={history.listContainer}>

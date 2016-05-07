@@ -41,12 +41,12 @@ export default class Materials extends Component {
 
   render() {
     return(
-      <View style={materials.color}>
+      <View style={styles.color}>
         <Navbar
           title="Materials"
-          style={materials.toolbar}
+          style={styles.toolbar}
           back={true} />
-        <Image source={require('../img/glow2.png')} style={materials.container}>
+        <Image source={require('../img/glow2.png')} style={styles.container}>
           <ScrollView style={{backgroundColor: 'transparent'}}>
             <View style={styles.verticalCenter}>
               <View style={materials.listContainer}>

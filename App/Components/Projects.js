@@ -62,12 +62,12 @@ export default class Projects extends Component {
 
 	render() {
 		return(
-    	<View style={projects.color}>
+    	<View style={styles.color}>
      		<Navbar
    		    title="Projects"
-   		    style={projects.toolbar}
+   		    style={styles.toolbar}
 					back={false} />
-     		<Image source={require('../img/glow2.png')} style={projects.container}>
+     		<Image source={require('../img/glow2.png')} style={styles.container}>
 					<ScrollView style={{backgroundColor: 'transparent'}}>
 						<View style={styles.verticalCenter}>
 							<View style={projects.listContainer}>

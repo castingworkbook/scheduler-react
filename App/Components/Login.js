@@ -35,8 +35,8 @@ export default class Login extends Component {
 
   render() {
     return(
-      <ScrollView style={login.color} scrollEnabled={this.state.scroll}>
-        <Image source={require('../img/glow2.png')} style={login.container}>
+      <ScrollView style={styles.color} scrollEnabled={this.state.scroll}>
+        <Image source={require('../img/glow2.png')} style={styles.container}>
           <View style={login.logoContainer}>
             <Image source={require('../img/cwb_logo.png')} style={login.logo} />
             <Text style={login.nameText}>Scheduler</Text>

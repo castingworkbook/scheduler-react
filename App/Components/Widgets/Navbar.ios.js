@@ -9,7 +9,7 @@ import {Actions} from 'react-native-router-flux';
 import AppEventEmitter from '../../Services/AppEventEmitter';
 
 export default class Navbar extends Component {
-  open () {
+  open() {
     AppEventEmitter.emit('hamburger.click');
   }
 
