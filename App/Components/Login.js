@@ -60,7 +60,7 @@ export default class Login extends Component {
               <Text style={login.registerLink}>Forgot Password</Text>
             </TouchableOpacity>
             <ButtonRounded
-              onPress={() => Actions.projects()}
+              onPress={() => this.createSession()}
               text="Login" />
           </View>
         </Image>
@@ -68,5 +68,34 @@ export default class Login extends Component {
     );
   }
 
+  async createSession() {
+    let headers = {
+      accept: 'application/json'
+    };
 
+    let data = {
+      'session[email]': this.state.email,
+      'session[password]': this.state.password,
+    };
+
+    let formData = new FormData();
+    for (var k in data) {
+			formData.append(k, data[k]);
+		}
+
+    let request = {
+      method: 'post',
+      headers: headers,
+      body: formData
+    }
+
+    let responseJson;
+    try {
+			let response = await fetch('http://cwbscheduler.herokuapp.com/session', request);
+			responseJson = await response.json();
+      console.log(responseJson);
+		} catch(error) {
+			console.error(error);
+		}
+  }
 }

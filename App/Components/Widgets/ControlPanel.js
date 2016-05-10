@@ -17,7 +17,7 @@ export default class ControlPanel extends Component {
             <TouchableOpacity
               style={controlPanel.link}
               underlayColor="#2D2D30"
-              onPress={Actions.home}>
+              onPress={Actions.projects}>
               <Icon name="clipboard" style={controlPanel.linkIcon} />
               <View style={{position: 'relative'}}>
                 <Text style={controlPanel.linkText}>Projects</Text>
