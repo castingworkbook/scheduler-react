@@ -94,8 +94,33 @@ export default class Login extends Component {
 			let response = await fetch('http://cwbscheduler.herokuapp.com/session', request);
 			responseJson = await response.json();
       console.log(responseJson);
+
+      this.props.userActions.saveUser({
+        userId: responseJson.id,
+        role: responseJson.role,
+        authToken: responseJson.authToken,
+      });
 		} catch(error) {
 			console.error(error);
 		}
   }
 }
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+const UserActions = require('../Redux/Actions/user');
+
+function mapStateToProps(state) {
+  return {
+	  user: state.user
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+	   userActions: bindActionCreators(UserActions, dispatch)
+  }
+}
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Login);

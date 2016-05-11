@@ -14,6 +14,10 @@ import Materials from './Materials';
 import Notes from './Notes';
 import layout from '../Styles/layout';
 import AppEventEmitter from '../Services/AppEventEmitter';
+import { createStore } from 'redux';
+import userReducer from '../Redux/Reducers/user';
+
+const store = createStore(userReducer);
 
 export default class RootRouter extends Component {
 	componentDidMount() {
@@ -44,16 +48,18 @@ export default class RootRouter extends Component {
 				openDrawerOffset={0.2}
 				panCloseMask={0.2}
 				content={<ControlPanel />}>
-        <Router hideNavBar={true} dispatch={this.closeControlPanel.bind(this)}>
-          <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight} />
-          <Route name="login" wrapRouter={false} component={Login} initial={true} />
-          <Route name="projects" wrapRouter={false} component={Projects} title="Projects" />
-          <Route name="schedule" wrapRouter={false} component={Schedule} title="schedule" />
-					<Route name="history" wrapRouter={false} component={History} title="history" />
-					<Route name="message" wrapRouter={false} component={Message} title="message" />
-					<Route name="materials" wrapRouter={false} component={Materials} title="materials" />
-					<Route name="notes" wrapRouter={false} component={Notes} title="notes" />
-        </Router>
+				<Provider store={store}>
+	        <Router hideNavBar={true} dispatch={this.closeControlPanel.bind(this)}>
+	          <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight} />
+	          <Route name="login" wrapRouter={false} component={Login} initial={true} />
+	          <Route name="projects" wrapRouter={false} component={Projects} title="Projects" />
+	          <Route name="schedule" wrapRouter={false} component={Schedule} title="schedule" />
+						<Route name="history" wrapRouter={false} component={History} title="history" />
+						<Route name="message" wrapRouter={false} component={Message} title="message" />
+						<Route name="materials" wrapRouter={false} component={Materials} title="materials" />
+						<Route name="notes" wrapRouter={false} component={Notes} title="notes" />
+	        </Router>
+				</Provider>
       </Drawer>
     );
   }
