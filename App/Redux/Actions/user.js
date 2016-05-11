@@ -1,4 +1,4 @@
-const SAVE_USER = 'USER_USER';
+const SAVE_USER = 'SAVE_USER';
 
 export function saveUser(user) {
   return { type: SAVE_USER, user }

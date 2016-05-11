@@ -14,10 +14,12 @@ import Materials from './Materials';
 import Notes from './Notes';
 import layout from '../Styles/layout';
 import AppEventEmitter from '../Services/AppEventEmitter';
-import { createStore } from 'redux';
-import userReducer from '../Redux/Reducers/user';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import user from '../Redux/Reducers/user';
+import project from '../Redux/Reducers/project';
 
-const store = createStore(userReducer);
+const store = createStore(combineReducers({user, project}));
 
 export default class RootRouter extends Component {
 	componentDidMount() {

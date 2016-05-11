@@ -18,39 +18,39 @@ export default class Schedule extends Component {
 		super(props);
 
 		const dummyAuditions = [
-			{
-				id: 1,
-				actor: "Brad Pitt",
-				phone: "7777777",
-				role: "Batman",
-				date: "Monday Apr 25",
-				time: "3:30pm",
-				status: "",
-				casting: "",
-				selected: false
-			},
-			{
-				id: 2,
-				actor: "Christian Bale",
-				phone: "7777777",
-				role: "Batman",
-				date: "Monday Apr 25",
-				time: "3:50pm",
-				status: "",
-				casting: "",
-				selected: false
-			},
-			{
-				id: 3,
-				actor: "Ben Affleck",
-				phone: "7777777",
-				role: "Batman",
-				date: "Monday Apr 25",
-				time: "4:10pm",
-				status: "",
-				casting: "",
-				selected: false
-			}
+			// {
+			// 	id: 1,
+			// 	actor: "Brad Pitt",
+			// 	phone: "7777777",
+			// 	role: "Batman",
+			// 	date: "Monday Apr 25",
+			// 	time: "3:30pm",
+			// 	status: "",
+			// 	casting: "",
+			// 	selected: false
+			// },
+			// {
+			// 	id: 2,
+			// 	actor: "Christian Bale",
+			// 	phone: "7777777",
+			// 	role: "Batman",
+			// 	date: "Monday Apr 25",
+			// 	time: "3:50pm",
+			// 	status: "",
+			// 	casting: "",
+			// 	selected: false
+			// },
+			// {
+			// 	id: 3,
+			// 	actor: "Ben Affleck",
+			// 	phone: "7777777",
+			// 	role: "Batman",
+			// 	date: "Monday Apr 25",
+			// 	time: "4:10pm",
+			// 	status: "",
+			// 	casting: "",
+			// 	selected: false
+			// }
 		]
 
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -68,7 +68,7 @@ export default class Schedule extends Component {
 		if (this.props.message)
 			Alert.alert(this.props.message);
 
-		// this.getSchedules();
+		this.getSchedules();
 	}
 
 	render() {
@@ -138,7 +138,7 @@ export default class Schedule extends Component {
 
 	_renderRow(audition) {
 		return(
-			<TouchableOpacity onPress={() => this.onItemSelected(audition.id)}>
+			<TouchableOpacity onPress={() => this.onItemSelected(audition.index)}>
 				<View style={audition.selected ? schedule.auditionItemSelected : schedule.auditionItem}>
 	        <View style={schedule.auditionItemLeft}>
             <Text style={schedule.highlightedFont}>{audition.actor}</Text>
@@ -192,17 +192,17 @@ export default class Schedule extends Component {
 		return statusElement;
 	}
 
-	onItemSelected(id) {
+	onItemSelected(index) {
 		let selected;
-		if (_.includes(this.state.selected, id))
-			selected = _.without(this.state.selected, id);
+		if (_.includes(this.state.selected, index))
+			selected = _.without(this.state.selected, index);
 		else
-			selected = _.concat(this.state.selected, id);
+			selected = _.concat(this.state.selected, index);
 
     const auditions = _.map(_.cloneDeep(this.state.auditions), (audition) => {
-      if (audition.id == id && audition.selected == false) {
+      if (audition.index == index && audition.selected == false) {
         audition.selected = true;
-      } else if (audition.id == id && audition.selected == true) {
+      } else if (audition.index == index && audition.selected == true) {
         audition.selected = false;
       }
 
@@ -242,14 +242,14 @@ export default class Schedule extends Component {
 
 	onAction(type) {
 		const auditions = _.map(_.cloneDeep(this.state.auditions), (audition) => {
-			if (_.includes(this.state.selected, audition.id) && type == 'CAST') {
+			if (_.includes(this.state.selected, audition.index) && type == 'CAST') {
 				if(audition.status == 'CONF')
 					audition.casting = 'confirm';
 				else if(audition.status == 'REGR')
 					audition.casting = 'regret';
 				else if(audition.status == 'TIME')
 					audition.casting = 'time'
-			} else if(_.includes(this.state.selected, audition.id) && type != 'CAST') {
+			} else if(_.includes(this.state.selected, audition.index) && type != 'CAST') {
 				audition.status = type;
 			}
 			audition.selected = false;
@@ -273,26 +273,43 @@ export default class Schedule extends Component {
 	}
 
 	async getSchedules() {
+		let headers = {
+      accept: 'application/json',
+			authorization: this.props.user.authToken
+    };
+
+		let request = {
+			method: 'get',
+			headers
+		}
+
+		let path = `http://cwbscheduler.herokuapp.com/projects/${this.props.project.id}/auditions`;
+
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
-			let response = await fetch('http://www.thecwbint.com/scheduling2016/api/agents/71/breakdown/43570/1');
+			let response = await fetch(path, request);
 			responseJson = await response.json();
+			console.log(responseJson);
+
+			if(responseJson.errors)
+				Alert.alert(responseJson.errors);
 		} catch(error) {
 			console.error(error);
 		}
 		this.setState({isLoading: false});
 
-		let auditions = _.map(responseJson.auditionSchedules, (schedule, index) => {
+		let auditions = _.map(responseJson, (audition, index) => {
 			let object = {
-				id: index+1,
-				actor: schedule.actorName,
-				phone: schedule.actorPhoneNumber,
-				role: schedule.role,
-				date: schedule.auditionDate8601,
-				time: schedule.auditionTime8601,
-				status: "",
-				casting: "",
+				index: index,
+				id: audition.id,
+				actor: audition.actor,
+				phone: audition.phone,
+				role: audition.role,
+				date: audition.date,
+				time: audition.time,
+				status: audition.status,
+				casting: audition.response,
 				selected: false
 			}
 
@@ -305,3 +322,15 @@ export default class Schedule extends Component {
 		});
 	}
 }
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+function mapStateToProps(state) {
+	return {
+		user: state.user,
+		project: state.project
+	}
+}
+
+module.exports = connect(mapStateToProps)(Schedule);

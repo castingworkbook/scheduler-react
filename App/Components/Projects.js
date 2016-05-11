@@ -13,37 +13,37 @@ import ActionSheet from '@remobile/react-native-action-sheet';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
 
-export default class Projects extends Component {
+class Projects extends Component {
 	constructor(props) {
     super(props);
 
 		const dummyProjects = [
-			{
-				id: 1,
-				name: "Batman Returns",
-				director: "Brad Richardson",
-				phone: "7777777",
-				roles: ["Batman", "Robin"],
-				actions: 3,
-				selected: false,
-			},
-			{
-				id: 2,
-				name: "Forrest Gump",
-				director: "Natalie Low",
-				phone: "7777777",
-				roles: ["Forrest Gump", "Jenny Curran"],
-				actions: 0,
-				selected: false,
-			},
-			{
-				id: 3,
-				name: "The NoteBook",
-				director: "Jeff Rose",
-				roles: ["Handsome Guy", "Pretty Girl"],
-				actions: 2,
-				selected: false,
-			}
+			// {
+			// 	id: 1,
+			// 	name: "Batman Returns",
+			// 	director: "Brad Richardson",
+			// 	phone: "7777777",
+			// 	roles: ["Batman", "Robin"],
+			// 	actions: 3,
+			// 	selected: false,
+			// },
+			// {
+			// 	id: 2,
+			// 	name: "Forrest Gump",
+			// 	director: "Natalie Low",
+			// 	phone: "7777777",
+			// 	roles: ["Forrest Gump", "Jenny Curran"],
+			// 	actions: 0,
+			// 	selected: false,
+			// },
+			// {
+			// 	id: 3,
+			// 	name: "The NoteBook",
+			// 	director: "Jeff Rose",
+			// 	roles: ["Handsome Guy", "Pretty Girl"],
+			// 	actions: 2,
+			// 	selected: false,
+			// }
 		];
 
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -56,9 +56,9 @@ export default class Projects extends Component {
 		}
   }
 
-	// componentDidMount() {
-	// 	this.getProjects();
-	// }
+	componentDidMount() {
+		this.getProjects();
+	}
 
 	render() {
 		return(
@@ -106,11 +106,11 @@ export default class Projects extends Component {
 		});
 
 		return(
-			<TouchableOpacity onPress={() => this.onItemSelected(project.id)}>
+			<TouchableOpacity onPress={() => this.onItemSelected(project.index)}>
 				<View style={project.selected ? projects.projectItemSelected : projects.projectItem}>
 					<View style={projects.projectItemLeft}>
 						<View style={projects.projectItemSelect}>
-							<Text style={projects.highlightedFont}>{project.name}</Text>
+							<Text style={projects.highlightedFont}>{project.title}</Text>
 							<Text style={projects.normalFont}>{project.director}</Text>
 							<View style={projects.projectItemRoles}>{roles}</View>
 						</View>
@@ -121,7 +121,7 @@ export default class Projects extends Component {
 								<Text>{project.actions}</Text>
 							</View>
 						</View>
-						<TouchableOpacity onPress={Actions.schedule}>
+						<TouchableOpacity onPress={() => this.onSchedulePressed(project.index)}>
 							<View style={projects.projectItemIconContainer}>
 								<Icon name="ios-arrow-forward" style={projects.projectItemIcon} />
 							</View>
@@ -147,17 +147,17 @@ export default class Projects extends Component {
 		return buttons;
 	}
 
-	onItemSelected(id) {
+	onItemSelected(index) {
 		let selected;
-		if (_.includes(this.state.selected, id))
-			selected = _.without(this.state.selected, id);
+		if (_.includes(this.state.selected, index))
+			selected = _.without(this.state.selected, index);
 		else
-			selected = _.concat(this.state.selected, id);
+			selected = _.concat(this.state.selected, index);
 
     const projects = _.map(_.cloneDeep(this.state.projects), (project) => {
-      if (project.id == id && project.selected == false) {
+      if (project.index == index && project.selected == false) {
         project.selected = true;
-      } else if (project.id == id && project.selected == true) {
+      } else if (project.index == index && project.selected == true) {
         project.selected = false;
       }
 
@@ -169,6 +169,12 @@ export default class Projects extends Component {
       projects: projects,
 			selected
     });
+	}
+
+	onSchedulePressed(index) {
+		this.props.projectActions.setProject(this.state.projects[index]);
+
+		Actions.schedule();
 	}
 
 	onCancel() {
@@ -187,11 +193,26 @@ export default class Projects extends Component {
 	}
 
 	async getProjects() {
+		let headers = {
+      accept: 'application/json',
+			authorization: this.props.user.authToken
+    };
+
+		let request = {
+			method: 'get',
+			headers
+		}
+
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
-			let response = await fetch('http://www.thecwbint.com/scheduling2016/api/agents/71/activebreakdowns');
+			let response = await fetch('http://cwbscheduler.herokuapp.com/projects', request);
 			responseJson = await response.json();
+			console.log(responseJson);
+
+			if(responseJson.errors)
+				Alert.alert(responseJson.errors);
+
 		} catch(error) {
 			console.error(error);
 		}
@@ -199,12 +220,13 @@ export default class Projects extends Component {
 
 		let projects = _.map(responseJson, (project, index) => {
 			let object = {
-				id: index+1,
-				name: project.title,
-				director: project.directorName,
-				phone: project.directorPhone,
-				roles: ["Batman", "Robin"],
-				actions: project.auditionsRegretedNotForwardedCount+project.auditionsConfirmedNotForwardedCount+project.auditionsRequestedNotForwardedCount,
+				index: index,
+				id: project.id,
+				title: project.title,
+				director: project.director,
+				phone: project.phone,
+				roles: project.roles,
+				actions: 3,
 				selected: false,
 			}
 
@@ -217,3 +239,21 @@ export default class Projects extends Component {
 		});
 	}
 }
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+const ProjectActions = require('../Redux/Actions/project');
+
+function mapStateToProps(state) {
+	return {
+		user: state.user
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		projectActions: bindActionCreators(ProjectActions, dispatch)
+	}
+}
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Projects);

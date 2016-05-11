@@ -1,19 +1,19 @@
 /* @flow */
 'use strict';
 
-import React, {Component, TextInput, Text, View, Image, StatusBarIOS, ScrollView, TouchableOpacity, Platform, Dimensions, DeviceEventEmitter} from 'react-native';
+import React, {Component, TextInput, Text, View, Image, StatusBarIOS, ScrollView, TouchableOpacity, Platform, Alert, Dimensions, DeviceEventEmitter} from 'react-native';
 import styles from '../Styles/style';
 import login from '../Styles/login';
 import ButtonRounded from './Widgets/ButtonRounded';
 import {Actions} from 'react-native-router-flux';
 import IconInput from './Widgets/IconInput';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: 'secret.agent@cwb.com',
+      password: 'password',
       visibleHeight: Dimensions.get('window').height,
       scroll: false
     };
@@ -95,20 +95,22 @@ export default class Login extends Component {
 			responseJson = await response.json();
       console.log(responseJson);
 
-      this.props.userActions.saveUser({
-        userId: responseJson.id,
-        role: responseJson.role,
-        authToken: responseJson.authToken,
-      });
+      this.props.userActions.saveUser(responseJson);
+
+      if(responseJson.errors)
+        Alert.alert(responseJson.errors);
+      else
+        Actions.projects();
+
 		} catch(error) {
-			console.error(error);
+      console.log(error);
+			Alert.alert(error);
 		}
   }
 }
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 const UserActions = require('../Redux/Actions/user');
 
 function mapStateToProps(state) {
