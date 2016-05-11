@@ -20,6 +20,8 @@
     "react-native-router-flux": "^2.1.8",
     "react-native-selectme": "^1.0.0",
     "react-native-spinkit": "0.0.7",
-    "react-native-vector-icons": "1.0.0-rc"
+    "react-native-vector-icons": "1.0.0-rc",
+    "react-redux": "^4.2.0",
+    "redux": "3.0.5"
   }
 }
