@@ -8,6 +8,7 @@ import ControlPanel from './Widgets/ControlPanel';
 import Login from './Login';
 import Projects from './Projects';
 import Schedule from './Schedule';
+import Auditions from './Auditions';
 import History from './History';
 import Message from './Message';
 import Materials from './Materials';
@@ -55,11 +56,12 @@ export default class RootRouter extends Component {
 	          <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight} />
 	          <Route name="login" wrapRouter={false} component={Login} initial={true} />
 	          <Route name="projects" wrapRouter={false} component={Projects} title="Projects" />
-	          <Route name="schedule" wrapRouter={false} component={Schedule} title="schedule" />
-						<Route name="history" wrapRouter={false} component={History} title="history" />
-						<Route name="message" wrapRouter={false} component={Message} title="message" />
-						<Route name="materials" wrapRouter={false} component={Materials} title="materials" />
-						<Route name="notes" wrapRouter={false} component={Notes} title="notes" />
+	          <Route name="schedule" wrapRouter={false} component={Schedule} title="Schedule" />
+						<Route name="auditions" wrapRouter={false} component={Auditions} title="Auditions" />
+						<Route name="history" wrapRouter={false} component={History} title="History" />
+						<Route name="message" wrapRouter={false} component={Message} title="Message" />
+						<Route name="materials" wrapRouter={false} component={Materials} title="Materials" />
+						<Route name="notes" wrapRouter={false} component={Notes} title="Notes" />
 	        </Router>
 				</Provider>
       </Drawer>
