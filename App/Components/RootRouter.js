@@ -32,7 +32,7 @@ export default class RootRouter extends Component {
   }
 
 	closeControlPanel(navigation) {
-		if(navigation.type == 'AFTER_ROUTER_ROUTE') {
+		if (navigation.type == 'AFTER_ROUTER_ROUTE') {
 			this.refs.drawer.close();
 		}
 	}

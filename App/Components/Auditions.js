@@ -1,64 +1,62 @@
 /* @flow */
 'use strict';
 
-import React, {Component, Text, View, Image, ScrollView, Alert, ListView, BackAndroid, TouchableOpacity} from 'react-native';
+import React, {Component, Text, View, Image, ScrollView, Alert, ListView, TouchableOpacity} from 'react-native';
 import styles from '../Styles/style';
+import Navbar from './Widgets/Navbar';
 import auditions from '../Styles/auditions';
+import Spinner from 'react-native-spinkit';
 
-export default class Auditions extends Component {
+class Auditions extends Component {
   constructor(props) {
     super(props);
 
     const dummyAuditions = [
-      {
-      	id: 1,
-        title: "Batman",
-      	actor: "Brad Pitt",
-      	phone: "7777777",
-      	role: "Batman",
-      	date: "Monday Apr 25",
-      	time: "3:30pm",
-      	status: "",
-      	casting: ""
-      },
-      {
-      	id: 2,
-        title: "Batman",
-      	actor: "Christian Bale",
-      	phone: "7777777",
-      	role: "Batman",
-      	date: "Monday Apr 25",
-      	time: "3:50pm",
-      	status: "",
-      	casting: ""
-      },
-      {
-      	id: 3,
-        title: "Batman",
-      	actor: "Ben Affleck",
-      	phone: "7777777",
-      	role: "Batman",
-      	date: "Monday Apr 25",
-      	time: "4:10pm",
-      	status: "",
-      	casting: ""
-      }
+      // {
+      // 	id: 1,
+      //  title: "Batman Returns",
+      // 	actor: "Brad Pitt",
+      // 	phone: "7777777",
+      // 	role: "Batman",
+      // 	date: "Monday Apr 25",
+      // 	time: "3:30pm",
+      // 	status: "",
+      // 	casting: ""
+      // },
+      // {
+      // 	id: 2,
+      //   title: "Batman Returns",
+      // 	actor: "Christian Bale",
+      // 	phone: "7777777",
+      // 	role: "Batman",
+      // 	date: "Monday Apr 25",
+      // 	time: "3:50pm",
+      // 	status: "",
+      // 	casting: ""
+      // },
+      // {
+      // 	id: 3,
+      //   title: "Batman Returns",
+      // 	actor: "Ben Affleck",
+      // 	phone: "7777777",
+      // 	role: "Batman",
+      // 	date: "Monday Apr 25",
+      // 	time: "4:10pm",
+      // 	status: "",
+      // 	casting: ""
+      // }
     ];
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(dummyAuditions),
-      projects: dummyAuditions,
+      auditions: dummyAuditions,
       selected: [],
-      show: false,
       isLoading: false,
     }
   }
 
   componentDidMount() {
-		if (this.props.message)
-			Alert.alert(this.props.message);
-
 		this.getAuditions();
 	}
 
@@ -66,7 +64,7 @@ export default class Auditions extends Component {
 		return(
       <View style={styles.color}>
         <Navbar
-					title="Schedule"
+					title="Auditions"
 					style={styles.toolbar}
 					back={true} />
         <Image source={require('../img/glow2.png')} style={styles.container}>
@@ -80,6 +78,13 @@ export default class Auditions extends Component {
 							</View>
             </View>
           </ScrollView>
+          <View style={auditions.spinnerContainer}>
+						<Spinner
+							isVisible={this.state.isLoading}
+							color={'#ffffff'}
+							size={50}
+							type={'Wave'} />
+					</View>
         </Image>
       </View>
     )
@@ -90,23 +95,23 @@ export default class Auditions extends Component {
       <View style={auditions.container}>
         <View style={auditions.top}>
           <View style={auditions.left}>
-            <Text>{auditions.title}</Text>
-            <Text>{auditions.role}</Text>
+            <Text style={auditions.highlightedFont}>{audition.title}</Text>
+            <Text style={auditions.normalFont}>{audition.role}</Text>
           </View>
           <View style={auditions.right}>
-            <Text>{auditions.date}</Text>
-            <Text>{auditions.time}</Text>
+            <Text style={auditions.highlightedFont}>{audition.time}</Text>
+            <Text style={auditions.normalFont}>{audition.date}</Text>
           </View>
         </View>
         <View style={auditions.bottom}>
           <TouchableOpacity>
-            <Text>YES</Text>
+            <Text style={auditions.highlightedFont}>YES</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text>Alternative</Text>
+            <Text style={auditions.highlightedFont}>Alternative</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text>NO</Text>
+            <Text style={auditions.highlightedFont}>NO</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -115,7 +120,66 @@ export default class Auditions extends Component {
 
   _renderSeperator(sectionID, rowID) {
     return (
-      <View key={`${sectionID}-${rowID}`} style={schedule.separator} />
+      <View key={`${sectionID}-${rowID}`} style={auditions.separator} />
     )
   }
+
+  async getAuditions() {
+    let headers = {
+      accept: 'application/json',
+      authorization: this.props.user.authToken
+    };
+
+    let request = {
+      method: 'get',
+      headers
+    }
+
+    let responseJson;
+    try {
+      this.setState({isLoading: true});
+      let response = await fetch('http://cwbscheduler.herokuapp.com/projects/1/auditions/', request);
+      responseJson = await response.json();
+      console.log(responseJson);
+
+      if(responseJson.errors)
+        Alert.alert(responseJson.errors);
+
+    } catch(error) {
+      console.error(error);
+    }
+    this.setState({isLoading: false});
+
+    let auditions = _.map(responseJson, (audition, index) => {
+      let object = {
+        index: index,
+				id: audition.id,
+				actor: audition.actor,
+				phone: audition.phone,
+				role: audition.role,
+				date: audition.date,
+				time: audition.time,
+				status: audition.status,
+				casting: audition.response,
+				selected: false
+      }
+
+      return object;
+    });
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(auditions),
+      auditions: auditions,
+    });
+  }
 }
+
+import { connect } from 'react-redux';
+
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+module.exports = connect(mapStateToProps)(Auditions);

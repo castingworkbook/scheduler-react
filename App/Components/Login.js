@@ -12,7 +12,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'secret.agent@cwb.com',
+      email: 'alister@cwb.com',
       password: 'password',
       visibleHeight: Dimensions.get('window').height,
       scroll: false
@@ -97,11 +97,11 @@ class Login extends Component {
 
       this.props.userActions.saveUser(responseJson);
 
-      if(responseJson.errors)
+      if(responseJson.errors) {
         Alert.alert(responseJson.errors);
-      else
-        Actions.projects();
-
+      } else {
+        responseJson.role == 'agent' ? Actions.projects() : Actions.auditions();
+      }
 		} catch(error) {
       console.log(error);
 			Alert.alert(error);

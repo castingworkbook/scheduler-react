@@ -97,5 +97,4 @@ export default class Notes extends Component {
       </View>
     )
   }
-
 }
