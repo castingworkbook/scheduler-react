@@ -111,13 +111,13 @@ class Auditions extends Component {
         </View>
         <View style={auditions.bottom}>
           <TouchableOpacity onPress={() => this.onAction(audition.id, 'CONF')}>
-            <Text style={audition.status == 'CONF' || audition.status == 'SENT' ? auditions.highlightedFont : auditions.inactiveStatus}>YES</Text>
+            <Text style={audition.status == 'CONF' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>YES</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onAction(audition.id, 'TIME')}>
-            <Text style={audition.status == 'TIME' || audition.status == 'SENT' ? auditions.highlightedFont : auditions.inactiveStatus}>Alternative</Text>
+            <Text style={audition.status == 'TIME' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>Alternative</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onAction(audition.id, 'REGR')}>
-            <Text style={audition.status == 'REGR' || audition.status == 'SENT' ? auditions.highlightedFont : auditions.inactiveStatus}>NO</Text>
+            <Text style={audition.status == 'REGR' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>NO</Text>
           </TouchableOpacity>
         </View>
       </View>

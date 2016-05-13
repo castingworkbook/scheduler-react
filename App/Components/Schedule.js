@@ -377,7 +377,6 @@ export default class Schedule extends Component {
 			console.log(error);
 			Alert.alert(error);
 		}
-		this.setState({isLoading: false});
 
 		let forwardActorCount = 0;
 		let forwardCastingCount = 0;
@@ -404,7 +403,9 @@ export default class Schedule extends Component {
 			dataSource: this.state.dataSource.cloneWithRows(auditions),
       auditions,
 			forwardActorCount,
-			forwardCastingCount
+			forwardCastingCount,
+			selected: [],
+			isLoading: false,
 		});
 	}
 }
