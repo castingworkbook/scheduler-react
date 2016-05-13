@@ -9,9 +9,18 @@ var {
   StyleSheet,
   Dimensions
 } = React;
+
 var deviceHeight = Dimensions.get('window').height;
+var deviceWidth = Dimensions.get('window').width;
 
 module.exports = StyleSheet.create({
+  spinnerContainer: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+    bottom: deviceHeight/2,
+    left: deviceWidth/2-25,
+  },
+
 	bg : {
 		flex: 1,
 		backgroundColor: secondary,

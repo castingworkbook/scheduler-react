@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, {Component, Text, View, Image, ScrollView, Alert, ListView, TouchableOpacity} from 'react-native';
+import React, { Component, Text, View, Image, ScrollView, Alert, ListView, TouchableOpacity, RefreshControl } from 'react-native';
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import projects from '../Styles/projects';
@@ -53,6 +53,7 @@ class Projects extends Component {
 			selected: [],
 			show: false,
 			isLoading: false,
+			refreshing: false,
 		}
   }
 
@@ -68,7 +69,13 @@ class Projects extends Component {
    		    style={styles.toolbar}
 					back={false} />
      		<Image source={require('../img/glow2.png')} style={styles.container}>
-					<ScrollView style={{backgroundColor: 'transparent'}}>
+					<ScrollView
+						style={{backgroundColor: 'transparent'}}
+						refreshControl={
+							<RefreshControl
+								refreshing={this.state.refreshing}
+								onRefresh={this._onRefresh.bind(this)} />
+						}>
 						<View style={styles.verticalCenter}>
 							<View style={projects.listContainer}>
 								<ListView
@@ -106,7 +113,7 @@ class Projects extends Component {
 		});
 
 		return(
-			<TouchableOpacity onPress={() => this.onItemSelected(project.index)}>
+			<TouchableOpacity onPress={() => this.onItemSelected(project.id)}>
 				<View style={project.selected ? projects.projectItemSelected : projects.projectItem}>
 					<View style={projects.projectItemLeft}>
 						<View style={projects.projectItemSelect}>
@@ -121,7 +128,7 @@ class Projects extends Component {
 								<Text>{project.actions}</Text>
 							</View>
 						</View>
-						<TouchableOpacity onPress={() => this.onSchedulePressed(project.index)}>
+						<TouchableOpacity onPress={() => this.onSchedulePressed(project.id)}>
 							<View style={projects.projectItemIconContainer}>
 								<Icon name="ios-arrow-forward" style={projects.projectItemIcon} />
 							</View>
@@ -138,6 +145,12 @@ class Projects extends Component {
     )
 	}
 
+	_onRefresh() {
+		console.log("Refresh Triggered")
+		this.setState({refreshing: true});
+		this.getProjects();
+	}
+
 	generateActionButtons() {
 		let buttons;
 		if (this.state.selected.length == 1)
@@ -147,17 +160,17 @@ class Projects extends Component {
 		return buttons;
 	}
 
-	onItemSelected(index) {
+	onItemSelected(id) {
 		let selected;
-		if (_.includes(this.state.selected, index))
-			selected = _.without(this.state.selected, index);
+		if (_.includes(this.state.selected, id))
+			selected = _.without(this.state.selected, id);
 		else
-			selected = _.concat(this.state.selected, index);
+			selected = _.concat(this.state.selected, id);
 
     const projects = _.map(_.cloneDeep(this.state.projects), (project) => {
-      if (project.index == index && project.selected == false) {
+      if (project.id == id && project.selected == false) {
         project.selected = true;
-      } else if (project.index == index && project.selected == true) {
+      } else if (project.id == id && project.selected == true) {
         project.selected = false;
       }
 
@@ -166,13 +179,13 @@ class Projects extends Component {
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(projects),
-      projects: projects,
+      projects,
 			selected
     });
 	}
 
-	onSchedulePressed(index) {
-		this.props.projectActions.setProject(this.state.projects[index]);
+	onSchedulePressed(id) {
+		this.props.projectActions.setProject(_.find(this.state.projects, { 'id': id }));
 
 		Actions.schedule();
 	}
@@ -203,10 +216,12 @@ class Projects extends Component {
 			headers
 		}
 
+		let path = 'http://cwbscheduler.herokuapp.com/projects';
+		// let path = 'http://localhost:3000/projects';
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
-			let response = await fetch('http://cwbscheduler.herokuapp.com/projects', request);
+			let response = await fetch(path, request);
 			responseJson = await response.json();
 			console.log(responseJson);
 
@@ -216,18 +231,27 @@ class Projects extends Component {
 		} catch(error) {
 			console.error(error);
 		}
-		this.setState({isLoading: false});
+		this.setState({
+			isLoading: false,
+			refreshing: false,
+		});
 
-		let projects = _.map(responseJson, (project, index) => {
+		let projects = _.map(responseJson.projects, (project, index) => {
+			let actions = 0;
+			_.each(project.auditions, (audition) => {
+				if (_.isEmpty(audition.status)) actions++;
+				if ((audition.status == 'CONF' || audition.status == 'REGR' || audition.status == 'TIME') && _.isEmpty(audition.response))
+					actions++;
+			});
+
 			let object = {
-				index: index,
 				id: project.id,
 				title: project.title,
 				director: project.director,
 				phone: project.phone,
 				roles: project.roles,
-				actions: 3,
 				selected: false,
+				actions,
 			}
 
 			return object;
@@ -235,7 +259,7 @@ class Projects extends Component {
 
 		this.setState({
 			dataSource: this.state.dataSource.cloneWithRows(projects),
-      projects: projects
+      projects
 		});
 	}
 }

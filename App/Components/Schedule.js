@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, {Component, ScrollView, Text, View, Image, ListView, TouchableOpacity, Alert} from 'react-native';
+import React, { Component, ScrollView, Text, View, Image, ListView, TouchableOpacity, Alert, RefreshControl } from 'react-native';
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import schedule from '../Styles/schedule';
@@ -57,10 +57,13 @@ export default class Schedule extends Component {
 		this.state = {
 			dataSource: ds.cloneWithRows(dummyAuditions),
 			auditions: dummyAuditions,
+			forwardActorCount: 0,
+			forwardCastingCount: 0,
       selected: [],
       clicked: 'none',
       show: false,
-			isLoading: false
+			isLoading: false,
+			refreshing: false,
 		}
 	}
 
@@ -79,12 +82,18 @@ export default class Schedule extends Component {
 					style={styles.toolbar}
 					back={true} />
 				<Image source={require('../img/glow2.png')} style={styles.container}>
-   		    <ScrollView style={{backgroundColor: 'transparent'}}>
+   		    <ScrollView
+						style={{backgroundColor: 'transparent'}}
+						refreshControl={
+							<RefreshControl
+								refreshing={this.state.refreshing}
+								onRefresh={this._onRefresh.bind(this)} />
+						}>
 						<View style={styles.verticalCenter}>
 							<View style={schedule.listContainer}>
 								<ListView
 									dataSource={this.state.dataSource}
-									renderHeader= {this._renderHeader}
+									renderHeader= {this._renderHeader.bind(this)}
 									renderRow={this._renderRow.bind(this)}
 									renderSeparator={this._renderSeperator} />
 							</View>
@@ -123,14 +132,8 @@ export default class Schedule extends Component {
       <View style={schedule.headerContainer}>
         <Text style={schedule.header}>Batman Returns</Text>
 				<View style={schedule.notificationsContainer}>
-					<View style={schedule.notification}>
-						<Icon name="android-alert" style={schedule.notificationIcon} />
-						<Text style={schedule.notificationFont}>2 need to be sent to Actor(s)</Text>
-					</View>
-					<View style={schedule.notification}>
-						<Icon name="android-alert" style={schedule.notificationIcon} />
-						<Text style={schedule.notificationFont}>4 need to be forwarded to Casting</Text>
-					</View>
+					{this.generateActorNotification()}
+					{this.generateCastingNotification()}
 				</View>
       </View>
     )
@@ -138,7 +141,7 @@ export default class Schedule extends Component {
 
 	_renderRow(audition) {
 		return(
-			<TouchableOpacity onPress={() => this.onItemSelected(audition.index)}>
+			<TouchableOpacity onPress={() => this.onItemSelected(audition.id)}>
 				<View style={audition.selected ? schedule.auditionItemSelected : schedule.auditionItem}>
 	        <View style={schedule.auditionItemLeft}>
             <Text style={schedule.highlightedFont}>{audition.actor}</Text>
@@ -169,6 +172,12 @@ export default class Schedule extends Component {
     )
 	}
 
+	_onRefresh() {
+		console.log("Refresh Triggered")
+		this.setState({refreshing: true});
+		this.getSchedules();
+	}
+
 	generateActionButtons() {
 		let buttons;
 		if(this.state.selected.length == 1)
@@ -192,17 +201,35 @@ export default class Schedule extends Component {
 		return statusElement;
 	}
 
-	onItemSelected(index) {
+	generateActorNotification() {
+		if (this.state.forwardActorCount > 0) {
+			return <View style={schedule.notification}>
+							 <Icon name="android-alert" style={schedule.notificationIcon} />
+							 <Text style={schedule.notificationFont}>{this.state.forwardActorCount} needs to be sent to Actor(s)</Text>
+						 </View>
+		}
+	}
+
+	generateCastingNotification() {
+		if (this.state.forwardCastingCount > 0) {
+			return <View style={schedule.notification}>
+							 <Icon name="android-alert" style={schedule.notificationIcon} />
+							 <Text style={schedule.notificationFont}>{this.state.forwardCastingCount} needs to be forwarded to Casting</Text>
+						 </View>
+		}
+	}
+
+	onItemSelected(id) {
 		let selected;
-		if (_.includes(this.state.selected, index))
-			selected = _.without(this.state.selected, index);
+		if (_.includes(this.state.selected, id))
+			selected = _.without(this.state.selected, id);
 		else
-			selected = _.concat(this.state.selected, index);
+			selected = _.concat(this.state.selected, id);
 
     const auditions = _.map(_.cloneDeep(this.state.auditions), (audition) => {
-      if (audition.index == index && audition.selected == false) {
+      if (audition.id == id && audition.selected == false) {
         audition.selected = true;
-      } else if (audition.index == index && audition.selected == true) {
+      } else if (audition.id == id && audition.selected == true) {
         audition.selected = false;
       }
 
@@ -211,7 +238,7 @@ export default class Schedule extends Component {
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(auditions),
-      auditions: auditions,
+      auditions,
 			selected
     });
 	}
@@ -240,32 +267,9 @@ export default class Schedule extends Component {
 		)
 	}
 
-	onAction(type) {
-		const auditions = _.map(_.cloneDeep(this.state.auditions), (audition) => {
-			if (_.includes(this.state.selected, audition.index) && type == 'CAST') {
-				if(audition.status == 'CONF')
-					audition.casting = 'confirm';
-				else if(audition.status == 'REGR')
-					audition.casting = 'regret';
-				else if(audition.status == 'TIME')
-					audition.casting = 'time'
-			} else if(_.includes(this.state.selected, audition.index) && type != 'CAST') {
-				audition.status = type;
-			}
-			audition.selected = false;
-
-			return audition;
-    });
-
-		if(type == "SENT" || type == "SENT+" || type == "CAST")
-			this.sendMessageAlert();
-
-		this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(auditions),
-      auditions: auditions,
-			selected: [],
-			show: false,
-    });
+	onAction(status) {
+		this.setState({show: false});
+		this.updateStatus(status);
 	}
 
 	onNotes() {
@@ -283,8 +287,8 @@ export default class Schedule extends Component {
 			headers
 		}
 
-		let path = `http://cwbscheduler.herokuapp.com/projects/${this.props.project.id}/auditions`;
-
+		let path = `http://cwbscheduler.herokuapp.com/auditions?project_id=${this.props.project.id}`;
+		// let path = `http://localhost:3000/auditions?project_id=${this.props.project.id}`;
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
@@ -297,11 +301,18 @@ export default class Schedule extends Component {
 		} catch(error) {
 			console.error(error);
 		}
-		this.setState({isLoading: false});
+		this.setState({
+			isLoading: false,
+			refreshing: false,
+		});
 
+		let forwardActorCount = 0;
+		let forwardCastingCount = 0;
 		let auditions = _.map(responseJson, (audition, index) => {
+			if (_.isEmpty(audition.status)) forwardActorCount++;
+			if ((audition.status == 'CONF' || audition.status == 'REGR' || audition.status == 'TIME') && _.isEmpty(audition.response))
+				forwardCastingCount++;
 			let object = {
-				index: index,
 				id: audition.id,
 				actor: audition.actor,
 				phone: audition.phone,
@@ -318,7 +329,82 @@ export default class Schedule extends Component {
 
 		this.setState({
 			dataSource: this.state.dataSource.cloneWithRows(auditions),
-      auditions: auditions,
+      auditions,
+			forwardActorCount,
+			forwardCastingCount
+		});
+	}
+
+	async updateStatus(status) {
+		let headers = {
+      accept: 'application/json',
+			authorization: this.props.user.authToken
+    };
+
+		let data = {
+			'status': status,
+			'project_id': this.props.project.id
+		};
+
+		let formData = new FormData();
+		for (var k in data) {
+			formData.append(k, data[k]);
+		}
+
+		for (var k in this.state.selected) {
+      let v = this.state.selected[k];
+			formData.append("selected[]", v.toString());
+    }
+
+		let request = {
+			method: 'put',
+			headers,
+			body: formData
+		}
+
+		let path = `http://cwbscheduler.herokuapp.com/auditions/update_status`;
+		// let path = `http://localhost:3000/auditions/update_status`;
+		let responseJson;
+		try {
+			this.setState({isLoading: true});
+			let response = await fetch(path, request);
+			responseJson = await response.json();
+      console.log(responseJson);
+
+			if(responseJson.errors)
+				Alert.alert(responseJson.errors);
+		} catch(error) {
+			console.log(error);
+			Alert.alert(error);
+		}
+		this.setState({isLoading: false});
+
+		let forwardActorCount = 0;
+		let forwardCastingCount = 0;
+		let auditions = _.map(responseJson, (audition) => {
+			if (_.isEmpty(audition.status)) forwardActorCount++;
+			if ((audition.status == 'CONF' || audition.status == 'REGR' || audition.status == 'TIME') && _.isEmpty(audition.response))
+				forwardCastingCount++;
+			let object = {
+				id: audition.id,
+				actor: audition.actor,
+				phone: audition.phone,
+				role: audition.role,
+				date: audition.date,
+				time: audition.time,
+				status: audition.status,
+				casting: audition.response,
+				selected: false
+			}
+
+			return object;
+		});
+
+		this.setState({
+			dataSource: this.state.dataSource.cloneWithRows(auditions),
+      auditions,
+			forwardActorCount,
+			forwardCastingCount
 		});
 	}
 }

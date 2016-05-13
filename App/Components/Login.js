@@ -7,15 +7,18 @@ import login from '../Styles/login';
 import ButtonRounded from './Widgets/ButtonRounded';
 import {Actions} from 'react-native-router-flux';
 import IconInput from './Widgets/IconInput';
+import Spinner from 'react-native-spinkit';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'alister@cwb.com',
+      // email: 'alister@cwb.com',
+      email: 'secret.agent@cwb.com',
       password: 'password',
       visibleHeight: Dimensions.get('window').height,
-      scroll: false
+      scroll: false,
+      isLoading: false,
     };
   }
 
@@ -63,6 +66,13 @@ class Login extends Component {
               onPress={() => this.createSession()}
               text="Login" />
           </View>
+          <View style={login.spinnerContainer}>
+						<Spinner
+							isVisible={this.state.isLoading}
+							color={'#ffffff'}
+							size={50}
+							type={'Wave'} />
+					</View>
         </Image>
       </ScrollView>
     );
@@ -89,9 +99,12 @@ class Login extends Component {
       body: formData
     }
 
+    let path = 'http://cwbscheduler.herokuapp.com/session';
+    // let path = 'http://localhost:3000/session';
     let responseJson;
     try {
-			let response = await fetch('http://cwbscheduler.herokuapp.com/session', request);
+      this.setState({isLoading: true});
+			let response = await fetch(path, request);
 			responseJson = await response.json();
       console.log(responseJson);
 
@@ -106,6 +119,7 @@ class Login extends Component {
       console.log(error);
 			Alert.alert(error);
 		}
+    this.setState({isLoading: false});
   }
 }
 

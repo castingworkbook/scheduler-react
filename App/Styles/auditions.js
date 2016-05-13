@@ -25,6 +25,13 @@ module.exports = StyleSheet.create({
     color: '#fff'
   },
 
+  inActiveStatus: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+    opacity: 0.5,
+  },
+
   spinnerContainer: {
     position: 'absolute',
     backgroundColor: 'transparent',

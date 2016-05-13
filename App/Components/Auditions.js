@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, {Component, Text, View, Image, ScrollView, Alert, ListView, TouchableOpacity} from 'react-native';
+import React, { Component, Text, View, Image, ScrollView, Alert, ListView, TouchableOpacity, RefreshControl } from 'react-native';
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import auditions from '../Styles/auditions';
@@ -68,7 +68,13 @@ class Auditions extends Component {
 					style={styles.toolbar}
 					back={true} />
         <Image source={require('../img/glow2.png')} style={styles.container}>
-          <ScrollView style={{backgroundColor: 'transparent'}}>
+          <ScrollView
+            style={{backgroundColor: 'transparent'}}
+            refreshControl={
+							<RefreshControl
+								refreshing={this.state.refreshing}
+								onRefresh={this._onRefresh.bind(this)} />
+						}>
             <View style={styles.verticalCenter}>
               <View style={auditions.listContainer}>
 								<ListView
@@ -104,14 +110,14 @@ class Auditions extends Component {
           </View>
         </View>
         <View style={auditions.bottom}>
-          <TouchableOpacity>
-            <Text style={auditions.highlightedFont}>YES</Text>
+          <TouchableOpacity onPress={() => this.onAction(audition.id, 'CONF')}>
+            <Text style={audition.status == 'CONF' || audition.status == 'SENT' ? auditions.highlightedFont : auditions.inactiveStatus}>YES</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={auditions.highlightedFont}>Alternative</Text>
+          <TouchableOpacity onPress={() => this.onAction(audition.id, 'TIME')}>
+            <Text style={audition.status == 'TIME' || audition.status == 'SENT' ? auditions.highlightedFont : auditions.inactiveStatus}>Alternative</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={auditions.highlightedFont}>NO</Text>
+          <TouchableOpacity onPress={() => this.onAction(audition.id, 'REGR')}>
+            <Text style={audition.status == 'REGR' || audition.status == 'SENT' ? auditions.highlightedFont : auditions.inactiveStatus}>NO</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -124,6 +130,12 @@ class Auditions extends Component {
     )
   }
 
+  _onRefresh() {
+		console.log("Refresh Triggered")
+		this.setState({refreshing: true});
+		this.getAuditions();
+	}
+
   async getAuditions() {
     let headers = {
       accept: 'application/json',
@@ -135,10 +147,12 @@ class Auditions extends Component {
       headers
     }
 
+    let path = 'http://cwbscheduler.herokuapp.com/auditions/';
+    // let path = 'http://localhost:3000/auditions/';
     let responseJson;
     try {
       this.setState({isLoading: true});
-      let response = await fetch('http://cwbscheduler.herokuapp.com/projects/1/auditions/', request);
+      let response = await fetch(path, request);
       responseJson = await response.json();
       console.log(responseJson);
 
@@ -148,14 +162,17 @@ class Auditions extends Component {
     } catch(error) {
       console.error(error);
     }
-    this.setState({isLoading: false});
+    this.setState({
+      isLoading: false,
+      refreshing: false,
+    });
 
-    let auditions = _.map(responseJson, (audition, index) => {
+    let auditions = _.map(responseJson, (audition) => {
       let object = {
-        index: index,
 				id: audition.id,
 				actor: audition.actor,
 				phone: audition.phone,
+        title: audition.title,
 				role: audition.role,
 				date: audition.date,
 				time: audition.time,
@@ -171,6 +188,71 @@ class Auditions extends Component {
       dataSource: this.state.dataSource.cloneWithRows(auditions),
       auditions: auditions,
     });
+  }
+
+  onAction(id, status) {
+    this.updateStatus(id, status);
+  }
+
+  async updateStatus(id, status) {
+    let headers = {
+      accept: 'application/json',
+			authorization: this.props.user.authToken
+    };
+
+    let data = {
+			'audition[status]': status
+		};
+
+    let formData = new FormData();
+		for (var k in data) {
+			formData.append(k, data[k]);
+		}
+
+    let request = {
+			method: 'put',
+			headers,
+			body: formData
+		}
+
+    let path = `http://cwbscheduler.herokuapp.com/auditions/${id}`;
+		// let path = `http://localhost:3000/auditions/${id}`;
+		let responseJson;
+		try {
+			this.setState({isLoading: true});
+			let response = await fetch(path, request);
+			responseJson = await response.json();
+      console.log(responseJson);
+
+			if(responseJson.errors)
+				Alert.alert(responseJson.errors);
+		} catch(error) {
+			console.log(error);
+			Alert.alert(error);
+		}
+		this.setState({isLoading: false});
+
+		let auditions = _.map(responseJson, (audition) => {
+			let object = {
+				id: audition.id,
+				actor: audition.actor,
+				phone: audition.phone,
+        title: audition.title,
+				role: audition.role,
+				date: audition.date,
+				time: audition.time,
+				status: audition.status,
+				casting: audition.response,
+				selected: false
+			}
+
+			return object;
+		});
+
+		this.setState({
+			dataSource: this.state.dataSource.cloneWithRows(auditions),
+      auditions: auditions,
+		});
   }
 }
 
