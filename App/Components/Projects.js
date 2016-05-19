@@ -92,7 +92,6 @@ class Projects extends Component {
 	          visible={this.state.show}
 	          onCancel={this.onCancel.bind(this)}>
 	          {this.generateActionButtons()}
-	          <ActionSheet.Button onPress={this.onNotesAction.bind(this)}>View / Add Notes</ActionSheet.Button>
 	        </ActionSheet>
 					<View style={projects.spinnerContainer}>
 						<Spinner
@@ -216,8 +215,8 @@ class Projects extends Component {
 			headers
 		}
 
-		let path = 'http://cwbscheduler.herokuapp.com/projects';
-		// let path = 'http://localhost:3000/projects';
+		// let path = 'http://cwbscheduler.herokuapp.com/projects';
+		let path = 'http://localhost:3000/projects';
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
@@ -231,10 +230,6 @@ class Projects extends Component {
 		} catch(error) {
 			console.error(error);
 		}
-		this.setState({
-			isLoading: false,
-			refreshing: false,
-		});
 
 		let projects = _.map(responseJson.projects, (project, index) => {
 			let actions = 0;
@@ -259,7 +254,9 @@ class Projects extends Component {
 
 		this.setState({
 			dataSource: this.state.dataSource.cloneWithRows(projects),
-      projects
+      projects,
+			isLoading: false,
+			refreshing: false,
 		});
 	}
 }

@@ -19,8 +19,9 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import user from '../Redux/Reducers/user';
 import project from '../Redux/Reducers/project';
+import audition from '../Redux/Reducers/audition';
 
-const store = createStore(combineReducers({user, project}));
+const store = createStore(combineReducers({user, project, audition}));
 
 export default class RootRouter extends Component {
 	componentDidMount() {

@@ -1,74 +1,82 @@
 /* @flow */
 'use strict';
 
-import React, {Component, ScrollView, View, Image, ListView, Text, TouchableOpacity} from 'react-native';
+import React, {Component, ScrollView, View, Image, ListView, Text, TouchableOpacity, RefreshControl} from 'react-native';
 import styles from '../Styles/style';
 import history from '../Styles/history';
 import Navbar from './Widgets/Navbar';
 import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Spinner from 'react-native-spinkit';
+import _ from 'lodash';
 
-export default class History extends Component {
+class History extends Component {
   constructor(props) {
     super(props);
 
     const dummyActions = [
-      {
-        text: "Confirm",
-        date: "MO Apr 25",
-        time: "1:37pm",
-      },
-      {
-        text: "Brad Pitt responds Confirm",
-        date: "MO Apr 25",
-        time: "11:37pm",
-      },
-      {
-        text: "Forward",
-        date: "MO Apr 25",
-        time: "10:51pm",
-      },
-      {
-        text: "Casting resubmits time",
-        date: "MO Apr 25",
-        time: "10:37am",
-      },
-      {
-        text: "Message: Can we set the time between to 02/21/16 between 1:30 to 4:30?",
-        date: "MO Apr 25",
-        time: "2:37pm",
-      },
-      {
-        text: "Request Alternative Time with Message",
-        date: "MO Apr 25",
-        time: "2:37pm",
-      },
-      {
-        text: "Note: Brad said 02/21/16 @ 1:30 to 4:30 works",
-        date: "MO Apr 25",
-        time: "2:15pm"
-      },
-      {
-        text: "Call Brad Pitt",
-        date: "MO Apr 25",
-        time: "2:01pm",
-      },
-      {
-        text: "Brad Pitt responds Regret",
-        date: "MO Apr 25",
-        time: "1:37pm",
-      },
-      {
-        text: "Forward to Brad Pitt",
-        date: "MO Apr 25",
-        time: "10:37am",
-      },
+      // {
+      //   text: "Confirm",
+      //   date: "MO Apr 25",
+      //   time: "1:37pm",
+      // },
+      // {
+      //   text: "Brad Pitt responds Confirm",
+      //   date: "MO Apr 25",
+      //   time: "11:37pm",
+      // },
+      // {
+      //   text: "Forward",
+      //   date: "MO Apr 25",
+      //   time: "10:51pm",
+      // },
+      // {
+      //   text: "Casting resubmits time",
+      //   date: "MO Apr 25",
+      //   time: "10:37am",
+      // },
+      // {
+      //   text: "Message: Can we set the time between to 02/21/16 between 1:30 to 4:30?",
+      //   date: "MO Apr 25",
+      //   time: "2:37pm",
+      // },
+      // {
+      //   text: "Request Alternative Time with Message",
+      //   date: "MO Apr 25",
+      //   time: "2:37pm",
+      // },
+      // {
+      //   text: "Note: Brad said 02/21/16 @ 1:30 to 4:30 works",
+      //   date: "MO Apr 25",
+      //   time: "2:15pm"
+      // },
+      // {
+      //   text: "Call Brad Pitt",
+      //   date: "MO Apr 25",
+      //   time: "2:01pm",
+      // },
+      // {
+      //   text: "Brad Pitt responds Regret",
+      //   date: "MO Apr 25",
+      //   time: "1:37pm",
+      // },
+      // {
+      //   text: "Forward to Brad Pitt",
+      //   date: "MO Apr 25",
+      //   time: "10:37am",
+      // },
     ]
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(dummyActions)
+      dataSource: ds.cloneWithRows(dummyActions),
+      isLoading: false,
+			refreshing: false,
     }
+  }
+
+  componentDidMount() {
+    this.getHistory();
   }
 
   render() {
@@ -79,7 +87,13 @@ export default class History extends Component {
           style={styles.toolbar}
           back={true} />
         <Image source={require('../img/glow2.png')} style={styles.container}>
-          <ScrollView style={{backgroundColor: 'transparent'}}>
+          <ScrollView
+            style={{backgroundColor: 'transparent'}}
+            refreshControl={
+							<RefreshControl
+								refreshing={this.state.refreshing}
+								onRefresh={this._onRefresh.bind(this)} />
+						}>
             <View style={styles.verticalCenter}>
   						<View style={history.listContainer}>
                 <ListView
@@ -89,10 +103,23 @@ export default class History extends Component {
               </View>
             </View>
           </ScrollView>
+          <View style={history.spinnerContainer}>
+						<Spinner
+							isVisible={this.state.isLoading}
+							color={'#ffffff'}
+							size={50}
+							type={'Wave'} />
+					</View>
         </Image>
       </View>
     );
   }
+
+  _onRefresh() {
+		console.log("Refresh Triggered")
+		this.setState({refreshing: true});
+		this.getHistory();
+	}
 
   _renderHeader() {
     return(
@@ -111,8 +138,8 @@ export default class History extends Component {
     					</TouchableOpacity>
             </View>
             <View style={history.headerDate}>
-              <Text style={history.font}>Monday Apr 25</Text>
-              <Text style={history.font}>3:30pm</Text>
+              <Text style={history.font}>{this.props.audition.date}</Text>
+              <Text style={history.font}>{this.props.audition.time}</Text>
             </View>
           </View>
         </View>
@@ -137,4 +164,64 @@ export default class History extends Component {
   onMaterials() {
     Actions.materials();
   }
+
+  async getHistory() {
+    let headers = {
+      accept: 'application/json',
+			authorization: this.props.user.authToken
+    };
+
+		let request = {
+			method: 'get',
+			headers
+		}
+
+    // let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/auditions?project_id=${this.props.project.id}`;
+		let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+
+    let responseJson;
+    try {
+      this.setState({isLoading: true});
+      let response = await fetch(path, request);
+      responseJson = await response.json();
+      console.log(responseJson);
+
+			if(responseJson.errors)
+				Alert.alert(responseJson.errors);
+    } catch(error) {
+      console.error(error);
+    }
+
+    let history = _.map(responseJson, (record) => {
+      let date = record.created_at.split(" ");
+      
+      let object = {
+        id: record.id,
+        text: record.action,
+        date: date[0],
+        time: date[1]
+      }
+
+      return object;
+    });
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(history),
+      isLoading: false,
+      refreshing: false,
+    });
+  }
 }
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    project: state.project,
+    audition: state.audition
+  }
+}
+
+module.exports = connect(mapStateToProps)(History);

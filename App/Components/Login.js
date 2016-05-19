@@ -99,8 +99,8 @@ class Login extends Component {
       body: formData
     }
 
-    let path = 'http://cwbscheduler.herokuapp.com/session';
-    // let path = 'http://localhost:3000/session';
+    // let path = 'http://cwbscheduler.herokuapp.com/session';
+    let path = 'http://localhost:3000/session';
     let responseJson;
     try {
       this.setState({isLoading: true});

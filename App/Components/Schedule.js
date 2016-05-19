@@ -13,7 +13,7 @@ import ActionSheet from '@remobile/react-native-action-sheet';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
 
-export default class Schedule extends Component {
+class Schedule extends Component {
 	constructor(props) {
 		super(props);
 
@@ -93,7 +93,7 @@ export default class Schedule extends Component {
 							<View style={schedule.listContainer}>
 								<ListView
 									dataSource={this.state.dataSource}
-									renderHeader= {this._renderHeader.bind(this)}
+									renderHeader={this._renderHeader.bind(this)}
 									renderRow={this._renderRow.bind(this)}
 									renderSeparator={this._renderSeperator} />
 							</View>
@@ -113,7 +113,6 @@ export default class Schedule extends Component {
 						<ActionSheet.Button onPress={() => this.onAction("CAST")}>Forward {this.state.selected.length} to Casting</ActionSheet.Button>
 						{this.generateActionButtons()}
 						<ActionSheet.Button>Call Casting Director</ActionSheet.Button>
-						<ActionSheet.Button onPress={this.onNotes.bind(this)}>View / Add Notes</ActionSheet.Button>
 	        </ActionSheet>
 					<View style={schedule.spinnerContainer}>
 						<Spinner
@@ -155,7 +154,7 @@ export default class Schedule extends Component {
 						<View style={schedule.statusContainer}>
 							{this.generateStatus(audition)}
 						</View>
-						<TouchableOpacity onPress={Actions.history}>
+						<TouchableOpacity onPress={() => this.onAuditionPressed(audition.id)}>
 							<View style={schedule.auditionItemIconContainer}>
 								<Icon name="ios-arrow-forward" style={schedule.auditionItemIcon} />
 							</View>
@@ -243,6 +242,12 @@ export default class Schedule extends Component {
     });
 	}
 
+	onAuditionPressed(id) {
+		this.props.auditionActions.setAudition(_.find(this.state.auditions, { 'id': id }));
+
+		Actions.history();
+	}
+
 	onCancel() {
     this.setState({show: false});
   }
@@ -272,10 +277,6 @@ export default class Schedule extends Component {
 		this.updateStatus(status);
 	}
 
-	onNotes() {
-		Actions.notes();
-	}
-
 	async getSchedules() {
 		let headers = {
       accept: 'application/json',
@@ -287,8 +288,8 @@ export default class Schedule extends Component {
 			headers
 		}
 
-		let path = `http://cwbscheduler.herokuapp.com/auditions?project_id=${this.props.project.id}`;
-		// let path = `http://localhost:3000/auditions?project_id=${this.props.project.id}`;
+		// let path = `http://cwbscheduler.herokuapp.com/auditions?project_id=${this.props.project.id}`;
+		let path = `http://localhost:3000/auditions?project_id=${this.props.project.id}`;
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
@@ -301,10 +302,6 @@ export default class Schedule extends Component {
 		} catch(error) {
 			console.error(error);
 		}
-		this.setState({
-			isLoading: false,
-			refreshing: false,
-		});
 
 		let forwardActorCount = 0;
 		let forwardCastingCount = 0;
@@ -331,7 +328,9 @@ export default class Schedule extends Component {
 			dataSource: this.state.dataSource.cloneWithRows(auditions),
       auditions,
 			forwardActorCount,
-			forwardCastingCount
+			forwardCastingCount,
+			isLoading: false,
+			refreshing: false,
 		});
 	}
 
@@ -362,8 +361,8 @@ export default class Schedule extends Component {
 			body: formData
 		}
 
-		let path = `http://cwbscheduler.herokuapp.com/auditions/update_status`;
-		// let path = `http://localhost:3000/auditions/update_status`;
+		// let path = `http://cwbscheduler.herokuapp.com/auditions/update_status`;
+		let path = `http://localhost:3000/auditions/update_status`;
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
@@ -412,6 +411,7 @@ export default class Schedule extends Component {
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+const AuditionActions = require('../Redux/Actions/audition');
 
 function mapStateToProps(state) {
 	return {
@@ -420,4 +420,10 @@ function mapStateToProps(state) {
 	}
 }
 
-module.exports = connect(mapStateToProps)(Schedule);
+function mapDispatchToProps(dispatch) {
+	return {
+		auditionActions: bindActionCreators(AuditionActions, dispatch)
+	}
+}
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Schedule);

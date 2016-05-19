@@ -56,8 +56,8 @@ export default class ControlPanel extends Component {
   }
 
   async resetData() {
-    let path = 'http://cwbscheduler.herokuapp.com/projects/reset_data';
-    // let path = 'http://localhost:3000/projects/reset_data';
+    // let path = 'http://cwbscheduler.herokuapp.com/projects/reset_data';
+    let path = 'http://localhost:3000/projects/reset_data';
     let responseJson;
     try {
       let response = await fetch(path);

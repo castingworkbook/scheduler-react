@@ -147,8 +147,8 @@ class Auditions extends Component {
       headers
     }
 
-    let path = 'http://cwbscheduler.herokuapp.com/auditions/';
-    // let path = 'http://localhost:3000/auditions/';
+    // let path = 'http://cwbscheduler.herokuapp.com/auditions/';
+    let path = 'http://localhost:3000/auditions/';
     let responseJson;
     try {
       this.setState({isLoading: true});
@@ -215,8 +215,8 @@ class Auditions extends Component {
 			body: formData
 		}
 
-    let path = `http://cwbscheduler.herokuapp.com/auditions/${id}`;
-		// let path = `http://localhost:3000/auditions/${id}`;
+    // let path = `http://cwbscheduler.herokuapp.com/auditions/${id}`;
+		let path = `http://localhost:3000/auditions/${id}`;
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
