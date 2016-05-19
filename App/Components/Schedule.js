@@ -309,6 +309,7 @@ class Schedule extends Component {
 			if (_.isEmpty(audition.status)) forwardActorCount++;
 			if ((audition.status == 'CONF' || audition.status == 'REGR' || audition.status == 'TIME') && _.isEmpty(audition.response))
 				forwardCastingCount++;
+				
 			let object = {
 				id: audition.id,
 				actor: audition.actor,

@@ -1,12 +1,13 @@
 /* @flow */
 'use strict';
 
-import React, {Component, ScrollView, View, Image, ListView, Text, TouchableOpacity, RefreshControl} from 'react-native';
+import React, { Component, ScrollView, View, Image, ListView, Text, TouchableOpacity, RefreshControl } from 'react-native';
 import styles from '../Styles/style';
 import history from '../Styles/history';
 import Navbar from './Widgets/Navbar';
 import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
+import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
 
@@ -70,6 +71,7 @@ class History extends Component {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(dummyActions),
+      action: "",
       isLoading: false,
 			refreshing: false,
     }
@@ -103,6 +105,22 @@ class History extends Component {
               </View>
             </View>
           </ScrollView>
+          <View style={history.formContainer}>
+            <View style={history.inputContainer}>
+              <IconInput
+                placeholder="Enter a Note..."
+                icon="compose"
+                secureTextEntry={false}
+                dark={false}
+                value={this.state.action}
+                onChangeText={(val) => this.setState({action: val})} />
+            </View>
+            <TouchableOpacity onPress={() => this.addNote()}>
+              <View style={history.addButton}>
+                <Text style={history.addButtonText}>Add</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
           <View style={history.spinnerContainer}>
 						<Spinner
 							isVisible={this.state.isLoading}
@@ -178,7 +196,6 @@ class History extends Component {
 
     // let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/auditions?project_id=${this.props.project.id}`;
 		let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
-
     let responseJson;
     try {
       this.setState({isLoading: true});
@@ -193,13 +210,11 @@ class History extends Component {
     }
 
     let history = _.map(responseJson, (record) => {
-      let date = record.created_at.split(" ");
-      
       let object = {
         id: record.id,
         text: record.action,
-        date: date[0],
-        time: date[1]
+        date: record.date,
+        time: record.time
       }
 
       return object;
@@ -209,6 +224,60 @@ class History extends Component {
       dataSource: this.state.dataSource.cloneWithRows(history),
       isLoading: false,
       refreshing: false,
+    });
+  }
+
+  async addNote() {
+    let headers = {
+      accept: 'application/json',
+			authorization: this.props.user.authToken
+    };
+
+    let data = {
+      'history[action]': `Note: ${this.state.action}.`,
+    };
+
+    let formData = new FormData();
+    for (var k in data) {
+			formData.append(k, data[k]);
+		}
+
+    let request = {
+      method: 'post',
+      headers: headers,
+      body: formData
+    }
+
+    // let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/auditions?project_id=${this.props.project.id}`;
+    let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    let responseJson;
+    try {
+      this.setState({isLoading: true});
+      let response = await fetch(path, request);
+      responseJson = await response.json();
+      console.log(responseJson);
+
+			if(responseJson.errors)
+				Alert.alert(responseJson.errors);
+    } catch(error) {
+      console.error(error);
+    }
+
+    let history = _.map(responseJson, (record) => {
+      let object = {
+        id: record.id,
+        text: record.action,
+        date: record.date,
+        time: record.time
+      }
+
+      return object;
+    });
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(history),
+      action: "",
+      isLoading: false,
     });
   }
 }

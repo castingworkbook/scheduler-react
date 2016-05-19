@@ -99,4 +99,30 @@ module.exports = StyleSheet.create({
     fontSize: 30,
     color: '#fff',
   },
+
+  formContainer: {
+    flexDirection: 'row',
+    backgroundColor: secondary,
+    borderTopWidth: 1,
+    borderColor: '#fff',
+    paddingBottom: 5,
+  },
+
+  inputContainer: {
+    flex: 1,
+  },
+
+  addButton: {
+    width: 70,
+    height: 40,
+    marginTop: 15,
+    alignItems: 'center'
+  },
+
+  addButtonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+    alignSelf: 'center',
+  }
 });

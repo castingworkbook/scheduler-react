@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, {Component, ScrollView, View, ListView, Text, TextInput, Image, TouchableOpacity, Switch} from 'react-native';
+import React, { Component, ScrollView, View, ListView, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import Navbar from './Widgets/Navbar';
 import styles from '../Styles/style';
 import notes from '../Styles/notes';
