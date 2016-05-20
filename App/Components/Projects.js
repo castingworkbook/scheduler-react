@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, { Component, Text, View, Image, ScrollView, Alert, ListView, TouchableOpacity, RefreshControl } from 'react-native';
+import React, { Component, Text, View, Image, ScrollView, Alert, ListView, TouchableOpacity, RefreshControl, Linking } from 'react-native';
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import projects from '../Styles/projects';
@@ -154,7 +154,7 @@ class Projects extends Component {
 		let buttons;
 		if (this.state.selected.length == 1)
 			buttons = [
-				<ActionSheet.Button key="call-casting">Call Casting Director</ActionSheet.Button>
+				<ActionSheet.Button key="call-casting" onPress={() => this.onCall()}>Call Casting Director</ActionSheet.Button>
 			]
 		return buttons;
 	}
@@ -200,8 +200,9 @@ class Projects extends Component {
     	this.setState({show: true});
   }
 
-	onNotesAction() {
-		Actions.notes();
+	onCall() {
+		this.setState({show: false});
+		Linking.openURL(`tel:${_.find(this.state.projects, { 'id': this.state.selected[0] }).phone}`);
 	}
 
 	async getProjects() {

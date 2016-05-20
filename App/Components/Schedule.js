@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, { Component, ScrollView, Text, View, Image, ListView, TouchableOpacity, Alert, RefreshControl } from 'react-native';
+import React, { Component, ScrollView, Text, View, Image, ListView, TouchableOpacity, Alert, RefreshControl, Linking } from 'react-native';
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import schedule from '../Styles/schedule';
@@ -112,7 +112,6 @@ class Schedule extends Component {
 						<ActionSheet.Button onPress={() => this.onAction("TIME")}>Request {this.state.selected.length} New Time(s)</ActionSheet.Button>
 						<ActionSheet.Button onPress={() => this.onAction("CAST")}>Forward {this.state.selected.length} to Casting</ActionSheet.Button>
 						{this.generateActionButtons()}
-						<ActionSheet.Button>Call Casting Director</ActionSheet.Button>
 	        </ActionSheet>
 					<View style={schedule.spinnerContainer}>
 						<Spinner
@@ -277,6 +276,12 @@ class Schedule extends Component {
 		this.updateStatus(status);
 	}
 
+	onCall() {
+		this.setState({show: false});
+		this.updateStatus('CALL');
+		Linking.openURL(`tel:${_.find(this.state.projects, { 'id': this.state.selected[0] }).phone}`);
+	}
+
 	async getSchedules() {
 		let headers = {
       accept: 'application/json',
@@ -309,7 +314,7 @@ class Schedule extends Component {
 			if (_.isEmpty(audition.status)) forwardActorCount++;
 			if ((audition.status == 'CONF' || audition.status == 'REGR' || audition.status == 'TIME') && _.isEmpty(audition.response))
 				forwardCastingCount++;
-				
+
 			let object = {
 				id: audition.id,
 				actor: audition.actor,

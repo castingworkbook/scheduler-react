@@ -8,6 +8,7 @@ export default function project(state = initialState, action) {
         id: action.project.id,
         title: action.project.title,
         director: action.project.director,
+        phone: action.project.phone,
         roles: action.project.roles
     });
     default:
