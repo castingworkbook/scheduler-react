@@ -5,6 +5,9 @@ import React, { Component, Text, View, Image, ScrollView, Alert, ListView, Touch
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import auditions from '../Styles/auditions';
+import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/Ionicons';
+import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 
 class Auditions extends Component {
@@ -25,7 +28,7 @@ class Auditions extends Component {
       // },
       // {
       // 	id: 2,
-      //   title: "Batman Returns",
+      //  title: "Batman Returns",
       // 	actor: "Christian Bale",
       // 	phone: "7777777",
       // 	role: "Batman",
@@ -110,11 +113,16 @@ class Auditions extends Component {
           </View>
         </View>
         <View style={auditions.bottom}>
+          <TouchableOpacity onPress={() => this.onMessages(audition.id)}>
+            <View style={auditions.messageIconContainer}>
+              <Icon name="email" style={auditions.messageIcon} />
+            </View>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onAction(audition.id, 'CONF')}>
             <Text style={audition.status == 'CONF' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>YES</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onAction(audition.id, 'TIME')}>
-            <Text style={audition.status == 'TIME' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>Alternative</Text>
+            <Text style={audition.status == 'TIME' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>New Time</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onAction(audition.id, 'REGR')}>
             <Text style={audition.status == 'REGR' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>NO</Text>
@@ -131,7 +139,7 @@ class Auditions extends Component {
   }
 
   _onRefresh() {
-		console.log("Refresh Triggered")
+		console.log("Refresh Triggered");
 		this.setState({refreshing: true});
 		this.getAuditions();
 	}
@@ -147,8 +155,8 @@ class Auditions extends Component {
       headers
     }
 
-    // let path = 'http://cwbscheduler.herokuapp.com/auditions/';
-    let path = 'http://localhost:3000/auditions/';
+    let path = 'http://cwbscheduler.herokuapp.com/auditions/';
+    // let path = 'http://localhost:3000/auditions/';
     let responseJson;
     try {
       this.setState({isLoading: true});
@@ -190,6 +198,10 @@ class Auditions extends Component {
     });
   }
 
+  onMessages(id) {
+    Actions.notes({audition: {id}});
+  }
+
   onAction(id, status) {
     this.updateStatus(id, status);
   }
@@ -215,8 +227,8 @@ class Auditions extends Component {
 			body: formData
 		}
 
-    // let path = `http://cwbscheduler.herokuapp.com/auditions/${id}`;
-		let path = `http://localhost:3000/auditions/${id}`;
+    let path = `http://cwbscheduler.herokuapp.com/auditions/${id}`;
+		// let path = `http://localhost:3000/auditions/${id}`;
 		let responseJson;
 		try {
 			this.setState({isLoading: true});

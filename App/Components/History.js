@@ -5,7 +5,7 @@ import React, { Component, ScrollView, View, Image, ListView, Text, TouchableOpa
 import styles from '../Styles/style';
 import history from '../Styles/history';
 import Navbar from './Widgets/Navbar';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
@@ -194,8 +194,8 @@ class History extends Component {
 			headers
 		}
 
-    // let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/auditions?project_id=${this.props.project.id}`;
-		let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/auditions?project_id=${this.props.project.id}`;
+		// let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
     let responseJson;
     try {
       this.setState({isLoading: true});
@@ -248,8 +248,8 @@ class History extends Component {
       body: formData
     }
 
-    // let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/auditions?project_id=${this.props.project.id}`;
-    let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    // let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
     let responseJson;
     try {
       this.setState({isLoading: true});

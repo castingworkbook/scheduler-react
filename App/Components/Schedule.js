@@ -181,6 +181,7 @@ class Schedule extends Component {
 		if(this.state.selected.length == 1)
 			buttons = [
 				<ActionSheet.Button key="call-actor" onPress={() => this.onAction("CALL")}>Call Selected Actor</ActionSheet.Button>,
+				<ActionSheet.Button key="message-actor" onPress={() => this.onMessages()}>Message Selected Actor</ActionSheet.Button>,
 			]
 		return buttons;
 	}
@@ -258,14 +259,14 @@ class Schedule extends Component {
     	this.setState({show: true});
   }
 
-	sendMessageAlert() {
+	sendMessageAlert(id) {
 		this.setState({show: false});
 
 		Alert.alert(
 			'Send Message',
       'Would you like to attach a message to this action?',
       [
-        {text: 'Yes', onPress: () => Actions.message()},
+        {text: 'Yes', onPress: () => Actions.notes({audition: {id}})},
 				{text: 'No', onPress: () => Alert.alert('Action Sent')},
       ]
 		)
@@ -274,6 +275,9 @@ class Schedule extends Component {
 	onAction(status) {
 		this.setState({show: false});
 		this.updateStatus(status);
+
+		if ((status == 'SENT' || status == 'SENT+') && this.state.selected.length == 1)
+			this.sendMessageAlert(this.state.selected[0]);
 	}
 
 	onCall() {
@@ -281,6 +285,10 @@ class Schedule extends Component {
 		this.updateStatus('CALL');
 		Linking.openURL(`tel:${_.find(this.state.projects, { 'id': this.state.selected[0] }).phone}`);
 	}
+
+	onMessages() {
+    Actions.notes({audition: {id: this.state.selected[0]}});
+  }
 
 	async getSchedules() {
 		let headers = {
@@ -293,8 +301,8 @@ class Schedule extends Component {
 			headers
 		}
 
-		// let path = `http://cwbscheduler.herokuapp.com/auditions?project_id=${this.props.project.id}`;
-		let path = `http://localhost:3000/auditions?project_id=${this.props.project.id}`;
+		let path = `http://cwbscheduler.herokuapp.com/auditions?project_id=${this.props.project.id}`;
+		// let path = `http://localhost:3000/auditions?project_id=${this.props.project.id}`;
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
@@ -367,8 +375,8 @@ class Schedule extends Component {
 			body: formData
 		}
 
-		// let path = `http://cwbscheduler.herokuapp.com/auditions/update_status`;
-		let path = `http://localhost:3000/auditions/update_status`;
+		let path = `http://cwbscheduler.herokuapp.com/auditions/update_status`;
+		// let path = `http://localhost:3000/auditions/update_status`;
 		let responseJson;
 		try {
 			this.setState({isLoading: true});

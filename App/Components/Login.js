@@ -1,11 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, {Component, TextInput, Text, View, Image, StatusBarIOS, ScrollView, TouchableOpacity, Platform, Alert, Dimensions, DeviceEventEmitter} from 'react-native';
+import React, { Component, TextInput, Text, View, Image, StatusBarIOS, ScrollView, TouchableOpacity, Platform, Alert, Dimensions, DeviceEventEmitter } from 'react-native';
 import styles from '../Styles/style';
 import login from '../Styles/login';
 import ButtonRounded from './Widgets/ButtonRounded';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 
@@ -99,8 +99,8 @@ class Login extends Component {
       body: formData
     }
 
-    // let path = 'http://cwbscheduler.herokuapp.com/session';
-    let path = 'http://localhost:3000/session';
+    let path = 'http://cwbscheduler.herokuapp.com/session';
+    // let path = 'http://localhost:3000/session';
     let responseJson;
     try {
       this.setState({isLoading: true});

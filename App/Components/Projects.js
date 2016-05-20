@@ -195,7 +195,9 @@ class Projects extends Component {
 
   onOpen() {
 		if (this.state.selected.length < 1)
-			Alert.alert("Please select projects");
+			Alert.alert("Please select project");
+		else if (this.state.selected.length > 1)
+			Alert.alert("Please only select 1 project");
 		else
     	this.setState({show: true});
   }
@@ -216,8 +218,8 @@ class Projects extends Component {
 			headers
 		}
 
-		// let path = 'http://cwbscheduler.herokuapp.com/projects';
-		let path = 'http://localhost:3000/projects';
+		let path = 'http://cwbscheduler.herokuapp.com/projects';
+		// let path = 'http://localhost:3000/projects';
 		let responseJson;
 		try {
 			this.setState({isLoading: true});

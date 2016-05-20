@@ -76,9 +76,22 @@ module.exports = StyleSheet.create({
 
   bottom: {
     marginTop: 20,
-    padding: 10,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-  }
+    alignItems: 'center',
+  },
+
+  messageIconContainer: {
+    height: 40,
+    width: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  messageIcon: {
+    marginTop: 5,
+    fontSize: 30,
+    color: '#fff',
+  },
 });

@@ -11,6 +11,7 @@ var {
 } = React;
 
 var deviceHeight = Dimensions.get('window').height;
+var deviceWidth = Dimensions.get('window').width;
 
 module.exports = StyleSheet.create({
   header: {
@@ -22,6 +23,13 @@ module.exports = StyleSheet.create({
   headerText: {
     fontSize: 20,
     color: '#fff'
+  },
+
+  spinnerContainer: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+    bottom: deviceHeight/2,
+    left: deviceWidth/2-25,
   },
 
   noteItem: {
