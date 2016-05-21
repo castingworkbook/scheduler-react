@@ -143,7 +143,7 @@ class History extends Component {
     return(
       <View style={history.headerContainer}>
         <View style={history.nameContainer}>
-          <Text style={history.header}>Brad Pitt</Text>
+          <Text style={history.header}>{this.props.audition.actor}</Text>
         </View>
         <View>
           <View style={history.subheaderContainer}>
@@ -194,8 +194,8 @@ class History extends Component {
 			headers
 		}
 
-    let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/auditions?project_id=${this.props.project.id}`;
-		// let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    // let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
     let responseJson;
     try {
       this.setState({isLoading: true});

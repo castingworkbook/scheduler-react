@@ -180,7 +180,7 @@ class Schedule extends Component {
 		let buttons;
 		if(this.state.selected.length == 1)
 			buttons = [
-				<ActionSheet.Button key="call-actor" onPress={() => this.onAction("CALL")}>Call Selected Actor</ActionSheet.Button>,
+				<ActionSheet.Button key="call-actor" onPress={() => this.onCall()}>Call Selected Actor</ActionSheet.Button>,
 				<ActionSheet.Button key="message-actor" onPress={() => this.onMessages()}>Message Selected Actor</ActionSheet.Button>,
 			]
 		return buttons;
