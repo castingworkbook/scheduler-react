@@ -129,11 +129,11 @@ export default class Notes extends Component {
 
     let path;
     if (this.props.user.role == 'agent') {
-      // path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
-      path = `http://localhost:3000/auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
+      path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
+      // path = `http://localhost:3000/auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
     } else {
-      // path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/messages`;
-      path = `http://localhost:3000/auditions/${this.props.audition.id}/messages`;
+      path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/messages`;
+      // path = `http://localhost:3000/auditions/${this.props.audition.id}/messages`;
     }
 
     let responseJson;

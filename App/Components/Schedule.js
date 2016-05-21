@@ -180,7 +180,7 @@ class Schedule extends Component {
 		let buttons;
 		if(this.state.selected.length == 1)
 			buttons = [
-				<ActionSheet.Button key="call-actor" onPress={() => this.onCall()}>Call Selected Actor</ActionSheet.Button>,
+				<ActionSheet.Button key="call-actor" onPress={() => this.onAction("CALL")}>Call Selected Actor</ActionSheet.Button>,
 				<ActionSheet.Button key="message-actor" onPress={() => this.onMessages()}>Message Selected Actor</ActionSheet.Button>,
 			]
 		return buttons;
@@ -278,12 +278,6 @@ class Schedule extends Component {
 
 		if ((status == 'SENT' || status == 'SENT+') && this.state.selected.length == 1)
 			this.sendMessageAlert(this.state.selected[0]);
-	}
-
-	onCall() {
-		this.setState({show: false});
-		this.updateStatus('CALL');
-		Linking.openURL(`tel:${_.find(this.state.projects, { 'id': this.state.selected[0] }).phone}`);
 	}
 
 	onMessages() {
@@ -420,6 +414,9 @@ class Schedule extends Component {
 			selected: [],
 			isLoading: false,
 		});
+
+		if(status == 'CALL')
+			Linking.openURL(`tel:${_.find(this.state.projects, { 'id': this.state.selected[0] }).phone}`);
 	}
 }
 
