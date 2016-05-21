@@ -128,7 +128,7 @@ class Schedule extends Component {
 	_renderHeader() {
 		return (
       <View style={schedule.headerContainer}>
-        <Text style={schedule.header}>Batman Returns</Text>
+        <Text style={schedule.header}>{this.props.project.title}</Text>
 				<View style={schedule.notificationsContainer}>
 					{this.generateActorNotification()}
 					{this.generateCastingNotification()}
@@ -281,6 +281,7 @@ class Schedule extends Component {
 	}
 
 	onMessages() {
+		this.setState({show: false});
     Actions.notes({audition: {id: this.state.selected[0]}});
   }
 
@@ -406,6 +407,9 @@ class Schedule extends Component {
 			return object;
 		});
 
+		if (status == 'CALL')
+				Linking.openURL(`tel:${_.find(this.state.auditions, { 'id': this.state.selected[0] }).phone}`);
+
 		this.setState({
 			dataSource: this.state.dataSource.cloneWithRows(auditions),
       auditions,
@@ -414,9 +418,6 @@ class Schedule extends Component {
 			selected: [],
 			isLoading: false,
 		});
-
-		if(status == 'CALL')
-			Linking.openURL(`tel:${_.find(this.state.projects, { 'id': this.state.selected[0] }).phone}`);
 	}
 }
 
