@@ -1,7 +1,7 @@
 'use strict';
 
-import React, {Component, Navigator, Text, View} from 'react-native';
-import {Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux';
+import React, { Component, Navigator, Text, View, Platform } from 'react-native';
+import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-flux';
 import EventEmitter from 'EventEmitter';
 import Drawer from 'react-native-drawer'
 import ControlPanel from './Widgets/ControlPanel';
@@ -20,12 +20,46 @@ import { Provider } from 'react-redux';
 import user from '../Redux/Reducers/user';
 import project from '../Redux/Reducers/project';
 import audition from '../Redux/Reducers/audition';
+const PushNotification = require('react-native-push-notification');
 
 const store = createStore(combineReducers({user, project, audition}));
 
-export default class RootRouter extends Component {
+class RootRouter extends Component {
 	componentDidMount() {
 		AppEventEmitter.addListener('hamburger.click', this.openControlPanel.bind(this));
+		PushNotification.configure({
+	    // (optional) Called when Token is generated (iOS and Android)
+	    onRegister: function(token) {
+				console.log( 'TOKEN:', token );
+				this.onRegister(token);
+	    },
+
+	    // (required) Called when a remote or local notification is opened or received
+	    onNotification: function(notification) {
+	      console.log( 'NOTIFICATION:', notification );
+	    },
+
+	    // ANDROID ONLY: (optional) GCM Sender ID.
+	    senderID: "YOUR GCM SENDER ID",
+
+	    // IOS ONLY (optional): default: all - Permissions to register.
+	    permissions: {
+	        alert: true,
+	        badge: true,
+	        sound: true
+	    },
+
+	    // Should the initial notification be popped automatically
+	    // default: true
+	    popInitialNotification: true,
+
+	    /**
+	      * IOS ONLY: (optional) default: true
+	      * - Specified if permissions will requested or not,
+	      * - if not, you must call PushNotificationsHandler.requestPermissions() later
+	      */
+	    requestPermissions: true,
+		});
   }
 
   componentWillUnMount() {
@@ -40,6 +74,17 @@ export default class RootRouter extends Component {
 
 	openControlPanel() {
 	  this.refs.drawer.open();
+	}
+
+	onRegister(token) {
+		this.props.user.savePushToken({
+			token,
+			platform: Platform.OS
+		});
+	}
+
+	onPushNotification(notification) {
+		Alert.alert('Notification Received', 'Alert message: ' + notification.getMessage(), [{ text: 'Dismiss', onPress: null, }]);
 	}
 
   render() {
@@ -69,3 +114,22 @@ export default class RootRouter extends Component {
     );
   }
 }
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+const UserActions = require('../Redux/Actions/user');
+
+function mapStateToProps(state) {
+	return {
+
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		user: bindActionCreators(UserActions, dispatch)
+	}
+}
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(RootRouter);

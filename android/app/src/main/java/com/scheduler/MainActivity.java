@@ -33,8 +33,17 @@ public class MainActivity extends ReactActivity {
    */
     @Override
     protected List<ReactPackage> getPackages() {
+      mReactNativePushNotificationPackage = new ReactNativePushNotificationPackage(this);
       return Arrays.<ReactPackage>asList(
         new MainReactPackage()
+        mReactNativePushNotificationPackage
       );
+    }
+
+    @Override
+    protected void onNewIntent (Intent intent) {
+      super.onNewIntent(intent);
+
+      mReactNativePushNotificationPackage.newIntent(intent);
     }
 }
