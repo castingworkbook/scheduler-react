@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
+import ServerURL from '../Network/Request';
 
 class History extends Component {
   constructor(props) {
@@ -194,8 +195,7 @@ class History extends Component {
 			headers
 		}
 
-    let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
-    // let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    let path = ServerURL + `auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
     let responseJson;
     try {
       this.setState({isLoading: true});
@@ -248,8 +248,7 @@ class History extends Component {
       body: formData
     }
 
-    let path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
-    // let path = `http://localhost:3000/auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    let path = ServerURL + `auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
     let responseJson;
     try {
       this.setState({isLoading: true});

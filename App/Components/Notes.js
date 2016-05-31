@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
+import ServerURL from '../Network/Request';
 
 export default class Notes extends Component {
   constructor(props) {
@@ -129,11 +130,9 @@ export default class Notes extends Component {
 
     let path;
     if (this.props.user.role == 'agent') {
-      path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
-      // path = `http://localhost:3000/auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
+      path = ServerURL + `auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
     } else {
-      path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/messages`;
-      // path = `http://localhost:3000/auditions/${this.props.audition.id}/messages`;
+      path = ServerURL + `auditions/${this.props.audition.id}/messages`;
     }
 
     let responseJson;
@@ -192,12 +191,9 @@ export default class Notes extends Component {
 
     let path;
     if (this.props.user.role == 'agent') {
-      path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
-      // path = `http://localhost:3000/auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
+      path = ServerURL + `auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
     } else {
-      path = `http://cwbscheduler.herokuapp.com/auditions/${this.props.audition.id}/messages`;
-      // path = `http://localhost:3000/auditions/${this.props.audition.id}/messages`;
-
+      path = ServerURL + `auditions/${this.props.audition.id}/messages`;
     }
 
     let responseJson;

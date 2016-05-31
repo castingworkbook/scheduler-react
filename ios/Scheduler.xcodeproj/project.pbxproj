@@ -29,6 +29,7 @@
 		4F17F20C1CDAD0CE00957BEB /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F17F2041CDAD0CE00957BEB /* MaterialIcons.ttf */; };
 		4F17F20D1CDAD0CE00957BEB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F17F2051CDAD0CE00957BEB /* Octicons.ttf */; };
 		4F17F20E1CDAD0CE00957BEB /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F17F2061CDAD0CE00957BEB /* Zocial.ttf */; };
+		4F5478891CF7C2EB00954768 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5478881CF7C2C200954768 /* libRCTPushNotification.a */; };
 		4FC680FF1CDAD2A0004D4030 /* .npmignore in Resources */ = {isa = PBXBuildFile; fileRef = 4FC680CA1CDAD2A0004D4030 /* .npmignore */; };
 		4FC681001CDAD2A0004D4030 /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 4FC680CB1CDAD2A0004D4030 /* index.ios.js */; };
 		4FC681011CDAD2A0004D4030 /* RTSpinKit9CubeGridAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC680D11CDAD2A0004D4030 /* RTSpinKit9CubeGridAnimation.m */; };
@@ -122,6 +123,13 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
+		4F5478871CF7C2C200954768 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F5478831CF7C2C200954768 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
 		4FC681231CDAD2A2004D4030 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4FC680F51CDAD2A0004D4030 /* RNSpinkit.xcodeproj */;
@@ -173,6 +181,7 @@
 		4F17F2041CDAD0CE00957BEB /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		4F17F2051CDAD0CE00957BEB /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		4F17F2061CDAD0CE00957BEB /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		4F5478831CF7C2C200954768 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		4FC680CA1CDAD2A0004D4030 /* .npmignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .npmignore; sourceTree = "<group>"; };
 		4FC680CB1CDAD2A0004D4030 /* index.ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.ios.js; sourceTree = "<group>"; };
 		4FC680D01CDAD2A0004D4030 /* RTSpinKit9CubeGridAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSpinKit9CubeGridAnimation.h; sourceTree = "<group>"; };
@@ -246,6 +255,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				4F5478891CF7C2EB00954768 /* libRCTPushNotification.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +373,14 @@
 			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
+		4F5478841CF7C2C200954768 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F5478881CF7C2C200954768 /* libRCTPushNotification.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4FC680C91CDAD2A0004D4030 /* react-native-spinkit */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,6 +494,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				4F5478831CF7C2C200954768 /* RCTPushNotification.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -567,7 +586,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -615,6 +634,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 4F5478841CF7C2C200954768 /* Products */;
+					ProjectRef = 4F5478831CF7C2C200954768 /* RCTPushNotification.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -704,6 +727,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4F5478881CF7C2C200954768 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 4F5478871CF7C2C200954768 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4FC681241CDAD2A2004D4030 /* libRNSpinkit.a */ = {
@@ -855,6 +885,7 @@
 				INFOPLIST_FILE = SchedulerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scheduler.app/Scheduler";
 			};
@@ -872,6 +903,7 @@
 				INFOPLIST_FILE = SchedulerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scheduler.app/Scheduler";
 			};
@@ -886,10 +918,12 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
 				);
 				INFOPLIST_FILE = Scheduler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.castingworkbook.scheduler;
 				PRODUCT_NAME = Scheduler;
 			};
 			name = Debug;
@@ -902,10 +936,12 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
 				);
 				INFOPLIST_FILE = Scheduler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.castingworkbook.scheduler;
 				PRODUCT_NAME = Scheduler;
 			};
 			name = Release;
@@ -930,6 +966,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;

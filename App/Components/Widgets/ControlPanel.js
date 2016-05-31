@@ -6,6 +6,7 @@ import Button from './Button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import controlPanel from '../../Styles/controlPanel';
 import {Actions} from 'react-native-router-flux';
+import ServerURL from '../../Network/Request';
 
 export default class ControlPanel extends Component {
   render() {
@@ -56,8 +57,7 @@ export default class ControlPanel extends Component {
   }
 
   async resetData() {
-    let path = 'http://cwbscheduler.herokuapp.com/projects/reset_data';
-    // let path = 'http://localhost:3000/projects/reset_data';
+    let path = ServerURL + 'projects/reset_data';
     let responseJson;
     try {
       let response = await fetch(path);

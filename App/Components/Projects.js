@@ -12,6 +12,7 @@ import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
+import ServerURL from '../Network/Request';
 
 class Projects extends Component {
 	constructor(props) {
@@ -218,8 +219,7 @@ class Projects extends Component {
 			headers
 		}
 
-		let path = 'http://cwbscheduler.herokuapp.com/projects';
-		// let path = 'http://localhost:3000/projects';
+		let path = ServerURL + 'projects';
 		let responseJson;
 		try {
 			this.setState({isLoading: true});

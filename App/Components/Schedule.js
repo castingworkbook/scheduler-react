@@ -12,6 +12,7 @@ import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
+import ServerURL from '../Network/Request';
 
 class Schedule extends Component {
 	constructor(props) {
@@ -295,8 +296,7 @@ class Schedule extends Component {
 			headers
 		}
 
-		let path = `http://cwbscheduler.herokuapp.com/auditions?project_id=${this.props.project.id}`;
-		// let path = `http://localhost:3000/auditions?project_id=${this.props.project.id}`;
+		let path = ServerURL + `auditions?project_id=${this.props.project.id}`;
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
@@ -369,8 +369,7 @@ class Schedule extends Component {
 			body: formData
 		}
 
-		let path = `http://cwbscheduler.herokuapp.com/auditions/update_status`;
-		// let path = `http://localhost:3000/auditions/update_status`;
+		let path = ServerURL + `auditions/update_status`;
 		let responseJson;
 		try {
 			this.setState({isLoading: true});
