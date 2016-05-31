@@ -35,7 +35,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
       mReactNativePushNotificationPackage = new ReactNativePushNotificationPackage(this);
       return Arrays.<ReactPackage>asList(
-        new MainReactPackage()
+        new MainReactPackage(),
         mReactNativePushNotificationPackage
       );
     }
