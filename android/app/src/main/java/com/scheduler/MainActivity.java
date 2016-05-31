@@ -7,7 +7,12 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.List;
 
+import android.content.Intent;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+
 public class MainActivity extends ReactActivity {
+
+  private ReactNativePushNotificationPackage mReactNativePushNotificationPackage;
 
     /**
      * Returns the name of the main component registered from JavaScript.
