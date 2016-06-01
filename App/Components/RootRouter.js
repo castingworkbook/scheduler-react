@@ -15,17 +15,23 @@ import Materials from './Materials';
 import Notes from './Notes';
 import layout from '../Styles/layout';
 import AppEventEmitter from '../Services/AppEventEmitter';
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import user from '../Redux/Reducers/user';
-import project from '../Redux/Reducers/project';
-import audition from '../Redux/Reducers/audition';
+import PushNotification from 'react-native-push-notification';
 
-const store = createStore(combineReducers({user, project, audition}));
-
-export default class RootRouter extends Component {
+class RootRouter extends Component {
 	componentDidMount() {
 		AppEventEmitter.addListener('hamburger.click', this.openControlPanel.bind(this));
+		PushNotification.configure({
+      onRegister: this.setToken.bind(this),
+      onNotification: this.onPushNotification.bind(this),
+      senderID: "625049319254",
+      permissions: {
+          alert: true,
+          badge: true,
+          sound: true
+      },
+      popInitialNotification: true,
+      requestPermissions: true,
+    });
   }
 
   componentWillUnMount() {
@@ -42,6 +48,15 @@ export default class RootRouter extends Component {
 	  this.refs.drawer.open();
 	}
 
+	setToken({token}) {
+    this.props.userActions.saveUser({notification_token: token});
+  }
+
+  onPushNotification(notification) {
+    console.log(notification);
+    Alert.alert('Notification Received', 'Alert message: ' + notification.getMessage(), [{ text: 'Dismiss', onPress: null, }]);
+  }
+
   render() {
     return(
     	<Drawer
@@ -52,20 +67,36 @@ export default class RootRouter extends Component {
 				openDrawerOffset={0.2}
 				panCloseMask={0.2}
 				content={<ControlPanel />}>
-				<Provider store={store}>
-	        <Router hideNavBar={true} dispatch={this.closeControlPanel.bind(this)}>
-	          <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight} />
-	          <Route name="login" wrapRouter={false} component={Login} initial={true} />
-	          <Route name="projects" wrapRouter={false} component={Projects} title="Projects" />
-	          <Route name="schedule" wrapRouter={false} component={Schedule} title="Schedule" />
-						<Route name="auditions" wrapRouter={false} component={Auditions} title="Auditions" />
-						<Route name="history" wrapRouter={false} component={History} title="History" />
-						<Route name="message" wrapRouter={false} component={Message} title="Message" />
-						<Route name="materials" wrapRouter={false} component={Materials} title="Materials" />
-						<Route name="notes" wrapRouter={false} component={Notes} title="Notes" />
-	        </Router>
-				</Provider>
+        <Router hideNavBar={true} dispatch={this.closeControlPanel.bind(this)}>
+          <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight} />
+          <Route name="login" wrapRouter={false} component={Login} initial={true} />
+          <Route name="projects" wrapRouter={false} component={Projects} title="Projects" />
+          <Route name="schedule" wrapRouter={false} component={Schedule} title="Schedule" />
+					<Route name="auditions" wrapRouter={false} component={Auditions} title="Auditions" />
+					<Route name="history" wrapRouter={false} component={History} title="History" />
+					<Route name="message" wrapRouter={false} component={Message} title="Message" />
+					<Route name="materials" wrapRouter={false} component={Materials} title="Materials" />
+					<Route name="notes" wrapRouter={false} component={Notes} title="Notes" />
+        </Router>
       </Drawer>
     );
   }
 }
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+const UserActions = require('../Redux/Actions/user');
+
+function mapStateToProps(state) {
+  return {
+	  user: state.user
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+	   userActions: bindActionCreators(UserActions, dispatch)
+  }
+}
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(RootRouter)

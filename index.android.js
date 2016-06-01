@@ -1,9 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
 'use strict';
+
 import React, {
     AppRegistry,
     Component,
@@ -11,21 +7,19 @@ import React, {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-
 BackAndroid.addEventListener('hardwareBackPress', function() {
     Actions.pop();
     return true;
 });
 
-import RootRouter from './App/Components/RootRouter';
+import App from './App/Components/App';
 
 class Scheduler extends Component {
-    render() {
-        return (
-            <RootRouter />
-        );
-    }
+  render() {
+    return (
+      <App />
+    );
+  }
 }
-
 
 AppRegistry.registerComponent('Scheduler', () => Scheduler);

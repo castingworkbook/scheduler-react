@@ -9,7 +9,6 @@ import { Actions } from 'react-native-router-flux';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import ServerURL from '../Network/Request';
-import PushNotification from 'react-native-push-notification';
 
 class Login extends Component {
   constructor(props) {
@@ -18,27 +17,10 @@ class Login extends Component {
       // email: 'alister@cwb.com',
       email: 'secret.agent@cwb.com',
       password: 'password',
-      notificationToken: "",
       visibleHeight: Dimensions.get('window').height,
       scroll: false,
       isLoading: false,
     };
-    this.setToken = this.setToken.bind(this);
-  }
-
-  componentDidMount() {
-    PushNotification.configure({
-      onRegister: this.setToken,
-      onNotification: this.onPushNotification,
-      senderID: "625049319254",
-      permissions: {
-          alert: true,
-          badge: true,
-          sound: true
-      },
-      popInitialNotification: true,
-      requestPermissions: true,
-    });
   }
 
   componentWillMount() {
@@ -53,16 +35,6 @@ class Login extends Component {
 
   keyboardWillHide(e) {
     this.setState({scroll: false});
-  }
-
-  setToken(object) {
-    let notificationToken = object.token;
-    this.setState({notificationToken});
-  }
-
-  onPushNotification(notification) {
-    console.log(notification);
-    Alert.alert('Notification Received', 'Alert message: ' + notification.getMessage(), [{ text: 'Dismiss', onPress: null, }]);
   }
 
   render() {

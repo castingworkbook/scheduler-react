@@ -9,6 +9,7 @@ export default function user(state = initialState, action) {
         name: action.user.name,
         role: action.user.role,
         authToken: action.user.auth_token,
+        notificationToken: action.user.notification_token
     });
     default:
       return state
