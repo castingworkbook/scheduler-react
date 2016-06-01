@@ -54,7 +54,7 @@ class RootRouter extends Component {
 
   onPushNotification(notification) {
     console.log(notification);
-    Alert.alert('Notification Received', 'Alert message: ' + notification.getMessage(), [{ text: 'Dismiss', onPress: null, }]);
+    Alert.alert('Notification Received');
   }
 
   render() {
