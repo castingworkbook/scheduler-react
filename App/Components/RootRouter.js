@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component, Navigator, Text, View, Platform } from 'react-native';
+import React, { Component, Navigator, Text, View, Platform, Alert } from 'react-native';
 import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-flux';
 import EventEmitter from 'EventEmitter';
 import Drawer from 'react-native-drawer'

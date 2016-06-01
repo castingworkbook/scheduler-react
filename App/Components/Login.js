@@ -87,7 +87,7 @@ class Login extends Component {
     let data = {
       'session[email]': this.state.email,
       'session[password]': this.state.password,
-      'session[notification_token]': this.state.notificationToken,
+      'session[notification_token]': this.props.user.notificationToken,
       'session[platform]': Platform.OS,
     };
 
