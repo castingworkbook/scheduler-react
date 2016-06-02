@@ -56,7 +56,6 @@ class RootRouter extends Component {
   onPushNotification(notification) {
     console.log(notification);
     Alert.alert(notification.title, notification.message, [{ text: 'Dismiss', onPress: null, }]);
-		PushNotification.setApplicationIconBadgeNumber(0);
   }
 
   render() {

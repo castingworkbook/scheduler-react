@@ -52,7 +52,7 @@ export default class Materials extends Component {
               <View style={materials.listContainer}>
                 <ListView
                   dataSource={this.state.dataSource}
-                  renderHeader={this._renderHeader}
+                  renderHeader={this._renderHeader.bind(this)}
                   renderRow={this._renderRow} />
               </View>
             </View>
@@ -71,7 +71,7 @@ export default class Materials extends Component {
   _renderHeader() {
     return(
       <View style={materials.header}>
-        <Text style={materials.headerText}>{`${this.props.audition.actor}'s Materials'`}</Text>
+        <Text style={materials.headerText}>{`${this.props.audition.actor}'s Materials`}</Text>
       </View>
     )
   }
@@ -109,3 +109,5 @@ function mapStateToProps(state) {
     audition: state.audition
   }
 }
+
+module.exports = connect(mapStateToProps)(Materials);
