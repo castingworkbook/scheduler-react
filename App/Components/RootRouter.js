@@ -55,7 +55,7 @@ class RootRouter extends Component {
 
   onPushNotification(notification) {
     console.log(notification);
-    Alert.alert(notification.title, notification.message, [{ text: 'Dismiss', onPress: null, }]);
+    Alert.alert("Audition Update", notification.message, [{ text: 'Dismiss', onPress: null, }]);
   }
 
   render() {
