@@ -205,7 +205,7 @@ class Schedule extends Component {
 		if (this.state.forwardActorCount > 0) {
 			return <View style={schedule.notification}>
 							 <Icon name="android-alert" style={schedule.notificationIcon} />
-							 <Text style={schedule.notificationFont}>{this.state.forwardActorCount} needs to be sent to Actor(s)</Text>
+							 <Text style={schedule.notificationFont}>{this.state.forwardActorCount} need to be sent to Actor(s)</Text>
 						 </View>
 		}
 	}
@@ -214,7 +214,7 @@ class Schedule extends Component {
 		if (this.state.forwardCastingCount > 0) {
 			return <View style={schedule.notification}>
 							 <Icon name="android-alert" style={schedule.notificationIcon} />
-							 <Text style={schedule.notificationFont}>{this.state.forwardCastingCount} needs to be forwarded to Casting</Text>
+							 <Text style={schedule.notificationFont}>{this.state.forwardCastingCount} need to be forwarded to Casting</Text>
 						 </View>
 		}
 	}
