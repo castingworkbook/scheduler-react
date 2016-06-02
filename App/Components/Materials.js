@@ -71,7 +71,7 @@ export default class Materials extends Component {
   _renderHeader() {
     return(
       <View style={materials.header}>
-        <Text style={materials.headerText}>Brad Pitt's Materials</Text>
+        <Text style={materials.headerText}>{`${this.props.audition.actor}'s Materials'`}</Text>
       </View>
     )
   }
@@ -98,5 +98,14 @@ export default class Materials extends Component {
         </View>
       </View>
     )
+  }
+}
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+function mapStateToProps(state) {
+  return {
+    audition: state.audition
   }
 }

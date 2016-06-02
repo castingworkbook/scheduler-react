@@ -32,6 +32,7 @@ class RootRouter extends Component {
       popInitialNotification: true,
       requestPermissions: true,
     });
+		PushNotification.setApplicationIconBadgeNumber(0);
   }
 
   componentWillUnMount() {
@@ -54,9 +55,8 @@ class RootRouter extends Component {
 
   onPushNotification(notification) {
     console.log(notification);
-    Alert.alert('Notification Received', 'Alert message: ' + notification.message, [{ text: 'Dismiss', onPress: null, }]);
+    Alert.alert(notification.title, notification.message, [{ text: 'Dismiss', onPress: null, }]);
 		PushNotification.setApplicationIconBadgeNumber(0);
-		PushNotification.cancelAllLocalNotifications();
   }
 
   render() {
