@@ -32,6 +32,7 @@ class RootRouter extends Component {
       popInitialNotification: true,
       requestPermissions: true,
     });
+		PushNotification.setApplicationIconBadgeNumber(0);
   }
 
   componentWillUnMount() {
@@ -56,6 +57,7 @@ class RootRouter extends Component {
     console.log(notification);
 		// Alert.alert(notification.toSource());
     // Alert.alert("Audition Update", notification.message, [{ text: 'Dismiss', onPress: null, }]);
+		PushNotification.setApplicationIconBadgeNumber(0);
   }
 
   render() {
