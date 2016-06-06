@@ -107,19 +107,15 @@ class Projects extends Component {
 	}
 
 	_renderRow(project) {
-		let roles = _.map(project.roles, (role, index) => {
-			if (index < 3)
-				return <Text key={index} style={projects.normalFont}>{role}</Text>
-		});
-
 		return(
 			<TouchableOpacity onPress={() => this.onItemSelected(project.id)}>
 				<View style={project.selected ? projects.projectItemSelected : projects.projectItem}>
 					<View style={projects.projectItemLeft}>
 						<View style={projects.projectItemSelect}>
 							<Text style={projects.highlightedFont}>{project.title}</Text>
-							<Text style={projects.normalFont}>{project.director}</Text>
-							<View style={projects.projectItemRoles}>{roles}</View>
+							<View style={projects.directorContainer}>
+								<Text style={projects.normalFont}>{project.director}</Text>
+							</View>
 						</View>
 					</View>
 					<View style={projects.projectItemRight}>
@@ -247,7 +243,6 @@ class Projects extends Component {
 				title: project.title,
 				director: project.director,
 				phone: project.phone,
-				roles: project.roles,
 				selected: false,
 				actions,
 			}

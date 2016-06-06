@@ -76,10 +76,8 @@ module.exports = StyleSheet.create({
     flex: 1,
   },
 
-  projectItemRoles: {
-    flex: 1,
-    flexDirection: 'column',
-    marginTop: 10,
+  directorContainer: {
+    marginTop: 20,
   },
 
   projectItemRight: {

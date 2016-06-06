@@ -202,19 +202,31 @@ class Schedule extends Component {
 	}
 
 	generateActorNotification() {
+		let countText;
+		if (this.state.forwardActorCount > 1)
+			countText = `${this.state.forwardActorCount} need to be sent to Actors`;
+		else
+			countText = `${this.state.forwardActorCount} needs to be sent to Actor`;
+
 		if (this.state.forwardActorCount > 0) {
 			return <View style={schedule.notification}>
 							 <Icon name="android-alert" style={schedule.notificationIcon} />
-							 <Text style={schedule.notificationFont}>{this.state.forwardActorCount} need to be sent to Actor(s)</Text>
+							 <Text style={schedule.notificationFont}>{countText}</Text>
 						 </View>
 		}
 	}
 
 	generateCastingNotification() {
+		let countText;
+		if (this.state.forwardCastingCount > 1)
+			countText = `${this.state.forwardCastingCount} need`;
+		else
+			countText = `${this.state.forwardCastingCount} needs`;
+
 		if (this.state.forwardCastingCount > 0) {
 			return <View style={schedule.notification}>
 							 <Icon name="android-alert" style={schedule.notificationIcon} />
-							 <Text style={schedule.notificationFont}>{this.state.forwardCastingCount} need to be forwarded to Casting</Text>
+							 <Text style={schedule.notificationFont}>{this.state.forwardCastingCount} to be forwarded to Casting</Text>
 						 </View>
 		}
 	}
@@ -277,7 +289,7 @@ class Schedule extends Component {
 		this.setState({show: false});
 		this.updateStatus(status);
 
-		if ((status == 'SENT' || status == 'SENT+') && this.state.selected.length == 1)
+		if ((status == 'SENT' || status == 'SENT+' || status == 'CAST') && this.state.selected.length == 1)
 			this.sendMessageAlert(this.state.selected[0]);
 	}
 
