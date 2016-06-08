@@ -285,12 +285,27 @@ class Schedule extends Component {
 		)
 	}
 
+	sendMessageCasting() {
+		this.setState({show: false});
+
+		Alert.alert(
+			'Send Message',
+      'Would you like to attach a message to this action?',
+      [
+        {text: 'Yes', onPress: () => Actions.message()},
+				{text: 'No', onPress: () => Alert.alert('Action Sent')},
+      ]
+		)
+	}
+
 	onAction(status) {
 		this.setState({show: false});
 		this.updateStatus(status);
 
-		if ((status == 'SENT' || status == 'SENT+' || status == 'CAST') && this.state.selected.length == 1)
+		if ((status == 'SENT' || status == 'SENT+') && this.state.selected.length == 1)
 			this.sendMessageAlert(this.state.selected[0]);
+		else if (status != 'CALL')
+			this.sendMessageCasting();
 	}
 
 	onMessages() {
