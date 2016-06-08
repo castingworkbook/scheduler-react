@@ -114,12 +114,19 @@ class Auditions extends Component {
             <Text style={auditions.normalFont}>{audition.date}</Text>
           </View>
         </View>
-        <View style={auditions.bottom}>
+        <View style={auditions.middle}>
           <TouchableOpacity onPress={() => this.onMessages(audition.id)}>
             <View style={auditions.messageIconContainer}>
               <Icon name="email" style={auditions.messageIcon} />
             </View>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.onMaterials()}>
+            <View style={auditions.messageIconContainer}>
+              <Icon name="document-text" style={auditions.messageIcon} />
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={auditions.bottom}>
           <TouchableOpacity onPress={() => this.onAction(audition.id, 'CONF')}>
             <Text style={audition.status == 'CONF' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>YES</Text>
           </TouchableOpacity>
@@ -203,8 +210,27 @@ class Auditions extends Component {
     Actions.notes({audition: {id}});
   }
 
+  onMaterials() {
+    Actions.materials();
+  }
+
   onAction(id, status) {
     this.updateStatus(id, status);
+
+    this.sendMessageAlert(id);
+  }
+
+  sendMessageAlert(id) {
+    this.setState({show: false});
+
+    Alert.alert(
+      'Send Message',
+      'Would you like to attach a message to this action?',
+      [
+        {text: 'Yes', onPress: () => Actions.notes({audition: {id}})},
+        {text: 'No', onPress: () => Alert.alert('Response Sent')},
+      ]
+    )
   }
 
   async updateStatus(id, status) {

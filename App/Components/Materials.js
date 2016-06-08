@@ -57,21 +57,22 @@ export default class Materials extends Component {
               </View>
             </View>
           </ScrollView>
-          <View style={materials.footer}>
-            <Text style={materials.switchFont}>Automatically forward the materials?</Text>
-            <Switch
-              onValueChange={(value) => this.setState({materials: value})}
-              value={this.state.materials} />
-          </View>
+          {this.generateFooter()}
         </Image>
       </View>
     )
   }
 
   _renderHeader() {
+    let headerText;
+    if (this.props.audition.actor)
+      headerText = `${this.props.audition.actor}'s Materials`;
+    else
+      headerText = `${this.props.user.name}'s Materials`;
+
     return(
       <View style={materials.header}>
-        <Text style={materials.headerText}>{`${this.props.audition.actor}'s Materials`}</Text>
+        <Text style={materials.headerText}>{headerText}</Text>
       </View>
     )
   }
@@ -99,6 +100,18 @@ export default class Materials extends Component {
       </View>
     )
   }
+
+  generateFooter() {
+    if (this.props.audition.actor)
+      return <View style={materials.footer}>
+              <Text style={materials.switchFont}>Automatically forward the materials?</Text>
+              <Switch
+                onValueChange={(value) => this.setState({materials: value})}
+                value={this.state.materials} />
+             </View>
+    else
+      return
+  }
 }
 
 import { connect } from 'react-redux';
@@ -106,6 +119,7 @@ import { bindActionCreators } from 'redux';
 
 function mapStateToProps(state) {
   return {
+    user: state.user,
     audition: state.audition
   }
 }
