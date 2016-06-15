@@ -213,41 +213,20 @@ class History extends Component {
   }
 
   async addNote() {
-    let headers = {
-      accept: 'application/json',
-			authorization: this.props.user.authToken
-    };
-
     let data = {
       'history[action]': `Note: ${this.state.action}.`,
     };
 
-    let formData = new FormData();
-    for (var k in data) {
-			formData.append(k, data[k]);
-		}
-
-    let request = {
-      method: 'post',
-      headers: headers,
-      body: formData
-    }
-
-    let path = ServerURL + `auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
-    let responseJson;
+    let endpoint = `auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    let historyListData;
+    this.setState({isLoading: true});
     try {
-      this.setState({isLoading: true});
-      let response = await fetch(path, request);
-      responseJson = await response.json();
-      console.log(responseJson);
-
-			if(responseJson.errors)
-				Alert.alert(responseJson.errors);
+      historyListData = await postHistory(endpoint, this.props.user.authToken, data);
     } catch(error) {
       console.error(error);
     }
 
-    let history = _.map(responseJson, (record) => {
+    let history = _.map(historyListData, (record) => {
       let object = {
         id: record.id,
         text: record.action,

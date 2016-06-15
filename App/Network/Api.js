@@ -81,5 +81,12 @@ export async function getHistory(endpoint, token) {
 }
 
 export async function postHistory(endpoint, token, data) {
-  
+  try {
+    this.token = token;
+    let response = await httpRequest(endpoint, 'post', data);
+    let responseJson = await response.json();
+    return responseJson;
+  } catch(error) {
+    console.error(error);
+  }
 }
