@@ -12,7 +12,7 @@ import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import ServerURL from '../Network/Request';
+import { getProjects } from '../Network/Api';
 
 class Projects extends Component {
 	constructor(props) {
@@ -59,7 +59,7 @@ class Projects extends Component {
   }
 
 	componentDidMount() {
-		this.getProjects();
+		this.populateProjectList();
 	}
 
 	render() {
@@ -144,7 +144,7 @@ class Projects extends Component {
 	_onRefresh() {
 		console.log("Refresh Triggered")
 		this.setState({refreshing: true});
-		this.getProjects();
+		this.populateProjectList();
 	}
 
 	generateActionButtons() {
@@ -182,7 +182,6 @@ class Projects extends Component {
 
 	onSchedulePressed(id) {
 		this.props.projectActions.setProject(_.find(this.state.projects, { 'id': id }));
-
 		Actions.schedule();
 	}
 
@@ -204,33 +203,16 @@ class Projects extends Component {
 		Linking.openURL(`tel:${_.find(this.state.projects, { 'id': this.state.selected[0] }).phone}`);
 	}
 
-	async getProjects() {
-		let headers = {
-      accept: 'application/json',
-			authorization: this.props.user.authToken
-    };
-
-		let request = {
-			method: 'get',
-			headers
-		}
-
-		let path = ServerURL + 'projects';
-		let responseJson;
+	async populateProjectList() {
+		let projectListData;
+		this.setState({isLoading: true});
 		try {
-			this.setState({isLoading: true});
-			let response = await fetch(path, request);
-			responseJson = await response.json();
-			console.log(responseJson);
-
-			if(responseJson.errors)
-				Alert.alert(responseJson.errors);
-
+			projectListData = await getProjects(this.props.user.authToken);
 		} catch(error) {
 			console.error(error);
 		}
 
-		let projects = _.map(responseJson.projects, (project, index) => {
+		let projects = _.map(projectListData.projects, (project, index) => {
 			let actions = 0;
 			_.each(project.auditions, (audition) => {
 				if (_.isEmpty(audition.status)) actions++;

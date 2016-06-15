@@ -12,7 +12,7 @@ import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import ServerURL from '../Network/Request';
+import { getAuditions, postAudition } from '../Network/Api';
 
 class Schedule extends Component {
 	constructor(props) {
@@ -72,7 +72,7 @@ class Schedule extends Component {
 		if (this.props.message)
 			Alert.alert(this.props.message);
 
-		this.getSchedules();
+		this.populateAuditionList();
 	}
 
 	render() {
@@ -174,7 +174,7 @@ class Schedule extends Component {
 	_onRefresh() {
 		console.log("Refresh Triggered")
 		this.setState({refreshing: true});
-		this.getSchedules();
+		this.populateAuditionList();
 	}
 
 	generateActionButtons() {
@@ -298,34 +298,19 @@ class Schedule extends Component {
     Actions.notes({audition: {id: this.state.selected[0]}});
   }
 
-	async getSchedules() {
-		let headers = {
-      accept: 'application/json',
-			authorization: this.props.user.authToken
-    };
-
-		let request = {
-			method: 'get',
-			headers
-		}
-
-		let path = ServerURL + `auditions?project_id=${this.props.project.id}`;
-		let responseJson;
+	async populateAuditionList() {
+		let endpoint = `auditions?project_id=${this.props.project.id}`;
+		let auditionListData;
+		this.setState({isLoading: true});
 		try {
-			this.setState({isLoading: true});
-			let response = await fetch(path, request);
-			responseJson = await response.json();
-			console.log(responseJson);
-
-			if(responseJson.errors)
-				Alert.alert(responseJson.errors);
+			auditionListData = await getAuditions(endpoint, this.props.user.authToken);
 		} catch(error) {
 			console.error(error);
 		}
 
 		let forwardActorCount = 0;
 		let forwardCastingCount = 0;
-		let auditions = _.map(responseJson, (audition, index) => {
+		let auditions = _.map(auditionListData, (audition, index) => {
 			if (_.isEmpty(audition.status)) forwardActorCount++;
 			if ((audition.status == 'CONF' || audition.status == 'REGR' || audition.status == 'TIME') && _.isEmpty(audition.response))
 				forwardCastingCount++;
@@ -356,50 +341,24 @@ class Schedule extends Component {
 	}
 
 	async updateStatus(status) {
-		let headers = {
-      accept: 'application/json',
-			authorization: this.props.user.authToken
-    };
-
 		let data = {
-			'status': status,
-			'project_id': this.props.project.id
+			project_id: this.props.project.id,
+			"selected[]": this.state.selected.toString(),
+			status,
 		};
 
-		let formData = new FormData();
-		for (var k in data) {
-			formData.append(k, data[k]);
-		}
-
-		for (var k in this.state.selected) {
-      let v = this.state.selected[k];
-			formData.append("selected[]", v.toString());
-    }
-
-		let request = {
-			method: 'put',
-			headers,
-			body: formData
-		}
-
-		let path = ServerURL + `auditions/update_status`;
-		let responseJson;
+		let endpoint = `auditions/update_status`;
+		let auditionListData;
+		this.setState({isLoading: true});
 		try {
-			this.setState({isLoading: true});
-			let response = await fetch(path, request);
-			responseJson = await response.json();
-      console.log(responseJson);
-
-			if(responseJson.errors)
-				Alert.alert(responseJson.errors);
+			auditionListData = await postAudition(endpoint, this.props.user.authToken, data);
 		} catch(error) {
-			console.log(error);
-			Alert.alert(error);
+			console.error(error);
 		}
 
 		let forwardActorCount = 0;
 		let forwardCastingCount = 0;
-		let auditions = _.map(responseJson, (audition) => {
+		let auditions = _.map(auditionListData, (audition) => {
 			if (_.isEmpty(audition.status)) forwardActorCount++;
 			if ((audition.status == 'CONF' || audition.status == 'REGR' || audition.status == 'TIME') && _.isEmpty(audition.response))
 				forwardCastingCount++;
@@ -414,7 +373,6 @@ class Schedule extends Component {
 				casting: audition.response,
 				selected: false
 			}
-
 			return object;
 		});
 

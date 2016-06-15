@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
-import ServerURL from '../Network/Request';
+import { postSession } from '../Network/Api';
 import _ from 'lodash';
 
 class Auditions extends Component {

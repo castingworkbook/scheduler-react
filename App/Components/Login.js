@@ -8,7 +8,7 @@ import ButtonRounded from './Widgets/ButtonRounded';
 import { Actions } from 'react-native-router-flux';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
-import ServerURL from '../Network/Request';
+import { postSession } from '../Network/Api';
 
 class Login extends Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class Login extends Component {
               <Text style={login.registerLink}>Forgot Password</Text>
             </TouchableOpacity>
             <ButtonRounded
-              onPress={() => this.createSession()}
+              onPress={() => this.login()}
               text="Login" />
           </View>
           <View style={login.spinnerContainer}>
@@ -79,11 +79,7 @@ class Login extends Component {
     );
   }
 
-  async createSession() {
-    let headers = {
-      accept: 'application/json'
-    };
-
+  async login() {
     let data = {
       'session[email]': this.state.email,
       'session[password]': this.state.password,
@@ -91,36 +87,14 @@ class Login extends Component {
       'session[platform]': Platform.OS,
     };
 
-    let formData = new FormData();
-    for (var k in data) {
-			formData.append(k, data[k]);
-		}
-
-    let request = {
-      method: 'post',
-      headers: headers,
-      body: formData
-    }
-
-    let path = ServerURL + 'session/';
-    let responseJson;
+    this.setState({isLoading: true});
     try {
-      this.setState({isLoading: true});
-			let response = await fetch(path, request);
-			responseJson = await response.json();
-      console.log(responseJson);
-
-      this.props.userActions.saveUser(responseJson);
-
-      if(responseJson.errors) {
-        Alert.alert(responseJson.errors);
-      } else {
-        responseJson.role == 'agent' ? Actions.projects() : Actions.auditions();
-      }
-		} catch(error) {
-      console.log(error);
-			Alert.alert(error);
-		}
+      const userData = await postSession(data);
+      this.props.userActions.saveUser(userData);
+      userData.role == 'agent' ? Actions.projects() : Actions.auditions();
+    } catch(error) {
+      console.error(error);
+    }
     this.setState({isLoading: false});
   }
 }

@@ -6,7 +6,7 @@ import Button from './Button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import controlPanel from '../../Styles/controlPanel';
 import {Actions} from 'react-native-router-flux';
-import ServerURL from '../../Network/Request';
+import ServerURL from '../../Network/Api';
 
 export default class ControlPanel extends Component {
   render() {

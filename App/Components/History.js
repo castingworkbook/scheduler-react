@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import ServerURL from '../Network/Request';
+import { getHistory } from '../Network/Api';
 
 class History extends Component {
   constructor(props) {
@@ -79,7 +79,7 @@ class History extends Component {
   }
 
   componentDidMount() {
-    this.getHistory();
+    this.populateHistoryData();
   }
 
   render() {
@@ -137,7 +137,7 @@ class History extends Component {
   _onRefresh() {
 		console.log("Refresh Triggered")
 		this.setState({refreshing: true});
-		this.getHistory();
+		this.populateHistoryData();
 	}
 
   _renderHeader() {
@@ -184,32 +184,17 @@ class History extends Component {
     Actions.materials();
   }
 
-  async getHistory() {
-    let headers = {
-      accept: 'application/json',
-			authorization: this.props.user.authToken
-    };
-
-		let request = {
-			method: 'get',
-			headers
-		}
-
-    let path = ServerURL + `auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
-    let responseJson;
+  async populateHistoryData() {
+    let endpoint = `auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    let historyListData;
+    this.setState({isLoading: true});
     try {
-      this.setState({isLoading: true});
-      let response = await fetch(path, request);
-      responseJson = await response.json();
-      console.log(responseJson);
-
-			if(responseJson.errors)
-				Alert.alert(responseJson.errors);
+      historyListData = await getHistory(endpoint, this.props.user.authToken);
     } catch(error) {
       console.error(error);
     }
 
-    let history = _.map(responseJson, (record) => {
+    let history = _.map(historyListData, (record) => {
       let object = {
         id: record.id,
         text: record.action,

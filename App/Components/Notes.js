@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import ServerURL from '../Network/Request';
+import { postSession } from '../Network/Api';
 
 export default class Notes extends Component {
   constructor(props) {
