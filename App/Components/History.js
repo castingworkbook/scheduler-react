@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import { getHistory } from '../Network/Api';
+import { getHistory, postHistory } from '../Network/Api';
 
 class History extends Component {
   constructor(props) {

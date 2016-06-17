@@ -1,5 +1,5 @@
-// const ServerURL = "http://cwbscheduler.herokuapp.com/";
-const ServerURL = "http://localhost:3000/";
+const ServerURL = "http://cwbscheduler.herokuapp.com/";
+// const ServerURL = "http://localhost:3000/";
 let token = "";
 
 function httpRequest(endpoint, method, data) {
