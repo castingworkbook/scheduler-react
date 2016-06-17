@@ -12,7 +12,7 @@ import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import { getAuditions, postAudition } from '../Network/Api';
+import { getAuditions, putAuditions } from '../Network/Api';
 
 class Schedule extends Component {
 	constructor(props) {
@@ -351,7 +351,7 @@ class Schedule extends Component {
 		let auditionListData;
 		this.setState({isLoading: true});
 		try {
-			auditionListData = await postAudition(endpoint, this.props.user.authToken, data);
+			auditionListData = await putAuditions(endpoint, this.props.user.authToken, data);
 		} catch(error) {
 			console.error(error);
 		}

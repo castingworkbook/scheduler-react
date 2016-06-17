@@ -6,7 +6,7 @@ import Button from './Button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import controlPanel from '../../Styles/controlPanel';
 import {Actions} from 'react-native-router-flux';
-import ServerURL from '../../Network/Api';
+import { resetData } from '../../Network/Api';
 
 export default class ControlPanel extends Component {
   render() {
@@ -53,18 +53,15 @@ export default class ControlPanel extends Component {
   }
 
   handleResetPressed() {
-    this.resetData();
+    this.reset();
   }
 
-  async resetData() {
-    let path = ServerURL + 'projects/reset_data';
-    let responseJson;
+  async reset() {
+    let response;
     try {
-      let response = await fetch(path);
-      responseJson = await response.json();
-			console.log(responseJson);
+      let response = await resetData();
 
-      Alert.alert(responseJson.message);
+      Alert.alert(response.message);
       Actions.login();
     } catch(error) {
       console.log(error);

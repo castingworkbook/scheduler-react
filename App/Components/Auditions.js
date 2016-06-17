@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
-import { postSession } from '../Network/Api';
+import { getAuditions, putAudition } from '../Network/Api';
 import _ from 'lodash';
 
 class Auditions extends Component {
@@ -62,7 +62,7 @@ class Auditions extends Component {
   }
 
   componentDidMount() {
-		this.getAuditions();
+		this.populateAuditionList();
 	}
 
   render() {
@@ -150,40 +150,20 @@ class Auditions extends Component {
   _onRefresh() {
 		console.log("Refresh Triggered");
 		this.setState({refreshing: true});
-		this.getAuditions();
+		this.populateAuditionList();
 	}
 
-  async getAuditions() {
-    let headers = {
-      accept: 'application/json',
-      authorization: this.props.user.authToken
-    };
-
-    let request = {
-      method: 'get',
-      headers
-    }
-
-    let path = ServerURL + 'auditions/';
-    let responseJson;
+  async populateAuditionList() {
+    let endpoint = 'auditions';
+    let auditionListData;
+    this.setState({isLoading: true});
     try {
-      this.setState({isLoading: true});
-      let response = await fetch(path, request);
-      responseJson = await response.json();
-      console.log(responseJson);
-
-      if(responseJson.errors)
-        Alert.alert(responseJson.errors);
-
+      auditionListData = await getAuditions(endpoint, this.props.user.authToken);
     } catch(error) {
       console.error(error);
     }
-    this.setState({
-      isLoading: false,
-      refreshing: false,
-    });
 
-    let auditions = _.map(responseJson, (audition) => {
+    let auditions = _.map(auditionListData, (audition) => {
       let object = {
 				id: audition.id,
 				actor: audition.actor,
@@ -196,13 +176,14 @@ class Auditions extends Component {
 				casting: audition.response,
 				selected: false
       }
-
       return object;
     });
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(auditions),
       auditions: auditions,
+      isLoading: false,
+      refreshing: false,
     });
   }
 
@@ -234,43 +215,20 @@ class Auditions extends Component {
   }
 
   async updateStatus(id, status) {
-    let headers = {
-      accept: 'application/json',
-			authorization: this.props.user.authToken
-    };
-
     let data = {
 			'audition[status]': status
 		};
 
-    let formData = new FormData();
-		for (var k in data) {
-			formData.append(k, data[k]);
-		}
-
-    let request = {
-			method: 'put',
-			headers,
-			body: formData
-		}
-
-    let path = ServerURL + `auditions/${id}`;
-		let responseJson;
+    let endpoint = `auditions/${id}`;
+		let auditionListData;
+    this.setState({isLoading: true});
 		try {
-			this.setState({isLoading: true});
-			let response = await fetch(path, request);
-			responseJson = await response.json();
-      console.log(responseJson);
-
-			if(responseJson.errors)
-				Alert.alert(responseJson.errors);
+			auditionListData = await fetch(path, request);
 		} catch(error) {
 			console.log(error);
-			Alert.alert(error);
 		}
-		this.setState({isLoading: false});
 
-		let auditions = _.map(responseJson, (audition) => {
+		let auditions = _.map(auditionListData, (audition) => {
 			let object = {
 				id: audition.id,
 				actor: audition.actor,
@@ -290,6 +248,7 @@ class Auditions extends Component {
 		this.setState({
 			dataSource: this.state.dataSource.cloneWithRows(auditions),
       auditions: auditions,
+      isLoading: false
 		});
   }
 }

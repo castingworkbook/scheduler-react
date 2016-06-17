@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import { postSession } from '../Network/Api';
+import { getMessages, postMessage } from '../Network/Api';
 
 export default class Notes extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ export default class Notes extends Component {
   }
 
   componentDidMount() {
-    this.getMessages();
+    this.populateMessages();
   }
 
   render() {
@@ -100,7 +100,7 @@ export default class Notes extends Component {
   _onRefresh() {
 		console.log("Refresh Triggered")
 		this.setState({refreshing: true});
-		this.getMessages();
+		this.populateMessages();
 	}
 
   _renderRow(note) {
@@ -117,38 +117,23 @@ export default class Notes extends Component {
     )
   }
 
-  async getMessages() {
-    let headers = {
-      accept: 'application/json',
-			authorization: this.props.user.authToken
-    };
-
-		let request = {
-			method: 'get',
-			headers
-		}
-
-    let path;
+  async populateMessages() {
+    let endpoint;
     if (this.props.user.role == 'agent') {
-      path = ServerURL + `auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
+      endpoint = `auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
     } else {
-      path = ServerURL + `auditions/${this.props.audition.id}/messages`;
+      endpoint = `auditions/${this.props.audition.id}/messages`;
     }
 
-    let responseJson;
+    let messageListData;
+    this.setState({isLoading: true});
     try {
-      this.setState({isLoading: true});
-      let response = await fetch(path, request);
-      responseJson = await response.json();
-      console.log(responseJson);
-
-			if(responseJson.errors)
-				Alert.alert(responseJson.errors);
+      messageListData = await getMessages(endpoint, this.props.user.authToken);
     } catch(error) {
       console.error(error);
     }
 
-    let messages = _.map(responseJson, (message) => {
+    let messages = _.map(messageListData, (message) => {
       let object = {
         id: message.id,
         sender: message.sender,
@@ -168,48 +153,27 @@ export default class Notes extends Component {
   }
 
   async sendMessage() {
-    let headers = {
-      accept: 'application/json',
-			authorization: this.props.user.authToken
-    };
-
     let data = {
       'message[user_id]': this.props.user.id,
       'message[body]': this.state.message,
     };
 
-    let formData = new FormData();
-    for (var k in data) {
-			formData.append(k, data[k]);
-		}
-
-    let request = {
-      method: 'post',
-      headers: headers,
-      body: formData
-    }
-
-    let path;
+    let endpoint;
     if (this.props.user.role == 'agent') {
-      path = ServerURL + `auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
+      endpoint = `auditions/${this.props.audition.id}/messages?project_id=${this.props.project.id}`;
     } else {
-      path = ServerURL + `auditions/${this.props.audition.id}/messages`;
+      endpoint = `auditions/${this.props.audition.id}/messages`;
     }
 
-    let responseJson;
+    let messageListData;
+    this.setState({isLoading: true});
     try {
-      this.setState({isLoading: true});
-      let response = await fetch(path, request);
-      responseJson = await response.json();
-      console.log(responseJson);
-
-			if(responseJson.errors)
-				Alert.alert(responseJson.errors);
+      messageListData = await postMessage(endpoint, this.props.user.authToken, data);
     } catch(error) {
       console.error(error);
     }
 
-    let messages = _.map(responseJson, (message) => {
+    let messages = _.map(messageListData, (message) => {
       let object = {
         id: message.id,
         sender: message.sender,
@@ -217,13 +181,12 @@ export default class Notes extends Component {
         date: message.date,
         time: message.time
       }
-
       return object;
     });
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(messages),
-      body: "",
+      message: "",
       isLoading: false,
     });
   }
