@@ -77,14 +77,14 @@ module.exports = StyleSheet.create({
   middle: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     padding: 10,
   },
 
   bottom: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: 10,
   },

@@ -61,7 +61,6 @@ class Schedule extends Component {
 			forwardActorCount: 0,
 			forwardCastingCount: 0,
       selected: [],
-      clicked: 'none',
       show: false,
 			isLoading: false,
 			refreshing: false,
@@ -189,14 +188,20 @@ class Schedule extends Component {
 
 	generateStatus(audition) {
 		let statusElement;
-		if(audition.casting == 'confirm')
-			statusElement = <Icon name='checkmark' style={schedule.auditionItemIcon} />
-		else if(audition.casting == 'regret')
-			statusElement = <Icon name='close' style={schedule.auditionItemIcon} />
-		else if(audition.casting == 'time')
-			statusElement = <Icon name='clock' style={schedule.auditionItemIcon} />
-		else
-			statusElement = <Text style={schedule.highlightedFont}>{audition.status}</Text>
+		if(audition.casting == 'confirm') {
+			statusElement = <Icon name='checkmark' style={[schedule.auditionItemIcon, {color: '#00AD63'}]} />
+		} else if(audition.casting == 'regret') {
+			statusElement = <Icon name='close' style={[schedule.auditionItemIcon, {color: '#E9556A'}]} />
+		} else if(audition.casting == 'time') {
+			statusElement = <Icon name='clock' style={[schedule.auditionItemIcon, {color: '#00B5EF'}]} />
+		} else {
+			if (audition.status == 'SENT')
+				statusElement = <Text style={[schedule.highlightedFont, {color: '#00B5EF'}]}>{audition.status}</Text>
+			else if (audition.status == 'CONF')
+				statusElement = <Text style={[schedule.highlightedFont, {color: '#00AD63'}]}>{audition.status}</Text>
+			else
+				statusElement = <Text style={[schedule.highlightedFont, {color: '#E9556A'}]}>{audition.status}</Text>
+		}
 
 		return statusElement;
 	}

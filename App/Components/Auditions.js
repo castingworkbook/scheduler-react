@@ -130,9 +130,6 @@ class Auditions extends Component {
           <TouchableOpacity onPress={() => this.onAction(audition.id, 'CONF')}>
             <Text style={audition.status == 'CONF' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>YES</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.onAction(audition.id, 'TIME')}>
-            <Text style={audition.status == 'TIME' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>New Time</Text>
-          </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onAction(audition.id, 'REGR')}>
             <Text style={audition.status == 'REGR' || audition.status == 'SENT' || audition.status == 'SENT+' ? auditions.highlightedFont : auditions.inActiveStatus}>NO</Text>
           </TouchableOpacity>
@@ -198,20 +195,8 @@ class Auditions extends Component {
   onAction(id, status) {
     this.updateStatus(id, status);
 
-    this.sendMessageAlert(id);
-  }
-
-  sendMessageAlert(id) {
-    this.setState({show: false});
-
-    Alert.alert(
-      'Send Message',
-      'Would you like to attach a message to this action?',
-      [
-        {text: 'Yes', onPress: () => Actions.notes({audition: {id}})},
-        {text: 'No', onPress: () => Alert.alert('Response Sent')},
-      ]
-    )
+    if (status == 'REGR')
+      Actions.notes({audition: {id}})
   }
 
   async updateStatus(id, status) {
@@ -223,7 +208,7 @@ class Auditions extends Component {
 		let auditionListData;
     this.setState({isLoading: true});
 		try {
-			auditionListData = await fetch(path, request);
+			auditionListData = await putAudition(endpoint, this.props.user.authToken, data);
 		} catch(error) {
 			console.log(error);
 		}
