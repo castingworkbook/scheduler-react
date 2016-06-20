@@ -195,11 +195,11 @@ class Schedule extends Component {
 		} else if(audition.casting == 'time') {
 			statusElement = <Icon name='clock' style={[schedule.auditionItemIcon, {color: '#00B5EF'}]} />
 		} else {
-			if (audition.status == 'SENT')
+			if (audition.status == 'SENT' || audition.status == 'SENT+')
 				statusElement = <Text style={[schedule.highlightedFont, {color: '#00B5EF'}]}>{audition.status}</Text>
 			else if (audition.status == 'CONF')
 				statusElement = <Text style={[schedule.highlightedFont, {color: '#00AD63'}]}>{audition.status}</Text>
-			else
+			else if (audition.status == 'REGR')
 				statusElement = <Text style={[schedule.highlightedFont, {color: '#E9556A'}]}>{audition.status}</Text>
 		}
 
@@ -348,7 +348,7 @@ class Schedule extends Component {
 	async updateStatus(status) {
 		let data = {
 			project_id: this.props.project.id,
-			"selected[]": this.state.selected.toString(),
+			selected: this.state.selected,
 			status,
 		};
 
@@ -365,7 +365,7 @@ class Schedule extends Component {
 		let forwardCastingCount = 0;
 		let auditions = _.map(auditionListData, (audition) => {
 			if (_.isEmpty(audition.status)) forwardActorCount++;
-			if ((audition.status == 'CONF' || audition.status == 'REGR' || audition.status == 'TIME') && _.isEmpty(audition.response))
+			if ((audition.status == 'CONF' || audition.status == 'REGR') && _.isEmpty(audition.response))
 				forwardCastingCount++;
 			let object = {
 				id: audition.id,

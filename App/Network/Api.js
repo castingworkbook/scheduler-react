@@ -1,5 +1,5 @@
-const ServerURL = "http://cwbscheduler.herokuapp.com/";
-// const ServerURL = "http://localhost:3000/";
+// const ServerURL = "http://cwbscheduler.herokuapp.com/";
+const ServerURL = "http://localhost:3000/";
 let token = "";
 
 function httpRequest(endpoint, method, data) {
@@ -12,7 +12,14 @@ function httpRequest(endpoint, method, data) {
   if (data) {
     formData = new FormData();
     for (var k in data) {
-      formData.append(k, data[k]);
+      if (k == 'selected') {
+        for (var j in data[k]) {
+          let v = data[k][j];
+          formData.append("selected[]", v.toString());
+        }
+      } else {
+        formData.append(k, data[k]);
+      }
     }
   }
 
