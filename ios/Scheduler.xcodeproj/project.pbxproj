@@ -30,7 +30,6 @@
 		4F17F20D1CDAD0CE00957BEB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F17F2051CDAD0CE00957BEB /* Octicons.ttf */; };
 		4F17F20E1CDAD0CE00957BEB /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F17F2061CDAD0CE00957BEB /* Zocial.ttf */; };
 		4F5478891CF7C2EB00954768 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5478881CF7C2C200954768 /* libRCTPushNotification.a */; };
-		4F8964521CFE3B79008E56EE /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F8964511CFE3B79008E56EE /* main.jsbundle */; };
 		4FC680FF1CDAD2A0004D4030 /* .npmignore in Resources */ = {isa = PBXBuildFile; fileRef = 4FC680CA1CDAD2A0004D4030 /* .npmignore */; };
 		4FC681001CDAD2A0004D4030 /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 4FC680CB1CDAD2A0004D4030 /* index.ios.js */; };
 		4FC681011CDAD2A0004D4030 /* RTSpinKit9CubeGridAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC680D11CDAD2A0004D4030 /* RTSpinKit9CubeGridAnimation.m */; };
@@ -56,6 +55,7 @@
 		4FC681151CDAD2A0004D4030 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 4FC680FB1CDAD2A0004D4030 /* README.md */; };
 		4FC681161CDAD2A0004D4030 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 4FC680FD1CDAD2A0004D4030 /* index.js */; };
 		4FC681171CDAD2A0004D4030 /* three-bounce.js in Resources */ = {isa = PBXBuildFile; fileRef = 4FC680FE1CDAD2A0004D4030 /* three-bounce.js */; };
+		4FDE40591D19C4A200C61637 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 4FDE40581D19C4A200C61637 /* main.jsbundle */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -182,7 +182,6 @@
 		4F17F2051CDAD0CE00957BEB /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		4F17F2061CDAD0CE00957BEB /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
 		4F5478831CF7C2C200954768 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
-		4F8964511CFE3B79008E56EE /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = ../main.jsbundle; sourceTree = "<group>"; };
 		4FC680CA1CDAD2A0004D4030 /* .npmignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .npmignore; sourceTree = "<group>"; };
 		4FC680CB1CDAD2A0004D4030 /* index.ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.ios.js; sourceTree = "<group>"; };
 		4FC680D01CDAD2A0004D4030 /* RTSpinKit9CubeGridAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSpinKit9CubeGridAnimation.h; sourceTree = "<group>"; };
@@ -229,6 +228,7 @@
 		4FC680FB1CDAD2A0004D4030 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4FC680FD1CDAD2A0004D4030 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		4FC680FE1CDAD2A0004D4030 /* three-bounce.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "three-bounce.js"; sourceTree = "<group>"; };
+		4FDE40581D19C4A200C61637 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = ../main.jsbundle; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -520,7 +520,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				4F8964511CFE3B79008E56EE /* main.jsbundle */,
+				4FDE40581D19C4A200C61637 /* main.jsbundle */,
 				4FC680C91CDAD2A0004D4030 /* react-native-spinkit */,
 				4F17F1FE1CDAD0CE00957BEB /* Fonts */,
 				13B07FAE1A68108700A75B9A /* Scheduler */,
@@ -778,7 +778,7 @@
 				4F17F20E1CDAD0CE00957BEB /* Zocial.ttf in Resources */,
 				4FC681001CDAD2A0004D4030 /* index.ios.js in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				4F8964521CFE3B79008E56EE /* main.jsbundle in Resources */,
+				4FDE40591D19C4A200C61637 /* main.jsbundle in Resources */,
 				4F17F2091CDAD0CE00957BEB /* FontAwesome.ttf in Resources */,
 				4F17F2081CDAD0CE00957BEB /* EvilIcons.ttf in Resources */,
 				4F17F20B1CDAD0CE00957BEB /* Ionicons.ttf in Resources */,

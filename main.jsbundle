@@ -17959,10 +17959,146 @@ return false;}
 
 module.exports=equalByTag;
 });
-__d('Scheduler/App/Network/Request.js',function(global, require, module, exports) {  Object.defineProperty(exports,"__esModule",{value:true});var ServerURL="http://cwbscheduler.herokuapp.com/";exports.default=
+__d('Scheduler/App/Network/Api.js',function(global, require, module, exports) {  Object.defineProperty(exports,"__esModule",{value:true});exports.
 
 
-ServerURL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+postSession=postSession;exports.
+
+
+
+
+
+
+
+
+
+getProjects=getProjects;exports.
+
+
+
+
+
+
+
+
+
+
+getAuditions=getAuditions;exports.
+
+
+
+
+
+
+
+
+
+
+putAudition=putAudition;exports.
+
+
+
+
+
+
+
+
+
+
+putAuditions=putAuditions;exports.
+
+
+
+
+
+
+
+
+
+
+getHistory=getHistory;exports.
+
+
+
+
+
+
+
+
+
+
+postHistory=postHistory;exports.
+
+
+
+
+
+
+
+
+
+
+getMessages=getMessages;exports.
+
+
+
+
+
+
+
+
+
+
+postMessage=postMessage;exports.
+
+
+
+
+
+
+
+
+
+
+resetData=resetData;var ServerURL="http://cwbscheduler.herokuapp.com/";var token="";function httpRequest(endpoint,method,data){var headers={accept:'application/json',authorization:this.token};var formData=void 0;if(data){formData=new FormData();for(var k in data){if(k=='selected'){for(var j in data[k]){var v=data[k][j];formData.append("selected[]",v.toString());}}else {formData.append(k,data[k]);}}}var request={method:method,headers:headers,body:formData};var path=ServerURL+endpoint;return fetch(path,request);}function postSession(data){var response,responseJson;return regeneratorRuntime.async(function postSession$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;_context.next=3;return regeneratorRuntime.awrap(httpRequest('session','post',data));case 3:response=_context.sent;_context.next=6;return regeneratorRuntime.awrap(response.json());case 6:responseJson=_context.sent;return _context.abrupt("return",responseJson);case 10:_context.prev=10;_context.t0=_context["catch"](0);console.error(_context.t0);case 13:case "end":return _context.stop();}}},null,this,[[0,10]]);}function getProjects(token){var response,responseJson;return regeneratorRuntime.async(function getProjects$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;this.token=token;_context2.next=4;return regeneratorRuntime.awrap(httpRequest('projects','get'));case 4:response=_context2.sent;_context2.next=7;return regeneratorRuntime.awrap(response.json());case 7:responseJson=_context2.sent;return _context2.abrupt("return",responseJson);case 11:_context2.prev=11;_context2.t0=_context2["catch"](0);console.error(_context2.t0);case 14:case "end":return _context2.stop();}}},null,this,[[0,11]]);}function getAuditions(endpoint,token){var response,responseJson;return regeneratorRuntime.async(function getAuditions$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:_context3.prev=0;this.token=token;_context3.next=4;return regeneratorRuntime.awrap(httpRequest(endpoint,'get'));case 4:response=_context3.sent;_context3.next=7;return regeneratorRuntime.awrap(response.json());case 7:responseJson=_context3.sent;return _context3.abrupt("return",responseJson);case 11:_context3.prev=11;_context3.t0=_context3["catch"](0);console.error(_context3.t0);case 14:case "end":return _context3.stop();}}},null,this,[[0,11]]);}function putAudition(endpoint,token,data){var response,responseJson;return regeneratorRuntime.async(function putAudition$(_context4){while(1){switch(_context4.prev=_context4.next){case 0:_context4.prev=0;this.token=token;_context4.next=4;return regeneratorRuntime.awrap(httpRequest(endpoint,'put',data));case 4:response=_context4.sent;_context4.next=7;return regeneratorRuntime.awrap(response.json());case 7:responseJson=_context4.sent;return _context4.abrupt("return",responseJson);case 11:_context4.prev=11;_context4.t0=_context4["catch"](0);console.error(_context4.t0);case 14:case "end":return _context4.stop();}}},null,this,[[0,11]]);}function putAuditions(endpoint,token,data){var response,responseJson;return regeneratorRuntime.async(function putAuditions$(_context5){while(1){switch(_context5.prev=_context5.next){case 0:_context5.prev=0;this.token=token;_context5.next=4;return regeneratorRuntime.awrap(httpRequest(endpoint,'put',data));case 4:response=_context5.sent;_context5.next=7;return regeneratorRuntime.awrap(response.json());case 7:responseJson=_context5.sent;return _context5.abrupt("return",responseJson);case 11:_context5.prev=11;_context5.t0=_context5["catch"](0);console.error(_context5.t0);case 14:case "end":return _context5.stop();}}},null,this,[[0,11]]);}function getHistory(endpoint,token){var response,responseJson;return regeneratorRuntime.async(function getHistory$(_context6){while(1){switch(_context6.prev=_context6.next){case 0:_context6.prev=0;this.token=token;_context6.next=4;return regeneratorRuntime.awrap(httpRequest(endpoint,'get'));case 4:response=_context6.sent;_context6.next=7;return regeneratorRuntime.awrap(response.json());case 7:responseJson=_context6.sent;return _context6.abrupt("return",responseJson);case 11:_context6.prev=11;_context6.t0=_context6["catch"](0);console.error(_context6.t0);case 14:case "end":return _context6.stop();}}},null,this,[[0,11]]);}function postHistory(endpoint,token,data){var response,responseJson;return regeneratorRuntime.async(function postHistory$(_context7){while(1){switch(_context7.prev=_context7.next){case 0:_context7.prev=0;this.token=token;_context7.next=4;return regeneratorRuntime.awrap(httpRequest(endpoint,'post',data));case 4:response=_context7.sent;_context7.next=7;return regeneratorRuntime.awrap(response.json());case 7:responseJson=_context7.sent;return _context7.abrupt("return",responseJson);case 11:_context7.prev=11;_context7.t0=_context7["catch"](0);console.error(_context7.t0);case 14:case "end":return _context7.stop();}}},null,this,[[0,11]]);}function getMessages(endpoint,token){var response,responseJson;return regeneratorRuntime.async(function getMessages$(_context8){while(1){switch(_context8.prev=_context8.next){case 0:_context8.prev=0;this.token=token;_context8.next=4;return regeneratorRuntime.awrap(httpRequest(endpoint,'get'));case 4:response=_context8.sent;_context8.next=7;return regeneratorRuntime.awrap(response.json());case 7:responseJson=_context8.sent;return _context8.abrupt("return",responseJson);case 11:_context8.prev=11;_context8.t0=_context8["catch"](0);console.error(_context8.t0);case 14:case "end":return _context8.stop();}}},null,this,[[0,11]]);}function postMessage(endpoint,token,data){var response,responseJson;return regeneratorRuntime.async(function postMessage$(_context9){while(1){switch(_context9.prev=_context9.next){case 0:_context9.prev=0;this.token=token;_context9.next=4;return regeneratorRuntime.awrap(httpRequest(endpoint,'post',data));case 4:response=_context9.sent;_context9.next=7;return regeneratorRuntime.awrap(response.json());case 7:responseJson=_context9.sent;return _context9.abrupt("return",responseJson);case 11:_context9.prev=11;_context9.t0=_context9["catch"](0);console.error(_context9.t0);case 14:case "end":return _context9.stop();}}},null,this,[[0,11]]);}function resetData(){var 
+
+response,
+responseJson;return regeneratorRuntime.async(function resetData$(_context10){while(1){switch(_context10.prev=_context10.next){case 0:_context10.prev=0;_context10.next=3;return regeneratorRuntime.awrap(httpRequest('projects/reset_data','get'));case 3:response=_context10.sent;_context10.next=6;return regeneratorRuntime.awrap(response.json());case 6:responseJson=_context10.sent;return _context10.abrupt("return",
+responseJson);case 10:_context10.prev=10;_context10.t0=_context10["catch"](0);
+
+console.error(_context10.t0);case 13:case "end":return _context10.stop();}}},null,this,[[0,10]]);}
 });
 __d('react-redux/lib/utils/warning.js',function(global, require, module, exports) {  'use strict';
 
@@ -34587,7 +34723,8 @@ return babelHelpers.extends({},state,{
 id:action.user.id,
 name:action.user.name,
 role:action.user.role,
-authToken:action.user.auth_token});
+authToken:action.user.auth_token,
+notificationToken:action.user.notification_token});
 
 default:
 return state;}}
@@ -34633,23 +34770,19 @@ __d('Scheduler/App/img/glow2.png',function(global, require, module, exports) {  
 });
 __d('Scheduler/index.ios.js',function(global, require, module, exports) {  'use strict';var _jsxFileName='/Users/brianpark/dev/scheduler-react/index.ios.js';
 
-
-
-
-
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
 
 
 
 
 
-
-var _RootRouter=require('Scheduler/App/Components/RootRouter.js');var _RootRouter2=babelHelpers.interopRequireDefault(_RootRouter);_reactNative.StatusBarIOS.setStyle('light-content');var 
+var _App=require('Scheduler/App/Components/App.js');var _App2=babelHelpers.interopRequireDefault(_App);
+_reactNative.StatusBarIOS.setStyle('light-content');var 
 
 Scheduler=function(_Component){babelHelpers.inherits(Scheduler,_Component);function Scheduler(){babelHelpers.classCallCheck(this,Scheduler);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Scheduler).apply(this,arguments));}babelHelpers.createClass(Scheduler,[{key:'render',value:function render()
 {
 return (
-_reactNative2.default.createElement(_RootRouter2.default,{__source:{fileName:_jsxFileName,lineNumber:19}}));}}]);return Scheduler;}(_reactNative.Component);
+_reactNative2.default.createElement(_App2.default,{__source:{fileName:_jsxFileName,lineNumber:15}}));}}]);return Scheduler;}(_reactNative.Component);
 
 
 
@@ -81819,7 +81952,25 @@ return ReactMount.getNodeFromInstance(componentOrElement);}
 
 module.exports=findDOMNode;
 });
-__d('Scheduler/App/Components/RootRouter.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _jsxFileName='/Users/brianpark/dev/scheduler-react/App/Components/RootRouter.js';
+__d('Scheduler/App/Components/App.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _jsxFileName='/Users/brianpark/dev/scheduler-react/App/Components/App.js';
+
+var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
+var _RootRouter=require('Scheduler/App/Components/RootRouter.js');var _RootRouter2=babelHelpers.interopRequireDefault(_RootRouter);
+var _redux=require('redux/lib/index.js');
+var _reactRedux=require('react-redux/lib/index.js');
+var _user=require('Scheduler/App/Redux/Reducers/user.js');var _user2=babelHelpers.interopRequireDefault(_user);
+var _project=require('Scheduler/App/Redux/Reducers/project.js');var _project2=babelHelpers.interopRequireDefault(_project);
+var _audition=require('Scheduler/App/Redux/Reducers/audition.js');var _audition2=babelHelpers.interopRequireDefault(_audition);
+
+var store=(0,_redux.createStore)((0,_redux.combineReducers)({user:_user2.default,project:_project2.default,audition:_audition2.default}));var 
+
+App=function(_Component){babelHelpers.inherits(App,_Component);function App(){babelHelpers.classCallCheck(this,App);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(App).apply(this,arguments));}babelHelpers.createClass(App,[{key:'render',value:function render()
+{
+return (
+_reactNative2.default.createElement(_reactRedux.Provider,{store:store,__source:{fileName:_jsxFileName,lineNumber:16}},
+_reactNative2.default.createElement(_RootRouter2.default,{__source:{fileName:_jsxFileName,lineNumber:17}})));}}]);return App;}(_reactNative.Component);exports.default=App;
+});
+__d('Scheduler/App/Components/RootRouter.js',function(global, require, module, exports) {  'use strict';var _jsxFileName='/Users/brianpark/dev/scheduler-react/App/Components/RootRouter.js';
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
@@ -81836,54 +81987,93 @@ var _Materials=require('Scheduler/App/Components/Materials.js');var _Materials2=
 var _Notes=require('Scheduler/App/Components/Notes.js');var _Notes2=babelHelpers.interopRequireDefault(_Notes);
 var _layout=require('Scheduler/App/Styles/layout.js');var _layout2=babelHelpers.interopRequireDefault(_layout);
 var _AppEventEmitter=require('Scheduler/App/Services/AppEventEmitter.js');var _AppEventEmitter2=babelHelpers.interopRequireDefault(_AppEventEmitter);
-var _redux=require('redux/lib/index.js');
+var _reactNativePushNotification=require('react-native-push-notification/index.js');var _reactNativePushNotification2=babelHelpers.interopRequireDefault(_reactNativePushNotification);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _reactRedux=require('react-redux/lib/index.js');
-var _user=require('Scheduler/App/Redux/Reducers/user.js');var _user2=babelHelpers.interopRequireDefault(_user);
-var _project=require('Scheduler/App/Redux/Reducers/project.js');var _project2=babelHelpers.interopRequireDefault(_project);
-var _audition=require('Scheduler/App/Redux/Reducers/audition.js');var _audition2=babelHelpers.interopRequireDefault(_audition);
+var _redux=require('redux/lib/index.js');var RootRouter=function(_Component){babelHelpers.inherits(RootRouter,_Component);function RootRouter(){babelHelpers.classCallCheck(this,RootRouter);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(RootRouter).apply(this,arguments));}babelHelpers.createClass(RootRouter,[{key:'componentDidMount',value:function componentDidMount(){_AppEventEmitter2.default.addListener('hamburger.click',this.openControlPanel.bind(this));_reactNativePushNotification2.default.configure({onRegister:this.setToken.bind(this),onNotification:this.onPushNotification.bind(this),senderID:"625049319254",permissions:{alert:true,badge:true,sound:true},popInitialNotification:true,requestPermissions:true});_reactNativePushNotification2.default.setApplicationIconBadgeNumber(0);}},{key:'componentWillUnMount',value:function componentWillUnMount(){_AppEventEmitter2.default.removeListener('hamburger.click');}},{key:'closeControlPanel',value:function closeControlPanel(navigation){if(navigation.type=='AFTER_ROUTER_ROUTE'){this.refs.drawer.close();}}},{key:'openControlPanel',value:function openControlPanel(){this.refs.drawer.open();}},{key:'setToken',value:function setToken(_ref){var token=_ref.token;this.props.userActions.saveUser({notification_token:token});}},{key:'onPushNotification',value:function onPushNotification(notification){console.log(notification);_reactNative.Alert.alert('Audition updated','The audition has been updated.',[{text:'Dismiss',onPress:null}]);_reactNativePushNotification2.default.setApplicationIconBadgeNumber(0);}},{key:'render',value:function render(){return _reactNative2.default.createElement(_reactNativeDrawer2.default,{style:{marginBottom:20},ref:'drawer',type:'overlay',tapToClose:true,openDrawerOffset:0.2,panCloseMask:0.2,content:_reactNative2.default.createElement(_ControlPanel2.default,{__source:{fileName:_jsxFileName,lineNumber:71}}),__source:{fileName:_jsxFileName,lineNumber:64}},_reactNative2.default.createElement(_reactNativeRouterFlux.Router,{hideNavBar:true,dispatch:this.closeControlPanel.bind(this),__source:{fileName:_jsxFileName,lineNumber:72}},_reactNative2.default.createElement(_reactNativeRouterFlux.Schema,{name:'default',sceneConfig:_reactNative.Navigator.SceneConfigs.FloatFromRight,__source:{fileName:_jsxFileName,lineNumber:73}}),_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'login',wrapRouter:false,component:_Login2.default,initial:true,__source:{fileName:_jsxFileName,lineNumber:74}}),_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'projects',wrapRouter:false,component:_Projects2.default,title:'Projects',__source:{fileName:_jsxFileName,lineNumber:75}}),_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'schedule',wrapRouter:false,component:_Schedule2.default,title:'Schedule',__source:{fileName:_jsxFileName,lineNumber:76}}),_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'auditions',wrapRouter:false,component:_Auditions2.default,title:'Auditions',__source:{fileName:_jsxFileName,lineNumber:77}}),_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'history',wrapRouter:false,component:_History2.default,title:'History',__source:{fileName:_jsxFileName,lineNumber:78}}),_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'message',wrapRouter:false,component:_Message2.default,title:'Message',__source:{fileName:_jsxFileName,lineNumber:79}}),_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'materials',wrapRouter:false,component:_Materials2.default,title:'Materials',__source:{fileName:_jsxFileName,lineNumber:80}}),_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'notes',wrapRouter:false,component:_Notes2.default,title:'Notes',__source:{fileName:_jsxFileName,lineNumber:81}})));}}]);return RootRouter;}(_reactNative.Component);
+var UserActions=require('Scheduler/App/Redux/Actions/user.js');
 
-var store=(0,_redux.createStore)((0,_redux.combineReducers)({user:_user2.default,project:_project2.default,audition:_audition2.default}));var 
-
-RootRouter=function(_Component){babelHelpers.inherits(RootRouter,_Component);function RootRouter(){babelHelpers.classCallCheck(this,RootRouter);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(RootRouter).apply(this,arguments));}babelHelpers.createClass(RootRouter,[{key:'componentDidMount',value:function componentDidMount()
-{
-_AppEventEmitter2.default.addListener('hamburger.click',this.openControlPanel.bind(this));}},{key:'componentWillUnMount',value:function componentWillUnMount()
-
-
-{
-_AppEventEmitter2.default.removeListener('hamburger.click');}},{key:'closeControlPanel',value:function closeControlPanel(
-
-
-navigation){
-if(navigation.type=='AFTER_ROUTER_ROUTE'){
-this.refs.drawer.close();}}},{key:'openControlPanel',value:function openControlPanel()
+function mapStateToProps(state){
+return {
+user:state.user};}
 
 
 
-{
-this.refs.drawer.open();}},{key:'render',value:function render()
+function mapDispatchToProps(dispatch){
+return {
+userActions:(0,_redux.bindActionCreators)(UserActions,dispatch)};}
 
 
-{
-return (
-_reactNative2.default.createElement(_reactNativeDrawer2.default,{
-style:{marginBottom:20},
-ref:'drawer',
-type:'overlay',
-tapToClose:true,
-openDrawerOffset:0.2,
-panCloseMask:0.2,
-content:_reactNative2.default.createElement(_ControlPanel2.default,{__source:{fileName:_jsxFileName,lineNumber:54}}),__source:{fileName:_jsxFileName,lineNumber:47}},
-_reactNative2.default.createElement(_reactRedux.Provider,{store:store,__source:{fileName:_jsxFileName,lineNumber:55}},
-_reactNative2.default.createElement(_reactNativeRouterFlux.Router,{hideNavBar:true,dispatch:this.closeControlPanel.bind(this),__source:{fileName:_jsxFileName,lineNumber:56}},
-_reactNative2.default.createElement(_reactNativeRouterFlux.Schema,{name:'default',sceneConfig:_reactNative.Navigator.SceneConfigs.FloatFromRight,__source:{fileName:_jsxFileName,lineNumber:57}}),
-_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'login',wrapRouter:false,component:_Login2.default,initial:true,__source:{fileName:_jsxFileName,lineNumber:58}}),
-_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'projects',wrapRouter:false,component:_Projects2.default,title:'Projects',__source:{fileName:_jsxFileName,lineNumber:59}}),
-_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'schedule',wrapRouter:false,component:_Schedule2.default,title:'Schedule',__source:{fileName:_jsxFileName,lineNumber:60}}),
-_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'auditions',wrapRouter:false,component:_Auditions2.default,title:'Auditions',__source:{fileName:_jsxFileName,lineNumber:61}}),
-_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'history',wrapRouter:false,component:_History2.default,title:'History',__source:{fileName:_jsxFileName,lineNumber:62}}),
-_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'message',wrapRouter:false,component:_Message2.default,title:'Message',__source:{fileName:_jsxFileName,lineNumber:63}}),
-_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'materials',wrapRouter:false,component:_Materials2.default,title:'Materials',__source:{fileName:_jsxFileName,lineNumber:64}}),
-_reactNative2.default.createElement(_reactNativeRouterFlux.Route,{name:'notes',wrapRouter:false,component:_Notes2.default,title:'Notes',__source:{fileName:_jsxFileName,lineNumber:65}})))));}}]);return RootRouter;}(_reactNative.Component);exports.default=RootRouter;
+
+module.exports=(0,_reactRedux.connect)(mapStateToProps,mapDispatchToProps)(RootRouter);
 });
 __d('react-native-router-flux/index.js',function(global, require, module, exports) {  var _Common=require('react-native-router-flux/Common.js');
 var _TabBar=require('react-native-router-flux/TabBar.js');var _TabBar2=babelHelpers.interopRequireDefault(_TabBar);
@@ -88181,246 +88371,6 @@ flexDirection:'row'}});
 
 module.exports=ThreeBounce;
 });
-__d('react-native-push-notification/index.js',function(global, require, module, exports) {  'use strict';
-
-
-
-
-
-var RNNotificationsComponent=require('react-native-push-notification/component/index.ios.js');
-
-var AppState=RNNotificationsComponent.state;
-var RNNotifications=RNNotificationsComponent.component;
-
-var Platform=require('react-native/Libraries/react-native/react-native.js').Platform;
-
-var Notifications={
-handler:RNNotifications,
-onRegister:false,
-onError:false,
-onNotification:false,
-
-loaded:false,
-
-permissions:{
-alert:true,
-badge:true,
-sound:true}};
-
-
-
-Notifications.callNative=function(name,params){
-if(typeof this.handler[name]==='function'){var _handler;
-if(typeof params!=='array'&&
-typeof params!=='object'){
-params=[];}
-
-
-return (_handler=this.handler)[name].apply(_handler,babelHelpers.toConsumableArray(params));}else 
-{
-return null;}};
-
-
-
-
-
-
-
-
-
-
-
-
-Notifications.configure=function(options){
-if(typeof options.onRegister!=='undefined'){
-this.onRegister=options.onRegister;}
-
-
-if(typeof options.onError!=='undefined'){
-this.onError=options.onError;}
-
-
-if(typeof options.onNotification!=='undefined'){
-this.onNotification=options.onNotification;}
-
-
-if(typeof options.permissions!=='undefined'){
-this.permissions=options.permissions;}
-
-
-if(typeof options.senderID!=='undefined'){
-this.senderID=options.senderID;}
-
-
-if(this.loaded===false){
-this.callNative('addEventListener',['register',this._onRegister.bind(this)]);
-this.callNative('addEventListener',['notification',this._onNotification.bind(this)]);
-
-if(typeof options.popInitialNotification==='undefined'||options.popInitialNotification===true){
-var tempFirstNotification=this.callNative('popInitialNotification');
-
-if(tempFirstNotification!==null){
-this._onNotification(tempFirstNotification,true);}}
-
-
-
-this.loaded=true;}
-
-
-if(options.requestPermissions!==false){
-this.requestPermissions();}};
-
-
-
-
-
-Notifications.unregister=function(){
-this.callNative('removeEventListener',['register',this._onRegister.bind(this)]);
-this.callNative('removeEventListener',['notification',this._onNotification.bind(this)]);};
-
-
-
-
-
-
-
-
-
-Notifications.localNotification=function(details){
-if(Platform.OS==='ios'){
-this.handler.presentLocalNotification({
-alertBody:details.message});}else 
-
-{
-this.handler.presentLocalNotification(details);}};
-
-
-
-
-
-
-
-
-Notifications.localNotificationSchedule=function(details){
-if(Platform.OS==='ios'){
-this.handler.scheduleLocalNotification({
-fireDate:details.date,
-alertBody:details.message});}else 
-
-{
-this.handler.scheduleLocalNotification(details);}};
-
-
-
-
-Notifications._onRegister=function(token){
-if(this.onRegister!==false){
-this.onRegister({
-token:token,
-os:Platform.OS});}};
-
-
-
-
-Notifications._onNotification=function(data){var isFromBackground=arguments.length<=1||arguments[1]===undefined?null:arguments[1];
-if(isFromBackground===null){
-if(Platform.OS==='ios'){
-isFromBackground=AppState.currentState==='background';}else 
-{
-isFromBackground=data.foreground===false;}}
-
-
-
-if(this.onNotification!==false){
-if(Platform.OS==='ios'){
-this.onNotification({
-foreground:!isFromBackground,
-message:data.getMessage(),
-data:data.getData(),
-badge:data.getBadgeCount(),
-alert:data.getAlert(),
-sound:data.getSound()});}else 
-
-{
-var notificationData=babelHelpers.extends({
-foreground:!isFromBackground},
-data);
-
-
-if(typeof notificationData.data==='string'){
-try{
-notificationData.data=JSON.parse(notificationData.data);}
-catch(e){}}
-
-
-
-
-this.onNotification(notificationData);}}};
-
-
-
-
-Notifications.requestPermissions=function(){
-if(Platform.OS==='ios'){
-return this.callNative('requestPermissions',[this.permissions]);}else 
-if(typeof this.senderID!=='undefined'){
-return this.callNative('requestPermissions',[this.senderID]);}};
-
-
-
-
-Notifications.presentLocalNotification=function(){
-return this.callNative('presentLocalNotification',arguments);};
-
-
-Notifications.scheduleLocalNotification=function(){
-return this.callNative('scheduleLocalNotification',arguments);};
-
-
-Notifications.cancelAllLocalNotifications=function(){
-return this.callNative('cancelAllLocalNotifications',arguments);};
-
-
-Notifications.cancelAllLocalNotifications=function(){
-return this.callNative('cancelAllLocalNotifications',arguments);};
-
-
-Notifications.setApplicationIconBadgeNumber=function(){
-return this.callNative('setApplicationIconBadgeNumber',arguments);};
-
-
-Notifications.getApplicationIconBadgeNumber=function(){
-return this.callNative('getApplicationIconBadgeNumber',arguments);};
-
-
-Notifications.popInitialNotification=function(){
-return this.callNative('popInitialNotification',arguments);};
-
-
-Notifications.abandonPermissions=function(){
-return this.callNative('abandonPermissions',arguments);};
-
-
-Notifications.checkPermissions=function(){
-return this.callNative('checkPermissions',arguments);};
-
-
-module.exports=Notifications;
-});
-__d('react-native-push-notification/component/index.ios.js',function(global, require, module, exports) {  'use strict';
-
-
-var React=require('react-native/Libraries/react-native/react-native.js');var 
-
-
-AppStateIOS=
-
-React.AppStateIOS;var PushNotificationIOS=React.PushNotificationIOS;
-
-module.exports={
-state:AppStateIOS,
-component:PushNotificationIOS};
-});
 __d('react-redux/lib/index.js',function(global, require, module, exports) {  'use strict';
 
 exports.__esModule=true;
@@ -89600,10 +89550,8 @@ projectItemSelect:{
 flex:1},
 
 
-projectItemRoles:{
-flex:1,
-flexDirection:'column',
-marginTop:10},
+directorContainer:{
+marginTop:20},
 
 
 projectItemRight:{
@@ -90045,12 +89993,19 @@ flexDirection:'column',
 alignItems:'flex-end'},
 
 
-bottom:{
-marginTop:20,
+middle:{
 flex:1,
 flexDirection:'row',
-justifyContent:'space-between',
-alignItems:'center'},
+justifyContent:'space-around',
+padding:10},
+
+
+bottom:{
+flex:1,
+flexDirection:'row',
+justifyContent:'space-around',
+alignItems:'center',
+marginTop:10},
 
 
 messageIconContainer:{
@@ -90431,6 +90386,246 @@ left:0,
 right:0,
 bottom:0}});
 });
+__d('react-native-push-notification/index.js',function(global, require, module, exports) {  'use strict';
+
+
+
+
+
+var RNNotificationsComponent=require('react-native-push-notification/component/index.ios.js');
+
+var AppState=RNNotificationsComponent.state;
+var RNNotifications=RNNotificationsComponent.component;
+
+var Platform=require('react-native/Libraries/react-native/react-native.js').Platform;
+
+var Notifications={
+handler:RNNotifications,
+onRegister:false,
+onError:false,
+onNotification:false,
+
+loaded:false,
+
+permissions:{
+alert:true,
+badge:true,
+sound:true}};
+
+
+
+Notifications.callNative=function(name,params){
+if(typeof this.handler[name]==='function'){var _handler;
+if(typeof params!=='array'&&
+typeof params!=='object'){
+params=[];}
+
+
+return (_handler=this.handler)[name].apply(_handler,babelHelpers.toConsumableArray(params));}else 
+{
+return null;}};
+
+
+
+
+
+
+
+
+
+
+
+
+Notifications.configure=function(options){
+if(typeof options.onRegister!=='undefined'){
+this.onRegister=options.onRegister;}
+
+
+if(typeof options.onError!=='undefined'){
+this.onError=options.onError;}
+
+
+if(typeof options.onNotification!=='undefined'){
+this.onNotification=options.onNotification;}
+
+
+if(typeof options.permissions!=='undefined'){
+this.permissions=options.permissions;}
+
+
+if(typeof options.senderID!=='undefined'){
+this.senderID=options.senderID;}
+
+
+if(this.loaded===false){
+this.callNative('addEventListener',['register',this._onRegister.bind(this)]);
+this.callNative('addEventListener',['notification',this._onNotification.bind(this)]);
+
+if(typeof options.popInitialNotification==='undefined'||options.popInitialNotification===true){
+var tempFirstNotification=this.callNative('popInitialNotification');
+
+if(tempFirstNotification!==null){
+this._onNotification(tempFirstNotification,true);}}
+
+
+
+this.loaded=true;}
+
+
+if(options.requestPermissions!==false){
+this.requestPermissions();}};
+
+
+
+
+
+Notifications.unregister=function(){
+this.callNative('removeEventListener',['register',this._onRegister.bind(this)]);
+this.callNative('removeEventListener',['notification',this._onNotification.bind(this)]);};
+
+
+
+
+
+
+
+
+
+Notifications.localNotification=function(details){
+if(Platform.OS==='ios'){
+this.handler.presentLocalNotification({
+alertBody:details.message});}else 
+
+{
+this.handler.presentLocalNotification(details);}};
+
+
+
+
+
+
+
+
+Notifications.localNotificationSchedule=function(details){
+if(Platform.OS==='ios'){
+this.handler.scheduleLocalNotification({
+fireDate:details.date,
+alertBody:details.message});}else 
+
+{
+this.handler.scheduleLocalNotification(details);}};
+
+
+
+
+Notifications._onRegister=function(token){
+if(this.onRegister!==false){
+this.onRegister({
+token:token,
+os:Platform.OS});}};
+
+
+
+
+Notifications._onNotification=function(data){var isFromBackground=arguments.length<=1||arguments[1]===undefined?null:arguments[1];
+if(isFromBackground===null){
+if(Platform.OS==='ios'){
+isFromBackground=AppState.currentState==='background';}else 
+{
+isFromBackground=data.foreground===false;}}
+
+
+
+if(this.onNotification!==false){
+if(Platform.OS==='ios'){
+this.onNotification({
+foreground:!isFromBackground,
+message:data.getMessage(),
+data:data.getData(),
+badge:data.getBadgeCount(),
+alert:data.getAlert(),
+sound:data.getSound()});}else 
+
+{
+var notificationData=babelHelpers.extends({
+foreground:!isFromBackground},
+data);
+
+
+if(typeof notificationData.data==='string'){
+try{
+notificationData.data=JSON.parse(notificationData.data);}
+catch(e){}}
+
+
+
+
+this.onNotification(notificationData);}}};
+
+
+
+
+Notifications.requestPermissions=function(){
+if(Platform.OS==='ios'){
+return this.callNative('requestPermissions',[this.permissions]);}else 
+if(typeof this.senderID!=='undefined'){
+return this.callNative('requestPermissions',[this.senderID]);}};
+
+
+
+
+Notifications.presentLocalNotification=function(){
+return this.callNative('presentLocalNotification',arguments);};
+
+
+Notifications.scheduleLocalNotification=function(){
+return this.callNative('scheduleLocalNotification',arguments);};
+
+
+Notifications.cancelAllLocalNotifications=function(){
+return this.callNative('cancelAllLocalNotifications',arguments);};
+
+
+Notifications.cancelAllLocalNotifications=function(){
+return this.callNative('cancelAllLocalNotifications',arguments);};
+
+
+Notifications.setApplicationIconBadgeNumber=function(){
+return this.callNative('setApplicationIconBadgeNumber',arguments);};
+
+
+Notifications.getApplicationIconBadgeNumber=function(){
+return this.callNative('getApplicationIconBadgeNumber',arguments);};
+
+
+Notifications.popInitialNotification=function(){
+return this.callNative('popInitialNotification',arguments);};
+
+
+Notifications.abandonPermissions=function(){
+return this.callNative('abandonPermissions',arguments);};
+
+
+Notifications.checkPermissions=function(){
+return this.callNative('checkPermissions',arguments);};
+
+
+module.exports=Notifications;
+});
+__d('react-native-push-notification/component/index.ios.js',function(global, require, module, exports) {  'use strict';
+
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+
+AppStateIOS=
+
+React.AppStateIOS;var PushNotificationIOS=React.PushNotificationIOS;
+
+module.exports={
+state:AppStateIOS,
+component:PushNotificationIOS};
+});
 __d('Scheduler/App/Components/Widgets/ControlPanel.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _jsxFileName='/Users/brianpark/dev/scheduler-react/App/Components/Widgets/ControlPanel.js';
 
 
@@ -90439,7 +90634,7 @@ var _Button=require('Scheduler/App/Components/Widgets/Button.js');var _Button2=b
 var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
 var _controlPanel=require('Scheduler/App/Styles/controlPanel.js');var _controlPanel2=babelHelpers.interopRequireDefault(_controlPanel);
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
-var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelpers.interopRequireDefault(_Request);var 
+var _Api=require('Scheduler/App/Network/Api.js');var 
 
 ControlPanel=function(_Component){babelHelpers.inherits(ControlPanel,_Component);function ControlPanel(){babelHelpers.classCallCheck(this,ControlPanel);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(ControlPanel).apply(this,arguments));}babelHelpers.createClass(ControlPanel,[{key:'render',value:function render()
 {var _this2=this;
@@ -90486,21 +90681,18 @@ _reactNative2.default.createElement(_reactNative.Text,{style:_controlPanel2.defa
 
 
 {
-this.resetData();}},{key:'resetData',value:function resetData(){var 
+this.reset();}},{key:'reset',value:function reset(){var 
 
 
 
-path,
-responseJson,
+response,
 
-response;return regeneratorRuntime.async(function resetData$(_context){while(1){switch(_context.prev=_context.next){case 0:path=_Request2.default+'projects/reset_data';responseJson=void 0;_context.prev=2;_context.next=5;return regeneratorRuntime.awrap(fetch(path));case 5:response=_context.sent;_context.next=8;return regeneratorRuntime.awrap(
-response.json());case 8:responseJson=_context.sent;
-console.log(responseJson);
+_response;return regeneratorRuntime.async(function reset$(_context){while(1){switch(_context.prev=_context.next){case 0:response=void 0;_context.prev=1;_context.next=4;return regeneratorRuntime.awrap((0,_Api.resetData)());case 4:_response=_context.sent;
 
-_reactNative.Alert.alert(responseJson.message);
-_reactNativeRouterFlux.Actions.login();_context.next=17;break;case 14:_context.prev=14;_context.t0=_context['catch'](2);
+_reactNative.Alert.alert(_response.message);
+_reactNativeRouterFlux.Actions.login();_context.next=12;break;case 9:_context.prev=9;_context.t0=_context['catch'](1);
 
-console.log(_context.t0);case 17:case 'end':return _context.stop();}}},null,this,[[2,14]]);}}]);return ControlPanel;}(_reactNative.Component);exports.default=ControlPanel;
+console.log(_context.t0);case 12:case 'end':return _context.stop();}}},null,this,[[1,9]]);}}]);return ControlPanel;}(_reactNative.Component);exports.default=ControlPanel;
 });
 __d('Scheduler/App/Components/Login.js',function(global, require, module, exports) {  'use strict';var _jsxFileName='/Users/brianpark/dev/scheduler-react/App/Components/Login.js';
 
@@ -90512,61 +90704,7 @@ var _ButtonRounded=require('Scheduler/App/Components/Widgets/ButtonRounded.js');
 var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
 var _IconInput=require('Scheduler/App/Components/Widgets/IconInput.js');var _IconInput2=babelHelpers.interopRequireDefault(_IconInput);
 var _reactNativeSpinkit=require('react-native-spinkit/index.ios.js');var _reactNativeSpinkit2=babelHelpers.interopRequireDefault(_reactNativeSpinkit);
-var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelpers.interopRequireDefault(_Request);
-var _reactNativePushNotification=require('react-native-push-notification/index.js');var _reactNativePushNotification2=babelHelpers.interopRequireDefault(_reactNativePushNotification);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var _Api=require('Scheduler/App/Network/Api.js');
 
 
 
@@ -90658,7 +90796,7 @@ var _reactNativePushNotification=require('react-native-push-notification/index.j
 
 
 var _reactRedux=require('react-redux/lib/index.js');
-var _redux=require('redux/lib/index.js');var Login=function(_Component){babelHelpers.inherits(Login,_Component);function Login(props){babelHelpers.classCallCheck(this,Login);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Login).call(this,props));_this.state={email:'secret.agent@cwb.com',password:'password',notificationToken:"",visibleHeight:_reactNative.Dimensions.get('window').height,scroll:false,isLoading:false};_this.setToken=_this.setToken.bind(_this);return _this;}babelHelpers.createClass(Login,[{key:'componentDidMount',value:function componentDidMount(){_reactNativePushNotification2.default.configure({onRegister:this.setToken,onNotification:this.onPushNotification,senderID:"625049319254",permissions:{alert:true,badge:true,sound:true},popInitialNotification:true,requestPermissions:true});}},{key:'componentWillMount',value:function componentWillMount(){_reactNative.DeviceEventEmitter.addListener('keyboardWillShow',this.keyboardWillShow.bind(this));_reactNative.DeviceEventEmitter.addListener('keyboardWillHide',this.keyboardWillHide.bind(this));}},{key:'keyboardWillShow',value:function keyboardWillShow(e){var newSize=_reactNative.Dimensions.get('window').height-e.endCoordinates.height;this.setState({scroll:true});}},{key:'keyboardWillHide',value:function keyboardWillHide(e){this.setState({scroll:false});}},{key:'setToken',value:function setToken(object){var notificationToken=object.token;this.setState({notificationToken:notificationToken});}},{key:'onPushNotification',value:function onPushNotification(notification){console.log(notification);_reactNative.Alert.alert('Notification Received','Alert message: '+notification.getMessage(),[{text:'Dismiss',onPress:null}]);}},{key:'render',value:function render(){var _this2=this;return _reactNative2.default.createElement(_reactNative.ScrollView,{style:_style2.default.color,scrollEnabled:this.state.scroll,__source:{fileName:_jsxFileName,lineNumber:70}},_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:71}},_reactNative2.default.createElement(_reactNative.View,{style:_login2.default.logoContainer,__source:{fileName:_jsxFileName,lineNumber:72}},_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/cwb_logo.png'),style:_login2.default.logo,__source:{fileName:_jsxFileName,lineNumber:73}}),_reactNative2.default.createElement(_reactNative.Text,{style:_login2.default.nameText,__source:{fileName:_jsxFileName,lineNumber:74}},'Scheduler')),_reactNative2.default.createElement(_reactNative.View,{style:_reactNative.Platform.OS==='android'?_login2.default.abg:_login2.default.bg,__source:{fileName:_jsxFileName,lineNumber:76}},_reactNative2.default.createElement(_IconInput2.default,{placeholder:'EMAIL',icon:'person',secureTextEntry:false,dark:false,value:this.state.email,onChangeText:function onChangeText(val){return _this2.setState({email:val});},__source:{fileName:_jsxFileName,lineNumber:77}}),_reactNative2.default.createElement(_IconInput2.default,{placeholder:'PASSWORD',icon:'ios-unlocked-outline',secureTextEntry:true,dark:false,value:this.state.password,onChangeText:function onChangeText(val){return _this2.setState({password:val});},__source:{fileName:_jsxFileName,lineNumber:84}}),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:this.signuep,style:{alignSelf:'flex-end',marginRight:15},__source:{fileName:_jsxFileName,lineNumber:91}},_reactNative2.default.createElement(_reactNative.Text,{style:_login2.default.registerLink,__source:{fileName:_jsxFileName,lineNumber:92}},'Forgot Password')),_reactNative2.default.createElement(_ButtonRounded2.default,{onPress:function onPress(){return _this2.createSession();},text:'Login',__source:{fileName:_jsxFileName,lineNumber:94}})),_reactNative2.default.createElement(_reactNative.View,{style:_login2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:98}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:99}}))));}},{key:'createSession',value:function createSession(){var headers,data,formData,k,request,path,responseJson,response;return regeneratorRuntime.async(function createSession$(_context){while(1){switch(_context.prev=_context.next){case 0:headers={accept:'application/json'};data={'session[email]':this.state.email,'session[password]':this.state.password,'session[notification_token]':this.state.notificationToken,'session[platform]':_reactNative.Platform.OS};formData=new FormData();for(k in data){formData.append(k,data[k]);}request={method:'post',headers:headers,body:formData};path=_Request2.default+'session/';responseJson=void 0;_context.prev=7;this.setState({isLoading:true});_context.next=11;return regeneratorRuntime.awrap(fetch(path,request));case 11:response=_context.sent;_context.next=14;return regeneratorRuntime.awrap(response.json());case 14:responseJson=_context.sent;console.log(responseJson);this.props.userActions.saveUser(responseJson);if(responseJson.errors){_reactNative.Alert.alert(responseJson.errors);}else {responseJson.role=='agent'?_reactNativeRouterFlux.Actions.projects():_reactNativeRouterFlux.Actions.auditions();}_context.next=24;break;case 20:_context.prev=20;_context.t0=_context['catch'](7);console.log(_context.t0);_reactNative.Alert.alert(_context.t0);case 24:this.setState({isLoading:false});case 25:case 'end':return _context.stop();}}},null,this,[[7,20]]);}}]);return Login;}(_reactNative.Component);
+var _redux=require('redux/lib/index.js');var Login=function(_Component){babelHelpers.inherits(Login,_Component);function Login(props){babelHelpers.classCallCheck(this,Login);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Login).call(this,props));_this.state={email:'secret.agent@cwb.com',password:'password',visibleHeight:_reactNative.Dimensions.get('window').height,scroll:false,isLoading:false};return _this;}babelHelpers.createClass(Login,[{key:'componentWillMount',value:function componentWillMount(){_reactNative.DeviceEventEmitter.addListener('keyboardWillShow',this.keyboardWillShow.bind(this));_reactNative.DeviceEventEmitter.addListener('keyboardWillHide',this.keyboardWillHide.bind(this));}},{key:'keyboardWillShow',value:function keyboardWillShow(e){var newSize=_reactNative.Dimensions.get('window').height-e.endCoordinates.height;this.setState({scroll:true});}},{key:'keyboardWillHide',value:function keyboardWillHide(e){this.setState({scroll:false});}},{key:'render',value:function render(){var _this2=this;return _reactNative2.default.createElement(_reactNative.ScrollView,{style:_style2.default.color,scrollEnabled:this.state.scroll,__source:{fileName:_jsxFileName,lineNumber:42}},_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:43}},_reactNative2.default.createElement(_reactNative.View,{style:_login2.default.logoContainer,__source:{fileName:_jsxFileName,lineNumber:44}},_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/cwb_logo.png'),style:_login2.default.logo,__source:{fileName:_jsxFileName,lineNumber:45}}),_reactNative2.default.createElement(_reactNative.Text,{style:_login2.default.nameText,__source:{fileName:_jsxFileName,lineNumber:46}},'Scheduler')),_reactNative2.default.createElement(_reactNative.View,{style:_reactNative.Platform.OS==='android'?_login2.default.abg:_login2.default.bg,__source:{fileName:_jsxFileName,lineNumber:48}},_reactNative2.default.createElement(_IconInput2.default,{placeholder:'EMAIL',icon:'person',secureTextEntry:false,dark:false,value:this.state.email,onChangeText:function onChangeText(val){return _this2.setState({email:val});},__source:{fileName:_jsxFileName,lineNumber:49}}),_reactNative2.default.createElement(_IconInput2.default,{placeholder:'PASSWORD',icon:'ios-unlocked-outline',secureTextEntry:true,dark:false,value:this.state.password,onChangeText:function onChangeText(val){return _this2.setState({password:val});},__source:{fileName:_jsxFileName,lineNumber:56}}),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:this.signuep,style:{alignSelf:'flex-end',marginRight:15},__source:{fileName:_jsxFileName,lineNumber:63}},_reactNative2.default.createElement(_reactNative.Text,{style:_login2.default.registerLink,__source:{fileName:_jsxFileName,lineNumber:64}},'Forgot Password')),_reactNative2.default.createElement(_ButtonRounded2.default,{onPress:function onPress(){return _this2.login();},text:'Login',__source:{fileName:_jsxFileName,lineNumber:66}})),_reactNative2.default.createElement(_reactNative.View,{style:_login2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:70}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:71}}))));}},{key:'login',value:function login(){var data,userData;return regeneratorRuntime.async(function login$(_context){while(1){switch(_context.prev=_context.next){case 0:data={'session[email]':this.state.email,'session[password]':this.state.password,'session[notification_token]':this.props.user.notificationToken,'session[platform]':_reactNative.Platform.OS};this.setState({isLoading:true});_context.prev=2;_context.next=5;return regeneratorRuntime.awrap((0,_Api.postSession)(data));case 5:userData=_context.sent;this.props.userActions.saveUser(userData);userData.role=='agent'?_reactNativeRouterFlux.Actions.projects():_reactNativeRouterFlux.Actions.auditions();_context.next=13;break;case 10:_context.prev=10;_context.t0=_context['catch'](2);console.error(_context.t0);case 13:this.setState({isLoading:false});case 14:case 'end':return _context.stop();}}},null,this,[[2,10]]);}}]);return Login;}(_reactNative.Component);
 var UserActions=require('Scheduler/App/Redux/Actions/user.js');
 
 function mapStateToProps(state){
@@ -90689,30 +90827,7 @@ var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
 var _reactNativeActionSheet=require('@remobile/react-native-action-sheet/index.js');var _reactNativeActionSheet2=babelHelpers.interopRequireDefault(_reactNativeActionSheet);
 var _reactNativeSpinkit=require('react-native-spinkit/index.ios.js');var _reactNativeSpinkit2=babelHelpers.interopRequireDefault(_reactNativeSpinkit);
 var _lodash=require('lodash/lodash.js');var _lodash2=babelHelpers.interopRequireDefault(_lodash);
-var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelpers.interopRequireDefault(_Request);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var _Api=require('Scheduler/App/Network/Api.js');
 
 
 
@@ -90942,7 +91057,7 @@ var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelp
 
 
 var _reactRedux=require('react-redux/lib/index.js');
-var _redux=require('redux/lib/index.js');var Projects=function(_Component){babelHelpers.inherits(Projects,_Component);function Projects(props){babelHelpers.classCallCheck(this,Projects);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Projects).call(this,props));var dummyProjects=[];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyProjects),projects:dummyProjects,selected:[],show:false,isLoading:false,refreshing:false};return _this;}babelHelpers.createClass(Projects,[{key:'componentDidMount',value:function componentDidMount(){this.getProjects();}},{key:'render',value:function render(){return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:67}},_reactNative2.default.createElement(_Navbar2.default,{title:'Projects',style:_style2.default.toolbar,back:false,__source:{fileName:_jsxFileName,lineNumber:68}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:72}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},refreshControl:_reactNative2.default.createElement(_reactNative.RefreshControl,{refreshing:this.state.refreshing,onRefresh:this._onRefresh.bind(this),__source:{fileName:_jsxFileName,lineNumber:76}}),__source:{fileName:_jsxFileName,lineNumber:73}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:80}},_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:81}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderRow:this._renderRow.bind(this),renderSeparator:this._renderSeperator,__source:{fileName:_jsxFileName,lineNumber:82}})))),_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.footer,__source:{fileName:_jsxFileName,lineNumber:89}},_reactNative2.default.createElement(_ButtonRounded2.default,{text:'Actions',onPress:this.onOpen.bind(this),__source:{fileName:_jsxFileName,lineNumber:90}})),_reactNative2.default.createElement(_reactNativeActionSheet2.default,{visible:this.state.show,onCancel:this.onCancel.bind(this),__source:{fileName:_jsxFileName,lineNumber:92}},this.generateActionButtons()),_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:97}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:98}}))));}},{key:'_renderRow',value:function _renderRow(project){var _this2=this;var roles=_lodash2.default.map(project.roles,function(role,index){if(index<3)return _reactNative2.default.createElement(_reactNative.Text,{key:index,style:_projects2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:112}},role);});return _reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onItemSelected(project.id);},__source:{fileName:_jsxFileName,lineNumber:116}},_reactNative2.default.createElement(_reactNative.View,{style:project.selected?_projects2.default.projectItemSelected:_projects2.default.projectItem,__source:{fileName:_jsxFileName,lineNumber:117}},_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.projectItemLeft,__source:{fileName:_jsxFileName,lineNumber:118}},_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.projectItemSelect,__source:{fileName:_jsxFileName,lineNumber:119}},_reactNative2.default.createElement(_reactNative.Text,{style:_projects2.default.highlightedFont,__source:{fileName:_jsxFileName,lineNumber:120}},project.title),_reactNative2.default.createElement(_reactNative.Text,{style:_projects2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:121}},project.director),_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.projectItemRoles,__source:{fileName:_jsxFileName,lineNumber:122}},roles))),_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.projectItemRight,__source:{fileName:_jsxFileName,lineNumber:125}},_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.actionsContainer,__source:{fileName:_jsxFileName,lineNumber:126}},_reactNative2.default.createElement(_reactNative.View,{style:project.actions>0?_projects2.default.activeActions:_projects2.default.inactiveActions,__source:{fileName:_jsxFileName,lineNumber:127}},_reactNative2.default.createElement(_reactNative.Text,{__source:{fileName:_jsxFileName,lineNumber:128}},project.actions))),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onSchedulePressed(project.id);},__source:{fileName:_jsxFileName,lineNumber:131}},_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.projectItemIconContainer,__source:{fileName:_jsxFileName,lineNumber:132}},_reactNative2.default.createElement(_Ionicons2.default,{name:'ios-arrow-forward',style:_projects2.default.projectItemIcon,__source:{fileName:_jsxFileName,lineNumber:133}}))))));}},{key:'_renderSeperator',value:function _renderSeperator(sectionID,rowID){return _reactNative2.default.createElement(_reactNative.View,{key:sectionID+'-'+rowID,style:_projects2.default.separator,__source:{fileName:_jsxFileName,lineNumber:144}});}},{key:'_onRefresh',value:function _onRefresh(){console.log("Refresh Triggered");this.setState({refreshing:true});this.getProjects();}},{key:'generateActionButtons',value:function generateActionButtons(){var _this3=this;var buttons=void 0;if(this.state.selected.length==1)buttons=[_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{key:'call-casting',onPress:function onPress(){return _this3.onCall();},__source:{fileName:_jsxFileName,lineNumber:158}},'Call Casting Director')];return buttons;}},{key:'onItemSelected',value:function onItemSelected(id){var selected=void 0;if(_lodash2.default.includes(this.state.selected,id))selected=_lodash2.default.without(this.state.selected,id);else selected=_lodash2.default.concat(this.state.selected,id);var projects=_lodash2.default.map(_lodash2.default.cloneDeep(this.state.projects),function(project){if(project.id==id&&project.selected==false){project.selected=true;}else if(project.id==id&&project.selected==true){project.selected=false;}return project;});this.setState({dataSource:this.state.dataSource.cloneWithRows(projects),projects:projects,selected:selected});}},{key:'onSchedulePressed',value:function onSchedulePressed(id){this.props.projectActions.setProject(_lodash2.default.find(this.state.projects,{'id':id}));_reactNativeRouterFlux.Actions.schedule();}},{key:'onCancel',value:function onCancel(){this.setState({show:false});}},{key:'onOpen',value:function onOpen(){if(this.state.selected.length<1)_reactNative.Alert.alert("Please select project");else if(this.state.selected.length>1)_reactNative.Alert.alert("Please only select 1 project");else this.setState({show:true});}},{key:'onCall',value:function onCall(){this.setState({show:false});_reactNative.Linking.openURL('tel:'+_lodash2.default.find(this.state.projects,{'id':this.state.selected[0]}).phone);}},{key:'getProjects',value:function getProjects(){var headers,request,path,responseJson,response,projects;return regeneratorRuntime.async(function getProjects$(_context){while(1){switch(_context.prev=_context.next){case 0:headers={accept:'application/json',authorization:this.props.user.authToken};request={method:'get',headers:headers};path=_Request2.default+'projects';responseJson=void 0;_context.prev=4;this.setState({isLoading:true});_context.next=8;return regeneratorRuntime.awrap(fetch(path,request));case 8:response=_context.sent;_context.next=11;return regeneratorRuntime.awrap(response.json());case 11:responseJson=_context.sent;console.log(responseJson);if(responseJson.errors)_reactNative.Alert.alert(responseJson.errors);_context.next=19;break;case 16:_context.prev=16;_context.t0=_context['catch'](4);console.error(_context.t0);case 19:projects=_lodash2.default.map(responseJson.projects,function(project,index){var actions=0;_lodash2.default.each(project.auditions,function(audition){if(_lodash2.default.isEmpty(audition.status))actions++;if((audition.status=='CONF'||audition.status=='REGR'||audition.status=='TIME')&&_lodash2.default.isEmpty(audition.response))actions++;});var object={id:project.id,title:project.title,director:project.director,phone:project.phone,roles:project.roles,selected:false,actions:actions};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(projects),projects:projects,isLoading:false,refreshing:false});case 21:case 'end':return _context.stop();}}},null,this,[[4,16]]);}}]);return Projects;}(_reactNative.Component);
+var _redux=require('redux/lib/index.js');var Projects=function(_Component){babelHelpers.inherits(Projects,_Component);function Projects(props){babelHelpers.classCallCheck(this,Projects);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Projects).call(this,props));var dummyProjects=[];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyProjects),projects:dummyProjects,selected:[],show:false,isLoading:false,refreshing:false};return _this;}babelHelpers.createClass(Projects,[{key:'componentDidMount',value:function componentDidMount(){this.populateProjectList();}},{key:'render',value:function render(){return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:67}},_reactNative2.default.createElement(_Navbar2.default,{title:'Projects',style:_style2.default.toolbar,back:false,__source:{fileName:_jsxFileName,lineNumber:68}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:72}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},refreshControl:_reactNative2.default.createElement(_reactNative.RefreshControl,{refreshing:this.state.refreshing,onRefresh:this._onRefresh.bind(this),__source:{fileName:_jsxFileName,lineNumber:76}}),__source:{fileName:_jsxFileName,lineNumber:73}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:80}},_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:81}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderRow:this._renderRow.bind(this),renderSeparator:this._renderSeperator,__source:{fileName:_jsxFileName,lineNumber:82}})))),_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.footer,__source:{fileName:_jsxFileName,lineNumber:89}},_reactNative2.default.createElement(_ButtonRounded2.default,{text:'Actions',onPress:this.onOpen.bind(this),__source:{fileName:_jsxFileName,lineNumber:90}})),_reactNative2.default.createElement(_reactNativeActionSheet2.default,{visible:this.state.show,onCancel:this.onCancel.bind(this),__source:{fileName:_jsxFileName,lineNumber:92}},this.generateActionButtons()),_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:97}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:98}}))));}},{key:'_renderRow',value:function _renderRow(project){var _this2=this;return _reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onItemSelected(project.id);},__source:{fileName:_jsxFileName,lineNumber:111}},_reactNative2.default.createElement(_reactNative.View,{style:project.selected?_projects2.default.projectItemSelected:_projects2.default.projectItem,__source:{fileName:_jsxFileName,lineNumber:112}},_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.projectItemLeft,__source:{fileName:_jsxFileName,lineNumber:113}},_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.projectItemSelect,__source:{fileName:_jsxFileName,lineNumber:114}},_reactNative2.default.createElement(_reactNative.Text,{style:_projects2.default.highlightedFont,__source:{fileName:_jsxFileName,lineNumber:115}},project.title),_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.directorContainer,__source:{fileName:_jsxFileName,lineNumber:116}},_reactNative2.default.createElement(_reactNative.Text,{style:_projects2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:117}},project.director)))),_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.projectItemRight,__source:{fileName:_jsxFileName,lineNumber:121}},_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.actionsContainer,__source:{fileName:_jsxFileName,lineNumber:122}},_reactNative2.default.createElement(_reactNative.View,{style:project.actions>0?_projects2.default.activeActions:_projects2.default.inactiveActions,__source:{fileName:_jsxFileName,lineNumber:123}},_reactNative2.default.createElement(_reactNative.Text,{__source:{fileName:_jsxFileName,lineNumber:124}},project.actions))),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onSchedulePressed(project.id);},__source:{fileName:_jsxFileName,lineNumber:127}},_reactNative2.default.createElement(_reactNative.View,{style:_projects2.default.projectItemIconContainer,__source:{fileName:_jsxFileName,lineNumber:128}},_reactNative2.default.createElement(_Ionicons2.default,{name:'ios-arrow-forward',style:_projects2.default.projectItemIcon,__source:{fileName:_jsxFileName,lineNumber:129}}))))));}},{key:'_renderSeperator',value:function _renderSeperator(sectionID,rowID){return _reactNative2.default.createElement(_reactNative.View,{key:sectionID+'-'+rowID,style:_projects2.default.separator,__source:{fileName:_jsxFileName,lineNumber:140}});}},{key:'_onRefresh',value:function _onRefresh(){console.log("Refresh Triggered");this.setState({refreshing:true});this.populateProjectList();}},{key:'generateActionButtons',value:function generateActionButtons(){var _this3=this;var buttons=void 0;if(this.state.selected.length==1)buttons=[_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{key:'call-casting',onPress:function onPress(){return _this3.onCall();},__source:{fileName:_jsxFileName,lineNumber:154}},'Call Casting Director')];return buttons;}},{key:'onItemSelected',value:function onItemSelected(id){var selected=void 0;if(_lodash2.default.includes(this.state.selected,id))selected=_lodash2.default.without(this.state.selected,id);else selected=_lodash2.default.concat(this.state.selected,id);var projects=_lodash2.default.map(_lodash2.default.cloneDeep(this.state.projects),function(project){if(project.id==id&&project.selected==false){project.selected=true;}else if(project.id==id&&project.selected==true){project.selected=false;}return project;});this.setState({dataSource:this.state.dataSource.cloneWithRows(projects),projects:projects,selected:selected});}},{key:'onSchedulePressed',value:function onSchedulePressed(id){this.props.projectActions.setProject(_lodash2.default.find(this.state.projects,{'id':id}));_reactNativeRouterFlux.Actions.schedule();}},{key:'onCancel',value:function onCancel(){this.setState({show:false});}},{key:'onOpen',value:function onOpen(){if(this.state.selected.length<1)_reactNative.Alert.alert("Please select project");else if(this.state.selected.length>1)_reactNative.Alert.alert("Please only select 1 project");else this.setState({show:true});}},{key:'onCall',value:function onCall(){this.setState({show:false});_reactNative.Linking.openURL('tel:'+_lodash2.default.find(this.state.projects,{'id':this.state.selected[0]}).phone);}},{key:'populateProjectList',value:function populateProjectList(){var projectListData,projects;return regeneratorRuntime.async(function populateProjectList$(_context){while(1){switch(_context.prev=_context.next){case 0:projectListData=void 0;this.setState({isLoading:true});_context.prev=2;_context.next=5;return regeneratorRuntime.awrap((0,_Api.getProjects)(this.props.user.authToken));case 5:projectListData=_context.sent;_context.next=11;break;case 8:_context.prev=8;_context.t0=_context['catch'](2);console.error(_context.t0);case 11:projects=_lodash2.default.map(projectListData.projects,function(project,index){var actions=0;_lodash2.default.each(project.auditions,function(audition){if(_lodash2.default.isEmpty(audition.status))actions++;if((audition.status=='CONF'||audition.status=='REGR'||audition.status=='TIME')&&_lodash2.default.isEmpty(audition.response))actions++;});var object={id:project.id,title:project.title,director:project.director,phone:project.phone,selected:false,actions:actions};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(projects),projects:projects,isLoading:false,refreshing:false});case 13:case 'end':return _context.stop();}}},null,this,[[2,8]]);}}]);return Projects;}(_reactNative.Component);
 var ProjectActions=require('Scheduler/App/Redux/Actions/project.js');
 
 function mapStateToProps(state){
@@ -90973,32 +91088,7 @@ var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
 var _reactNativeActionSheet=require('@remobile/react-native-action-sheet/index.js');var _reactNativeActionSheet2=babelHelpers.interopRequireDefault(_reactNativeActionSheet);
 var _reactNativeSpinkit=require('react-native-spinkit/index.ios.js');var _reactNativeSpinkit2=babelHelpers.interopRequireDefault(_reactNativeSpinkit);
 var _lodash=require('lodash/lodash.js');var _lodash2=babelHelpers.interopRequireDefault(_lodash);
-var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelpers.interopRequireDefault(_Request);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var _Api=require('Scheduler/App/Network/Api.js');
 
 
 
@@ -91382,7 +91472,7 @@ var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelp
 
 
 var _reactRedux=require('react-redux/lib/index.js');
-var _redux=require('redux/lib/index.js');var Schedule=function(_Component){babelHelpers.inherits(Schedule,_Component);function Schedule(props){babelHelpers.classCallCheck(this,Schedule);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Schedule).call(this,props));var dummyAuditions=[];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyAuditions),auditions:dummyAuditions,forwardActorCount:0,forwardCastingCount:0,selected:[],clicked:'none',show:false,isLoading:false,refreshing:false};return _this;}babelHelpers.createClass(Schedule,[{key:'componentDidMount',value:function componentDidMount(){if(this.props.message)_reactNative.Alert.alert(this.props.message);this.getSchedules();}},{key:'render',value:function render(){var _this2=this;return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:80}},_reactNative2.default.createElement(_Navbar2.default,{title:'Schedule',style:_style2.default.toolbar,back:true,__source:{fileName:_jsxFileName,lineNumber:81}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:85}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},refreshControl:_reactNative2.default.createElement(_reactNative.RefreshControl,{refreshing:this.state.refreshing,onRefresh:this._onRefresh.bind(this),__source:{fileName:_jsxFileName,lineNumber:89}}),__source:{fileName:_jsxFileName,lineNumber:86}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:93}},_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:94}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderHeader:this._renderHeader.bind(this),renderRow:this._renderRow.bind(this),renderSeparator:this._renderSeperator,__source:{fileName:_jsxFileName,lineNumber:95}})))),_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.footer,__source:{fileName:_jsxFileName,lineNumber:103}},_reactNative2.default.createElement(_ButtonRounded2.default,{text:'Actions',onPress:this.onOpen.bind(this),__source:{fileName:_jsxFileName,lineNumber:104}})),_reactNative2.default.createElement(_reactNativeActionSheet2.default,{visible:this.state.show,onCancel:this.onCancel.bind(this),__source:{fileName:_jsxFileName,lineNumber:106}},_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("SENT");},__source:{fileName:_jsxFileName,lineNumber:109}},'Send to ',this.state.selected.length,' Actor(s)'),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("SENT+");},__source:{fileName:_jsxFileName,lineNumber:110}},'Send to ',this.state.selected.length,' Actor(s) + Materials'),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("CONF");},__source:{fileName:_jsxFileName,lineNumber:111}},'Confirm ',this.state.selected.length),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("REGR");},__source:{fileName:_jsxFileName,lineNumber:112}},'Regret ',this.state.selected.length),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("TIME");},__source:{fileName:_jsxFileName,lineNumber:113}},'Request ',this.state.selected.length,' New Time(s)'),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("CAST");},__source:{fileName:_jsxFileName,lineNumber:114}},'Forward ',this.state.selected.length,' to Casting'),this.generateActionButtons()),_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:117}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:118}}))));}},{key:'_renderHeader',value:function _renderHeader(){return _reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.headerContainer,__source:{fileName:_jsxFileName,lineNumber:131}},_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.header,__source:{fileName:_jsxFileName,lineNumber:132}},this.props.project.title),_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.notificationsContainer,__source:{fileName:_jsxFileName,lineNumber:133}},this.generateActorNotification(),this.generateCastingNotification()));}},{key:'_renderRow',value:function _renderRow(audition){var _this3=this;return _reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this3.onItemSelected(audition.id);},__source:{fileName:_jsxFileName,lineNumber:143}},_reactNative2.default.createElement(_reactNative.View,{style:audition.selected?_schedule2.default.auditionItemSelected:_schedule2.default.auditionItem,__source:{fileName:_jsxFileName,lineNumber:144}},_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.auditionItemLeft,__source:{fileName:_jsxFileName,lineNumber:145}},_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.highlightedFont,__source:{fileName:_jsxFileName,lineNumber:146}},audition.actor),_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:147}},audition.role),_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.date,__source:{fileName:_jsxFileName,lineNumber:148}},_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:149}},audition.date),_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:150}},audition.time))),_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.auditionItemRight,__source:{fileName:_jsxFileName,lineNumber:153}},_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.statusContainer,__source:{fileName:_jsxFileName,lineNumber:154}},this.generateStatus(audition)),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this3.onAuditionPressed(audition.id);},__source:{fileName:_jsxFileName,lineNumber:157}},_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.auditionItemIconContainer,__source:{fileName:_jsxFileName,lineNumber:158}},_reactNative2.default.createElement(_Ionicons2.default,{name:'ios-arrow-forward',style:_schedule2.default.auditionItemIcon,__source:{fileName:_jsxFileName,lineNumber:159}}))))));}},{key:'_renderSeperator',value:function _renderSeperator(sectionID,rowID){return _reactNative2.default.createElement(_reactNative.View,{key:sectionID+'-'+rowID,style:_schedule2.default.separator,__source:{fileName:_jsxFileName,lineNumber:170}});}},{key:'_onRefresh',value:function _onRefresh(){console.log("Refresh Triggered");this.setState({refreshing:true});this.getSchedules();}},{key:'generateActionButtons',value:function generateActionButtons(){var _this4=this;var buttons=void 0;if(this.state.selected.length==1)buttons=[_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{key:'call-actor',onPress:function onPress(){return _this4.onAction("CALL");},__source:{fileName:_jsxFileName,lineNumber:184}},'Call Selected Actor'),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{key:'message-actor',onPress:function onPress(){return _this4.onMessages();},__source:{fileName:_jsxFileName,lineNumber:185}},'Message Selected Actor')];return buttons;}},{key:'generateStatus',value:function generateStatus(audition){var statusElement=void 0;if(audition.casting=='confirm')statusElement=_reactNative2.default.createElement(_Ionicons2.default,{name:'checkmark',style:_schedule2.default.auditionItemIcon,__source:{fileName:_jsxFileName,lineNumber:193}});else if(audition.casting=='regret')statusElement=_reactNative2.default.createElement(_Ionicons2.default,{name:'close',style:_schedule2.default.auditionItemIcon,__source:{fileName:_jsxFileName,lineNumber:195}});else if(audition.casting=='time')statusElement=_reactNative2.default.createElement(_Ionicons2.default,{name:'clock',style:_schedule2.default.auditionItemIcon,__source:{fileName:_jsxFileName,lineNumber:197}});else statusElement=_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.highlightedFont,__source:{fileName:_jsxFileName,lineNumber:199}},audition.status);return statusElement;}},{key:'generateActorNotification',value:function generateActorNotification(){if(this.state.forwardActorCount>0){return _reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.notification,__source:{fileName:_jsxFileName,lineNumber:206}},_reactNative2.default.createElement(_Ionicons2.default,{name:'android-alert',style:_schedule2.default.notificationIcon,__source:{fileName:_jsxFileName,lineNumber:207}}),_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.notificationFont,__source:{fileName:_jsxFileName,lineNumber:208}},this.state.forwardActorCount,' needs to be sent to Actor(s)'));}}},{key:'generateCastingNotification',value:function generateCastingNotification(){if(this.state.forwardCastingCount>0){return _reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.notification,__source:{fileName:_jsxFileName,lineNumber:215}},_reactNative2.default.createElement(_Ionicons2.default,{name:'android-alert',style:_schedule2.default.notificationIcon,__source:{fileName:_jsxFileName,lineNumber:216}}),_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.notificationFont,__source:{fileName:_jsxFileName,lineNumber:217}},this.state.forwardCastingCount,' needs to be forwarded to Casting'));}}},{key:'onItemSelected',value:function onItemSelected(id){var selected=void 0;if(_lodash2.default.includes(this.state.selected,id))selected=_lodash2.default.without(this.state.selected,id);else selected=_lodash2.default.concat(this.state.selected,id);var auditions=_lodash2.default.map(_lodash2.default.cloneDeep(this.state.auditions),function(audition){if(audition.id==id&&audition.selected==false){audition.selected=true;}else if(audition.id==id&&audition.selected==true){audition.selected=false;}return audition;});this.setState({dataSource:this.state.dataSource.cloneWithRows(auditions),auditions:auditions,selected:selected});}},{key:'onAuditionPressed',value:function onAuditionPressed(id){this.props.auditionActions.setAudition(_lodash2.default.find(this.state.auditions,{'id':id}));_reactNativeRouterFlux.Actions.history();}},{key:'onCancel',value:function onCancel(){this.setState({show:false});}},{key:'onOpen',value:function onOpen(){if(this.state.selected.length<1)_reactNative.Alert.alert("Please select auditions");else this.setState({show:true});}},{key:'sendMessageAlert',value:function sendMessageAlert(id){this.setState({show:false});_reactNative.Alert.alert('Send Message','Would you like to attach a message to this action?',[{text:'Yes',onPress:function onPress(){return _reactNativeRouterFlux.Actions.notes({audition:{id:id}});}},{text:'No',onPress:function onPress(){return _reactNative.Alert.alert('Action Sent');}}]);}},{key:'onAction',value:function onAction(status){this.setState({show:false});this.updateStatus(status);if((status=='SENT'||status=='SENT+')&&this.state.selected.length==1)this.sendMessageAlert(this.state.selected[0]);}},{key:'onMessages',value:function onMessages(){this.setState({show:false});_reactNativeRouterFlux.Actions.notes({audition:{id:this.state.selected[0]}});}},{key:'getSchedules',value:function getSchedules(){var headers,request,path,responseJson,response,forwardActorCount,forwardCastingCount,auditions;return regeneratorRuntime.async(function getSchedules$(_context){while(1){switch(_context.prev=_context.next){case 0:headers={accept:'application/json',authorization:this.props.user.authToken};request={method:'get',headers:headers};path=_Request2.default+('auditions?project_id='+this.props.project.id);responseJson=void 0;_context.prev=4;this.setState({isLoading:true});_context.next=8;return regeneratorRuntime.awrap(fetch(path,request));case 8:response=_context.sent;_context.next=11;return regeneratorRuntime.awrap(response.json());case 11:responseJson=_context.sent;console.log(responseJson);if(responseJson.errors)_reactNative.Alert.alert(responseJson.errors);_context.next=19;break;case 16:_context.prev=16;_context.t0=_context['catch'](4);console.error(_context.t0);case 19:forwardActorCount=0;forwardCastingCount=0;auditions=_lodash2.default.map(responseJson,function(audition,index){if(_lodash2.default.isEmpty(audition.status))forwardActorCount++;if((audition.status=='CONF'||audition.status=='REGR'||audition.status=='TIME')&&_lodash2.default.isEmpty(audition.response))forwardCastingCount++;var object={id:audition.id,actor:audition.actor,phone:audition.phone,role:audition.role,date:audition.date,time:audition.time,status:audition.status,casting:audition.response,selected:false};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(auditions),auditions:auditions,forwardActorCount:forwardActorCount,forwardCastingCount:forwardCastingCount,isLoading:false,refreshing:false});case 23:case 'end':return _context.stop();}}},null,this,[[4,16]]);}},{key:'updateStatus',value:function updateStatus(status){var headers,data,formData,k,v,request,path,responseJson,response,forwardActorCount,forwardCastingCount,auditions;return regeneratorRuntime.async(function updateStatus$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:headers={accept:'application/json',authorization:this.props.user.authToken};data={'status':status,'project_id':this.props.project.id};formData=new FormData();for(k in data){formData.append(k,data[k]);}for(k in this.state.selected){v=this.state.selected[k];formData.append("selected[]",v.toString());}request={method:'put',headers:headers,body:formData};path=_Request2.default+'auditions/update_status';responseJson=void 0;_context2.prev=8;this.setState({isLoading:true});_context2.next=12;return regeneratorRuntime.awrap(fetch(path,request));case 12:response=_context2.sent;_context2.next=15;return regeneratorRuntime.awrap(response.json());case 15:responseJson=_context2.sent;console.log(responseJson);if(responseJson.errors)_reactNative.Alert.alert(responseJson.errors);_context2.next=24;break;case 20:_context2.prev=20;_context2.t0=_context2['catch'](8);console.log(_context2.t0);_reactNative.Alert.alert(_context2.t0);case 24:forwardActorCount=0;forwardCastingCount=0;auditions=_lodash2.default.map(responseJson,function(audition){if(_lodash2.default.isEmpty(audition.status))forwardActorCount++;if((audition.status=='CONF'||audition.status=='REGR'||audition.status=='TIME')&&_lodash2.default.isEmpty(audition.response))forwardCastingCount++;var object={id:audition.id,actor:audition.actor,phone:audition.phone,role:audition.role,date:audition.date,time:audition.time,status:audition.status,casting:audition.response,selected:false};return object;});if(status=='CALL')_reactNative.Linking.openURL('tel:'+_lodash2.default.find(this.state.auditions,{'id':this.state.selected[0]}).phone);this.setState({dataSource:this.state.dataSource.cloneWithRows(auditions),auditions:auditions,forwardActorCount:forwardActorCount,forwardCastingCount:forwardCastingCount,selected:[],isLoading:false});case 29:case 'end':return _context2.stop();}}},null,this,[[8,20]]);}}]);return Schedule;}(_reactNative.Component);
+var _redux=require('redux/lib/index.js');var Schedule=function(_Component){babelHelpers.inherits(Schedule,_Component);function Schedule(props){babelHelpers.classCallCheck(this,Schedule);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Schedule).call(this,props));var dummyAuditions=[];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyAuditions),auditions:dummyAuditions,forwardActorCount:0,forwardCastingCount:0,selected:[],show:false,isLoading:false,refreshing:false};return _this;}babelHelpers.createClass(Schedule,[{key:'componentDidMount',value:function componentDidMount(){if(this.props.message)_reactNative.Alert.alert(this.props.message);this.populateAuditionList();}},{key:'render',value:function render(){var _this2=this;return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:79}},_reactNative2.default.createElement(_Navbar2.default,{title:'Schedule',style:_style2.default.toolbar,back:true,__source:{fileName:_jsxFileName,lineNumber:80}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:84}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},refreshControl:_reactNative2.default.createElement(_reactNative.RefreshControl,{refreshing:this.state.refreshing,onRefresh:this._onRefresh.bind(this),__source:{fileName:_jsxFileName,lineNumber:88}}),__source:{fileName:_jsxFileName,lineNumber:85}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:92}},_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:93}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderHeader:this._renderHeader.bind(this),renderRow:this._renderRow.bind(this),renderSeparator:this._renderSeperator,__source:{fileName:_jsxFileName,lineNumber:94}})))),_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.footer,__source:{fileName:_jsxFileName,lineNumber:102}},_reactNative2.default.createElement(_ButtonRounded2.default,{text:'Actions',onPress:this.onOpen.bind(this),__source:{fileName:_jsxFileName,lineNumber:103}})),_reactNative2.default.createElement(_reactNativeActionSheet2.default,{visible:this.state.show,onCancel:this.onCancel.bind(this),__source:{fileName:_jsxFileName,lineNumber:105}},_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("SENT");},__source:{fileName:_jsxFileName,lineNumber:108}},'Send to ',this.state.selected.length,' Actor(s)'),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("SENT+");},__source:{fileName:_jsxFileName,lineNumber:109}},'Send to ',this.state.selected.length,' Actor(s) + Materials'),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("CONF");},__source:{fileName:_jsxFileName,lineNumber:110}},'Confirm ',this.state.selected.length),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("REGR");},__source:{fileName:_jsxFileName,lineNumber:111}},'Regret ',this.state.selected.length),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("TIME");},__source:{fileName:_jsxFileName,lineNumber:112}},'Request ',this.state.selected.length,' New Time(s)'),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{onPress:function onPress(){return _this2.onAction("CAST");},__source:{fileName:_jsxFileName,lineNumber:113}},'Forward ',this.state.selected.length,' to Casting'),this.generateActionButtons()),_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:116}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:117}}))));}},{key:'_renderHeader',value:function _renderHeader(){return _reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.headerContainer,__source:{fileName:_jsxFileName,lineNumber:130}},_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.header,__source:{fileName:_jsxFileName,lineNumber:131}},this.props.project.title),_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.notificationsContainer,__source:{fileName:_jsxFileName,lineNumber:132}},this.generateActorNotification(),this.generateCastingNotification()));}},{key:'_renderRow',value:function _renderRow(audition){var _this3=this;return _reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this3.onItemSelected(audition.id);},__source:{fileName:_jsxFileName,lineNumber:142}},_reactNative2.default.createElement(_reactNative.View,{style:audition.selected?_schedule2.default.auditionItemSelected:_schedule2.default.auditionItem,__source:{fileName:_jsxFileName,lineNumber:143}},_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.auditionItemLeft,__source:{fileName:_jsxFileName,lineNumber:144}},_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.highlightedFont,__source:{fileName:_jsxFileName,lineNumber:145}},audition.actor),_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:146}},audition.role),_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.date,__source:{fileName:_jsxFileName,lineNumber:147}},_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:148}},audition.date),_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:149}},audition.time))),_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.auditionItemRight,__source:{fileName:_jsxFileName,lineNumber:152}},_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.statusContainer,__source:{fileName:_jsxFileName,lineNumber:153}},this.generateStatus(audition)),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this3.onAuditionPressed(audition.id);},__source:{fileName:_jsxFileName,lineNumber:156}},_reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.auditionItemIconContainer,__source:{fileName:_jsxFileName,lineNumber:157}},_reactNative2.default.createElement(_Ionicons2.default,{name:'ios-arrow-forward',style:_schedule2.default.auditionItemIcon,__source:{fileName:_jsxFileName,lineNumber:158}}))))));}},{key:'_renderSeperator',value:function _renderSeperator(sectionID,rowID){return _reactNative2.default.createElement(_reactNative.View,{key:sectionID+'-'+rowID,style:_schedule2.default.separator,__source:{fileName:_jsxFileName,lineNumber:169}});}},{key:'_onRefresh',value:function _onRefresh(){console.log("Refresh Triggered");this.setState({refreshing:true});this.populateAuditionList();}},{key:'generateActionButtons',value:function generateActionButtons(){var _this4=this;var buttons=void 0;if(this.state.selected.length==1)buttons=[_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{key:'call-actor',onPress:function onPress(){return _this4.onAction("CALL");},__source:{fileName:_jsxFileName,lineNumber:183}},'Call Selected Actor'),_reactNative2.default.createElement(_reactNativeActionSheet2.default.Button,{key:'message-actor',onPress:function onPress(){return _this4.onMessages();},__source:{fileName:_jsxFileName,lineNumber:184}},'Message Selected Actor')];return buttons;}},{key:'generateStatus',value:function generateStatus(audition){var statusElement=void 0;if(audition.casting=='confirm'){statusElement=_reactNative2.default.createElement(_Ionicons2.default,{name:'checkmark',style:[_schedule2.default.auditionItemIcon,{color:'#00AD63'}],__source:{fileName:_jsxFileName,lineNumber:192}});}else if(audition.casting=='regret'){statusElement=_reactNative2.default.createElement(_Ionicons2.default,{name:'close',style:[_schedule2.default.auditionItemIcon,{color:'#E9556A'}],__source:{fileName:_jsxFileName,lineNumber:194}});}else if(audition.casting=='time'){statusElement=_reactNative2.default.createElement(_Ionicons2.default,{name:'clock',style:[_schedule2.default.auditionItemIcon,{color:'#00B5EF'}],__source:{fileName:_jsxFileName,lineNumber:196}});}else {if(audition.status=='SENT'||audition.status=='SENT+')statusElement=_reactNative2.default.createElement(_reactNative.Text,{style:[_schedule2.default.highlightedFont,{color:'#00B5EF'}],__source:{fileName:_jsxFileName,lineNumber:199}},audition.status);else if(audition.status=='CONF')statusElement=_reactNative2.default.createElement(_reactNative.Text,{style:[_schedule2.default.highlightedFont,{color:'#00AD63'}],__source:{fileName:_jsxFileName,lineNumber:201}},audition.status);else if(audition.status=='REGR')statusElement=_reactNative2.default.createElement(_reactNative.Text,{style:[_schedule2.default.highlightedFont,{color:'#E9556A'}],__source:{fileName:_jsxFileName,lineNumber:203}},audition.status);}return statusElement;}},{key:'generateActorNotification',value:function generateActorNotification(){var countText=void 0;if(this.state.forwardActorCount>1)countText=this.state.forwardActorCount+' need to be sent to Actors';else countText=this.state.forwardActorCount+' needs to be sent to Actor';if(this.state.forwardActorCount>0){return _reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.notification,__source:{fileName:_jsxFileName,lineNumber:217}},_reactNative2.default.createElement(_Ionicons2.default,{name:'android-alert',style:_schedule2.default.notificationIcon,__source:{fileName:_jsxFileName,lineNumber:218}}),_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.notificationFont,__source:{fileName:_jsxFileName,lineNumber:219}},countText));}}},{key:'generateCastingNotification',value:function generateCastingNotification(){var countText=void 0;if(this.state.forwardCastingCount>1)countText=this.state.forwardCastingCount+' need';else countText=this.state.forwardCastingCount+' needs';if(this.state.forwardCastingCount>0){return _reactNative2.default.createElement(_reactNative.View,{style:_schedule2.default.notification,__source:{fileName:_jsxFileName,lineNumber:232}},_reactNative2.default.createElement(_Ionicons2.default,{name:'android-alert',style:_schedule2.default.notificationIcon,__source:{fileName:_jsxFileName,lineNumber:233}}),_reactNative2.default.createElement(_reactNative.Text,{style:_schedule2.default.notificationFont,__source:{fileName:_jsxFileName,lineNumber:234}},this.state.forwardCastingCount,' to be forwarded to Casting'));}}},{key:'onItemSelected',value:function onItemSelected(id){var selected=void 0;if(_lodash2.default.includes(this.state.selected,id))selected=_lodash2.default.without(this.state.selected,id);else selected=_lodash2.default.concat(this.state.selected,id);var auditions=_lodash2.default.map(_lodash2.default.cloneDeep(this.state.auditions),function(audition){if(audition.id==id&&audition.selected==false){audition.selected=true;}else if(audition.id==id&&audition.selected==true){audition.selected=false;}return audition;});this.setState({dataSource:this.state.dataSource.cloneWithRows(auditions),auditions:auditions,selected:selected});}},{key:'onAuditionPressed',value:function onAuditionPressed(id){this.props.auditionActions.setAudition(_lodash2.default.find(this.state.auditions,{'id':id}));_reactNativeRouterFlux.Actions.history();}},{key:'onCancel',value:function onCancel(){this.setState({show:false});}},{key:'onOpen',value:function onOpen(){if(this.state.selected.length<1)_reactNative.Alert.alert("Please select auditions");else this.setState({show:true});}},{key:'sendMessageAlert',value:function sendMessageAlert(id){this.setState({show:false});_reactNative.Alert.alert('Send Message','Would you like to attach a message to this action?',[{text:'Yes',onPress:function onPress(){return _reactNativeRouterFlux.Actions.notes({audition:{id:id}});}},{text:'No',onPress:function onPress(){return _reactNative.Alert.alert('Action Sent');}}]);}},{key:'onAction',value:function onAction(status){this.setState({show:false});this.updateStatus(status);if(status!='CALL'&&this.state.selected.length==1)this.sendMessageAlert(this.state.selected[0]);}},{key:'onMessages',value:function onMessages(){this.setState({show:false});_reactNativeRouterFlux.Actions.notes({audition:{id:this.state.selected[0]}});}},{key:'populateAuditionList',value:function populateAuditionList(){var endpoint,auditionListData,forwardActorCount,forwardCastingCount,auditions;return regeneratorRuntime.async(function populateAuditionList$(_context){while(1){switch(_context.prev=_context.next){case 0:endpoint='auditions?project_id='+this.props.project.id;auditionListData=void 0;this.setState({isLoading:true});_context.prev=3;_context.next=6;return regeneratorRuntime.awrap((0,_Api.getAuditions)(endpoint,this.props.user.authToken));case 6:auditionListData=_context.sent;_context.next=12;break;case 9:_context.prev=9;_context.t0=_context['catch'](3);console.error(_context.t0);case 12:forwardActorCount=0;forwardCastingCount=0;auditions=_lodash2.default.map(auditionListData,function(audition,index){if(_lodash2.default.isEmpty(audition.status))forwardActorCount++;if((audition.status=='CONF'||audition.status=='REGR'||audition.status=='TIME')&&_lodash2.default.isEmpty(audition.response))forwardCastingCount++;var object={id:audition.id,actor:audition.actor,phone:audition.phone,role:audition.role,date:audition.date,time:audition.time,status:audition.status,casting:audition.response,selected:false};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(auditions),auditions:auditions,forwardActorCount:forwardActorCount,forwardCastingCount:forwardCastingCount,isLoading:false,refreshing:false});case 16:case 'end':return _context.stop();}}},null,this,[[3,9]]);}},{key:'updateStatus',value:function updateStatus(status){var data,endpoint,auditionListData,forwardActorCount,forwardCastingCount,auditions;return regeneratorRuntime.async(function updateStatus$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:data={project_id:this.props.project.id,selected:this.state.selected,status:status};endpoint='auditions/update_status';auditionListData=void 0;this.setState({isLoading:true});_context2.prev=4;_context2.next=7;return regeneratorRuntime.awrap((0,_Api.putAuditions)(endpoint,this.props.user.authToken,data));case 7:auditionListData=_context2.sent;_context2.next=13;break;case 10:_context2.prev=10;_context2.t0=_context2['catch'](4);console.error(_context2.t0);case 13:forwardActorCount=0;forwardCastingCount=0;auditions=_lodash2.default.map(auditionListData,function(audition){if(_lodash2.default.isEmpty(audition.status))forwardActorCount++;if((audition.status=='CONF'||audition.status=='REGR')&&_lodash2.default.isEmpty(audition.response))forwardCastingCount++;var object={id:audition.id,actor:audition.actor,phone:audition.phone,role:audition.role,date:audition.date,time:audition.time,status:audition.status,casting:audition.response,selected:false};return object;});if(status=='CALL')_reactNative.Linking.openURL('tel:'+_lodash2.default.find(this.state.auditions,{'id':this.state.selected[0]}).phone);this.setState({dataSource:this.state.dataSource.cloneWithRows(auditions),auditions:auditions,forwardActorCount:forwardActorCount,forwardCastingCount:forwardCastingCount,selected:[],isLoading:false});case 18:case 'end':return _context2.stop();}}},null,this,[[4,10]]);}}]);return Schedule;}(_reactNative.Component);
 var AuditionActions=require('Scheduler/App/Redux/Actions/audition.js');
 
 function mapStateToProps(state){
@@ -91411,7 +91501,7 @@ var _reactNativeRouterFlux=require('react-native-router-flux/index.js');
 var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
 var _IconInput=require('Scheduler/App/Components/Widgets/IconInput.js');var _IconInput2=babelHelpers.interopRequireDefault(_IconInput);
 var _reactNativeSpinkit=require('react-native-spinkit/index.ios.js');var _reactNativeSpinkit2=babelHelpers.interopRequireDefault(_reactNativeSpinkit);
-var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelpers.interopRequireDefault(_Request);
+var _Api=require('Scheduler/App/Network/Api.js');
 var _lodash=require('lodash/lodash.js');var _lodash2=babelHelpers.interopRequireDefault(_lodash);
 
 
@@ -91640,37 +91730,7 @@ var _lodash=require('lodash/lodash.js');var _lodash2=babelHelpers.interopRequire
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var _reactRedux=require('react-redux/lib/index.js');var Auditions=function(_Component){babelHelpers.inherits(Auditions,_Component);function Auditions(props){babelHelpers.classCallCheck(this,Auditions);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Auditions).call(this,props));var dummyAuditions=[];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyAuditions),auditions:dummyAuditions,selected:[],isLoading:false};return _this;}babelHelpers.createClass(Auditions,[{key:'componentDidMount',value:function componentDidMount(){this.getAuditions();}},{key:'render',value:function render(){return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:70}},_reactNative2.default.createElement(_Navbar2.default,{title:'Auditions',style:_style2.default.toolbar,back:true,__source:{fileName:_jsxFileName,lineNumber:71}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:75}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},refreshControl:_reactNative2.default.createElement(_reactNative.RefreshControl,{refreshing:this.state.refreshing,onRefresh:this._onRefresh.bind(this),__source:{fileName:_jsxFileName,lineNumber:79}}),__source:{fileName:_jsxFileName,lineNumber:76}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:83}},_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:84}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderRow:this._renderRow.bind(this),renderSeparator:this._renderSeperator,__source:{fileName:_jsxFileName,lineNumber:85}})))),_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:92}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:93}}))));}},{key:'_renderRow',value:function _renderRow(audition){var _this2=this;return _reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.container,__source:{fileName:_jsxFileName,lineNumber:106}},_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.top,__source:{fileName:_jsxFileName,lineNumber:107}},_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.left,__source:{fileName:_jsxFileName,lineNumber:108}},_reactNative2.default.createElement(_reactNative.Text,{style:_auditions2.default.highlightedFont,__source:{fileName:_jsxFileName,lineNumber:109}},audition.title),_reactNative2.default.createElement(_reactNative.Text,{style:_auditions2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:110}},audition.role)),_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.right,__source:{fileName:_jsxFileName,lineNumber:112}},_reactNative2.default.createElement(_reactNative.Text,{style:_auditions2.default.highlightedFont,__source:{fileName:_jsxFileName,lineNumber:113}},audition.time),_reactNative2.default.createElement(_reactNative.Text,{style:_auditions2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:114}},audition.date))),_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.bottom,__source:{fileName:_jsxFileName,lineNumber:117}},_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onMessages(audition.id);},__source:{fileName:_jsxFileName,lineNumber:118}},_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.messageIconContainer,__source:{fileName:_jsxFileName,lineNumber:119}},_reactNative2.default.createElement(_Ionicons2.default,{name:'email',style:_auditions2.default.messageIcon,__source:{fileName:_jsxFileName,lineNumber:120}}))),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onAction(audition.id,'CONF');},__source:{fileName:_jsxFileName,lineNumber:123}},_reactNative2.default.createElement(_reactNative.Text,{style:audition.status=='CONF'||audition.status=='SENT'||audition.status=='SENT+'?_auditions2.default.highlightedFont:_auditions2.default.inActiveStatus,__source:{fileName:_jsxFileName,lineNumber:124}},'YES')),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onAction(audition.id,'TIME');},__source:{fileName:_jsxFileName,lineNumber:126}},_reactNative2.default.createElement(_reactNative.Text,{style:audition.status=='TIME'||audition.status=='SENT'||audition.status=='SENT+'?_auditions2.default.highlightedFont:_auditions2.default.inActiveStatus,__source:{fileName:_jsxFileName,lineNumber:127}},'New Time')),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onAction(audition.id,'REGR');},__source:{fileName:_jsxFileName,lineNumber:129}},_reactNative2.default.createElement(_reactNative.Text,{style:audition.status=='REGR'||audition.status=='SENT'||audition.status=='SENT+'?_auditions2.default.highlightedFont:_auditions2.default.inActiveStatus,__source:{fileName:_jsxFileName,lineNumber:130}},'NO'))));}},{key:'_renderSeperator',value:function _renderSeperator(sectionID,rowID){return _reactNative2.default.createElement(_reactNative.View,{key:sectionID+'-'+rowID,style:_auditions2.default.separator,__source:{fileName:_jsxFileName,lineNumber:139}});}},{key:'_onRefresh',value:function _onRefresh(){console.log("Refresh Triggered");this.setState({refreshing:true});this.getAuditions();}},{key:'getAuditions',value:function getAuditions(){var headers,request,path,responseJson,response,auditions;return regeneratorRuntime.async(function getAuditions$(_context){while(1){switch(_context.prev=_context.next){case 0:headers={accept:'application/json',authorization:this.props.user.authToken};request={method:'get',headers:headers};path=_Request2.default+'auditions/';responseJson=void 0;_context.prev=4;this.setState({isLoading:true});_context.next=8;return regeneratorRuntime.awrap(fetch(path,request));case 8:response=_context.sent;_context.next=11;return regeneratorRuntime.awrap(response.json());case 11:responseJson=_context.sent;console.log(responseJson);if(responseJson.errors)_reactNative.Alert.alert(responseJson.errors);_context.next=19;break;case 16:_context.prev=16;_context.t0=_context['catch'](4);console.error(_context.t0);case 19:this.setState({isLoading:false,refreshing:false});auditions=_lodash2.default.map(responseJson,function(audition){var object={id:audition.id,actor:audition.actor,phone:audition.phone,title:audition.title,role:audition.role,date:audition.date,time:audition.time,status:audition.status,casting:audition.response,selected:false};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(auditions),auditions:auditions});case 22:case 'end':return _context.stop();}}},null,this,[[4,16]]);}},{key:'onMessages',value:function onMessages(id){_reactNativeRouterFlux.Actions.notes({audition:{id:id}});}},{key:'onAction',value:function onAction(id,status){this.updateStatus(id,status);}},{key:'updateStatus',value:function updateStatus(id,status){var headers,data,formData,k,request,path,responseJson,response,auditions;return regeneratorRuntime.async(function updateStatus$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:headers={accept:'application/json',authorization:this.props.user.authToken};data={'audition[status]':status};formData=new FormData();for(k in data){formData.append(k,data[k]);}request={method:'put',headers:headers,body:formData};path=_Request2.default+('auditions/'+id);responseJson=void 0;_context2.prev=7;this.setState({isLoading:true});_context2.next=11;return regeneratorRuntime.awrap(fetch(path,request));case 11:response=_context2.sent;_context2.next=14;return regeneratorRuntime.awrap(response.json());case 14:responseJson=_context2.sent;console.log(responseJson);if(responseJson.errors)_reactNative.Alert.alert(responseJson.errors);_context2.next=23;break;case 19:_context2.prev=19;_context2.t0=_context2['catch'](7);console.log(_context2.t0);_reactNative.Alert.alert(_context2.t0);case 23:this.setState({isLoading:false});auditions=_lodash2.default.map(responseJson,function(audition){var object={id:audition.id,actor:audition.actor,phone:audition.phone,title:audition.title,role:audition.role,date:audition.date,time:audition.time,status:audition.status,casting:audition.response,selected:false};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(auditions),auditions:auditions});case 26:case 'end':return _context2.stop();}}},null,this,[[7,19]]);}}]);return Auditions;}(_reactNative.Component);
+var _reactRedux=require('react-redux/lib/index.js');var Auditions=function(_Component){babelHelpers.inherits(Auditions,_Component);function Auditions(props){babelHelpers.classCallCheck(this,Auditions);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Auditions).call(this,props));var dummyAuditions=[];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyAuditions),auditions:dummyAuditions,selected:[],isLoading:false};return _this;}babelHelpers.createClass(Auditions,[{key:'componentDidMount',value:function componentDidMount(){this.populateAuditionList();}},{key:'render',value:function render(){return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:70}},_reactNative2.default.createElement(_Navbar2.default,{title:'Auditions',style:_style2.default.toolbar,back:true,__source:{fileName:_jsxFileName,lineNumber:71}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:75}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},refreshControl:_reactNative2.default.createElement(_reactNative.RefreshControl,{refreshing:this.state.refreshing,onRefresh:this._onRefresh.bind(this),__source:{fileName:_jsxFileName,lineNumber:79}}),__source:{fileName:_jsxFileName,lineNumber:76}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:83}},_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:84}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderRow:this._renderRow.bind(this),renderSeparator:this._renderSeperator,__source:{fileName:_jsxFileName,lineNumber:85}})))),_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:92}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:93}}))));}},{key:'_renderRow',value:function _renderRow(audition){var _this2=this;return _reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.container,__source:{fileName:_jsxFileName,lineNumber:106}},_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.top,__source:{fileName:_jsxFileName,lineNumber:107}},_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.left,__source:{fileName:_jsxFileName,lineNumber:108}},_reactNative2.default.createElement(_reactNative.Text,{style:_auditions2.default.highlightedFont,__source:{fileName:_jsxFileName,lineNumber:109}},audition.title),_reactNative2.default.createElement(_reactNative.Text,{style:_auditions2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:110}},audition.role)),_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.right,__source:{fileName:_jsxFileName,lineNumber:112}},_reactNative2.default.createElement(_reactNative.Text,{style:_auditions2.default.highlightedFont,__source:{fileName:_jsxFileName,lineNumber:113}},audition.time),_reactNative2.default.createElement(_reactNative.Text,{style:_auditions2.default.normalFont,__source:{fileName:_jsxFileName,lineNumber:114}},audition.date))),_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.middle,__source:{fileName:_jsxFileName,lineNumber:117}},_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onMessages(audition.id);},__source:{fileName:_jsxFileName,lineNumber:118}},_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.messageIconContainer,__source:{fileName:_jsxFileName,lineNumber:119}},_reactNative2.default.createElement(_Ionicons2.default,{name:'email',style:_auditions2.default.messageIcon,__source:{fileName:_jsxFileName,lineNumber:120}}))),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onMaterials();},__source:{fileName:_jsxFileName,lineNumber:123}},_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.messageIconContainer,__source:{fileName:_jsxFileName,lineNumber:124}},_reactNative2.default.createElement(_Ionicons2.default,{name:'document-text',style:_auditions2.default.messageIcon,__source:{fileName:_jsxFileName,lineNumber:125}})))),_reactNative2.default.createElement(_reactNative.View,{style:_auditions2.default.bottom,__source:{fileName:_jsxFileName,lineNumber:129}},_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onAction(audition.id,'CONF');},__source:{fileName:_jsxFileName,lineNumber:130}},_reactNative2.default.createElement(_reactNative.Text,{style:audition.status=='CONF'||audition.status=='SENT'||audition.status=='SENT+'?_auditions2.default.highlightedFont:_auditions2.default.inActiveStatus,__source:{fileName:_jsxFileName,lineNumber:131}},'YES')),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.onAction(audition.id,'REGR');},__source:{fileName:_jsxFileName,lineNumber:133}},_reactNative2.default.createElement(_reactNative.Text,{style:audition.status=='REGR'||audition.status=='SENT'||audition.status=='SENT+'?_auditions2.default.highlightedFont:_auditions2.default.inActiveStatus,__source:{fileName:_jsxFileName,lineNumber:134}},'NO'))));}},{key:'_renderSeperator',value:function _renderSeperator(sectionID,rowID){return _reactNative2.default.createElement(_reactNative.View,{key:sectionID+'-'+rowID,style:_auditions2.default.separator,__source:{fileName:_jsxFileName,lineNumber:143}});}},{key:'_onRefresh',value:function _onRefresh(){console.log("Refresh Triggered");this.setState({refreshing:true});this.populateAuditionList();}},{key:'populateAuditionList',value:function populateAuditionList(){var endpoint,auditionListData,auditions;return regeneratorRuntime.async(function populateAuditionList$(_context){while(1){switch(_context.prev=_context.next){case 0:endpoint='auditions';auditionListData=void 0;this.setState({isLoading:true});_context.prev=3;_context.next=6;return regeneratorRuntime.awrap((0,_Api.getAuditions)(endpoint,this.props.user.authToken));case 6:auditionListData=_context.sent;_context.next=12;break;case 9:_context.prev=9;_context.t0=_context['catch'](3);console.error(_context.t0);case 12:auditions=_lodash2.default.map(auditionListData,function(audition){var object={id:audition.id,actor:audition.actor,phone:audition.phone,title:audition.title,role:audition.role,date:audition.date,time:audition.time,status:audition.status,casting:audition.response,selected:false};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(auditions),auditions:auditions,isLoading:false,refreshing:false});case 14:case 'end':return _context.stop();}}},null,this,[[3,9]]);}},{key:'onMessages',value:function onMessages(id){_reactNativeRouterFlux.Actions.notes({audition:{id:id}});}},{key:'onMaterials',value:function onMaterials(){_reactNativeRouterFlux.Actions.materials();}},{key:'onAction',value:function onAction(id,status){this.updateStatus(id,status);if(status=='REGR')_reactNativeRouterFlux.Actions.notes({audition:{id:id}});}},{key:'updateStatus',value:function updateStatus(id,status){var data,endpoint,auditionListData,auditions;return regeneratorRuntime.async(function updateStatus$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:data={'audition[status]':status};endpoint='auditions/'+id;auditionListData=void 0;this.setState({isLoading:true});_context2.prev=4;_context2.next=7;return regeneratorRuntime.awrap((0,_Api.putAudition)(endpoint,this.props.user.authToken,data));case 7:auditionListData=_context2.sent;_context2.next=13;break;case 10:_context2.prev=10;_context2.t0=_context2['catch'](4);console.log(_context2.t0);case 13:auditions=_lodash2.default.map(auditionListData,function(audition){var object={id:audition.id,actor:audition.actor,phone:audition.phone,title:audition.title,role:audition.role,date:audition.date,time:audition.time,status:audition.status,casting:audition.response,selected:false};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(auditions),auditions:auditions,isLoading:false});case 15:case 'end':return _context2.stop();}}},null,this,[[4,10]]);}}]);return Auditions;}(_reactNative.Component);
 
 function mapStateToProps(state){
 return {
@@ -91692,43 +91752,7 @@ var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=ba
 var _IconInput=require('Scheduler/App/Components/Widgets/IconInput.js');var _IconInput2=babelHelpers.interopRequireDefault(_IconInput);
 var _reactNativeSpinkit=require('react-native-spinkit/index.ios.js');var _reactNativeSpinkit2=babelHelpers.interopRequireDefault(_reactNativeSpinkit);
 var _lodash=require('lodash/lodash.js');var _lodash2=babelHelpers.interopRequireDefault(_lodash);
-var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelpers.interopRequireDefault(_Request);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var _Api=require('Scheduler/App/Network/Api.js');
 
 
 
@@ -91964,7 +91988,7 @@ var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelp
 
 
 var _reactRedux=require('react-redux/lib/index.js');
-var _redux=require('redux/lib/index.js');var History=function(_Component){babelHelpers.inherits(History,_Component);function History(props){babelHelpers.classCallCheck(this,History);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(History).call(this,props));var dummyActions=[];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyActions),action:"",isLoading:false,refreshing:false};return _this;}babelHelpers.createClass(History,[{key:'componentDidMount',value:function componentDidMount(){this.getHistory();}},{key:'render',value:function render(){var _this2=this;return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:87}},_reactNative2.default.createElement(_Navbar2.default,{title:'History',style:_style2.default.toolbar,back:true,__source:{fileName:_jsxFileName,lineNumber:88}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:92}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},refreshControl:_reactNative2.default.createElement(_reactNative.RefreshControl,{refreshing:this.state.refreshing,onRefresh:this._onRefresh.bind(this),__source:{fileName:_jsxFileName,lineNumber:96}}),__source:{fileName:_jsxFileName,lineNumber:93}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:100}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:101}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderHeader:this._renderHeader.bind(this),renderRow:this._renderRow.bind(this),__source:{fileName:_jsxFileName,lineNumber:102}})))),_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.formContainer,__source:{fileName:_jsxFileName,lineNumber:109}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.inputContainer,__source:{fileName:_jsxFileName,lineNumber:110}},_reactNative2.default.createElement(_IconInput2.default,{placeholder:'Enter a Note...',icon:'compose',secureTextEntry:false,dark:false,value:this.state.action,onChangeText:function onChangeText(val){return _this2.setState({action:val});},__source:{fileName:_jsxFileName,lineNumber:111}})),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.addNote();},__source:{fileName:_jsxFileName,lineNumber:119}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.addButton,__source:{fileName:_jsxFileName,lineNumber:120}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.addButtonText,__source:{fileName:_jsxFileName,lineNumber:121}},'Add')))),_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:125}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:126}}))));}},{key:'_onRefresh',value:function _onRefresh(){console.log("Refresh Triggered");this.setState({refreshing:true});this.getHistory();}},{key:'_renderHeader',value:function _renderHeader(){var _this3=this;return _reactNative2.default.createElement(_reactNative.View,{style:_history2.default.headerContainer,__source:{fileName:_jsxFileName,lineNumber:145}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.nameContainer,__source:{fileName:_jsxFileName,lineNumber:146}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.header,__source:{fileName:_jsxFileName,lineNumber:147}},this.props.audition.actor)),_reactNative2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:149}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.subheaderContainer,__source:{fileName:_jsxFileName,lineNumber:150}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.materialsContainer,__source:{fileName:_jsxFileName,lineNumber:151}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:152}},'Materials'),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this3.onMaterials();},__source:{fileName:_jsxFileName,lineNumber:153}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.materialsIconContainer,__source:{fileName:_jsxFileName,lineNumber:154}},_reactNative2.default.createElement(_Ionicons2.default,{name:'document-text',style:_history2.default.materialsIcon,__source:{fileName:_jsxFileName,lineNumber:155}})))),_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.headerDate,__source:{fileName:_jsxFileName,lineNumber:159}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:160}},this.props.audition.date),_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:161}},this.props.audition.time)))));}},{key:'_renderRow',value:function _renderRow(action){return _reactNative2.default.createElement(_reactNative.View,{style:_history2.default.actionItem,__source:{fileName:_jsxFileName,lineNumber:171}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.actionItemLeft,__source:{fileName:_jsxFileName,lineNumber:172}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:173}},action.text)),_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.actionItemRight,__source:{fileName:_jsxFileName,lineNumber:175}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:176}},action.date),_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:177}},action.time)));}},{key:'onMaterials',value:function onMaterials(){_reactNativeRouterFlux.Actions.materials();}},{key:'getHistory',value:function getHistory(){var headers,request,path,responseJson,response,history;return regeneratorRuntime.async(function getHistory$(_context){while(1){switch(_context.prev=_context.next){case 0:headers={accept:'application/json',authorization:this.props.user.authToken};request={method:'get',headers:headers};path=_Request2.default+('auditions/'+this.props.audition.id+'/histories?project_id='+this.props.project.id);responseJson=void 0;_context.prev=4;this.setState({isLoading:true});_context.next=8;return regeneratorRuntime.awrap(fetch(path,request));case 8:response=_context.sent;_context.next=11;return regeneratorRuntime.awrap(response.json());case 11:responseJson=_context.sent;console.log(responseJson);if(responseJson.errors)Alert.alert(responseJson.errors);_context.next=19;break;case 16:_context.prev=16;_context.t0=_context['catch'](4);console.error(_context.t0);case 19:history=_lodash2.default.map(responseJson,function(record){var object={id:record.id,text:record.action,date:record.date,time:record.time};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(history),isLoading:false,refreshing:false});case 21:case 'end':return _context.stop();}}},null,this,[[4,16]]);}},{key:'addNote',value:function addNote(){var headers,data,formData,k,request,path,responseJson,response,history;return regeneratorRuntime.async(function addNote$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:headers={accept:'application/json',authorization:this.props.user.authToken};data={'history[action]':'Note: '+this.state.action+'.'};formData=new FormData();for(k in data){formData.append(k,data[k]);}request={method:'post',headers:headers,body:formData};path=_Request2.default+('auditions/'+this.props.audition.id+'/histories?project_id='+this.props.project.id);responseJson=void 0;_context2.prev=7;this.setState({isLoading:true});_context2.next=11;return regeneratorRuntime.awrap(fetch(path,request));case 11:response=_context2.sent;_context2.next=14;return regeneratorRuntime.awrap(response.json());case 14:responseJson=_context2.sent;console.log(responseJson);if(responseJson.errors)Alert.alert(responseJson.errors);_context2.next=22;break;case 19:_context2.prev=19;_context2.t0=_context2['catch'](7);console.error(_context2.t0);case 22:history=_lodash2.default.map(responseJson,function(record){var object={id:record.id,text:record.action,date:record.date,time:record.time};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(history),action:"",isLoading:false});case 24:case 'end':return _context2.stop();}}},null,this,[[7,19]]);}}]);return History;}(_reactNative.Component);
+var _redux=require('redux/lib/index.js');var History=function(_Component){babelHelpers.inherits(History,_Component);function History(props){babelHelpers.classCallCheck(this,History);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(History).call(this,props));var dummyActions=[];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyActions),action:"",isLoading:false,refreshing:false};return _this;}babelHelpers.createClass(History,[{key:'componentDidMount',value:function componentDidMount(){this.populateHistoryData();}},{key:'render',value:function render(){var _this2=this;return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:87}},_reactNative2.default.createElement(_Navbar2.default,{title:'History',style:_style2.default.toolbar,back:true,__source:{fileName:_jsxFileName,lineNumber:88}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:92}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},refreshControl:_reactNative2.default.createElement(_reactNative.RefreshControl,{refreshing:this.state.refreshing,onRefresh:this._onRefresh.bind(this),__source:{fileName:_jsxFileName,lineNumber:96}}),__source:{fileName:_jsxFileName,lineNumber:93}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:100}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:101}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderHeader:this._renderHeader.bind(this),renderRow:this._renderRow.bind(this),__source:{fileName:_jsxFileName,lineNumber:102}})))),_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.formContainer,__source:{fileName:_jsxFileName,lineNumber:109}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.inputContainer,__source:{fileName:_jsxFileName,lineNumber:110}},_reactNative2.default.createElement(_IconInput2.default,{placeholder:'Enter a Note...',icon:'compose',secureTextEntry:false,dark:false,value:this.state.action,onChangeText:function onChangeText(val){return _this2.setState({action:val});},__source:{fileName:_jsxFileName,lineNumber:111}})),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.addNote();},__source:{fileName:_jsxFileName,lineNumber:119}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.addButton,__source:{fileName:_jsxFileName,lineNumber:120}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.addButtonText,__source:{fileName:_jsxFileName,lineNumber:121}},'Add')))),_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:125}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:126}}))));}},{key:'_onRefresh',value:function _onRefresh(){console.log("Refresh Triggered");this.setState({refreshing:true});this.populateHistoryData();}},{key:'_renderHeader',value:function _renderHeader(){var _this3=this;return _reactNative2.default.createElement(_reactNative.View,{style:_history2.default.headerContainer,__source:{fileName:_jsxFileName,lineNumber:145}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.nameContainer,__source:{fileName:_jsxFileName,lineNumber:146}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.header,__source:{fileName:_jsxFileName,lineNumber:147}},this.props.audition.actor)),_reactNative2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:149}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.subheaderContainer,__source:{fileName:_jsxFileName,lineNumber:150}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.materialsContainer,__source:{fileName:_jsxFileName,lineNumber:151}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:152}},'Materials'),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this3.onMaterials();},__source:{fileName:_jsxFileName,lineNumber:153}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.materialsIconContainer,__source:{fileName:_jsxFileName,lineNumber:154}},_reactNative2.default.createElement(_Ionicons2.default,{name:'document-text',style:_history2.default.materialsIcon,__source:{fileName:_jsxFileName,lineNumber:155}})))),_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.headerDate,__source:{fileName:_jsxFileName,lineNumber:159}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:160}},this.props.audition.date),_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:161}},this.props.audition.time)))));}},{key:'_renderRow',value:function _renderRow(action){return _reactNative2.default.createElement(_reactNative.View,{style:_history2.default.actionItem,__source:{fileName:_jsxFileName,lineNumber:171}},_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.actionItemLeft,__source:{fileName:_jsxFileName,lineNumber:172}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:173}},action.text)),_reactNative2.default.createElement(_reactNative.View,{style:_history2.default.actionItemRight,__source:{fileName:_jsxFileName,lineNumber:175}},_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:176}},action.date),_reactNative2.default.createElement(_reactNative.Text,{style:_history2.default.font,__source:{fileName:_jsxFileName,lineNumber:177}},action.time)));}},{key:'onMaterials',value:function onMaterials(){_reactNativeRouterFlux.Actions.materials();}},{key:'populateHistoryData',value:function populateHistoryData(){var endpoint,historyListData,history;return regeneratorRuntime.async(function populateHistoryData$(_context){while(1){switch(_context.prev=_context.next){case 0:endpoint='auditions/'+this.props.audition.id+'/histories?project_id='+this.props.project.id;historyListData=void 0;this.setState({isLoading:true});_context.prev=3;_context.next=6;return regeneratorRuntime.awrap((0,_Api.getHistory)(endpoint,this.props.user.authToken));case 6:historyListData=_context.sent;_context.next=12;break;case 9:_context.prev=9;_context.t0=_context['catch'](3);console.error(_context.t0);case 12:history=_lodash2.default.map(historyListData,function(record){var object={id:record.id,text:record.action,date:record.date,time:record.time};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(history),isLoading:false,refreshing:false});case 14:case 'end':return _context.stop();}}},null,this,[[3,9]]);}},{key:'addNote',value:function addNote(){var data,endpoint,historyListData,history;return regeneratorRuntime.async(function addNote$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:data={'history[action]':'Note: '+this.state.action+'.'};endpoint='auditions/'+this.props.audition.id+'/histories?project_id='+this.props.project.id;historyListData=void 0;this.setState({isLoading:true});_context2.prev=4;_context2.next=7;return regeneratorRuntime.awrap((0,_Api.postHistory)(endpoint,this.props.user.authToken,data));case 7:historyListData=_context2.sent;_context2.next=13;break;case 10:_context2.prev=10;_context2.t0=_context2['catch'](4);console.error(_context2.t0);case 13:history=_lodash2.default.map(historyListData,function(record){var object={id:record.id,text:record.action,date:record.date,time:record.time};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(history),action:"",isLoading:false});case 15:case 'end':return _context2.stop();}}},null,this,[[4,10]]);}}]);return History;}(_reactNative.Component);
 
 function mapStateToProps(state){
 return {
@@ -92030,96 +92054,126 @@ var _reactNative=require('react-native/Libraries/react-native/react-native.js');
 var _Navbar=require('Scheduler/App/Components/Widgets/Navbar.ios.js');var _Navbar2=babelHelpers.interopRequireDefault(_Navbar);
 var _style=require('Scheduler/App/Styles/style.js');var _style2=babelHelpers.interopRequireDefault(_style);
 var _materials=require('Scheduler/App/Styles/materials.js');var _materials2=babelHelpers.interopRequireDefault(_materials);
-var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);var 
-
-Materials=function(_Component){babelHelpers.inherits(Materials,_Component);
-function Materials(props){babelHelpers.classCallCheck(this,Materials);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Materials).call(this,
-props));
-
-var dummyMaterials=[
-{
-name:"Overview",
-date:"02/11/16",
-time:"10:10am",
-alert:false},
-
-{
-name:"Script",
-date:"02/11/16",
-time:"10:37am",
-alert:false},
-
-{
-name:"Images",
-date:"02/11/16",
-time:"11:48am",
-alert:true}];
-
-
-
-var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});
-_this.state={
-dataSource:ds.cloneWithRows(dummyMaterials),
-materials:false};return _this;}babelHelpers.createClass(Materials,[{key:'render',value:function render()
-
-
-
-{var _this2=this;
-return (
-_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:44}},
-_reactNative2.default.createElement(_Navbar2.default,{
-title:'Materials',
-style:_style2.default.toolbar,
-back:true,__source:{fileName:_jsxFileName,lineNumber:45}}),
-_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:49}},
-_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:50}},
-_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:51}},
-_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:52}},
-_reactNative2.default.createElement(_reactNative.ListView,{
-dataSource:this.state.dataSource,
-renderHeader:this._renderHeader,
-renderRow:this._renderRow,__source:{fileName:_jsxFileName,lineNumber:53}})))),
-
-
-
-_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.footer,__source:{fileName:_jsxFileName,lineNumber:60}},
-_reactNative2.default.createElement(_reactNative.Text,{style:_materials2.default.switchFont,__source:{fileName:_jsxFileName,lineNumber:61}},'Automatically forward the materials?'),
-_reactNative2.default.createElement(_reactNative.Switch,{
-onValueChange:function onValueChange(value){return _this2.setState({materials:value});},
-value:this.state.materials,__source:{fileName:_jsxFileName,lineNumber:62}})))));}},{key:'_renderHeader',value:function _renderHeader()
+var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
 
 
 
 
 
 
-{
-return (
-_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.header,__source:{fileName:_jsxFileName,lineNumber:73}},
-_reactNative2.default.createElement(_reactNative.Text,{style:_materials2.default.headerText,__source:{fileName:_jsxFileName,lineNumber:74}},'Brad Pitt\'s Materials')));}},{key:'_renderRow',value:function _renderRow(
 
 
 
 
-material){
-return (
-_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.materialItem,__source:{fileName:_jsxFileName,lineNumber:81}},
-_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.materialItemLeft,__source:{fileName:_jsxFileName,lineNumber:82}},
-_reactNative2.default.createElement(_reactNative.TouchableOpacity,{__source:{fileName:_jsxFileName,lineNumber:83}},
-_reactNative2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:84}},
-_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.materialItemIconContainer,__source:{fileName:_jsxFileName,lineNumber:85}},
-_reactNative2.default.createElement(_Ionicons2.default,{name:'document-text',style:_materials2.default.materialItemIcon,__source:{fileName:_jsxFileName,lineNumber:86}})),
-
-_reactNative2.default.createElement(_Ionicons2.default,{name:'android-alert',style:material.alert?_materials2.default.notificationIcon:{opacity:0},__source:{fileName:_jsxFileName,lineNumber:88}}))),
 
 
-_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.nameContainer,__source:{fileName:_jsxFileName,lineNumber:91}},
-_reactNative2.default.createElement(_reactNative.Text,{style:_materials2.default.font,__source:{fileName:_jsxFileName,lineNumber:92}},material.name))),
 
 
-_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.materialItemRight,__source:{fileName:_jsxFileName,lineNumber:95}},
-_reactNative2.default.createElement(_reactNative.Text,{style:_materials2.default.font,__source:{fileName:_jsxFileName,lineNumber:96}},material.date),
-_reactNative2.default.createElement(_reactNative.Text,{style:_materials2.default.font,__source:{fileName:_jsxFileName,lineNumber:97}},material.time))));}}]);return Materials;}(_reactNative.Component);exports.default=Materials;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _reactRedux=require('react-redux/lib/index.js');
+var _redux=require('redux/lib/index.js');var Materials=function(_Component){babelHelpers.inherits(Materials,_Component);function Materials(props){babelHelpers.classCallCheck(this,Materials);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Materials).call(this,props));var dummyMaterials=[{name:"Overview",date:"02/11/16",time:"10:10am",alert:false},{name:"Script",date:"02/11/16",time:"10:37am",alert:false},{name:"Images",date:"02/11/16",time:"11:48am",alert:true}];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyMaterials),materials:false};return _this;}babelHelpers.createClass(Materials,[{key:'render',value:function render(){return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:44}},_reactNative2.default.createElement(_Navbar2.default,{title:'Materials',style:_style2.default.toolbar,back:true,__source:{fileName:_jsxFileName,lineNumber:45}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:49}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},__source:{fileName:_jsxFileName,lineNumber:50}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:51}},_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:52}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderHeader:this._renderHeader.bind(this),renderRow:this._renderRow,__source:{fileName:_jsxFileName,lineNumber:53}})))),this.generateFooter()));}},{key:'_renderHeader',value:function _renderHeader(){var headerText=void 0;if(this.props.audition.actor)headerText=this.props.audition.actor+'\'s Materials';else headerText=this.props.user.name+'\'s Materials';return _reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.header,__source:{fileName:_jsxFileName,lineNumber:74}},_reactNative2.default.createElement(_reactNative.Text,{style:_materials2.default.headerText,__source:{fileName:_jsxFileName,lineNumber:75}},headerText));}},{key:'_renderRow',value:function _renderRow(material){return _reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.materialItem,__source:{fileName:_jsxFileName,lineNumber:82}},_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.materialItemLeft,__source:{fileName:_jsxFileName,lineNumber:83}},_reactNative2.default.createElement(_reactNative.TouchableOpacity,{__source:{fileName:_jsxFileName,lineNumber:84}},_reactNative2.default.createElement(_reactNative.View,{__source:{fileName:_jsxFileName,lineNumber:85}},_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.materialItemIconContainer,__source:{fileName:_jsxFileName,lineNumber:86}},_reactNative2.default.createElement(_Ionicons2.default,{name:'document-text',style:_materials2.default.materialItemIcon,__source:{fileName:_jsxFileName,lineNumber:87}})),_reactNative2.default.createElement(_Ionicons2.default,{name:'android-alert',style:material.alert?_materials2.default.notificationIcon:{opacity:0},__source:{fileName:_jsxFileName,lineNumber:89}}))),_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.nameContainer,__source:{fileName:_jsxFileName,lineNumber:92}},_reactNative2.default.createElement(_reactNative.Text,{style:_materials2.default.font,__source:{fileName:_jsxFileName,lineNumber:93}},material.name))),_reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.materialItemRight,__source:{fileName:_jsxFileName,lineNumber:96}},_reactNative2.default.createElement(_reactNative.Text,{style:_materials2.default.font,__source:{fileName:_jsxFileName,lineNumber:97}},material.date),_reactNative2.default.createElement(_reactNative.Text,{style:_materials2.default.font,__source:{fileName:_jsxFileName,lineNumber:98}},material.time)));}},{key:'generateFooter',value:function generateFooter(){var _this2=this;if(this.props.audition.actor)return _reactNative2.default.createElement(_reactNative.View,{style:_materials2.default.footer,__source:{fileName:_jsxFileName,lineNumber:106}},_reactNative2.default.createElement(_reactNative.Text,{style:_materials2.default.switchFont,__source:{fileName:_jsxFileName,lineNumber:107}},'Automatically forward the materials?'),_reactNative2.default.createElement(_reactNative.Switch,{onValueChange:function onValueChange(value){return _this2.setState({materials:value});},value:this.state.materials,__source:{fileName:_jsxFileName,lineNumber:108}}));else return;}}]);return Materials;}(_reactNative.Component);exports.default=Materials;
+
+function mapStateToProps(state){
+return {
+user:state.user,
+audition:state.audition};}
+
+
+
+module.exports=(0,_reactRedux.connect)(mapStateToProps)(Materials);
 });
 __d('Scheduler/App/Components/Notes.js',function(global, require, module, exports) {  'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _jsxFileName='/Users/brianpark/dev/scheduler-react/App/Components/Notes.js';
 
@@ -92132,7 +92186,7 @@ var _Ionicons=require('react-native-vector-icons/Ionicons.js');var _Ionicons2=ba
 var _IconInput=require('Scheduler/App/Components/Widgets/IconInput.js');var _IconInput2=babelHelpers.interopRequireDefault(_IconInput);
 var _reactNativeSpinkit=require('react-native-spinkit/index.ios.js');var _reactNativeSpinkit2=babelHelpers.interopRequireDefault(_reactNativeSpinkit);
 var _lodash=require('lodash/lodash.js');var _lodash2=babelHelpers.interopRequireDefault(_lodash);
-var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelpers.interopRequireDefault(_Request);
+var _Api=require('Scheduler/App/Network/Api.js');
 
 
 
@@ -92315,44 +92369,7 @@ var _Request=require('Scheduler/App/Network/Request.js');var _Request2=babelHelp
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var _reactRedux=require('react-redux/lib/index.js');var Notes=function(_Component){babelHelpers.inherits(Notes,_Component);function Notes(props){babelHelpers.classCallCheck(this,Notes);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Notes).call(this,props));var dummyNotes=[];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyNotes),message:"",isLoading:false,refreshing:false};return _this;}babelHelpers.createClass(Notes,[{key:'componentDidMount',value:function componentDidMount(){this.getMessages();}},{key:'render',value:function render(){var _this2=this;return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:51}},_reactNative2.default.createElement(_Navbar2.default,{title:'Messages',style:_style2.default.toolbar,back:true,__source:{fileName:_jsxFileName,lineNumber:52}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:56}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},refreshControl:_reactNative2.default.createElement(_reactNative.RefreshControl,{refreshing:this.state.refreshing,onRefresh:this._onRefresh.bind(this),__source:{fileName:_jsxFileName,lineNumber:60}}),__source:{fileName:_jsxFileName,lineNumber:57}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:64}},_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:65}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderRow:this._renderRow,__source:{fileName:_jsxFileName,lineNumber:66}})))),_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.formContainer,__source:{fileName:_jsxFileName,lineNumber:72}},_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.inputContainer,__source:{fileName:_jsxFileName,lineNumber:73}},_reactNative2.default.createElement(_IconInput2.default,{placeholder:'Enter a Message...',icon:'compose',secureTextEntry:false,dark:false,value:this.state.message,onChangeText:function onChangeText(val){return _this2.setState({message:val});},__source:{fileName:_jsxFileName,lineNumber:74}})),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.sendMessage();},__source:{fileName:_jsxFileName,lineNumber:82}},_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.addButton,__source:{fileName:_jsxFileName,lineNumber:83}},_reactNative2.default.createElement(_reactNative.Text,{style:_notes2.default.addButtonText,__source:{fileName:_jsxFileName,lineNumber:84}},'Send')))),_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:88}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:89}}))));}},{key:'_onRefresh',value:function _onRefresh(){console.log("Refresh Triggered");this.setState({refreshing:true});this.getMessages();}},{key:'_renderRow',value:function _renderRow(note){return _reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.noteItem,__source:{fileName:_jsxFileName,lineNumber:108}},_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.noteItemLeft,__source:{fileName:_jsxFileName,lineNumber:109}},_reactNative2.default.createElement(_reactNative.Text,{style:_notes2.default.font,__source:{fileName:_jsxFileName,lineNumber:110}},note.sender,': ',note.body)),_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.noteItemRight,__source:{fileName:_jsxFileName,lineNumber:112}},_reactNative2.default.createElement(_reactNative.Text,{style:_notes2.default.font,__source:{fileName:_jsxFileName,lineNumber:113}},note.date),_reactNative2.default.createElement(_reactNative.Text,{style:_notes2.default.font,__source:{fileName:_jsxFileName,lineNumber:114}},note.time)));}},{key:'getMessages',value:function getMessages(){var headers,request,path,responseJson,response,messages;return regeneratorRuntime.async(function getMessages$(_context){while(1){switch(_context.prev=_context.next){case 0:headers={accept:'application/json',authorization:this.props.user.authToken};request={method:'get',headers:headers};path=void 0;if(this.props.user.role=='agent'){path=_Request2.default+('auditions/'+this.props.audition.id+'/messages?project_id='+this.props.project.id);}else {path=_Request2.default+('auditions/'+this.props.audition.id+'/messages');}responseJson=void 0;_context.prev=5;this.setState({isLoading:true});_context.next=9;return regeneratorRuntime.awrap(fetch(path,request));case 9:response=_context.sent;_context.next=12;return regeneratorRuntime.awrap(response.json());case 12:responseJson=_context.sent;console.log(responseJson);if(responseJson.errors)Alert.alert(responseJson.errors);_context.next=20;break;case 17:_context.prev=17;_context.t0=_context['catch'](5);console.error(_context.t0);case 20:messages=_lodash2.default.map(responseJson,function(message){var object={id:message.id,sender:message.sender,body:message.body,date:message.date,time:message.time};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(messages),isLoading:false,refreshing:false});case 22:case 'end':return _context.stop();}}},null,this,[[5,17]]);}},{key:'sendMessage',value:function sendMessage(){var headers,data,formData,k,request,path,responseJson,response,messages;return regeneratorRuntime.async(function sendMessage$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:headers={accept:'application/json',authorization:this.props.user.authToken};data={'message[user_id]':this.props.user.id,'message[body]':this.state.message};formData=new FormData();for(k in data){formData.append(k,data[k]);}request={method:'post',headers:headers,body:formData};path=void 0;if(this.props.user.role=='agent'){path=_Request2.default+('auditions/'+this.props.audition.id+'/messages?project_id='+this.props.project.id);}else {path=_Request2.default+('auditions/'+this.props.audition.id+'/messages');}responseJson=void 0;_context2.prev=8;this.setState({isLoading:true});_context2.next=12;return regeneratorRuntime.awrap(fetch(path,request));case 12:response=_context2.sent;_context2.next=15;return regeneratorRuntime.awrap(response.json());case 15:responseJson=_context2.sent;console.log(responseJson);if(responseJson.errors)Alert.alert(responseJson.errors);_context2.next=23;break;case 20:_context2.prev=20;_context2.t0=_context2['catch'](8);console.error(_context2.t0);case 23:messages=_lodash2.default.map(responseJson,function(message){var object={id:message.id,sender:message.sender,body:message.body,date:message.date,time:message.time};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(messages),body:"",isLoading:false});case 25:case 'end':return _context2.stop();}}},null,this,[[8,20]]);}}]);return Notes;}(_reactNative.Component);exports.default=Notes;
+var _reactRedux=require('react-redux/lib/index.js');var Notes=function(_Component){babelHelpers.inherits(Notes,_Component);function Notes(props){babelHelpers.classCallCheck(this,Notes);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Notes).call(this,props));var dummyNotes=[];var ds=new _reactNative.ListView.DataSource({rowHasChanged:function rowHasChanged(r1,r2){return r1!==r2;}});_this.state={dataSource:ds.cloneWithRows(dummyNotes),message:"",isLoading:false,refreshing:false};return _this;}babelHelpers.createClass(Notes,[{key:'componentDidMount',value:function componentDidMount(){this.populateMessages();}},{key:'render',value:function render(){var _this2=this;return _reactNative2.default.createElement(_reactNative.View,{style:_style2.default.color,__source:{fileName:_jsxFileName,lineNumber:51}},_reactNative2.default.createElement(_Navbar2.default,{title:'Messages',style:_style2.default.toolbar,back:true,__source:{fileName:_jsxFileName,lineNumber:52}}),_reactNative2.default.createElement(_reactNative.Image,{source:require('Scheduler/App/img/glow2.png'),style:_style2.default.container,__source:{fileName:_jsxFileName,lineNumber:56}},_reactNative2.default.createElement(_reactNative.ScrollView,{style:{backgroundColor:'transparent'},refreshControl:_reactNative2.default.createElement(_reactNative.RefreshControl,{refreshing:this.state.refreshing,onRefresh:this._onRefresh.bind(this),__source:{fileName:_jsxFileName,lineNumber:60}}),__source:{fileName:_jsxFileName,lineNumber:57}},_reactNative2.default.createElement(_reactNative.View,{style:_style2.default.verticalCenter,__source:{fileName:_jsxFileName,lineNumber:64}},_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.listContainer,__source:{fileName:_jsxFileName,lineNumber:65}},_reactNative2.default.createElement(_reactNative.ListView,{dataSource:this.state.dataSource,renderRow:this._renderRow,__source:{fileName:_jsxFileName,lineNumber:66}})))),_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.formContainer,__source:{fileName:_jsxFileName,lineNumber:72}},_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.inputContainer,__source:{fileName:_jsxFileName,lineNumber:73}},_reactNative2.default.createElement(_IconInput2.default,{placeholder:'Enter a Message...',icon:'compose',secureTextEntry:false,dark:false,value:this.state.message,onChangeText:function onChangeText(val){return _this2.setState({message:val});},__source:{fileName:_jsxFileName,lineNumber:74}})),_reactNative2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.sendMessage();},__source:{fileName:_jsxFileName,lineNumber:82}},_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.addButton,__source:{fileName:_jsxFileName,lineNumber:83}},_reactNative2.default.createElement(_reactNative.Text,{style:_notes2.default.addButtonText,__source:{fileName:_jsxFileName,lineNumber:84}},'Send')))),_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.spinnerContainer,__source:{fileName:_jsxFileName,lineNumber:88}},_reactNative2.default.createElement(_reactNativeSpinkit2.default,{isVisible:this.state.isLoading,color:'#ffffff',size:50,type:'Wave',__source:{fileName:_jsxFileName,lineNumber:89}}))));}},{key:'_onRefresh',value:function _onRefresh(){console.log("Refresh Triggered");this.setState({refreshing:true});this.populateMessages();}},{key:'_renderRow',value:function _renderRow(note){return _reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.noteItem,__source:{fileName:_jsxFileName,lineNumber:108}},_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.noteItemLeft,__source:{fileName:_jsxFileName,lineNumber:109}},_reactNative2.default.createElement(_reactNative.Text,{style:_notes2.default.font,__source:{fileName:_jsxFileName,lineNumber:110}},note.sender,': ',note.body)),_reactNative2.default.createElement(_reactNative.View,{style:_notes2.default.noteItemRight,__source:{fileName:_jsxFileName,lineNumber:112}},_reactNative2.default.createElement(_reactNative.Text,{style:_notes2.default.font,__source:{fileName:_jsxFileName,lineNumber:113}},note.date),_reactNative2.default.createElement(_reactNative.Text,{style:_notes2.default.font,__source:{fileName:_jsxFileName,lineNumber:114}},note.time)));}},{key:'populateMessages',value:function populateMessages(){var endpoint,messageListData,messages;return regeneratorRuntime.async(function populateMessages$(_context){while(1){switch(_context.prev=_context.next){case 0:endpoint=void 0;if(this.props.user.role=='agent'){endpoint='auditions/'+this.props.audition.id+'/messages?project_id='+this.props.project.id;}else {endpoint='auditions/'+this.props.audition.id+'/messages';}messageListData=void 0;this.setState({isLoading:true});_context.prev=4;_context.next=7;return regeneratorRuntime.awrap((0,_Api.getMessages)(endpoint,this.props.user.authToken));case 7:messageListData=_context.sent;_context.next=13;break;case 10:_context.prev=10;_context.t0=_context['catch'](4);console.error(_context.t0);case 13:messages=_lodash2.default.map(messageListData,function(message){var object={id:message.id,sender:message.sender,body:message.body,date:message.date,time:message.time};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(messages),isLoading:false,refreshing:false});case 15:case 'end':return _context.stop();}}},null,this,[[4,10]]);}},{key:'sendMessage',value:function sendMessage(){var data,endpoint,messageListData,messages;return regeneratorRuntime.async(function sendMessage$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:data={'message[user_id]':this.props.user.id,'message[body]':this.state.message};endpoint=void 0;if(this.props.user.role=='agent'){endpoint='auditions/'+this.props.audition.id+'/messages?project_id='+this.props.project.id;}else {endpoint='auditions/'+this.props.audition.id+'/messages';}messageListData=void 0;this.setState({isLoading:true});_context2.prev=5;_context2.next=8;return regeneratorRuntime.awrap((0,_Api.postMessage)(endpoint,this.props.user.authToken,data));case 8:messageListData=_context2.sent;_context2.next=14;break;case 11:_context2.prev=11;_context2.t0=_context2['catch'](5);console.error(_context2.t0);case 14:messages=_lodash2.default.map(messageListData,function(message){var object={id:message.id,sender:message.sender,body:message.body,date:message.date,time:message.time};return object;});this.setState({dataSource:this.state.dataSource.cloneWithRows(messages),message:"",isLoading:false});case 16:case 'end':return _context2.stop();}}},null,this,[[5,11]]);}}]);return Notes;}(_reactNative.Component);exports.default=Notes;
 
 function mapStateToProps(state){
 return {
