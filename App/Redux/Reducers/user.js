@@ -6,9 +6,9 @@ export default function user(state = initialState, action) {
       console.log("user.SAVE_USER: " + JSON.stringify(action));
       return Object.assign({}, state, {
         id: action.user.id,
-        name: action.user.name,
-        role: action.user.role,
-        authToken: action.user.auth_token,
+        firstName: action.user.firstName,
+        lastName: action.user.lastName,
+        type: action.user.type,
         notificationToken: action.user.notification_token
     });
     default:

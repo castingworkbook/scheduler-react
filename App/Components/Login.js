@@ -14,11 +14,11 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // email: 'alister@cwb.com',
-      email: 'secret.agent@cwb.com',
-      password: 'password',
+      // email: 'secret.agent@cwb.com',
+      // password: 'password',
+      email: "tymans",
+      password: "tymansint",
       visibleHeight: Dimensions.get('window').height,
-      scroll: false,
       isLoading: false,
     };
   }
@@ -30,16 +30,16 @@ class Login extends Component {
 
   keyboardWillShow(e) {
     let newSize = Dimensions.get('window').height - e.endCoordinates.height;
-    this.setState({scroll: true});
+    this.setState({visibleHeight: newSize});
   }
 
   keyboardWillHide(e) {
-    this.setState({scroll: false});
+    this.setState({visibleHeight: Dimensions.get('window').height});
   }
 
   render() {
     return(
-      <ScrollView style={styles.color} scrollEnabled={this.state.scroll}>
+      <ScrollView style={[styles.color, {height: this.state.visibleHeight}]}>
         <Image source={require('../img/glow2.png')} style={styles.container}>
           <View style={login.logoContainer}>
             <Image source={require('../img/cwb_logo.png')} style={login.logo} />
@@ -80,18 +80,26 @@ class Login extends Component {
   }
 
   async login() {
-    let data = {
-      'session[email]': this.state.email,
-      'session[password]': this.state.password,
-      'session[notification_token]': this.props.user.notificationToken,
-      'session[platform]': Platform.OS,
-    };
+    // let data = {
+    //   'session[username]': this.state.email,
+    //   'session[password]': this.state.password,
+    //   'session[notification_token]': this.props.user.notificationToken,
+    //   'session[platform]': Platform.OS,
+    // };
+
+    let data = `username=${this.state.email}&password=${this.state.password}&remember_password=no&doAction=mobileactorupload`
 
     this.setState({isLoading: true});
     try {
-      const userData = await postSession(data);
+      const response = await postSession(data);
+      let userData = {
+        id: response.id,
+        firstName: response.firstName,
+        lastName: response.lastName,
+        type: response.type,
+      }
       this.props.userActions.saveUser(userData);
-      userData.role == 'agent' ? Actions.projects() : Actions.auditions();
+      userData.type == 3 ? Actions.projects() : Actions.auditions();
     } catch(error) {
       console.error(error);
     }

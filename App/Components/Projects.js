@@ -207,24 +207,22 @@ class Projects extends Component {
 		let projectListData;
 		this.setState({isLoading: true});
 		try {
-			projectListData = await getProjects(this.props.user.authToken);
+			const endpoint = `/scheduling2016/api/agents/${this.props.user.id}/activebreakdowns`;
+			projectListData = await getProjects(endpoint);
+			console.log(projectListData);
 		} catch(error) {
 			console.error(error);
 		}
 
-		let projects = _.map(projectListData.projects, (project, index) => {
-			let actions = 0;
-			_.each(project.auditions, (audition) => {
-				if (_.isEmpty(audition.status)) actions++;
-				if ((audition.status == 'CONF' || audition.status == 'REGR' || audition.status == 'TIME') && _.isEmpty(audition.response))
-					actions++;
-			});
+		let projects = _.map(projectListData, (project, index) => {
+			let actions = project.auditionsRequestedNotForwardedCount + project.auditionsResponseNotForwardedCount;
 
 			let object = {
-				id: project.id,
-				title: project.title,
-				director: project.director,
-				phone: project.phone,
+				id: project.breakdownId,
+				type: project.breakdownType,
+				title: project.title.trim(),
+				director: project.directorName.trim(),
+				phone: project.directorPhone.trim(),
 				selected: false,
 				actions,
 			}

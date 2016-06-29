@@ -188,20 +188,18 @@ class Schedule extends Component {
 
 	generateStatus(audition) {
 		let statusElement;
-		if(audition.casting == 'confirm') {
+		if(audition.status == 6)
 			statusElement = <Icon name='checkmark' style={[schedule.auditionItemIcon, {color: '#00AD63'}]} />
-		} else if(audition.casting == 'regret') {
+		else if(audition.status == 4)
 			statusElement = <Icon name='close' style={[schedule.auditionItemIcon, {color: '#E9556A'}]} />
-		} else if(audition.casting == 'time') {
+		else if(audition.status == 10)
 			statusElement = <Icon name='clock' style={[schedule.auditionItemIcon, {color: '#00B5EF'}]} />
-		} else {
-			if (audition.status == 'SENT' || audition.status == 'SENT+')
-				statusElement = <Text style={[schedule.highlightedFont, {color: '#00B5EF'}]}>{audition.status}</Text>
-			else if (audition.status == 'CONF')
-				statusElement = <Text style={[schedule.highlightedFont, {color: '#00AD63'}]}>{audition.status}</Text>
-			else if (audition.status == 'REGR')
-				statusElement = <Text style={[schedule.highlightedFont, {color: '#E9556A'}]}>{audition.status}</Text>
-		}
+		else if (audition.status == 2)
+			statusElement = <Text style={[schedule.highlightedFont, {color: '#00B5EF'}]}>SENT</Text>
+		else if (audition.status == 5)
+			statusElement = <Text style={[schedule.highlightedFont, {color: '#00AD63'}]}>CONF</Text>
+		else if (audition.status == 3)
+			statusElement = <Text style={[schedule.highlightedFont, {color: '#E9556A'}]}>REGR</Text>
 
 		return statusElement;
 	}
@@ -224,14 +222,14 @@ class Schedule extends Component {
 	generateCastingNotification() {
 		let countText;
 		if (this.state.forwardCastingCount > 1)
-			countText = `${this.state.forwardCastingCount} need`;
+			countText = `${this.state.forwardCastingCount} need to be forwarded to Casting`;
 		else
-			countText = `${this.state.forwardCastingCount} needs`;
+			countText = `${this.state.forwardCastingCount} needs to be forwarded to Casting`;
 
 		if (this.state.forwardCastingCount > 0) {
 			return <View style={schedule.notification}>
 							 <Icon name="android-alert" style={schedule.notificationIcon} />
-							 <Text style={schedule.notificationFont}>{this.state.forwardCastingCount} to be forwarded to Casting</Text>
+							 <Text style={schedule.notificationFont}>{countText}</Text>
 						 </View>
 		}
 	}
@@ -304,11 +302,12 @@ class Schedule extends Component {
   }
 
 	async populateAuditionList() {
-		let endpoint = `auditions?project_id=${this.props.project.id}`;
+		let endpoint = `/scheduling2016/api/agents/${this.props.user.id}/breakdownschedules/${this.props.project.id}/${this.props.project.type}`;
 		let auditionListData;
 		this.setState({isLoading: true});
 		try {
 			auditionListData = await getAuditions(endpoint, this.props.user.authToken);
+			console.log(auditionListData);
 		} catch(error) {
 			console.error(error);
 		}
@@ -316,19 +315,23 @@ class Schedule extends Component {
 		let forwardActorCount = 0;
 		let forwardCastingCount = 0;
 		let auditions = _.map(auditionListData, (audition, index) => {
-			if (_.isEmpty(audition.status)) forwardActorCount++;
-			if ((audition.status == 'CONF' || audition.status == 'REGR' || audition.status == 'TIME') && _.isEmpty(audition.response))
+			if (audition.auditionStatusI == 1)
+				forwardActorCount++;
+			if (audition.auditionStatusI == 5 || audition.auditionStatusI == 3)
 				forwardCastingCount++;
+
+			let millidate = audition.auditionDate.replace(/\/Date\((-?\d+)\)\//, '$1');
+			let date = new Date(parseInt(millidate));
 
 			let object = {
 				id: audition.id,
-				actor: audition.actor,
-				phone: audition.phone,
-				role: audition.role,
-				date: audition.date,
-				time: audition.time,
-				status: audition.status,
-				casting: audition.response,
+				actor: `${audition.clientFirstName} ${audition.clientLastName}`,
+				actorPhone: audition.clientPhoneNumber,
+				directorPhone: audition.directorPhoneNumber,
+				role: audition.roleName,
+				date: date.toLocaleDateString(),
+				time: date.toLocaleTimeString(),
+				status: audition.auditionStatusI,
 				selected: false
 			}
 

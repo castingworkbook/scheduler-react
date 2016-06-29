@@ -20,19 +20,19 @@ import PushNotification from 'react-native-push-notification';
 class RootRouter extends Component {
 	componentDidMount() {
 		AppEventEmitter.addListener('hamburger.click', this.openControlPanel.bind(this));
-		PushNotification.configure({
-      onRegister: this.setToken.bind(this),
-      onNotification: this.onPushNotification.bind(this),
-      senderID: "625049319254",
-      permissions: {
-          alert: true,
-          badge: true,
-          sound: true
-      },
-      popInitialNotification: true,
-      requestPermissions: true,
-    });
-		PushNotification.setApplicationIconBadgeNumber(0);
+		// PushNotification.configure({
+    //   onRegister: this.setToken.bind(this),
+    //   onNotification: this.onPushNotification.bind(this),
+    //   senderID: "625049319254",
+    //   permissions: {
+    //       alert: true,
+    //       badge: true,
+    //       sound: true
+    //   },
+    //   popInitialNotification: true,
+    //   requestPermissions: true,
+    // });
+		// PushNotification.setApplicationIconBadgeNumber(0);
   }
 
   componentWillUnMount() {
