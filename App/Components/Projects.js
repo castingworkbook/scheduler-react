@@ -209,7 +209,6 @@ class Projects extends Component {
 		try {
 			const endpoint = `/scheduling2016/api/agents/${this.props.user.id}/activebreakdowns`;
 			projectListData = await getProjects(endpoint);
-			console.log(projectListData);
 		} catch(error) {
 			console.error(error);
 		}

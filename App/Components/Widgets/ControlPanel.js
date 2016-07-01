@@ -57,12 +57,11 @@ export default class ControlPanel extends Component {
   }
 
   async reset() {
-    let response;
     try {
-      let response = await resetData();
+      let endpoint = "/scheduling2016/api/agents/reset/"
+      let response = await resetData(endpoint);
 
-      Alert.alert(response.message);
-      Actions.login();
+      Alert.alert("Data Reset!");
     } catch(error) {
       console.log(error);
     }

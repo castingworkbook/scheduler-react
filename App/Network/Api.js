@@ -107,9 +107,41 @@ export async function getAuditions(endpoint) {
   }
   try {
     let response = await fetch(ServerURL+endpoint, request);
-    console.log(response);
     let jsonResponse = JSON.parse(response._bodyInit);
     return jsonResponse;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export async function putAuditions(endpoint, data) {
+  let headers = {
+    'WebSessionKey': token,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  }
+  let request = {
+    method: 'PUT',
+    headers,
+    body: data,
+  }
+  try {
+    let response = await fetch(ServerURL+endpoint, request);
+    let jsonResponse = JSON.parse(response._bodyInit);
+    return jsonResponse;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export async function resetData(endpoint) {
+  let headers = {
+    'WebSessionKey': token,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  }
+  try {
+    let response = await fetch(ServerURL+endpoint);
   } catch(error) {
     console.log(error);
   }
@@ -147,27 +179,27 @@ export async function getAuditions(endpoint) {
 //   }
 // }
 
-export async function putAudition(endpoint, token, data) {
-  try {
-    this.token = token;
-    let response = await httpRequest(endpoint, 'put', data);
-    let responseJson = await response.json();
-    return responseJson;
-  } catch(error) {
-    console.error(error);
-  }
-}
+// export async function putAudition(endpoint, token, data) {
+//   try {
+//     this.token = token;
+//     let response = await httpRequest(endpoint, 'put', data);
+//     let responseJson = await response.json();
+//     return responseJson;
+//   } catch(error) {
+//     console.error(error);
+//   }
+// }
 
-export async function putAuditions(endpoint, token, data) {
-  try {
-    this.token = token;
-    let response = await httpRequest(endpoint, 'put', data);
-    let responseJson = await response.json();
-    return responseJson;
-  } catch(error) {
-    console.error(error);
-  }
-}
+// export async function putAuditions(endpoint, token, data) {
+//   try {
+//     this.token = token;
+//     let response = await httpRequest(endpoint, 'put', data);
+//     let responseJson = await response.json();
+//     return responseJson;
+//   } catch(error) {
+//     console.error(error);
+//   }
+// }
 
 export async function getHistory(endpoint, token) {
   try {
@@ -213,12 +245,12 @@ export async function postMessage(endpoint, token, data) {
   }
 }
 
-export async function resetData() {
-  try {
-    let response = await httpRequest('projects/reset_data', 'get');
-    let responseJson = await response.json();
-    return responseJson;
-  } catch(error) {
-    console.error(error);
-  }
-}
+// export async function resetData() {
+//   try {
+//     let response = await httpRequest('projects/reset_data', 'get');
+//     let responseJson = await response.json();
+//     return responseJson;
+//   } catch(error) {
+//     console.error(error);
+//   }
+// }

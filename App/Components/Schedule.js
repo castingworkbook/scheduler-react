@@ -106,7 +106,6 @@ class Schedule extends Component {
 	          visible={this.state.show}
 	          onCancel={this.onCancel.bind(this)}>
 	          <ActionSheet.Button onPress={() => this.onAction("SENT")}>Send to {this.state.selected.length} Actor(s)</ActionSheet.Button>
-						<ActionSheet.Button onPress={() => this.onAction("SENT+")}>Send to {this.state.selected.length} Actor(s) + Materials</ActionSheet.Button>
 	          <ActionSheet.Button onPress={() => this.onAction("CONF")}>Confirm {this.state.selected.length}</ActionSheet.Button>
 						<ActionSheet.Button onPress={() => this.onAction("REGR")}>Regret {this.state.selected.length}</ActionSheet.Button>
 						<ActionSheet.Button onPress={() => this.onAction("TIME")}>Request {this.state.selected.length} New Time(s)</ActionSheet.Button>
@@ -247,7 +246,6 @@ class Schedule extends Component {
       } else if (audition.id == id && audition.selected == true) {
         audition.selected = false;
       }
-
       return audition;
     });
 
@@ -307,7 +305,6 @@ class Schedule extends Component {
 		this.setState({isLoading: true});
 		try {
 			auditionListData = await getAuditions(endpoint, this.props.user.authToken);
-			console.log(auditionListData);
 		} catch(error) {
 			console.error(error);
 		}
@@ -324,7 +321,7 @@ class Schedule extends Component {
 			let date = new Date(parseInt(millidate));
 
 			let object = {
-				id: audition.id,
+				id: audition.auditionScheduleId,
 				actor: `${audition.clientFirstName} ${audition.clientLastName}`,
 				actorPhone: audition.clientPhoneNumber,
 				directorPhone: audition.directorPhoneNumber,
@@ -332,6 +329,7 @@ class Schedule extends Component {
 				date: date.toLocaleDateString(),
 				time: date.toLocaleTimeString(),
 				status: audition.auditionStatusI,
+				error: false,
 				selected: false
 			}
 
@@ -349,38 +347,65 @@ class Schedule extends Component {
 	}
 
 	async updateStatus(status) {
-		let data = {
-			project_id: this.props.project.id,
-			selected: this.state.selected,
-			status,
-		};
+		let endpoint;
+		switch(status) {
+			case 'CALL':
+				endpoint = `/scheduling2016/api/agents/${this.props.user.id}/batchsettocallauditionschedule`;
+				break;
+			case 'SENT':
+				endpoint = `/scheduling2016/api/agents/${this.props.user.id}/batchforwardauditionschedule`;
+				break;
+			case 'CONF':
+				endpoint = `/scheduling2016/api/agents/${this.props.user.id}/batchconfirmauditionschedule`;
+				break;
+			case 'REGR':
+				endpoint = `/scheduling2016/api/agents/${this.props.user.id}/batchregretauditionschedule`;
+				break;
+			case 'TIME':
+				endpoint = `/scheduling2016/api/agents/${this.props.user.id}/batchrequestotherauditionschedule`;
+				break;
+			case 'CAST':
+				endpoint = ``;
+				break;
+		}
 
-		let endpoint = `auditions/update_status`;
-		let auditionListData;
+		let data = {
+			auditionScheduleIds: this.state.selected
+		};
+		let jsonData = JSON.stringify(data);
+		let response;
 		this.setState({isLoading: true});
 		try {
-			auditionListData = await putAuditions(endpoint, this.props.user.authToken, data);
+			response = await putAuditions(endpoint, jsonData);
+			console.log(response);
 		} catch(error) {
 			console.error(error);
 		}
 
 		let forwardActorCount = 0;
 		let forwardCastingCount = 0;
-		let auditions = _.map(auditionListData, (audition) => {
-			if (_.isEmpty(audition.status)) forwardActorCount++;
-			if ((audition.status == 'CONF' || audition.status == 'REGR') && _.isEmpty(audition.response))
-				forwardCastingCount++;
-			let object = {
-				id: audition.id,
-				actor: audition.actor,
-				phone: audition.phone,
-				role: audition.role,
-				date: audition.date,
-				time: audition.time,
-				status: audition.status,
-				casting: audition.response,
-				selected: false
+		let auditions = _.map(this.state.auditions, (audition) => {
+			let object;
+			if (_.some(response.auditions, {'auditionScheduleId': audition.id})) {
+				let responseObject = _.find(response.auditions, {'auditionScheduleId': audition.id});
+
+				object = {
+					id: audition.id,
+					actor: audition.actor,
+					actorPhone: audition.actorPhone,
+					directorPhone: audition.directorPhone,
+					role: audition.role,
+					date: audition.date,
+					time: audition.time,
+					status: audition.responseObject.state.stateId,
+					selected: false
+				}
+			} else {
+				object = {
+					id:
+				}
 			}
+
 			return object;
 		});
 
