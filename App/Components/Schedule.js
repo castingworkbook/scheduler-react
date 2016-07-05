@@ -12,7 +12,7 @@ import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import { getAuditions, putAuditions } from '../Network/Api';
+import {getAuditions, putAuditions} from '../Network/Api';
 
 class Schedule extends Component {
 	constructor(props) {
@@ -27,14 +27,11 @@ class Schedule extends Component {
       selected: [],
       show: false,
 			isLoading: false,
-			refreshing: false,
+			refreshing: false
 		}
 	}
 
 	componentDidMount() {
-		if (this.props.message)
-			Alert.alert(this.props.message);
-
 		this.populateAuditionList();
 	}
 
@@ -136,22 +133,17 @@ class Schedule extends Component {
 	}
 
 	generateActionButtons() {
-		let buttons;
 		if(this.state.selected.length == 1)
-			buttons = [
-				<ActionSheet.Button key="call-actor" onPress={() => this.onAction("CALL")}>Call Selected Actor</ActionSheet.Button>,
-				<ActionSheet.Button key="message-actor" onPress={() => this.onMessages()}>Message Selected Actor</ActionSheet.Button>,
-			]
-		return buttons;
+			return <ActionSheet.Button key="call-actor" onPress={() => this.onAction("CALL")}>Call Selected Actor</ActionSheet.Button>
 	}
 
 	generateStatus(audition) {
 		let statusElement;
-		if(audition.status == 2)
+		if (audition.status == 2)
 			statusElement = <Text style={[schedule.highlightedFont, {color: '#00B5EF'}]}>CALL</Text>
-		else if(audition.status == 3)
+		else if (audition.status == 3)
 			statusElement = <Text style={[schedule.highlightedFont, {color: '#00B5EF'}]}>SENT</Text>
-		else if(audition.status == 4)
+		else if (audition.status == 4)
 			statusElement = <Icon name='clock' style={[schedule.auditionItemIcon, {color: '#00B5EF'}]} />
 		else if (audition.status == 5)
 			statusElement = <Text style={[schedule.highlightedFont, {color: '#E9556A'}]}>REGR</Text>
@@ -172,12 +164,11 @@ class Schedule extends Component {
 		else
 			countText = `${this.state.forwardActorCount} needs to be sent to Actor`;
 
-		if (this.state.forwardActorCount > 0) {
+		if (this.state.forwardActorCount > 0)
 			return <View style={schedule.notification}>
 							 <Icon name="android-alert" style={schedule.notificationIcon} />
 							 <Text style={schedule.notificationFont}>{countText}</Text>
 						 </View>
-		}
 	}
 
 	generateCastingNotification() {
@@ -226,31 +217,25 @@ class Schedule extends Component {
     	this.setState({show: true});
   }
 
-	sendMessageAlert(id) {
+	sendMessageAlert(status) {
 		this.setState({show: false});
-
 		Alert.alert(
 			'Send Message',
       'Would you like to attach a message to this action?',
       [
-        {text: 'Yes', onPress: () => Actions.notes({audition: {id}})},
-				{text: 'No', onPress: () => Alert.alert('Action Sent')},
+        {text: 'Yes', onPress: () => Actions.message({selected: this.state.selected, status})},
+				{text: 'No', onPress: () => this.updateStatus(status)}
       ]
 		)
 	}
 
 	onAction(status) {
 		this.setState({show: false});
-		this.updateStatus(status);
-
-		if ((status != 'CALL') && this.state.selected.length == 1)
-			this.sendMessageAlert(this.state.selected[0]);
+		if (status == 'SENT' || status == 'TIME' || status == 'REGR')
+			this.sendMessageAlert(status);
+		else
+			this.updateStatus(status);
 	}
-
-	onMessages() {
-		this.setState({show: false});
-    Actions.notes({audition: {id: this.state.selected[0]}});
-  }
 
 	async populateAuditionList() {
 		let endpoint = `/scheduling2016/api/agents/${this.props.user.id}/breakdownschedules/${this.props.project.id}/${this.props.project.type}`;
@@ -325,7 +310,6 @@ class Schedule extends Component {
 		this.setState({isLoading: true});
 		try {
 			response = await putAuditions(endpoint, jsonData);
-			console.log(response);
 		} catch(error) {
 			console.error(error);
 		}
@@ -345,7 +329,7 @@ class Schedule extends Component {
 						role: audition.role,
 						date: audition.date,
 						time: audition.time,
-						status: responseObject.state.auditionStatusI,
+						status: responseObject.state.auditionStatusI
 					}
 				} else {
 					object = {

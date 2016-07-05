@@ -121,14 +121,14 @@ export async function getHistory(endpoint) {
   }
 }
 
-export async function postHistory(endpoint, data) {
+export async function postNote(endpoint, data) {
   const headers = {
     'WebSessionKey': token,
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   }
   const request = {
-    method: 'PUT',
+    method: 'POST',
     headers,
     body: data,
   }

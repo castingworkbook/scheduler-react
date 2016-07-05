@@ -73,6 +73,7 @@ module.exports = StyleSheet.create({
 
   actionItemLeft: {
     flex: 0.7,
+    flexDirection: 'column',
     paddingRight: 10
   },
 

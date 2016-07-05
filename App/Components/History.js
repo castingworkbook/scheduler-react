@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import {getHistory, postHistory} from '../Network/Api';
+import {getHistory, postNote} from '../Network/Api';
 
 class History extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class History extends Component {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows([]),
-      action: "",
+      note: "",
       isLoading: false,
 			refreshing: false,
     }
@@ -60,8 +60,8 @@ class History extends Component {
                 icon="compose"
                 secureTextEntry={false}
                 dark={false}
-                value={this.state.action}
-                onChangeText={(val) => this.setState({action: val})} />
+                value={this.state.note}
+                onChangeText={(val) => this.setState({note: val})} />
             </View>
             <TouchableOpacity onPress={() => this.addNote()}>
               <View style={history.addButton}>
@@ -117,7 +117,8 @@ class History extends Component {
     return(
       <View style={history.actionItem}>
         <View style={history.actionItemLeft}>
-          <Text style={history.font}>{action.text}</Text>
+          <Text style={history.font}>{action.name}</Text>
+          {action.note ? <Text style={history.font}>{action.note}</Text> : null}
         </View>
         <View style={history.actionItemRight}>
           <Text style={history.font}>{action.date}</Text>
@@ -140,12 +141,13 @@ class History extends Component {
     } catch(error) {
       console.error(error);
     }
-    let history = _.map(historyListData, (record) => {
+    let history = _.map(historyListData.reverse(), (record) => {
       let millidate  = record.createdDate.replace(/\/Date\((-?\d+)\)\//, '$1');
       let date = new Date(parseInt(millidate));
       let object = {
         id: record.auditionScheduleHistoryId,
-        text: record.actionName,
+        name: record.actionName,
+        note: record.note,
         date: date.toLocaleDateString(),
         time: date.toLocaleTimeString()
       }
@@ -161,32 +163,40 @@ class History extends Component {
   }
 
   async addNote() {
-    let data = {actionText: `Note: ${this.state.action}.`};
+    let data = {noteText: this.state.note};
     let jsonData = JSON.stringify(data);
-    let endpoint = `/scheduling2016/api/agents/${this.props.user.id}/createschedulehistory/${this.props.audition.id}`;
+    let endpoint = `/scheduling2016/api/agents/${this.props.user.id}/createschedulenote/${this.props.audition.id}`;
     let response;
     this.setState({isLoading: true});
     try {
-      response = await postHistory(endpoint, jsonData);
+      response = await postNote(endpoint, jsonData);
     } catch(error) {
       console.error(error);
     }
-    let history = _.map(this.state.history, (record) => {
-      let object = {
-        id: record.auditionScheduleHistoryId,
-        text: record.actionName,
+
+    if (response.history) {
+      let millidate  = response.history.createdDate.replace(/\/Date\((-?\d+)\)\//, '$1');
+      let date = new Date(parseInt(millidate));
+      let note = {
+        id: response.history.noteId,
+        name: response.history.actionName,
+        note: response.history.note,
         date: date.toLocaleDateString(),
         time: date.toLocaleTimeString()
       }
-      return object;
-    });
 
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(history),
-      history,
-      action: "",
-      isLoading: false,
-    });
+      let history = _.cloneDeep(this.state.history);
+      history.unshift(note);
+
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(history),
+        history,
+        note: "",
+        isLoading: false,
+      });
+    } else {
+      Alert.alert("Something went wrong!");
+    }
   }
 }
 
