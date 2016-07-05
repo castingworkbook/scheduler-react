@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, { Component, ScrollView, Text, View, Image, ListView, TouchableOpacity, Alert, RefreshControl, Linking } from 'react-native';
+import React, {Component, ScrollView, Text, View, Image, ListView, TouchableOpacity, Alert, RefreshControl, Linking} from 'react-native';
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import schedule from '../Styles/schedule';
@@ -18,46 +18,10 @@ class Schedule extends Component {
 	constructor(props) {
 		super(props);
 
-		const dummyAuditions = [
-			// {
-			// 	id: 1,
-			// 	actor: "Brad Pitt",
-			// 	phone: "7777777",
-			// 	role: "Batman",
-			// 	date: "Monday Apr 25",
-			// 	time: "3:30pm",
-			// 	status: "",
-			// 	casting: "",
-			// 	selected: false
-			// },
-			// {
-			// 	id: 2,
-			// 	actor: "Christian Bale",
-			// 	phone: "7777777",
-			// 	role: "Batman",
-			// 	date: "Monday Apr 25",
-			// 	time: "3:50pm",
-			// 	status: "",
-			// 	casting: "",
-			// 	selected: false
-			// },
-			// {
-			// 	id: 3,
-			// 	actor: "Ben Affleck",
-			// 	phone: "7777777",
-			// 	role: "Batman",
-			// 	date: "Monday Apr 25",
-			// 	time: "4:10pm",
-			// 	status: "",
-			// 	casting: "",
-			// 	selected: false
-			// }
-		]
-
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
-			dataSource: ds.cloneWithRows(dummyAuditions),
-			auditions: dummyAuditions,
+			dataSource: ds.cloneWithRows([]),
+			auditions: [],
 			forwardActorCount: 0,
 			forwardCastingCount: 0,
       selected: [],
@@ -125,21 +89,19 @@ class Schedule extends Component {
 	}
 
 	_renderHeader() {
-		return (
-      <View style={schedule.headerContainer}>
-        <Text style={schedule.header}>{this.props.project.title}</Text>
-				<View style={schedule.notificationsContainer}>
-					{this.generateActorNotification()}
-					{this.generateCastingNotification()}
-				</View>
-      </View>
-    )
+		return <View style={schedule.headerContainer}>
+		         <Text style={schedule.header}>{this.props.project.title}</Text>
+						 <View style={schedule.notificationsContainer}>
+							 {this.generateActorNotification()}
+							 {this.generateCastingNotification()}
+						 </View>
+		       </View>
 	}
 
 	_renderRow(audition) {
 		return(
 			<TouchableOpacity onPress={() => this.onItemSelected(audition.id)}>
-				<View style={audition.selected ? schedule.auditionItemSelected : schedule.auditionItem}>
+				<View style={_.includes(this.state.selected, audition.id) ? schedule.auditionItemSelected : schedule.auditionItem}>
 	        <View style={schedule.auditionItemLeft}>
             <Text style={schedule.highlightedFont}>{audition.actor}</Text>
             <Text style={schedule.normalFont}>{audition.role}</Text>
@@ -164,9 +126,7 @@ class Schedule extends Component {
 	}
 
 	_renderSeperator(sectionID, rowID) {
-		return (
-      <View key={`${sectionID}-${rowID}`} style={schedule.separator} />
-    )
+		return <View key={`${sectionID}-${rowID}`} style={schedule.separator} />
 	}
 
 	_onRefresh() {
@@ -187,18 +147,20 @@ class Schedule extends Component {
 
 	generateStatus(audition) {
 		let statusElement;
-		if(audition.status == 6)
-			statusElement = <Icon name='checkmark' style={[schedule.auditionItemIcon, {color: '#00AD63'}]} />
-		else if(audition.status == 4)
-			statusElement = <Icon name='close' style={[schedule.auditionItemIcon, {color: '#E9556A'}]} />
-		else if(audition.status == 10)
-			statusElement = <Icon name='clock' style={[schedule.auditionItemIcon, {color: '#00B5EF'}]} />
-		else if (audition.status == 2)
+		if(audition.status == 2)
+			statusElement = <Text style={[schedule.highlightedFont, {color: '#00B5EF'}]}>CALL</Text>
+		else if(audition.status == 3)
 			statusElement = <Text style={[schedule.highlightedFont, {color: '#00B5EF'}]}>SENT</Text>
+		else if(audition.status == 4)
+			statusElement = <Icon name='clock' style={[schedule.auditionItemIcon, {color: '#00B5EF'}]} />
 		else if (audition.status == 5)
-			statusElement = <Text style={[schedule.highlightedFont, {color: '#00AD63'}]}>CONF</Text>
-		else if (audition.status == 3)
 			statusElement = <Text style={[schedule.highlightedFont, {color: '#E9556A'}]}>REGR</Text>
+		else if (audition.status == 6)
+			statusElement = <Icon name='close' style={[schedule.auditionItemIcon, {color: '#E9556A'}]} />
+		else if (audition.status == 7)
+			statusElement = <Text style={[schedule.highlightedFont, {color: '#00AD63'}]}>CONF</Text>
+		else if (audition.status == 8)
+			statusElement = <Icon name='checkmark' style={[schedule.auditionItemIcon, {color: '#00AD63'}]} />
 
 		return statusElement;
 	}
@@ -240,15 +202,7 @@ class Schedule extends Component {
 		else
 			selected = _.concat(this.state.selected, id);
 
-    const auditions = _.map(_.cloneDeep(this.state.auditions), (audition) => {
-      if (audition.id == id && audition.selected == false) {
-        audition.selected = true;
-      } else if (audition.id == id && audition.selected == true) {
-        audition.selected = false;
-      }
-      return audition;
-    });
-
+    const auditions = _.cloneDeep(this.state.auditions);
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(auditions),
       auditions,
@@ -257,8 +211,7 @@ class Schedule extends Component {
 	}
 
 	onAuditionPressed(id) {
-		this.props.auditionActions.setAudition(_.find(this.state.auditions, { 'id': id }));
-
+		this.props.auditionActions.setAudition(_.find(this.state.auditions, {'id': id}));
 		Actions.history();
 	}
 
@@ -312,14 +265,8 @@ class Schedule extends Component {
 		let forwardActorCount = 0;
 		let forwardCastingCount = 0;
 		let auditions = _.map(auditionListData, (audition, index) => {
-			if (audition.auditionStatusI == 1)
-				forwardActorCount++;
-			if (audition.auditionStatusI == 5 || audition.auditionStatusI == 3)
-				forwardCastingCount++;
-
 			let millidate = audition.auditionDate.replace(/\/Date\((-?\d+)\)\//, '$1');
 			let date = new Date(parseInt(millidate));
-
 			let object = {
 				id: audition.auditionScheduleId,
 				actor: `${audition.clientFirstName} ${audition.clientLastName}`,
@@ -328,10 +275,13 @@ class Schedule extends Component {
 				role: audition.roleName,
 				date: date.toLocaleDateString(),
 				time: date.toLocaleTimeString(),
-				status: audition.auditionStatusI,
-				error: false,
-				selected: false
+				status: audition.auditionStatusI
 			}
+
+			if (object.status == 1)
+				forwardActorCount++;
+			if (object.status == 5 || audition.status == 3)
+				forwardCastingCount++;
 
 			return object;
 		});
@@ -365,13 +315,11 @@ class Schedule extends Component {
 				endpoint = `/scheduling2016/api/agents/${this.props.user.id}/batchrequestotherauditionschedule`;
 				break;
 			case 'CAST':
-				endpoint = ``;
+				endpoint = `/scheduling2016/api/agents/${this.props.user.id}/batchforwardtodirectorauditionschedule`;
 				break;
 		}
 
-		let data = {
-			auditionScheduleIds: this.state.selected
-		};
+		let data = {auditionScheduleIds: this.state.selected};
 		let jsonData = JSON.stringify(data);
 		let response;
 		this.setState({isLoading: true});
@@ -388,29 +336,43 @@ class Schedule extends Component {
 			let object;
 			if (_.some(response.auditions, {'auditionScheduleId': audition.id})) {
 				let responseObject = _.find(response.auditions, {'auditionScheduleId': audition.id});
-
-				object = {
-					id: audition.id,
-					actor: audition.actor,
-					actorPhone: audition.actorPhone,
-					directorPhone: audition.directorPhone,
-					role: audition.role,
-					date: audition.date,
-					time: audition.time,
-					status: audition.responseObject.state.stateId,
-					selected: false
+				if (responseObject.success) {
+					object = {
+						id: audition.id,
+						actor: audition.actor,
+						actorPhone: audition.actorPhone,
+						directorPhone: audition.directorPhone,
+						role: audition.role,
+						date: audition.date,
+						time: audition.time,
+						status: responseObject.state.auditionStatusI,
+					}
+				} else {
+					object = {
+						id: audition.id,
+						actor: audition.actor,
+						actorPhone: audition.actorPhone,
+						directorPhone: audition.directorPhone,
+						role: audition.role,
+						date: audition.date,
+						time: audition.time,
+						status: audition.status,
+					}
 				}
 			} else {
-				object = {
-					id:
-				}
+				object = audition;
 			}
+
+			if (object.status == 1)
+				forwardActorCount++;
+			if (audition.status == 5 || audition.status == 3)
+				forwardCastingCount++;
 
 			return object;
 		});
 
 		if (status == 'CALL')
-				Linking.openURL(`tel:${_.find(this.state.auditions, { 'id': this.state.selected[0] }).phone}`);
+			Linking.openURL(`tel:${_.find(this.state.auditions, { 'id': this.state.selected[0] }).actorPhone}`);
 
 		this.setState({
 			dataSource: this.state.dataSource.cloneWithRows(auditions),
@@ -423,15 +385,12 @@ class Schedule extends Component {
 	}
 }
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 const AuditionActions = require('../Redux/Actions/audition');
 
-function mapStateToProps(state) {
-	return {
-		user: state.user,
-		project: state.project
-	}
+function mapStateToProps({user, project}) {
+	return {user, project}
 }
 
 function mapDispatchToProps(dispatch) {

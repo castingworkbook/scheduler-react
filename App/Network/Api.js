@@ -1,51 +1,21 @@
-// const ServerURL = "http://cwbscheduler.herokuapp.com/";
-// const ServerURL = "http://localhost:3000/";
+/* @flow */
+'use strict';
+
 const ServerURL = "http://www.thecwbint.com";
 let token = "";
 
-// function httpRequest(endpoint, method, data) {
-//   let headers = {
-//     accept: 'application/json',
-//     authorization: this.token
-//   };
-//
-//   let formData;
-//   if (data) {
-//     formData = new FormData();
-//     for (var k in data) {
-//       if (k == 'selected') {
-//         for (var j in data[k]) {
-//           let v = data[k][j];
-//           formData.append("selected[]", v.toString());
-//         }
-//       } else {
-//         formData.append(k, data[k]);
-//       }
-//     }
-//   }
-//
-//   let request = {
-//     method,
-//     headers,
-//     body: formData
-//   }
-//
-//   let path = ServerURL + endpoint;
-//   return fetch(path, request);
-// }
-
 export async function postSession(data) {
-  let headers = {
+  const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/x-www-form-urlencoded'
   }
-  let request = {
+  const request = {
     method: 'POST',
     headers,
     body: data
   }
   try {
-    let response = await fetch(ServerURL+"/inc/inc_login_functions.asp", request);
+    let response = await fetch(ServerURL + "/inc/inc_login_functions.asp", request);
     let userResponse = await getUser(response);
     return userResponse;
   } catch (error) {
@@ -54,23 +24,22 @@ export async function postSession(data) {
 }
 
 export async function getUser(loginResponse) {
-  let cookie = loginResponse.headers.map["set-cookie"];
-  let regex = /WebSessionKey=([^;]*);.*/g;
-  let match = regex.exec(cookie);
-
+  const cookie = loginResponse.headers.map["set-cookie"];
+  const regex = /WebSessionKey=([^;]*);.*/g;
+  const match = regex.exec(cookie);
   if(cookie[0].indexOf("WebSessionKey=") != -1 && match.length > 1) {
     token = decodeURI(match[1]);
-    let headers = {
+    const headers = {
       'WebSessionKey': token,
       'Accept': 'application/json'
     }
-    let request = {
+    const request = {
       method: 'GET',
       headers
     }
     try {
-      let response = await fetch(ServerURL+"/castingworkbook3/currentuser.mvc", request);
-      let jsonResponse = JSON.parse(response._bodyInit);
+      const response = await fetch(ServerURL + "/castingworkbook3/currentuser.mvc", request);
+      const jsonResponse = JSON.parse(response._bodyInit);
       return jsonResponse;
     } catch (error) {
       console.log(error);
@@ -79,17 +48,17 @@ export async function getUser(loginResponse) {
 }
 
 export async function getProjects(endpoint) {
-  let headers = {
+  const headers = {
     'WebSessionKey': token,
     'Accept': 'application/json'
   }
-  let request = {
+  const request = {
     method: 'GET',
     headers
   }
   try {
-    let response = await fetch(ServerURL+endpoint, request);
-    let jsonResponse = JSON.parse(response._bodyInit);
+    const response = await fetch(ServerURL + endpoint, request);
+    const jsonResponse = JSON.parse(response._bodyInit);
     return jsonResponse;
   } catch(error) {
     console.log(error);
@@ -97,17 +66,17 @@ export async function getProjects(endpoint) {
 }
 
 export async function getAuditions(endpoint) {
-  let headers = {
+  const headers = {
     'WebSessionKey': token,
     'Accept': 'application/json',
   }
-  let request = {
+  const request = {
     method: 'GET',
     headers
   }
   try {
-    let response = await fetch(ServerURL+endpoint, request);
-    let jsonResponse = JSON.parse(response._bodyInit);
+    const response = await fetch(ServerURL + endpoint, request);
+    const jsonResponse = JSON.parse(response._bodyInit);
     return jsonResponse;
   } catch(error) {
     console.log(error);
@@ -115,19 +84,57 @@ export async function getAuditions(endpoint) {
 }
 
 export async function putAuditions(endpoint, data) {
-  let headers = {
+  const headers = {
     'WebSessionKey': token,
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   }
-  let request = {
+  const request = {
     method: 'PUT',
     headers,
     body: data,
   }
   try {
-    let response = await fetch(ServerURL+endpoint, request);
-    let jsonResponse = JSON.parse(response._bodyInit);
+    const response = await fetch(ServerURL + endpoint, request);
+    const jsonResponse = JSON.parse(response._bodyInit);
+    return jsonResponse;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export async function getHistory(endpoint) {
+  const headers = {
+    'WebSessionKey': token,
+    'Accept': 'application/json',
+  }
+  const request = {
+    method: 'GET',
+    headers
+  }
+  try {
+    const response = await fetch(ServerURL + endpoint);
+    const jsonResponse = JSON.parse(response._bodyInit);
+    return jsonResponse;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export async function postHistory(endpoint, data) {
+  const headers = {
+    'WebSessionKey': token,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  }
+  const request = {
+    method: 'PUT',
+    headers,
+    body: data,
+  }
+  try {
+    const response = await fetch(ServerURL + endpoint, request);
+    const jsonResponse = JSON.parse(response._bodyInit);
     return jsonResponse;
   } catch(error) {
     console.log(error);
@@ -141,34 +148,24 @@ export async function resetData(endpoint) {
     'Content-Type': 'application/json',
   }
   try {
-    let response = await fetch(ServerURL+endpoint);
+    let response = await fetch(ServerURL + endpoint);
   } catch(error) {
     console.log(error);
   }
 }
 
-// export async function postSession(data) {
-//   try {
-//     let response = await httpRequest('session', 'post', data);
-//     let responseJson = await response.json();
-//     return responseJson;
-//   } catch(error) {
-//     console.error(error);
-//   }
-// }
-
-// export async function getProjects(token) {
+// export async function postHistory(endpoint, token, data) {
 //   try {
 //     this.token = token;
-//     let response = await httpRequest('projects', 'get');
+//     let response = await httpRequest(endpoint, 'post', data);
 //     let responseJson = await response.json();
 //     return responseJson;
 //   } catch(error) {
 //     console.error(error);
 //   }
 // }
-
-// export async function getAuditions(endpoint, token) {
+//
+// export async function getMessages(endpoint, token) {
 //   try {
 //     this.token = token;
 //     let response = await httpRequest(endpoint, 'get');
@@ -178,72 +175,17 @@ export async function resetData(endpoint) {
 //     console.error(error);
 //   }
 // }
-
-// export async function putAudition(endpoint, token, data) {
+//
+// export async function postMessage(endpoint, token, data) {
 //   try {
 //     this.token = token;
-//     let response = await httpRequest(endpoint, 'put', data);
+//     let response = await httpRequest(endpoint, 'post', data);
 //     let responseJson = await response.json();
 //     return responseJson;
 //   } catch(error) {
 //     console.error(error);
 //   }
 // }
-
-// export async function putAuditions(endpoint, token, data) {
-//   try {
-//     this.token = token;
-//     let response = await httpRequest(endpoint, 'put', data);
-//     let responseJson = await response.json();
-//     return responseJson;
-//   } catch(error) {
-//     console.error(error);
-//   }
-// }
-
-export async function getHistory(endpoint, token) {
-  try {
-    this.token = token;
-    let response = await httpRequest(endpoint, 'get');
-    let responseJson = await response.json();
-    return responseJson;
-  } catch(error) {
-    console.error(error);
-  }
-}
-
-export async function postHistory(endpoint, token, data) {
-  try {
-    this.token = token;
-    let response = await httpRequest(endpoint, 'post', data);
-    let responseJson = await response.json();
-    return responseJson;
-  } catch(error) {
-    console.error(error);
-  }
-}
-
-export async function getMessages(endpoint, token) {
-  try {
-    this.token = token;
-    let response = await httpRequest(endpoint, 'get');
-    let responseJson = await response.json();
-    return responseJson;
-  } catch(error) {
-    console.error(error);
-  }
-}
-
-export async function postMessage(endpoint, token, data) {
-  try {
-    this.token = token;
-    let response = await httpRequest(endpoint, 'post', data);
-    let responseJson = await response.json();
-    return responseJson;
-  } catch(error) {
-    console.error(error);
-  }
-}
 
 // export async function resetData() {
 //   try {

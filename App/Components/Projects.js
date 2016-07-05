@@ -18,39 +18,10 @@ class Projects extends Component {
 	constructor(props) {
     super(props);
 
-		const dummyProjects = [
-			// {
-			// 	id: 1,
-			// 	name: "Batman Returns",
-			// 	director: "Brad Richardson",
-			// 	phone: "7777777",
-			// 	roles: ["Batman", "Robin"],
-			// 	actions: 3,
-			// 	selected: false,
-			// },
-			// {
-			// 	id: 2,
-			// 	name: "Forrest Gump",
-			// 	director: "Natalie Low",
-			// 	phone: "7777777",
-			// 	roles: ["Forrest Gump", "Jenny Curran"],
-			// 	actions: 0,
-			// 	selected: false,
-			// },
-			// {
-			// 	id: 3,
-			// 	name: "The NoteBook",
-			// 	director: "Jeff Rose",
-			// 	roles: ["Handsome Guy", "Pretty Girl"],
-			// 	actions: 2,
-			// 	selected: false,
-			// }
-		];
-
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
-			dataSource: ds.cloneWithRows(dummyProjects),
-			projects: dummyProjects,
+			dataSource: ds.cloneWithRows([]),
+			projects: [],
 			selected: [],
 			show: false,
 			isLoading: false,
@@ -109,7 +80,7 @@ class Projects extends Component {
 	_renderRow(project) {
 		return(
 			<TouchableOpacity onPress={() => this.onItemSelected(project.id)}>
-				<View style={project.selected ? projects.projectItemSelected : projects.projectItem}>
+				<View style={_.includes(this.state.selected, project.id) ? projects.projectItemSelected : projects.projectItem}>
 					<View style={projects.projectItemLeft}>
 						<View style={projects.projectItemSelect}>
 							<Text style={projects.highlightedFont}>{project.title}</Text>
@@ -163,16 +134,7 @@ class Projects extends Component {
 		else
 			selected = _.concat(this.state.selected, id);
 
-    const projects = _.map(_.cloneDeep(this.state.projects), (project) => {
-      if (project.id == id && project.selected == false) {
-        project.selected = true;
-      } else if (project.id == id && project.selected == true) {
-        project.selected = false;
-      }
-
-      return project;
-    });
-
+    const projects = _.cloneDeep(this.state.projects)
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(projects),
       projects,
@@ -200,7 +162,7 @@ class Projects extends Component {
 
 	onCall() {
 		this.setState({show: false});
-		Linking.openURL(`tel:${_.find(this.state.projects, { 'id': this.state.selected[0] }).phone}`);
+		Linking.openURL(`tel:${_.find(this.state.projects, {'id': this.state.selected[0]}).phone}`);
 	}
 
 	async populateProjectList() {
@@ -215,17 +177,14 @@ class Projects extends Component {
 
 		let projects = _.map(projectListData, (project, index) => {
 			let actions = project.auditionsRequestedNotForwardedCount + project.auditionsResponseNotForwardedCount;
-
 			let object = {
 				id: project.breakdownId,
 				type: project.breakdownType,
 				title: project.title.trim(),
 				director: project.directorName.trim(),
 				phone: project.directorPhone.trim(),
-				selected: false,
 				actions,
 			}
-
 			return object;
 		});
 
@@ -242,10 +201,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 const ProjectActions = require('../Redux/Actions/project');
 
-function mapStateToProps(state) {
-	return {
-		user: state.user
-	}
+function mapStateToProps({user}) {
+	return {user}
 }
 
 function mapDispatchToProps(dispatch) {

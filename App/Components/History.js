@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, { Component, ScrollView, View, Image, ListView, Text, TouchableOpacity, RefreshControl } from 'react-native';
+import React, {Component, ScrollView, View, Image, ListView, Text, TouchableOpacity, RefreshControl} from 'react-native';
 import styles from '../Styles/style';
 import history from '../Styles/history';
 import Navbar from './Widgets/Navbar';
@@ -10,68 +10,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import { getHistory, postHistory } from '../Network/Api';
+import {getHistory, postHistory} from '../Network/Api';
 
 class History extends Component {
   constructor(props) {
     super(props);
 
-    const dummyActions = [
-      // {
-      //   text: "Confirm",
-      //   date: "MO Apr 25",
-      //   time: "1:37pm",
-      // },
-      // {
-      //   text: "Brad Pitt responds Confirm",
-      //   date: "MO Apr 25",
-      //   time: "11:37pm",
-      // },
-      // {
-      //   text: "Forward",
-      //   date: "MO Apr 25",
-      //   time: "10:51pm",
-      // },
-      // {
-      //   text: "Casting resubmits time",
-      //   date: "MO Apr 25",
-      //   time: "10:37am",
-      // },
-      // {
-      //   text: "Message: Can we set the time between to 02/21/16 between 1:30 to 4:30?",
-      //   date: "MO Apr 25",
-      //   time: "2:37pm",
-      // },
-      // {
-      //   text: "Request Alternative Time with Message",
-      //   date: "MO Apr 25",
-      //   time: "2:37pm",
-      // },
-      // {
-      //   text: "Note: Brad said 02/21/16 @ 1:30 to 4:30 works",
-      //   date: "MO Apr 25",
-      //   time: "2:15pm"
-      // },
-      // {
-      //   text: "Call Brad Pitt",
-      //   date: "MO Apr 25",
-      //   time: "2:01pm",
-      // },
-      // {
-      //   text: "Brad Pitt responds Regret",
-      //   date: "MO Apr 25",
-      //   time: "1:37pm",
-      // },
-      // {
-      //   text: "Forward to Brad Pitt",
-      //   date: "MO Apr 25",
-      //   time: "10:37am",
-      // },
-    ]
-
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(dummyActions),
+      dataSource: ds.cloneWithRows([]),
       action: "",
       isLoading: false,
 			refreshing: false,
@@ -185,75 +132,69 @@ class History extends Component {
   }
 
   async populateHistoryData() {
-    let endpoint = `auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
+    let endpoint = `/scheduling2016/api/agents/${this.props.user.id}/schedulehistory/${this.props.audition.id}`;
     let historyListData;
     this.setState({isLoading: true});
     try {
-      historyListData = await getHistory(endpoint, this.props.user.authToken);
+      historyListData = await getHistory(endpoint);
     } catch(error) {
       console.error(error);
     }
-
     let history = _.map(historyListData, (record) => {
+      let millidate  = record.createdDate.replace(/\/Date\((-?\d+)\)\//, '$1');
+      let date = new Date(parseInt(millidate));
       let object = {
-        id: record.id,
-        text: record.action,
-        date: record.date,
-        time: record.time
+        id: record.auditionScheduleHistoryId,
+        text: record.actionName,
+        date: date.toLocaleDateString(),
+        time: date.toLocaleTimeString()
       }
-
       return object;
     });
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(history),
+      history,
       isLoading: false,
       refreshing: false,
     });
   }
 
   async addNote() {
-    let data = {
-      'history[action]': `Note: ${this.state.action}.`,
-    };
-
-    let endpoint = `auditions/${this.props.audition.id}/histories?project_id=${this.props.project.id}`;
-    let historyListData;
+    let data = {actionText: `Note: ${this.state.action}.`};
+    let jsonData = JSON.stringify(data);
+    let endpoint = `/scheduling2016/api/agents/${this.props.user.id}/createschedulehistory/${this.props.audition.id}`;
+    let response;
     this.setState({isLoading: true});
     try {
-      historyListData = await postHistory(endpoint, this.props.user.authToken, data);
+      response = await postHistory(endpoint, jsonData);
     } catch(error) {
       console.error(error);
     }
-
-    let history = _.map(historyListData, (record) => {
+    let history = _.map(this.state.history, (record) => {
       let object = {
-        id: record.id,
-        text: record.action,
-        date: record.date,
-        time: record.time
+        id: record.auditionScheduleHistoryId,
+        text: record.actionName,
+        date: date.toLocaleDateString(),
+        time: date.toLocaleTimeString()
       }
-
       return object;
     });
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(history),
+      history,
       action: "",
       isLoading: false,
     });
   }
 }
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    project: state.project,
-    audition: state.audition
-  }
+function mapStateToProps({user, audition}) {
+  return {user, audition}
 }
 
 module.exports = connect(mapStateToProps)(History);
