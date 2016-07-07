@@ -6,10 +6,10 @@ var primary = require('./variable').brandPrimary;
 var secondary = require('./variable').brandSecondary;
 
 var {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
 } = React;
 
 var styles = StyleSheet.create({

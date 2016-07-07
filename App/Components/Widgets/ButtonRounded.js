@@ -1,9 +1,9 @@
 /* @flow */
 'use strict';
 
-import React, {Component, Text, View, TouchableOpacity } from 'react-native';
+import React, { Component, Text, View, TouchableOpacity } from 'react-native';
 import bootstrap from '../../Styles/bootstrap';
-import {brandPrimary as primary} from '../../Styles/variable';
+import { brandPrimary as primary } from '../../Styles/variable';
 
 export default class Button extends Component {
   render() {

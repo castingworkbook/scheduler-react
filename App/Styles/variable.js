@@ -5,7 +5,6 @@ var secondary = Color("#252932");
 var sidebar = Color("#363636");
 var dark = Color("rgba(0,0,0,0.8)");
 var light = Color("rgba(255,255,255,0.8)");
-
 var darken = primary.darken(0.2).hexString().toString();
 
 module.exports = {

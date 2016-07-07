@@ -1,15 +1,14 @@
 /* @flow */
 'use strict';
 
-import React, {Component, Text, View} from 'react-native';
+import React, { Component, Text, View } from 'react-native';
 import ToolbarAndroid from 'ToolbarAndroid';
-import {brandPrimary as primary} from '../../Styles/variable';
+import { brandPrimary as primary } from '../../Styles/variable';
 import AppEventEmitter from '../../Services/AppEventEmitter';
 
 export default class Navbar extends Component {
   open () {
     AppEventEmitter.emit('hamburger.click');
-
   }
 
   render() {

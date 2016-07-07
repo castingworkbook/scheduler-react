@@ -117,10 +117,10 @@ export default class Materials extends Component {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-function mapStateToProps(state) {
+function mapStateToProps({user, audition}) {
   return {
-    user: state.user,
-    audition: state.audition
+    user,
+    audition
   }
 }
 

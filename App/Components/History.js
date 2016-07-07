@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, {Component, ScrollView, View, Image, ListView, Text, TouchableOpacity, RefreshControl} from 'react-native';
+import React, { Component, ScrollView, View, Image, ListView, Text, TouchableOpacity, RefreshControl } from 'react-native';
 import styles from '../Styles/style';
 import history from '../Styles/history';
 import Navbar from './Widgets/Navbar';
@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconInput from './Widgets/IconInput';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import {getHistory, postNote} from '../Network/Api';
+import { getHistory, postNote } from '../Network/Api';
 
 class History extends Component {
   constructor(props) {
@@ -158,7 +158,7 @@ class History extends Component {
       dataSource: this.state.dataSource.cloneWithRows(history),
       history,
       isLoading: false,
-      refreshing: false,
+      refreshing: false
     });
   }
 
@@ -200,11 +200,14 @@ class History extends Component {
   }
 }
 
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 function mapStateToProps({user, audition}) {
-  return {user, audition}
+  return {
+    user, 
+    audition
+  }
 }
 
 module.exports = connect(mapStateToProps)(History);

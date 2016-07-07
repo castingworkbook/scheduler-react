@@ -202,7 +202,9 @@ import { bindActionCreators } from 'redux';
 const ProjectActions = require('../Redux/Actions/project');
 
 function mapStateToProps({user}) {
-	return {user}
+	return {
+		user
+	}
 }
 
 function mapDispatchToProps(dispatch) {

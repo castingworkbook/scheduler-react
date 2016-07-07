@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, { Component, TextInput, Text, View, Image, StatusBarIOS, ScrollView, TouchableOpacity, Platform, Alert, Dimensions, DeviceEventEmitter } from 'react-native';
+import React, { Component, TextInput, Text, View, Image, StatusBarIOS, ScrollView, TouchableOpacity, Platform, Alert, Dimensions, DeviceEventEmitter, LayoutAnimation } from 'react-native';
 import styles from '../Styles/style';
 import login from '../Styles/login';
 import ButtonRounded from './Widgets/ButtonRounded';
@@ -24,16 +24,23 @@ class Login extends Component {
   }
 
   componentWillMount() {
-    DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
-    DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
+    this.keyboardDidShowListener = DeviceEventEmitter.addListener('keyboardDidShow', this.keyboardDidShow.bind(this));
+    this.keyboardDidHideListener = DeviceEventEmitter.addListener('keyboardDidHide', this.keyboardDidHide.bind(this));
   }
 
-  keyboardWillShow(e) {
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  keyboardDidShow(e) {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     let newSize = Dimensions.get('window').height - e.endCoordinates.height;
     this.setState({visibleHeight: newSize});
   }
 
-  keyboardWillHide(e) {
+  keyboardDidHide(e) {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this.setState({visibleHeight: Dimensions.get('window').height});
   }
 
@@ -80,15 +87,7 @@ class Login extends Component {
   }
 
   async login() {
-    // let data = {
-    //   'session[username]': this.state.email,
-    //   'session[password]': this.state.password,
-    //   'session[notification_token]': this.props.user.notificationToken,
-    //   'session[platform]': Platform.OS,
-    // };
-
-    let data = `username=${this.state.email}&password=${this.state.password}&remember_password=no&doAction=mobileactorupload`
-
+    let data = `username=${this.state.email}&password=${this.state.password}&remember_password=no&doAction=mobileactorupload`;
     this.setState({isLoading: true});
     try {
       const response = await postSession(data);
@@ -98,12 +97,12 @@ class Login extends Component {
         lastName: response.lastName,
         type: response.type,
       }
-      this.props.userActions.saveUser(userData);
-      userData.type == 3 ? Actions.projects() : Actions.auditions();
     } catch(error) {
       console.error(error);
     }
     this.setState({isLoading: false});
+    this.props.userActions.saveUser(userData);
+    userData.type == 3 ? Actions.projects() : Actions.auditions();
   }
 }
 
@@ -111,9 +110,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 const UserActions = require('../Redux/Actions/user');
 
-function mapStateToProps(state) {
+function mapStateToProps({user}) {
   return {
-	  user: state.user
+	  user
   }
 }
 

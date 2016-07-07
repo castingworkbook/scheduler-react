@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, {Component, ScrollView, Text, View, Image, ListView, TouchableOpacity, Alert, RefreshControl, Linking} from 'react-native';
+import React, { Component, ScrollView, Text, View, Image, ListView, TouchableOpacity, Alert, RefreshControl, Linking } from 'react-native';
 import styles from '../Styles/style';
 import Navbar from './Widgets/Navbar';
 import schedule from '../Styles/schedule';
@@ -12,7 +12,7 @@ import {Actions} from 'react-native-router-flux';
 import ActionSheet from '@remobile/react-native-action-sheet';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
-import {getAuditions, putAuditions} from '../Network/Api';
+import { getAuditions, putAuditions } from '../Network/Api';
 
 class Schedule extends Component {
 	constructor(props) {
@@ -369,12 +369,15 @@ class Schedule extends Component {
 	}
 }
 
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 const AuditionActions = require('../Redux/Actions/audition');
 
 function mapStateToProps({user, project}) {
-	return {user, project}
+	return {
+		user,
+		project
+	}
 }
 
 function mapDispatchToProps(dispatch) {

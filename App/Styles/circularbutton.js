@@ -12,11 +12,11 @@ var {
 module.exports = StyleSheet.create({
 	button: {
 		backgroundColor: secondary,
-	    padding: 25,
-	    borderColor: secondary,
-	    borderWidth:0,
-	    borderBottomColor: secondary,
-	    alignSelf: 'center',
+	  padding: 25,
+	  borderColor: secondary,
+	  borderWidth:0,
+	  borderBottomColor: secondary,
+	  alignSelf: 'center',
 		borderRadius: 40,
 		width: 80,
 		height: 80,
@@ -28,6 +28,7 @@ module.exports = StyleSheet.create({
 		shadowRadius: 4,
 		overflow: 'hidden'
 	},
+
 	buttonText: {
 		color: '#fff',
 		fontSize: 10,
@@ -35,4 +36,3 @@ module.exports = StyleSheet.create({
 		marginLeft: -5
 	}
 });
-

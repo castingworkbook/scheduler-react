@@ -7,7 +7,6 @@ var Icon = require('react-native-vector-icons/Ionicons');
 var {
 	View,
 	Text
-
 } = React;
 
 var RightButtonUser = React.createClass({

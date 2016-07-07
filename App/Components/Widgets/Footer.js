@@ -1,14 +1,13 @@
 /* @flow */
 'use strict';
 
-import React, {Component, Text, View, TouchableOpacity} from 'react-native';
+import React, { Component, Text, View, TouchableOpacity } from 'react-native';
 import footer from '../../Styles/footer';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {brandPrimary as primary} from '../../Styles/variable';
-import {Actions} from 'react-native-router-flux';
+import { brandPrimary as primary } from '../../Styles/variable';
+import { Actions } from 'react-native-router-flux';
 
 export default class Footer extends Component {
-
 	render() {
 		return (
 			<View style={footer.footer}>
@@ -31,4 +30,3 @@ export default class Footer extends Component {
 		);
 	}
 }
-

@@ -194,10 +194,10 @@ export default class Notes extends Component {
 
 import { connect } from 'react-redux';
 
-function mapStateToProps(state) {
+function mapStateToProps({user, project}) {
   return {
-    user: state.user,
-    project: state.project,
+    user,
+    project,
   }
 }
 

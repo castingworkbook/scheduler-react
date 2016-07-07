@@ -240,9 +240,9 @@ class Auditions extends Component {
 
 import { connect } from 'react-redux';
 
-function mapStateToProps(state) {
+function mapStateToProps({user}) {
   return {
-    user: state.user
+    user
   }
 }
 

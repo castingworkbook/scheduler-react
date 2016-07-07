@@ -11,6 +11,7 @@ var {
 } = React;
 
 var deviceHeight = Dimensions.get('window').height;
+
 module.exports = StyleSheet.create({
   inputContainer: {
     flex: 1,

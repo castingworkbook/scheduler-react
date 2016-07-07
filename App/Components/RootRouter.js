@@ -89,9 +89,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 const UserActions = require('../Redux/Actions/user');
 
-function mapStateToProps(state) {
+function mapStateToProps({user}) {
   return {
-	  user: state.user
+	  user
   }
 }
 

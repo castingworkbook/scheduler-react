@@ -1,11 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, {Component, Text, View, TouchableOpacity} from 'react-native';
+import React, { Component, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import navbarStyle from './../../Styles/navbar.js';
-import {brandPrimary as primary} from '../../Styles/variable';
-import {Actions} from 'react-native-router-flux';
+import { brandPrimary as primary } from '../../Styles/variable';
+import { Actions } from 'react-native-router-flux';
 import AppEventEmitter from '../../Services/AppEventEmitter';
 
 export default class Navbar extends Component {
@@ -27,7 +27,7 @@ export default class Navbar extends Component {
 
     return(
       <View style={[this.props.style, navbarStyle.navbar]}>
-        { backButton }
+        {backButton}
         <View>
           <Text style={navbarStyle.title}>{this.props.title}</Text>
           <Text style={this.props.subtitleStyle}>{this.props.subtitle}</Text>

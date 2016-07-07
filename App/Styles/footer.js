@@ -7,6 +7,7 @@ var {
   StyleSheet,
   Dimensions
 } = React;
+
 var deviceHeight = Dimensions.get('window').height;
 
 module.exports = StyleSheet.create({
@@ -21,4 +22,3 @@ module.exports = StyleSheet.create({
 		backgroundColor: 'rgba(255,255,255,0.2)'
 	},
 });
-

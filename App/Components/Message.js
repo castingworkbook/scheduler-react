@@ -1,13 +1,13 @@
 /* @flow */
 'use strict';
 
-import React, {Component, ScrollView, View, Text, TextInput, Image, Switch} from 'react-native';
+import React, { Component, ScrollView, View, Text, TextInput, Image, Switch } from 'react-native';
 import Navbar from './Widgets/Navbar';
 import styles from '../Styles/style';
 import message from '../Styles/message';
 import ButtonRounded from './Widgets/ButtonRounded';
-import {Actions} from 'react-native-router-flux';
-import {putAuditions} from '../Network/Api';
+import { Actions } from 'react-native-router-flux';
+import { putAuditions } from '../Network/Api';
 
 export default class Message extends Component {
   constructor(props) {
@@ -67,7 +67,6 @@ export default class Message extends Component {
         endpoint = `/scheduling2016/api/agents/${this.props.user.id}/batchrequestotherauditionschedule`;
         break;
     }
-
     let data = {
       auditionScheduleIds: this.props.selected,
       message: this.state.message
@@ -84,10 +83,12 @@ export default class Message extends Component {
   }
 }
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 function mapStateToProps({user}) {
-  return {user}
+  return {
+    user
+  }
 }
 
 module.exports = connect(mapStateToProps)(Message);
