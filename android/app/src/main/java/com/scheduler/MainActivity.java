@@ -7,13 +7,7 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.List;
 
-import android.content.Intent;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
-
-public class MainActivity extends ReactActivity {
-
-  private ReactNativePushNotificationPackage mReactNativePushNotificationPackage;
-
+public class MainActivity extends ReactActivity {xw
     /**
      * Returns the name of the main component registered from JavaScript.
      * This is used to schedule rendering of the component.
@@ -38,17 +32,8 @@ public class MainActivity extends ReactActivity {
    */
     @Override
     protected List<ReactPackage> getPackages() {
-      mReactNativePushNotificationPackage = new ReactNativePushNotificationPackage(this);
       return Arrays.<ReactPackage>asList(
-        new MainReactPackage(),
-        mReactNativePushNotificationPackage
+        new MainReactPackage()
       );
-    }
-
-    @Override
-    protected void onNewIntent (Intent intent) {
-      super.onNewIntent(intent);
-
-      mReactNativePushNotificationPackage.newIntent(intent);
     }
 }

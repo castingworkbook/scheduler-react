@@ -89,9 +89,10 @@ class Login extends Component {
   async login() {
     let data = `username=${this.state.email}&password=${this.state.password}&remember_password=no&doAction=mobileactorupload`;
     this.setState({isLoading: true});
+    let userData;
     try {
       const response = await postSession(data);
-      let userData = {
+      userData = {
         id: response.id,
         firstName: response.firstName,
         lastName: response.lastName,
